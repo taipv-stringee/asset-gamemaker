@@ -1,0 +1,17 @@
+draw_set_colour(make_colour_rgb(18, 16, 34));
+draw_set_alpha(0.6);
+draw_rectangle(0, 0, VIEW_W, VIEW_H, false);
+draw_set_alpha(1);
+draw_set_colour(c_white);
+var _h = global.heroes[global.hero];
+text_align(fa_center, fa_top);
+draw_set_font(global.font_big);
+draw_text_outlined(VIEW_W / 2, 18, "CHIẾN THẮNG!", c_yellow, make_colour_rgb(126, 22, 36));
+draw_set_font(global.font_small);
+draw_text_outlined(VIEW_W / 2, 54, _h.name + " đã đánh bại Hỏa Long và mang bình yên về vương quốc.", c_white);
+draw_sprite_ext(_h.sprites[3], (t div 8) mod 4, VIEW_W / 2, 110, 3, 3, 0, c_white, 1);
+draw_text_outlined(VIEW_W / 2, 160, "Thời gian: " + time_string(global.time), c_white);
+draw_text_outlined(VIEW_W / 2, 174, "Vàng: " + string(global.coins) + "     Quái hạ gục: " + string(global.kills), c_white);
+if (global.new_record) draw_text_outlined(VIEW_W / 2, 192, "KỶ LỤC MỚI!", c_lime);
+if (t > 60) draw_text_outlined(VIEW_W / 2, VIEW_H - 30, "ENTER: về menu", c_yellow);
+text_align(fa_left, fa_top);

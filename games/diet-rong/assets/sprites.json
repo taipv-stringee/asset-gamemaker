@@ -1,0 +1,1332 @@
+[
+ {
+  "name": "spr_knight_down",
+  "file": "spr_knight_down_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   10,
+   18,
+   21,
+   28
+  ],
+  "group": "heroes"
+ },
+ {
+  "name": "spr_knight_up",
+  "file": "spr_knight_up_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   10,
+   18,
+   21,
+   28
+  ],
+  "group": "heroes"
+ },
+ {
+  "name": "spr_knight_right",
+  "file": "spr_knight_right_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   10,
+   18,
+   21,
+   28
+  ],
+  "group": "heroes"
+ },
+ {
+  "name": "spr_knight_left",
+  "file": "spr_knight_left_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   10,
+   18,
+   21,
+   28
+  ],
+  "group": "heroes"
+ },
+ {
+  "name": "spr_archer_down",
+  "file": "spr_archer_down_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   10,
+   18,
+   21,
+   28
+  ],
+  "group": "heroes"
+ },
+ {
+  "name": "spr_archer_up",
+  "file": "spr_archer_up_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   10,
+   18,
+   21,
+   28
+  ],
+  "group": "heroes"
+ },
+ {
+  "name": "spr_archer_right",
+  "file": "spr_archer_right_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   10,
+   18,
+   21,
+   28
+  ],
+  "group": "heroes"
+ },
+ {
+  "name": "spr_archer_left",
+  "file": "spr_archer_left_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   10,
+   18,
+   21,
+   28
+  ],
+  "group": "heroes"
+ },
+ {
+  "name": "spr_wizard_down",
+  "file": "spr_wizard_down_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   10,
+   18,
+   21,
+   28
+  ],
+  "group": "heroes"
+ },
+ {
+  "name": "spr_wizard_up",
+  "file": "spr_wizard_up_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   10,
+   18,
+   21,
+   28
+  ],
+  "group": "heroes"
+ },
+ {
+  "name": "spr_wizard_right",
+  "file": "spr_wizard_right_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   10,
+   18,
+   21,
+   28
+  ],
+  "group": "heroes"
+ },
+ {
+  "name": "spr_wizard_left",
+  "file": "spr_wizard_left_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   10,
+   18,
+   21,
+   28
+  ],
+  "group": "heroes"
+ },
+ {
+  "name": "spr_slime",
+  "file": "spr_slime_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   8,
+   18,
+   23,
+   28
+  ],
+  "group": "enemies"
+ },
+ {
+  "name": "spr_goblin_walk",
+  "file": "spr_goblin_walk_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 10,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   11,
+   16,
+   21,
+   28
+  ],
+  "group": "enemies"
+ },
+ {
+  "name": "spr_goblin_atk",
+  "file": "spr_goblin_atk_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 12,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   11,
+   16,
+   21,
+   28
+  ],
+  "group": "enemies"
+ },
+ {
+  "name": "spr_skeleton_walk",
+  "file": "spr_skeleton_walk_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   11,
+   16,
+   21,
+   28
+  ],
+  "group": "enemies"
+ },
+ {
+  "name": "spr_skeleton_atk",
+  "file": "spr_skeleton_atk_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 6,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   11,
+   16,
+   21,
+   28
+  ],
+  "group": "enemies"
+ },
+ {
+  "name": "spr_bat",
+  "file": "spr_bat_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 12,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   9,
+   9,
+   22,
+   21
+  ],
+  "group": "enemies"
+ },
+ {
+  "name": "spr_orc_walk",
+  "file": "spr_orc_walk_strip4.png",
+  "w": 40,
+  "h": 40,
+  "n": 4,
+  "fps": 7,
+  "origin": [
+   20,
+   20
+  ],
+  "mask": [
+   11,
+   18,
+   27,
+   36
+  ],
+  "group": "enemies"
+ },
+ {
+  "name": "spr_orc_atk",
+  "file": "spr_orc_atk_strip6.png",
+  "w": 40,
+  "h": 40,
+  "n": 6,
+  "fps": 8,
+  "origin": [
+   20,
+   20
+  ],
+  "mask": [
+   11,
+   18,
+   27,
+   36
+  ],
+  "group": "enemies"
+ },
+ {
+  "name": "spr_dragon_fly",
+  "file": "spr_dragon_fly_strip6.png",
+  "w": 96,
+  "h": 96,
+  "n": 6,
+  "fps": 8,
+  "origin": [
+   48,
+   48
+  ],
+  "mask": [
+   26,
+   24,
+   69,
+   82
+  ],
+  "group": "boss"
+ },
+ {
+  "name": "spr_dragon_breath",
+  "file": "spr_dragon_breath_strip3.png",
+  "w": 96,
+  "h": 96,
+  "n": 3,
+  "fps": 8,
+  "origin": [
+   48,
+   48
+  ],
+  "mask": [
+   26,
+   24,
+   69,
+   82
+  ],
+  "group": "boss"
+ },
+ {
+  "name": "spr_wp_sword",
+  "file": "spr_wp_sword.png",
+  "w": 32,
+  "h": 32,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   8,
+   16
+  ],
+  "mask": [
+   2,
+   10,
+   30,
+   21
+  ],
+  "group": "weapons"
+ },
+ {
+  "name": "spr_wp_axe",
+  "file": "spr_wp_axe.png",
+  "w": 32,
+  "h": 32,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   8,
+   16
+  ],
+  "mask": [
+   2,
+   4,
+   30,
+   28
+  ],
+  "group": "weapons"
+ },
+ {
+  "name": "spr_wp_bow",
+  "file": "spr_wp_bow.png",
+  "w": 32,
+  "h": 32,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   14,
+   16
+  ],
+  "mask": [
+   12,
+   2,
+   21,
+   28
+  ],
+  "group": "weapons"
+ },
+ {
+  "name": "spr_wp_crossbow",
+  "file": "spr_wp_crossbow.png",
+  "w": 32,
+  "h": 32,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   8,
+   16
+  ],
+  "mask": [
+   3,
+   6,
+   28,
+   24
+  ],
+  "group": "weapons"
+ },
+ {
+  "name": "spr_wp_staff_fire",
+  "file": "spr_wp_staff_fire.png",
+  "w": 32,
+  "h": 32,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   8,
+   16
+  ],
+  "mask": [
+   1,
+   11,
+   31,
+   20
+  ],
+  "group": "weapons"
+ },
+ {
+  "name": "spr_wp_staff_storm",
+  "file": "spr_wp_staff_storm.png",
+  "w": 32,
+  "h": 32,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   8,
+   16
+  ],
+  "mask": [
+   1,
+   11,
+   31,
+   20
+  ],
+  "group": "weapons"
+ },
+ {
+  "name": "spr_arrow",
+  "file": "spr_arrow.png",
+  "w": 16,
+  "h": 16,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   0,
+   5,
+   15,
+   10
+  ],
+  "group": "projectiles"
+ },
+ {
+  "name": "spr_bone_arrow",
+  "file": "spr_bone_arrow.png",
+  "w": 16,
+  "h": 16,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   0,
+   5,
+   15,
+   10
+  ],
+  "group": "projectiles"
+ },
+ {
+  "name": "spr_bolt",
+  "file": "spr_bolt.png",
+  "w": 16,
+  "h": 16,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   2,
+   4,
+   15,
+   11
+  ],
+  "group": "projectiles"
+ },
+ {
+  "name": "spr_fireball",
+  "file": "spr_fireball_strip4.png",
+  "w": 16,
+  "h": 16,
+  "n": 4,
+  "fps": 12,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   0,
+   3,
+   12,
+   12
+  ],
+  "group": "projectiles"
+ },
+ {
+  "name": "spr_dragon_fire",
+  "file": "spr_dragon_fire_strip4.png",
+  "w": 24,
+  "h": 24,
+  "n": 4,
+  "fps": 12,
+  "origin": [
+   12,
+   12
+  ],
+  "mask": [
+   0,
+   5,
+   18,
+   18
+  ],
+  "group": "projectiles"
+ },
+ {
+  "name": "spr_spark",
+  "file": "spr_spark_strip4.png",
+  "w": 16,
+  "h": 16,
+  "n": 4,
+  "fps": 16,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   0,
+   0,
+   15,
+   15
+  ],
+  "group": "projectiles"
+ },
+ {
+  "name": "spr_slash",
+  "file": "spr_slash_strip5.png",
+  "w": 48,
+  "h": 48,
+  "n": 5,
+  "fps": 20,
+  "origin": [
+   24,
+   24
+  ],
+  "mask": [
+   9,
+   2,
+   45,
+   43
+  ],
+  "group": "projectiles"
+ },
+ {
+  "name": "spr_slash_big",
+  "file": "spr_slash_big_strip5.png",
+  "w": 64,
+  "h": 64,
+  "n": 5,
+  "fps": 18,
+  "origin": [
+   32,
+   32
+  ],
+  "mask": [
+   4,
+   2,
+   61,
+   61
+  ],
+  "group": "projectiles"
+ },
+ {
+  "name": "spr_spin",
+  "file": "spr_spin_strip4.png",
+  "w": 64,
+  "h": 64,
+  "n": 4,
+  "fps": 20,
+  "origin": [
+   32,
+   32
+  ],
+  "mask": [
+   2,
+   2,
+   61,
+   61
+  ],
+  "group": "projectiles"
+ },
+ {
+  "name": "spr_nova",
+  "file": "spr_nova_strip5.png",
+  "w": 128,
+  "h": 128,
+  "n": 5,
+  "fps": 14,
+  "origin": [
+   64,
+   64
+  ],
+  "mask": [
+   0,
+   0,
+   127,
+   127
+  ],
+  "group": "projectiles"
+ },
+ {
+  "name": "spr_fx_hit",
+  "file": "spr_fx_hit_strip4.png",
+  "w": 16,
+  "h": 16,
+  "n": 4,
+  "fps": 20,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   1,
+   1,
+   14,
+   14
+  ],
+  "group": "fx"
+ },
+ {
+  "name": "spr_fx_poof",
+  "file": "spr_fx_poof_strip5.png",
+  "w": 32,
+  "h": 32,
+  "n": 5,
+  "fps": 14,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   4,
+   1,
+   30,
+   24
+  ],
+  "group": "fx"
+ },
+ {
+  "name": "spr_fx_explosion",
+  "file": "spr_fx_explosion_strip6.png",
+  "w": 48,
+  "h": 48,
+  "n": 6,
+  "fps": 16,
+  "origin": [
+   24,
+   24
+  ],
+  "mask": [
+   5,
+   5,
+   42,
+   42
+  ],
+  "group": "fx"
+ },
+ {
+  "name": "spr_fx_sparkle",
+  "file": "spr_fx_sparkle_strip4.png",
+  "w": 16,
+  "h": 16,
+  "n": 4,
+  "fps": 14,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   1,
+   1,
+   14,
+   14
+  ],
+  "group": "fx"
+ },
+ {
+  "name": "spr_fx_heal",
+  "file": "spr_fx_heal_strip4.png",
+  "w": 24,
+  "h": 24,
+  "n": 4,
+  "fps": 10,
+  "origin": [
+   12,
+   12
+  ],
+  "mask": [
+   4,
+   1,
+   18,
+   21
+  ],
+  "group": "fx"
+ },
+ {
+  "name": "spr_fx_dust",
+  "file": "spr_fx_dust_strip4.png",
+  "w": 16,
+  "h": 16,
+  "n": 4,
+  "fps": 14,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   2,
+   4,
+   12,
+   12
+  ],
+  "group": "fx"
+ },
+ {
+  "name": "spr_fx_flame",
+  "file": "spr_fx_flame_strip4.png",
+  "w": 16,
+  "h": 16,
+  "n": 4,
+  "fps": 12,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   4,
+   1,
+   12,
+   14
+  ],
+  "group": "fx"
+ },
+ {
+  "name": "spr_coin",
+  "file": "spr_coin_strip4.png",
+  "w": 16,
+  "h": 16,
+  "n": 4,
+  "fps": 10,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   2,
+   2,
+   13,
+   13
+  ],
+  "group": "items"
+ },
+ {
+  "name": "spr_potion_hp",
+  "file": "spr_potion_hp.png",
+  "w": 16,
+  "h": 16,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   3,
+   1,
+   12,
+   14
+  ],
+  "group": "items"
+ },
+ {
+  "name": "spr_potion_mp",
+  "file": "spr_potion_mp.png",
+  "w": 16,
+  "h": 16,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   3,
+   1,
+   12,
+   14
+  ],
+  "group": "items"
+ },
+ {
+  "name": "spr_key",
+  "file": "spr_key.png",
+  "w": 16,
+  "h": 16,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   1,
+   3,
+   15,
+   12
+  ],
+  "group": "items"
+ },
+ {
+  "name": "spr_heart_pickup",
+  "file": "spr_heart_pickup.png",
+  "w": 16,
+  "h": 16,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   2,
+   2,
+   14,
+   14
+  ],
+  "group": "items"
+ },
+ {
+  "name": "spr_chest",
+  "file": "spr_chest_strip2.png",
+  "w": 32,
+  "h": 32,
+  "n": 2,
+  "fps": 0,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   5,
+   10,
+   26,
+   27
+  ],
+  "group": "world"
+ },
+ {
+  "name": "spr_chest_gold",
+  "file": "spr_chest_gold_strip2.png",
+  "w": 32,
+  "h": 32,
+  "n": 2,
+  "fps": 0,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   5,
+   10,
+   26,
+   27
+  ],
+  "group": "world"
+ },
+ {
+  "name": "spr_door",
+  "file": "spr_door.png",
+  "w": 32,
+  "h": 32,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   0,
+   0
+  ],
+  "mask": [
+   0,
+   0,
+   31,
+   31
+  ],
+  "group": "world"
+ },
+ {
+  "name": "spr_portal",
+  "file": "spr_portal_strip6.png",
+  "w": 48,
+  "h": 48,
+  "n": 6,
+  "fps": 10,
+  "origin": [
+   24,
+   24
+  ],
+  "mask": [
+   10,
+   6,
+   37,
+   40
+  ],
+  "group": "world"
+ },
+ {
+  "name": "spr_teleport",
+  "file": "spr_teleport_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   2,
+   7,
+   29,
+   25
+  ],
+  "group": "world"
+ },
+ {
+  "name": "spr_spikes",
+  "file": "spr_spikes_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 0,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   4,
+   4,
+   27,
+   27
+  ],
+  "group": "world"
+ },
+ {
+  "name": "spr_lava",
+  "file": "spr_lava_strip4.png",
+  "w": 32,
+  "h": 32,
+  "n": 4,
+  "fps": 4,
+  "origin": [
+   0,
+   0
+  ],
+  "mask": [
+   0,
+   0,
+   31,
+   31
+  ],
+  "group": "world"
+ },
+ {
+  "name": "spr_torch",
+  "file": "spr_torch_strip4.png",
+  "w": 16,
+  "h": 32,
+  "n": 4,
+  "fps": 10,
+  "origin": [
+   8,
+   16
+  ],
+  "mask": [
+   3,
+   2,
+   11,
+   29
+  ],
+  "group": "world"
+ },
+ {
+  "name": "spr_sign",
+  "file": "spr_sign.png",
+  "w": 32,
+  "h": 32,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   16,
+   16
+  ],
+  "mask": [
+   5,
+   6,
+   26,
+   28
+  ],
+  "group": "world"
+ },
+ {
+  "name": "spr_wall_mask",
+  "file": "spr_wall_mask.png",
+  "w": 32,
+  "h": 32,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   0,
+   0
+  ],
+  "mask": [
+   0,
+   0,
+   31,
+   31
+  ],
+  "group": "world"
+ },
+ {
+  "name": "spr_ui_heart",
+  "file": "spr_ui_heart_strip2.png",
+  "w": 16,
+  "h": 16,
+  "n": 2,
+  "fps": 0,
+  "origin": [
+   0,
+   0
+  ],
+  "mask": [
+   0,
+   1,
+   15,
+   13
+  ],
+  "group": "ui"
+ },
+ {
+  "name": "spr_ui_mana_bg",
+  "file": "spr_ui_mana_bg.png",
+  "w": 64,
+  "h": 8,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   0,
+   0
+  ],
+  "mask": [
+   0,
+   0,
+   63,
+   7
+  ],
+  "group": "ui"
+ },
+ {
+  "name": "spr_ui_mana_fill",
+  "file": "spr_ui_mana_fill.png",
+  "w": 64,
+  "h": 8,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   0,
+   0
+  ],
+  "mask": [
+   2,
+   2,
+   61,
+   5
+  ],
+  "group": "ui"
+ },
+ {
+  "name": "spr_ui_boss_bg",
+  "file": "spr_ui_boss_bg.png",
+  "w": 200,
+  "h": 10,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   0,
+   0
+  ],
+  "mask": [
+   0,
+   0,
+   199,
+   9
+  ],
+  "group": "ui"
+ },
+ {
+  "name": "spr_ui_boss_fill",
+  "file": "spr_ui_boss_fill.png",
+  "w": 200,
+  "h": 10,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   0,
+   0
+  ],
+  "mask": [
+   2,
+   2,
+   197,
+   7
+  ],
+  "group": "ui"
+ },
+ {
+  "name": "spr_cursor",
+  "file": "spr_cursor.png",
+  "w": 16,
+  "h": 16,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   0,
+   0,
+   15,
+   15
+  ],
+  "group": "ui"
+ },
+ {
+  "name": "spr_ui_slot",
+  "file": "spr_ui_slot.png",
+  "w": 24,
+  "h": 24,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   0,
+   0
+  ],
+  "mask": [
+   0,
+   0,
+   23,
+   23
+  ],
+  "group": "ui"
+ },
+ {
+  "name": "spr_ui_skill",
+  "file": "spr_ui_skill_strip3.png",
+  "w": 16,
+  "h": 16,
+  "n": 3,
+  "fps": 0,
+  "origin": [
+   8,
+   8
+  ],
+  "mask": [
+   0,
+   0,
+   15,
+   14
+  ],
+  "group": "ui"
+ },
+ {
+  "name": "spr_ts_ground",
+  "file": "spr_ts_ground.png",
+  "w": 256,
+  "h": 128,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   0,
+   0
+  ],
+  "mask": [
+   0,
+   0,
+   255,
+   127
+  ],
+  "group": "tiles"
+ },
+ {
+  "name": "spr_ts_wall",
+  "file": "spr_ts_wall.png",
+  "w": 256,
+  "h": 64,
+  "n": 1,
+  "fps": 8,
+  "origin": [
+   0,
+   0
+  ],
+  "mask": [
+   0,
+   0,
+   223,
+   63
+  ],
+  "group": "tiles"
+ }
+]

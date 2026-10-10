@@ -4,3 +4,5 @@
 # GameMaker
 *.old
 Build/
+__pycache__/
+*.pyc

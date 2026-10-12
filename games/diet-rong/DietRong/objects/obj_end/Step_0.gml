@@ -1,4 +1,5 @@
 t++;
+if (t == 330) music_play(mus_menu);   // nhạc nền sau khi kèn chiến thắng kết thúc
 if (t mod 10 == 0) {
     spawn_fx(random(VIEW_W), random(VIEW_H * 0.6), choose(spr_fx_sparkle, spr_fx_hit), 0, 2);
 }

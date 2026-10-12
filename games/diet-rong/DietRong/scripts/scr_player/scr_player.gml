@@ -59,6 +59,7 @@ function player_attack() {
     if (reload > 0 || !key_attack) exit;
     reload = _wp.reload;
     if (instance_exists(gun)) gun.kick = 4;
+    if (_wp.snd != -1) sfx(_wp.snd, 0.7);
     var _ox = x + lengthdir_x(12, aim_dir);
     var _oy = y + 3 + lengthdir_y(12, aim_dir);
 
@@ -102,6 +103,7 @@ function player_skill() {
     if (!key_skill || skill_timer > 0) exit;
     if (global.mana < _h.skill_cost) {
         show_msg("Không đủ năng lượng!", 60);
+        sfx(snd_no_mana, 0.6);
         exit;
     }
     global.mana -= _h.skill_cost;
@@ -112,6 +114,7 @@ function player_skill() {
             var _sp = instance_create_depth(x, y + 2, depth - 2, obj_spin);
             _sp.owner = id;
             inv_timer = max(inv_timer, 36);
+            sfx(snd_spin);
             break;
         case HERO.ARCHER:      // Mưa tên: 9 mũi xuyên thấu toả hình quạt
             for (var _i = 0; _i < 9; _i++) {
@@ -119,10 +122,12 @@ function player_skill() {
                 shoot_projectile(x, y + 2, _a, spr_arrow, 7, 2, 260, true, 0, 3);
             }
             screen_shake(2);
+            sfx(snd_arrow_rain);
             break;
         case HERO.WIZARD:      // Vòng băng: đóng băng quái xung quanh
             instance_create_depth(x, y + 2, -9500, obj_nova);
             screen_shake(4);
+            sfx(snd_ice);
             break;
     }
 }
@@ -135,6 +140,7 @@ function player_try_dash() {
     dash_cd = 45;
     dash_dir = dir;
     inv_timer = max(inv_timer, 12);
+    sfx(snd_dash, 0.6);
 }
 
 /// Đổi vũ khí (Q / con lăn chuột / phím 1, 2).
@@ -147,6 +153,7 @@ function player_switch_weapon() {
     if (_old != global.wp_index) {
         reload = 10;
         show_msg(global.weapons[global.wp_index].name, 60);
+        sfx(snd_menu_move);
     }
 }
 

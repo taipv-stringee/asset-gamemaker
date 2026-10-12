@@ -12,6 +12,7 @@ Code GML không bị đụng tới.
 
 Chạy:
     python generate_assets.py      # (khi sửa hình)
+    python generate_sounds.py      # (khi sửa âm thanh)
     python build_project.py        # (khi sửa bản đồ, thêm object / sự kiện)
 Lưu ý: room được tạo lại từ maps/*.txt, nên chỉnh room trong GameMaker sẽ bị ghi đè
 khi chạy lại script — muốn giữ thì sửa bản đồ trong file .txt.
@@ -275,6 +276,38 @@ def build_object(name, sprite, parent, visible, group):
     }
     write(os.path.join(d, name + ".yy"), gm_dump(yy))
     RESOURCES.append(ref(name, "objects"))
+
+
+# =============================================================================
+# 4b. ÂM THANH (do generate_sounds.py tạo trong assets/sounds/)
+# =============================================================================
+def build_sounds():
+    meta_path = os.path.join(ASSETS, "sounds", "sounds.json")
+    if not os.path.exists(meta_path):
+        print("  ! chưa có assets/sounds/sounds.json - hãy chạy generate_sounds.py")
+        return 0
+    metas = json.load(open(meta_path, encoding="utf-8"))
+    for m in metas:
+        name = m["name"]
+        d = os.path.join(PROJ, "sounds", name)
+        if os.path.isdir(d):
+            shutil.rmtree(d)
+        os.makedirs(d)
+        shutil.copy(os.path.join(ASSETS, "sounds", m["file"]), os.path.join(d, name + ".wav"))
+        music = m["kind"] == "music"
+        yy = {
+            "$GMSound": "v2", "%Name": name,
+            "audioGroupId": {"name": "audiogroup_default", "path": "audiogroups/audiogroup_default"},
+            "bitDepth": 1, "channelFormat": 0,
+            "compression": 1 if music else 0,      # nhạc nền: nén lại cho nhẹ; hiệu ứng: để nguyên
+            "compressionQuality": 4, "conversionMode": 0, "duration": m["duration"], "exportDir": "",
+            "name": name, "parent": folder("Sounds/music" if music else "Sounds/sfx"), "preload": False,
+            "resourceType": "GMSound", "resourceVersion": "2.0", "sampleRate": 22050,
+            "soundFile": name + ".wav", "volume": 1.0,
+        }
+        write(os.path.join(d, name + ".yy"), gm_dump(yy))
+        RESOURCES.append(ref(name, "sounds"))
+    return len(metas)
 
 
 def build_scripts():
@@ -579,6 +612,7 @@ def main():
     for name, (spr, parent, vis, group) in OBJECTS.items():
         build_object(name, spr, parent, vis, group)
     build_scripts()
+    n_sounds = build_sounds()
     build_room("rm_menu", 480, 270, [("obj_menu", 0, 0, None)], bg=4280422418)
     build_room("rm_end", 480, 270, [("obj_end", 0, 0, None)], bg=4280422418)
     print("Room:")
@@ -591,7 +625,7 @@ def main():
     for d in sorted(os.listdir(os.path.join(PROJ, "objects"))):
         if d not in OBJECTS:
             print("  ! thư mục objects/" + d + " chưa có trong bảng OBJECTS")
-    print(f"Xong: {len(sprites)} sprite, {len(OBJECTS)} object, project {NAME}/{NAME}.yyp")
+    print(f"Xong: {len(sprites)} sprite, {n_sounds} âm thanh, {len(OBJECTS)} object, project {NAME}/{NAME}.yyp")
 
 
 if __name__ == "__main__":

@@ -56,7 +56,7 @@ for (var _i = 0; _i < 3; _i++) {
 
 // hướng dẫn
 text_align(fa_center, fa_top);
-draw_text_outlined(VIEW_W / 2, VIEW_H - 40, "A/D hoặc chuột: chọn     ENTER / nhấp chuột: bắt đầu", c_yellow);
+draw_text_outlined(VIEW_W / 2, VIEW_H - 40, "A/D hoặc chuột: chọn     ENTER / nhấp chuột: bắt đầu     M: tắt/bật tiếng", c_yellow);
 draw_text_outlined(VIEW_W / 2, VIEW_H - 26, "WASD đi  -  Chuột trái đánh  -  Chuột phải chiêu  -  SPACE lướt  -  Q đổi vũ khí", c_silver);
 text_align(fa_left, fa_top);
 draw_cursor_gui();

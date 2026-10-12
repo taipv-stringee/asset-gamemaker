@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """Kiểm tra tĩnh code GML của project (không cần GameMaker):
 - cân ngoặc (), [], {} trong từng file
-- tên spr_/obj_/rm_/ts_ dùng trong code phải tồn tại trong project
+- tên spr_/obj_/rm_/ts_/snd_/mus_ dùng trong code phải tồn tại trong project
 - hàm được gọi phải là hàm tự viết (trong scripts) hoặc nằm trong danh sách hàm có sẵn của GML
 - giá trị enum (PSTATE.X, ESTATE.X, HERO.X) phải được khai báo
 """
@@ -25,6 +25,7 @@ mp_grid_clear_cell mp_grid_create mp_grid_destroy mp_grid_path ord path_add path
 place_meeting point_direction point_distance point_in_rectangle random random_range random_set_seed
 randomize room_goto room_restart round sign sin cos sprite_get_width sprite_get_xoffset string tilemap_get
 variable_global_exists window_set_cursor
+audio_is_playing audio_master_gain audio_play_sound audio_sound_gain audio_stop_sound
 """.split())
 KEYWORDS = set("if else for while repeat switch case break continue return exit with function var new do until default and or not".split())
 
@@ -42,7 +43,7 @@ for root, _, fs in os.walk(PROJ):
             files.append(os.path.join(root, f))
 resources = set()
 yyp = open(os.path.join(PROJ, "DietRong.yyp"), encoding="utf-8").read()
-for m in re.finditer(r'"name":"([a-zA-Z0-9_]+)","path":"(sprites|objects|rooms|tilesets|scripts)/', yyp):
+for m in re.finditer(r'"name":"([a-zA-Z0-9_]+)","path":"(sprites|objects|rooms|tilesets|scripts|sounds)/', yyp):
     resources.add(m.group(1))
 
 funcs, enums, macros = set(), {}, set()
@@ -76,7 +77,7 @@ for p in sorted(files):
             stack.pop()
     if stack:
         err(p, f"thiếu đóng ngoặc '{stack[-1][0]}' (mở ở dòng {c[:stack[-1][1]].count(chr(10)) + 1})")
-    for name in set(re.findall(r"\b((?:spr|obj|rm|ts)_\w+)", c)):
+    for name in set(re.findall(r"\b((?:spr|obj|rm|ts|snd|mus)_\w+)", c)):
         if name not in resources:
             err(p, f"không có tài nguyên '{name}'")
     for name in set(re.findall(r"(?<![\.\w])([A-Za-z_]\w*)\s*\(", c)):

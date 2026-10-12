@@ -7,3 +7,4 @@ if (global.hp < global.hp_max) {
     spawn_text(x, y - 10, "+5 vàng", c_yellow);
 }
 spawn_fx(x, y - 6, spr_fx_heal);
+sfx(snd_potion);

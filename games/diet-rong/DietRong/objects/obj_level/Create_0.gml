@@ -14,3 +14,9 @@ global.msg_timer = 0;
 sign_text = "";
 over_timer = 0;
 window_set_cursor(cr_none);
+
+// nhạc nền theo màn (đánh trùm sẽ đổi sang mus_boss)
+switch (room) {
+    case rm_level1: music_play(mus_forest); break;
+    default: music_play(mus_dungeon); break;
+}

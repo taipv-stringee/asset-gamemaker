@@ -8,6 +8,7 @@ if (instance_exists(obj_player)) {
     var _p = obj_player;
     if (_p.state == PSTATE.DEAD) {
         over_timer++;
+        if (over_timer == 40) sfx(snd_gameover);
         if (over_timer > 45 && keyboard_check_pressed(ord("R"))) {
             checkpoint_load();
             room_restart();
@@ -20,3 +21,4 @@ if (instance_exists(obj_player)) {
     if (_s != noone && point_distance(_s.x, _s.y, _p.x, _p.y) < 40) sign_text = _s.text;
 }
 if (keyboard_check_pressed(vk_escape)) room_goto(rm_menu);
+audio_toggle_check();

@@ -26,6 +26,7 @@ function WeaponInit(_name, _sprite, _kind, _proj, _dmg, _reload, _spd, _num, _sp
     aoe = 0;               // bán kính nổ (0 = không nổ)
     arc = 120;             // góc chém (cho vũ khí cận chiến)
     knock = 3;             // lực đẩy lùi quái
+    snd = -1;              // âm thanh khi đánh
 }
 
 /// Gọi một lần lúc mở game (an toàn nếu gọi nhiều lần).
@@ -44,14 +45,20 @@ function game_init() {
     global.wp_axe   = new WeaponInit("Rìu chiến", spr_wp_axe, "melee", spr_slash_big, 5, 34, 0, 1, 0, 44);
     global.wp_axe.arc = 170;
     global.wp_axe.knock = 6;
+    global.wp_sword.snd = snd_sword;
+    global.wp_axe.snd = snd_axe;
 
     global.wp_bow      = new WeaponInit("Cung gỗ", spr_wp_bow, "shot", spr_arrow, 2, 14, 7, 1, 0, 260);
     global.wp_crossbow = new WeaponInit("Nỏ ba tên", spr_wp_crossbow, "shot", spr_bolt, 2, 26, 8, 3, 12, 220);
+    global.wp_bow.snd = snd_bow;
+    global.wp_crossbow.snd = snd_crossbow;
 
     global.wp_fire  = new WeaponInit("Gậy lửa", spr_wp_staff_fire, "shot", spr_fireball, 3, 28, 4, 1, 0, 240);
     global.wp_fire.aoe = 30;
     global.wp_storm = new WeaponInit("Gậy sét", spr_wp_staff_storm, "shot", spr_spark, 2, 12, 9, 1, 4, 200);
     global.wp_storm.pierce = true;
+    global.wp_fire.snd = snd_fireball;
+    global.wp_storm.snd = snd_spark;
 
     // ---- 3 nhân vật. sprites theo thứ tự [phải, lên, trái, xuống] như material_8
     global.heroes = [
@@ -84,6 +91,13 @@ function game_init() {
     global.msg = "";          // thông báo giữa màn hình
     global.msg_timer = 0;
     global.mana_max = 100;
+
+    // âm thanh
+    global.music = -1;        // bản nhạc nền đang phát
+    global.music_id = -1;
+    global.muted = false;
+    global.sfx_volume = 0.8;
+    global.music_volume = 0.45;
     reset_stats(global.hero);
 
     ini_open("save.ini");
@@ -108,6 +122,7 @@ function reset_stats(_hero) {
 
 /// Bắt đầu lượt chơi mới với nhân vật đã chọn.
 function new_game(_hero) {
+    sfx(snd_menu_select);
     reset_stats(_hero);
     room_goto(rm_level1);
 }

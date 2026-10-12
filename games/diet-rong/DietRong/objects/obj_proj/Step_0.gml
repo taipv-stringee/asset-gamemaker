@@ -13,6 +13,7 @@ if (_end) {
         hurt_enemies_circle(x, y, aoe, dmg, knock);
         spawn_fx(x, y, spr_fx_explosion, 0, 0.8);
         screen_shake(2);
+        sfx(snd_explosion, 0.5);
     } else {
         spawn_fx(x, y, spr_fx_hit);
     }

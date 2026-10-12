@@ -60,6 +60,7 @@ function enemy_hurt(_enemy, _dmg, _dir, _knock) {
         flash = 6;
         spawn_text(x, bbox_top - 4, string(_dmg), c_yellow);
         spawn_fx(x + irandom_range(-4, 4), y + irandom_range(-4, 4), spr_fx_hit);
+        sfx(snd_hit, 0.5, heavy ? 0.7 : 1);
         if (!heavy) {
             knock_x = lengthdir_x(_knock, _dir);
             knock_y = lengthdir_y(_knock, _dir);
@@ -103,6 +104,7 @@ function player_hurt(_dmg, _from_x, _from_y) {
         inv_timer = 60;
         flash = 8;
         screen_shake(4);
+        sfx(snd_player_hurt, 0.8);
         spawn_text(x, y - 20, "-" + string(_dmg), c_red);
         var _d = point_direction(_from_x, _from_y, x, y);
         knock_x = lengthdir_x(4, _d);
@@ -116,6 +118,8 @@ function player_hurt(_dmg, _from_x, _from_y) {
             instance_destroy(gun);
             gun = noone;
             spawn_fx(x, y, spr_fx_poof, 0, 1.5);
+            sfx(snd_player_die);
+            music_stop();
         }
     }
 }

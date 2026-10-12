@@ -9,5 +9,6 @@ if (partner != noone && instance_exists(obj_player) && obj_player.tele_cd <= 0
     obj_player.x = partner.x;
     obj_player.y = partner.y - 8;
     obj_player.tele_cd = 30;
+    sfx(snd_teleport);
     spawn_fx(partner.x, partner.y - 8, spr_fx_sparkle, 0, 2);
 }

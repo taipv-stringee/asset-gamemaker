@@ -51,6 +51,7 @@ function enemy_can_see_player() {
 function enemy_die() {
     path_end();
     global.kills++;
+    sfx(snd_enemy_die, 0.6);
     spawn_fx(x, y, spr_fx_poof, 0, 1 + heavy * 0.8);
     repeat (coin_drop) {
         var _c = instance_create_depth(x, y + 4, 0, obj_coin);

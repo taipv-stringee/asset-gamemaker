@@ -1,0 +1,8 @@
+.DS_Store
+._*
+
+# GameMaker
+*.old
+Build/
+__pycache__/
+*.pyc

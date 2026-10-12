@@ -1,0 +1,224 @@
+[
+ {
+  "name": "snd_sword",
+  "file": "snd_sword.wav",
+  "kind": "sfx",
+  "duration": 0.18
+ },
+ {
+  "name": "snd_axe",
+  "file": "snd_axe.wav",
+  "kind": "sfx",
+  "duration": 0.28
+ },
+ {
+  "name": "snd_bow",
+  "file": "snd_bow.wav",
+  "kind": "sfx",
+  "duration": 0.3
+ },
+ {
+  "name": "snd_crossbow",
+  "file": "snd_crossbow.wav",
+  "kind": "sfx",
+  "duration": 0.189977
+ },
+ {
+  "name": "snd_fireball",
+  "file": "snd_fireball.wav",
+  "kind": "sfx",
+  "duration": 0.4
+ },
+ {
+  "name": "snd_spark",
+  "file": "snd_spark.wav",
+  "kind": "sfx",
+  "duration": 0.149977
+ },
+ {
+  "name": "snd_explosion",
+  "file": "snd_explosion.wav",
+  "kind": "sfx",
+  "duration": 0.699955
+ },
+ {
+  "name": "snd_hit",
+  "file": "snd_hit.wav",
+  "kind": "sfx",
+  "duration": 0.08
+ },
+ {
+  "name": "snd_enemy_die",
+  "file": "snd_enemy_die.wav",
+  "kind": "sfx",
+  "duration": 0.349977
+ },
+ {
+  "name": "snd_player_hurt",
+  "file": "snd_player_hurt.wav",
+  "kind": "sfx",
+  "duration": 0.249977
+ },
+ {
+  "name": "snd_player_die",
+  "file": "snd_player_die.wav",
+  "kind": "sfx",
+  "duration": 0.76
+ },
+ {
+  "name": "snd_dash",
+  "file": "snd_dash.wav",
+  "kind": "sfx",
+  "duration": 0.22
+ },
+ {
+  "name": "snd_spin",
+  "file": "snd_spin.wav",
+  "kind": "sfx",
+  "duration": 0.5
+ },
+ {
+  "name": "snd_arrow_rain",
+  "file": "snd_arrow_rain.wav",
+  "kind": "sfx",
+  "duration": 0.4
+ },
+ {
+  "name": "snd_ice",
+  "file": "snd_ice.wav",
+  "kind": "sfx",
+  "duration": 0.62
+ },
+ {
+  "name": "snd_no_mana",
+  "file": "snd_no_mana.wav",
+  "kind": "sfx",
+  "duration": 0.149977
+ },
+ {
+  "name": "snd_coin",
+  "file": "snd_coin.wav",
+  "kind": "sfx",
+  "duration": 0.2
+ },
+ {
+  "name": "snd_potion",
+  "file": "snd_potion.wav",
+  "kind": "sfx",
+  "duration": 0.309977
+ },
+ {
+  "name": "snd_key",
+  "file": "snd_key.wav",
+  "kind": "sfx",
+  "duration": 0.26
+ },
+ {
+  "name": "snd_heart",
+  "file": "snd_heart.wav",
+  "kind": "sfx",
+  "duration": 0.4
+ },
+ {
+  "name": "snd_chest",
+  "file": "snd_chest.wav",
+  "kind": "sfx",
+  "duration": 0.579955
+ },
+ {
+  "name": "snd_door",
+  "file": "snd_door.wav",
+  "kind": "sfx",
+  "duration": 0.249977
+ },
+ {
+  "name": "snd_portal",
+  "file": "snd_portal.wav",
+  "kind": "sfx",
+  "duration": 0.9
+ },
+ {
+  "name": "snd_teleport",
+  "file": "snd_teleport.wav",
+  "kind": "sfx",
+  "duration": 0.3
+ },
+ {
+  "name": "snd_spikes",
+  "file": "snd_spikes.wav",
+  "kind": "sfx",
+  "duration": 0.1
+ },
+ {
+  "name": "snd_enemy_shoot",
+  "file": "snd_enemy_shoot.wav",
+  "kind": "sfx",
+  "duration": 0.2
+ },
+ {
+  "name": "snd_orc_slam",
+  "file": "snd_orc_slam.wav",
+  "kind": "sfx",
+  "duration": 0.5
+ },
+ {
+  "name": "snd_dragon_roar",
+  "file": "snd_dragon_roar.wav",
+  "kind": "sfx",
+  "duration": 1.3
+ },
+ {
+  "name": "snd_dragon_fire",
+  "file": "snd_dragon_fire.wav",
+  "kind": "sfx",
+  "duration": 0.6
+ },
+ {
+  "name": "snd_menu_move",
+  "file": "snd_menu_move.wav",
+  "kind": "sfx",
+  "duration": 0.049977
+ },
+ {
+  "name": "snd_menu_select",
+  "file": "snd_menu_select.wav",
+  "kind": "sfx",
+  "duration": 0.219955
+ },
+ {
+  "name": "snd_victory",
+  "file": "snd_victory.wav",
+  "kind": "sfx",
+  "duration": 4.8
+ },
+ {
+  "name": "snd_gameover",
+  "file": "snd_gameover.wav",
+  "kind": "sfx",
+  "duration": 5.333333
+ },
+ {
+  "name": "mus_menu",
+  "file": "mus_menu.wav",
+  "kind": "music",
+  "duration": 19.2
+ },
+ {
+  "name": "mus_forest",
+  "file": "mus_forest.wav",
+  "kind": "music",
+  "duration": 15.0
+ },
+ {
+  "name": "mus_dungeon",
+  "file": "mus_dungeon.wav",
+  "kind": "music",
+  "duration": 20.869524
+ },
+ {
+  "name": "mus_boss",
+  "file": "mus_boss.wav",
+  "kind": "music",
+  "duration": 12.8
+ }
+]

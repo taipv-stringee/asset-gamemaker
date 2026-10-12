@@ -100,13 +100,15 @@ AE2 không có tính năng này. Thêm vào vì người chơi điện thoại c
 - Tướng **không mua được**. Tướng của người chơi về 0 máu thì **thua màn [đổi]**.
   AE2 cho mua lại vua; ở đây tướng là người thật, nên không "hồi sinh". Tướng phụ có tên (không phải tướng chính)
   về 0 máu thì **rút lui bị thương**: rời bản đồ, màn vẫn tiếp tục, không chết trong cốt truyện.
-- Tướng địch có tên về 0 máu: hiện câu thoại, rời bản đồ. Cái chết của họ chỉ được thể hiện **đúng như sử liệu**
-  (Sầm Nghi Đống tự vẫn, Hứa Thế Hanh chết khi chặn hậu) trong hội thoại, không phải trong hoạt cảnh chiến đấu.
+- Tướng địch có tên về 0 máu: hiện câu thoại, rời bản đồ. Cái chết của họ chỉ được kể **theo đúng các phiên bản trong nguồn**
+  (Sầm Nghi Đống tự vẫn; Hứa Thế Hanh chết ở bờ sông khi chặn hậu theo sử Thanh, ở Ngọc Hồi theo cách kể phổ biến ở Việt Nam)
+  trong hội thoại và Sử liệu, không phải trong hoạt cảnh chiến đấu.
 
 ## 8. Quân tan và chiêu hàng [đổi so với "mộ" của AE2]
 
-AE2: quân chết để lại **mộ**, phù thủy gọi **bộ xương** từ mộ. Game này đổi thành chiêu hàng, dựa trên việc đồn
-Hà Hồi đầu hàng sau khi bị gọi hàng và quân Tây Sơn bắt hơn 3.400 tù binh.
+AE2: quân chết để lại **mộ**, phù thủy gọi **bộ xương** từ mộ. Game này đổi thành chiêu hàng, lấy cảm hứng từ cảnh
+đồn Hà Hồi ra hàng sau khi bị vây và gọi hàng (*Theo HLNTC*) và việc trận này có nhiều quân Thanh bị bắt
+(Wikipedia tiếng Anh ghi ít nhất 3.400 tù binh cho **cả chiến dịch**, chưa kiểm nguồn gốc).
 
 - Quân thường của Thanh/Lê bị hạ để lại **quân tan** (cờ rách, vũ khí vứt lại) trên ô đó, tồn tại **2 lượt**.
 - **Quân sư** đứng cách quân tan ≤ 2 ô dùng **Chiêu hàng** → quân tan thành **hàng binh** (phe Tây Sơn,

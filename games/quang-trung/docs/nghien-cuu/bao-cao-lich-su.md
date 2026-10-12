@@ -1,6 +1,28 @@
 # Sáu ngày Tết Quang Trung đánh bật quân Thanh
 
-Sử liệu Việt, Thanh và phương Tây cùng xác nhận một bộ khung khá vững. Nguyễn Huệ lên ngôi ở núi Bân ngày **25 tháng 11 Mậu Thân (22/12/1788)**, hành quân qua Nghệ An ra Tam Điệp, và chỉ trong sáu ngày từ **đêm 30 Tết đến mùng 5 tháng Giêng Kỷ Dậu (30/01/1789)** đã quét sạch hệ thống đồn của quân Thanh phía nam Thăng Long. Ngọc Hồi và Khương Thượng vỡ cùng ngày, Sầm Nghi Đống thắt cổ, các tướng Thanh chết bên cầu phao sông Hồng và Tôn Sĩ Nghị chạy về nước. Nhiều chi tiết được kể lại nhiều nhất thì yếu hơn bộ khung đó. Quân số quân Thanh lệch nhau tới 25 lần (từ khoảng 18.000 quân chính quy theo sổ sách Thanh đến "29 vạn" theo sử Việt). Danh tính "Đô đốc Long" vẫn còn tranh cãi. Cảnh mộc thuẫn, lời hẹn mùng 7 và lời dụ binh ở Nghệ An chủ yếu đến từ *Hoàng Lê nhất thống chí* (HLNTC), một tiểu thuyết chương hồi. Câu "Đánh cho để dài tóc…" và chuyện cành đào thì không có trong sử liệu gốc. Với đội làm game, có ba phát hiện đòi hỏi sửa ngay bản nháp. Thứ nhất, **đồn Hà Hồi bị vây vào nửa đêm mùng 3 Tết (28/01/1789), không phải đêm 30**: đêm 30 là lúc vượt sông Gián và diệt đồn Gián Khẩu. Thứ hai, **không có bằng chứng nào cho thấy lính Tây Sơn đội nón**: hình ảnh gần thời nhất cho thấy lính chân đất, quấn khăn, và sử Thanh tả quân voi "chít khăn đỏ". Thứ ba, câu "Đánh cho để dài tóc…" trong mockup hội thoại **không nằm trong HLNTC** như README đang ghi. Toàn bộ báo cáo dựa trên đoạn trích của công cụ tìm kiếm vì việc tải trang bị chặn trong mọi phiên nghiên cứu. Do đó mọi trích dẫn then chốt phải được đối chiếu với nguyên văn trước khi phát hành.
+Sử liệu Việt, Thanh và phương Tây cùng xác nhận một bộ khung khá vững. Nguyễn Huệ lên ngôi ở núi Bân ngày **25 tháng 11 Mậu Thân (22/12/1788)**, hành quân qua Nghệ An ra Tam Điệp, và chỉ trong sáu ngày từ **đêm 30 Tết đến mùng 5 tháng Giêng Kỷ Dậu (30/01/1789)** đã quét sạch hệ thống đồn của quân Thanh phía nam Thăng Long. Ngọc Hồi và Khương Thượng vỡ cùng ngày, Sầm Nghi Đống thắt cổ, các tướng Thanh chết bên cầu phao sông Hồng và Tôn Sĩ Nghị chạy về nước. Nhiều chi tiết được kể lại nhiều nhất thì yếu hơn bộ khung đó. Quân số quân Thanh lệch nhau khoảng 16 lần (từ khoảng 18.000 quân chính quy theo sổ sách Thanh đến "29 vạn" theo sử Việt). Danh tính "Đô đốc Long" vẫn còn tranh cãi. Cảnh mộc thuẫn, lời hẹn mùng 7 và lời dụ binh ở Nghệ An chủ yếu đến từ *Hoàng Lê nhất thống chí* (HLNTC), một tiểu thuyết chương hồi. Câu "Đánh cho để dài tóc…" và chuyện cành đào thì không có trong sử liệu gốc. Với đội làm game, có ba phát hiện đòi hỏi sửa ngay bản nháp. Thứ nhất, **đồn Hà Hồi bị vây vào nửa đêm mùng 3 Tết (28/01/1789), không phải đêm 30**: đêm 30 là lúc vượt sông Gián và diệt đồn Gián Khẩu. Thứ hai, **không có bằng chứng nào cho thấy lính Tây Sơn đội nón**: hình ảnh gần thời nhất cho thấy lính chân đất, quấn khăn, và sử Thanh tả quân voi "chít khăn đỏ". Thứ ba, câu "Đánh cho để dài tóc…" trong mockup hội thoại **không nằm trong HLNTC** như README đang ghi. Toàn bộ báo cáo dựa trên đoạn trích của công cụ tìm kiếm vì việc tải trang bị chặn trong mọi phiên nghiên cứu. Do đó mọi trích dẫn then chốt phải được đối chiếu với nguyên văn trước khi phát hành.
+
+> **Đính chính sau rà soát lịch sử (tháng 10/2026).** Một agent rà soát độc lập đã kiểm lại báo cáo này. Tài liệu thiết kế
+> trong `docs/` đã được sửa theo; các điểm sai trong báo cáo được ghi ở đây, phần thân báo cáo giữ nguyên trừ hai con số đã sửa.
+>
+> 1. **Chi tiết Hà Hồi** ("bắc loa gọi hàng", "đều ra hàng") gần như trùng câu chữ HLNTC hồi 14; các nguồn dẫn đều là bản tóm tắt HLNTC.
+>    Việc đồn Hà Hồi bị hạ đêm mùng 3 là *Sử liệu*; cách đồn bị hạ là *Theo HLNTC*. Tương tự ở Ngọc Hồi: mộc thuẫn 20 bức, đê Yên Duyên,
+>    Đầm Mực là *Theo HLNTC*; phía Thanh chỉ xác nhận "đội ván" và vua cưỡi voi đốc chiến.
+> 2. **3.400 tù binh** là con số của cả chiến dịch (infobox Wikipedia tiếng Anh), không phải của Hà Hồi.
+> 3. **"Chênh 25 lần"** tính sai: 290.000 / 18.000 ≈ 16 lần (đã sửa trong thân bài).
+> 4. **Tỷ lệ điểu thương 60%** là quy chế doanh Vân – Quý (bài Zhihu); quy định năm 1727 cho tỉnh biên giới khoảng 40%, nội địa 30%.
+>    Quân ở Ngọc Hồi là Lục doanh Lưỡng Quảng, tỷ lệ chưa rõ.
+> 5. **Nón**: *Lê quý dật sử* (trích ở mục trang phục) có "chỏm mũ đính lông chiên đỏ", tức có một loại mũ. Kết luận "không có bằng chứng
+>    về nón" chỉ đúng với nón chóp / nón dấu; "nón dấu là của thời Nguyễn" là suy luận.
+> 6. **Hứa Thế Hanh** là người Hồi (Wikipedia tiếng Anh) → "Lục doanh là quân người Hán" nên nói "chủ yếu người Hán".
+> 7. **Đỉnh hồng ngọc** của Tôn Sĩ Nghị đi kèm tước Nhất đẳng Mưu dũng công, ban **sau** khi chiếm Thăng Long; lệnh thu mũ đến vài tuần sau trận.
+> 8. **Lễ cầu siêu cho lính Thanh** chỉ có nguồn về lễ hội ngày nay (một bài blog), không có nguồn cho năm 1789.
+> 9. **Nguồn gốc chuyện cành đào** (vở kịch của Trúc Đường, 1964) là ý kiến của một số nhà nghiên cứu, không phải kết luận chắc chắn.
+> 10. Ghi chú gốc: `dien_bien_chien_dich.md` dòng 135 viết "theo HLNTC, Tôn Sĩ Nghị sai chặt cầu" — mâu thuẫn với báo cáo; HLNTC kể cầu đứt
+>     vì quân chen nhau. `nhan_vat.md` dòng 45 xếp Đô đốc Bảo vào "hữu quân", HLNTC ghi tả quân. `dien_bien_chien_dich.md` dòng 89 "Đại đô đốc
+>     Tuyết" nên là Đô đốc Tuyết. `quan_luc_vu_khi.md` dòng 12 "白馬關" có lẽ là 馬白關. 28/10 Mậu Thân = 25/11/1788 (không phải 25–26/11).
+> 11. **Lịch**: agent rà soát tự tính sóc (thuật toán Meeus): tháng 11 Mậu Thân thiếu, **tháng Chạp đủ 30 ngày** → năm đó có ngày 30 Chạp.
+>     Mọi ngày "(quy đổi)" trong báo cáo đều đúng: 30 Chạp = 25/01/1789, mùng 3 = 28/01, mùng 7 = 01/02.
 
 > **Giới hạn phương pháp, đọc trước khi dùng.** Trong cả năm phiên nghiên cứu, công cụ tải trang (WebFetch/curl) bị lỗi DNS hoặc bị proxy chặn với gần như mọi tên miền: Wikipedia, wikisource, ctext, vjol, báo Việt Nam. Vì vậy người nghiên cứu **chỉ đọc được đoạn trích (snippet) mà công cụ tìm kiếm trả về** cho từng URL, không đọc toàn văn trang. Không ai đọc được nguyên văn *Khâm định Việt sử thông giám cương mục*, *Đại Nam chính biên liệt truyện*, HLNTC hồi 14, *Thanh thực lục*, *Khâm định An Nam kỷ lược*, *Thánh vũ ký*, thư giáo sĩ MEP, hay văn bản Nghị định 147/2024. Một số ngày dương lịch là do người nghiên cứu tự quy đổi từ hai mốc chắc chắn, và được đánh dấu "(quy đổi)" trong báo cáo. Mọi câu thoại, con số, ngày tháng và quy định pháp lý sẽ xuất hiện trong game cần được kiểm lại trên bản gốc. Mục cuối báo cáo liệt kê thứ tự ưu tiên kiểm tra.
 
@@ -42,7 +64,7 @@ Mốc thứ nhất có nhiều nguồn độc lập xác nhận: Nguyễn Huệ 
 
 Ở Khương Thượng, mọi nguồn đều đồng ý rằng Sầm Nghi Đống thắt cổ ở Loa Sơn. Thời điểm thì có ba bản: ngay đêm mùng 4 rạng mùng 5, sáng mùng 5, hoặc cố thủ chờ cứu viện đến hôm sau mới tự vẫn ([Wikipedia: Sầm Nghi Đống](https://vi.wikipedia.org/wiki/S%E1%BA%A7m_Nghi_%C4%90%E1%BB%91ng); [Dân Việt](https://danviet.vn/tran-danh-kinh-hoang-khien-tuong-giac-phuong-bac-tu-van-tai-cho-77771014283-d750877.html)). Không có nguồn nào ghi thời tiết của các ngày 25–30/01/1789. Sương mù và mưa phùn chỉ là khí hậu chung của đồng bằng Bắc Bộ vào mùa này, không phải ghi chép năm 1789. Chi tiết gần với thời tiết nhất là gió đổi chiều làm ống phun lửa của quân Thanh quay lại hại chính họ ([baotintuc.vn](https://baotintuc.vn/doi-song-van-hoa/di-tich-ngoc-hoi-mo-chon-quan-thanh-xam-luoc-230-nam-truoc-20190208173416660.htm)).
 
-## Quân số chênh 25 lần, vì mỗi bên đếm một kiểu
+## Quân số chênh khoảng 16 lần, vì mỗi bên đếm một kiểu
 
 ### Quân Thanh: từ 18.000 đến 500.000
 
@@ -157,7 +179,7 @@ Màn 7 và màn 8 diễn ra gần như đồng thời, nên có thể cho ngư�
 | Catapult | Đại bác | Thần công / **voi chở pháo** | Trung bình | Có thần công ở bảo tàng; "voi chở đại pháo" theo nguồn Thanh thế kỷ 19 |
 | Wyvern (tinh nhuệ) | Voi chiến | Voi chiến: mạnh, chậm | **Cao** | Hơn 100 voi, được cả sử Việt lẫn sử Thanh xác nhận. Nên bỏ tốc độ cao của Wyvern |
 | Lizard (nước) | Thủy binh? | Thủy binh | Thấp – trung bình | Lộ trình theo HLNTC; bằng chứng giao chiến thủy chỉ có từ năm 1785 |
-| Wizard (gọi xương) | ? | **Quân sư chiêu hàng** (loa gọi hàng): biến "hàng binh" thành quân mình | Trung bình cho cơ chế | Hà Hồi hàng; 3.400 tù binh. Tránh cơ chế gọi xác chết vì liên quan người chết thật |
+| Wizard (gọi xương) | ? | **Quân sư chiêu hàng** (loa gọi hàng): biến "hàng binh" thành quân mình | Trung bình cho cơ chế | Hà Hồi hàng (theo HLNTC); con số 3.400 tù binh là của cả chiến dịch. Tránh cơ chế gọi xác chết vì liên quan người chết thật |
 | (đơn vị nhanh) | – | Kỵ binh | Thấp | Toàn quân Tây Sơn có hơn 2.000 ngựa, nhưng không có tư liệu cho năm 1789 |
 
 Phe Thanh nên được dựng theo tỷ lệ Lục doanh. Gồm có: lính trường mâu có tua đỏ (bộ binh rẻ), điểu thương binh (vai bắn xa chính, chiếm 60%), cung tiễn binh (20%), **đằng bài binh** cầm khiên mây (vai tank, 10%), pháo binh (10%), thổ binh Điền Châu (yếu nhưng đông), và quân Lê Chiêu Thống (rẻ, giữ đồn tiền tiêu). Chông sắt và địa lôi nên là ô địa hình hoặc bẫy, không phải đơn vị. Theo *Đại Nam chính biên liệt truyện*, địa lôi còn có thể gây sát thương cho chính quân Thanh khi tháo chạy. Kỵ binh và Bát kỳ không có nguồn, nên không đưa vào. Tôn Sĩ Nghị là "King" phe Thanh ở màn cuối. Hứa Thế Hanh là tướng địch đáng kính, chết khi chặn hậu.

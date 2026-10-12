@@ -1,7 +1,7 @@
 # Tây Sơn (tên tạm)
 
 Game chiến thuật theo lượt trên điện thoại (màn hình dọc), lối chơi bám sát **Ancient Empires 2**, về chiến dịch
-Quang Trung đại phá quân Thanh, từ núi Bân (22/12/1788) đến Thăng Long trưa mùng 5 Tết Kỷ Dậu (30/01/1789).
+Quang Trung đại phá quân Thanh, từ núi Bân (22/12/1788) đến Thăng Long trưa hoặc chiều mùng 5 Tết Kỷ Dậu (30/01/1789).
 Làm bằng **Godot 4**, phát hành **miễn phí** trên Google Play và App Store (chủ dự án đứng tên cá nhân).
 Thư mục vẫn tên `quang-trung` (tên mã dự án).
 

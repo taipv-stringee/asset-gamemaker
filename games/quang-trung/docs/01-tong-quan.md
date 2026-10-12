@@ -6,7 +6,7 @@
 ## Một câu
 
 Game chiến thuật theo lượt trên điện thoại, chơi màn hình dọc, lối chơi bám sát *Ancient Empires 2*:
-người chơi cầm quân Tây Sơn đi từ núi Bân (22/12/1788) tới Thăng Long trưa mùng 5 Tết Kỷ Dậu (30/01/1789).
+người chơi cầm quân Tây Sơn đi từ núi Bân (22/12/1788) tới Thăng Long trưa hoặc chiều mùng 5 Tết Kỷ Dậu (30/01/1789).
 
 ## Tên game
 
@@ -32,7 +32,7 @@ Tên tạm: **Tây Sơn** (chủ dự án chốt). Các tên khác đã cân nh�
 4. **Chơi một tay, từng đoạn ngắn.** Màn hình dọc, chạm là chính, một lượt chơi 1–3 phút, một màn 10–25 phút,
    tự lưu mỗi lượt để tắt app lúc nào cũng được.
 5. **Tôn trọng người chết của cả hai phía.** Không có cơ chế gọi xác chết, không dùng từ miệt thị trong giao diện,
-   tướng Thanh được khắc họa như con người (Hứa Thế Hanh chặn hậu, Sầm Nghi Đống tự vẫn), có lời kết cầu siêu
+   tướng Thanh được khắc họa như con người (Hứa Thế Hanh theo sử Thanh ở lại chặn hậu, Sầm Nghi Đống tự vẫn), có lời kết cầu siêu
    như lễ hội gò Đống Đa.
 
 ## Người chơi mục tiêu

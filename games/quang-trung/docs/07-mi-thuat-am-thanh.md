@@ -21,15 +21,15 @@
 
 | Đối tượng | Làm | Không làm | Nguồn |
 |---|---|---|---|
-| **Lính Tây Sơn** | Chít khăn (turban), đi chân đất, áo rộng dài tay, quần ống rộng; vải nâu, chàm | **Nón chóp, nón dấu** (nón dấu là của lính lệ thời Nguyễn); quân phục đồng phục; giáp | Tranh William Alexander, 1793 |
-| **Màu đỏ** | Khăn đỏ cho quân voi và làm màu phe; áo đỏ tía cho một số quân | Gọi "áo vải cờ đào" như sử liệu (đó là biệt danh hiện đại) | Sử Thanh; *Lê quý dật sử* |
+| **Lính Tây Sơn** | Mặc định: chít khăn (turban), đi chân đất, áo rộng dài tay, quần ống rộng; vải nâu, chàm. Một số quân tinh nhuệ / tướng có thể đội mũ đính lông đỏ (*Lê quý dật sử*: "chỏm mũ đính lông chiên đỏ") | Nón chóp, nón dấu (không thấy bằng chứng thế kỷ 18; cho rằng nón dấu là của thời Nguyễn là suy luận, chưa có nguồn); quân phục đồng phục; giáp | Tranh William Alexander, 1793; *Lê quý dật sử* |
+| **Màu đỏ** | Khăn đỏ cho quân voi và làm màu phe; áo đỏ tía cho một số quân | Gọi "áo vải cờ đào" như sử liệu (đó là biệt danh hiện đại) | Sử Thanh (qua trích dẫn, chưa kiểm nguyên văn); *Lê quý dật sử* |
 | **Cờ Tây Sơn** | Cờ đỏ trơn hoặc có chữ, ghi là *Sáng tạo* | Khẳng định màu cờ lịch sử | Không có nguồn về màu cờ |
 | **Quang Trung** | Cách điệu: áo bào đỏ, cưỡi voi, "mắt sáng" là dấu hiệu nhận diện | Chép mặt từ tranh *Đông Thanh* 1932 / tượng đài (có thể bắt nguồn từ tranh Càn Long) | Nguyễn Duy Chính, Lê Nguyễn Lưu |
 | **Lính Thanh** | Đuôi sam, mũ có tua đỏ, trường thương tua đỏ (lông bò yak); màu phe xanh lam để dễ đọc | Chữ 勇 trên ngực áo (dấu hiệu thế kỷ 19); áo xanh lục (màu lục chỉ cho cờ) | Hoàng triều lễ khí đồ thức (1766) |
-| **Tôn Sĩ Nghị** | Đỉnh mũ **hồng ngọc** đỏ trong, **lông công hai mắt**, bổ tử, triều châu. Sau màn 9: chân dung không mũ đính, không lông công | Đỉnh san hô (bản nháp đang dùng) | Thanh sử cảo, quyển 330 |
+| **Tôn Sĩ Nghị** | Từ khi chiếm Thăng Long (tháng 11 Mậu Thân, được phong Nhất đẳng Mưu dũng công): đỉnh mũ **hồng ngọc** đỏ trong, **lông công hai mắt**, bổ tử, triều châu. Cảnh trước đó (vượt Trấn Nam Quan): đỉnh san hô. Bản **bị thu mũ** chỉ dùng ở lời kết (lệnh thu mũ đến vài tuần sau trận) | Dùng bản bị thu mũ ngay trong màn 9 | Thanh sử cảo, quyển 330 |
 | **Quan Lê** | Áo giao lĩnh, mũ chữ đinh | | Báo Pháp Luật (cổ phục Lê trung hưng) |
-| **Mộc thuẫn** | Tấm ván ghép, phủ rơm ướt, nhiều người khiêng | | HLNTC; sử Thanh "đội ván" |
-| **Voi chiến** | Mỗi voi 3–4 lính chít khăn đỏ, có thể ném hỏa cầu | | Sử Thanh |
+| **Mộc thuẫn** | Tấm ván ghép, phủ rơm ướt, nhiều người khiêng | | Theo HLNTC (ván ghép phủ rơm); sử Thanh chỉ ghi "đội ván"; *Cương mục* ghi bó rơm lăn |
+| **Voi chiến** | Mỗi voi 3–4 lính chít khăn đỏ, có thể ném hỏa cầu | | Sử Thanh (qua trích dẫn, chưa kiểm nguyên văn) |
 | **Thăng Long** | Thành, cổng ô cách điệu | Vẽ đúng Ô Quan Chưởng hiện nay (bản xây lại 1804/1817) | |
 | **Tết** | Cây đào, đèn trong làng, cây nêu — coi là **không khí** (sáng tạo) | Gán là chi tiết sử | Chưa có nguồn thế kỷ 18 |
 | **Khung UI** | Sơn mài đỏ – đen – vàng; motif đồng tiền **Quang Trung thông bảo** (光中通寶) | | Numista, Penn Museum |
@@ -106,8 +106,8 @@ con trỏ chọn ô, ô xanh / đỏ / vùng nguy hiểm, bản đồ chiến d�
 | Thắng / Thua | Kết quả màn | Ngắn |
 | Lời kết | Cầu siêu, kết thúc | Trầm, tưởng niệm |
 
-Nhạc cụ: trống chiến, chiêng, kèn, tù và, sáo, đàn nguyệt. Tránh tạo cảm giác "nhạc Trung Hoa" cho phe Tây Sơn;
-có thể dùng âm sắc khác (kèn, chũm chọe) cho các cảnh trong doanh trại Thanh.
+Nhạc cụ: trống chiến, chiêng, kèn, tù và, sáo, đàn nguyệt. Cảnh trong doanh trại Thanh dùng cùng bảng nhạc cụ nhưng
+đổi giai điệu và nhịp; tránh các khuôn sáo "nhạc Trung Hoa" (gõ chũm chọe, ngũ cung kiểu phim) để không rập khuôn.
 
 ### Hiệu ứng âm thanh
 

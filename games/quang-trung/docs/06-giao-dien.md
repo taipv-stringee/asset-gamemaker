@@ -5,8 +5,11 @@
 
 ## 1. Khung màn hình
 
-- Kích thước gốc **288 × 512** điểm ảnh logic (9 cột ô 32px). Màn hình dài hơn 9:16 (19.5:9, 20:9) thì **hiện thêm hàng ô**,
-  không kéo giãn. Cách phóng to xem [08-ky-thuat.md](08-ky-thuat.md#4-độ-phân-giải-và-phóng-to).
+- Kích thước gốc **288 × 512** điểm ảnh logic, phóng **nguyên số** (08 §4). Vì vậy vùng logic thật thay đổi theo máy: rộng **288–432**
+  (9–13 cột), cao 512 trở lên. Giao diện **neo theo cạnh** (anchor), không giả định cố định 9 cột; máy dài hơn thì thấy thêm hàng ô.
+- **Màn hình ngang / máy tính bảng / máy gập**: Android 16 (khi app nhắm API 36) bỏ qua khóa màn hình dọc trên màn hình lớn; iPad cũng
+  đang bỏ chế độ toàn màn hình bắt buộc. Cách xử lý ở 1.0: giữ nguyên bố cục dọc ở giữa màn hình, hai bên là khung trang trí sơn mài.
+  Không thiết kế bố cục ngang riêng.
 - Chừa vùng an toàn (tai thỏ, thanh điều hướng): thanh trên và bảng dưới nằm trong vùng an toàn; bản đồ được tràn ra sau.
 - Vùng ngón cái (nửa dưới màn hình) chứa mọi nút hay bấm. Thanh trên chỉ hiển thị thông tin.
 
@@ -17,11 +20,11 @@
 ├────────────────────────────┤
 │                            │
 │        BẢN ĐỒ              │  kéo để cuộn, chụm để thu phóng (2 mức)
-│   (9 cột × 12+ hàng)       │
+│   (9–13 cột × 12+ hàng)    │
 │                            │
 ├────────────────────────────┤
 │ [chân dung] Tên quân  Cấp 2│  bảng dưới: quân / ô đang chọn
-│  Máu 100  Công 55–65       │
+│  Máu 100  Công 60–70       │
 │  [ Chờ ]  [ Đi ]  [ Đánh ] │  nút hành động theo ngữ cảnh
 │                [Hết lượt ▶]│
 └────────────────────────────┘
@@ -38,15 +41,16 @@
 | Chạm quân địch ngoài tầm | Hiện thông tin và **vùng nguy hiểm** của nó (ô nó có thể đánh tới) |
 | Giữ lâu một ô | Thông tin địa hình: chi phí đi, thủ, đặc tính |
 | Kéo một ngón | Cuộn bản đồ |
-| Chụm hai ngón | Thu / phóng (2 mức: ×1 và ×1.5 so với mức gốc) |
+| Chụm hai ngón | Thu / phóng 2 mức: ×1 và ×2 (giữ phóng nguyên số) |
 | Nút **Hết lượt** | Hỏi xác nhận nếu còn quân chưa đi |
 | Nút **≡** | Tạm dừng: tiếp tục, xem mục tiêu, Sử liệu, cài đặt, bỏ màn |
 
-Không cần thao tác chính xác: vùng chạm của ô là 32 × hệ số phóng (≥ 96 px vật lý trên máy 1080p), nút ≥ 44 điểm.
+Vùng chạm của ô là 32 × hệ số phóng (≥ 96 px vật lý trên máy 1080p, khoảng 6 mm — dưới mức khuyến nghị 7–9 mm, chấp nhận được vì
+đi và đánh đều cần chạm hai lần để xác nhận; mức phóng ×2 cho người cần ô to hơn). Nút ≥ 44 điểm.
 
 ## 3. Lượt của máy
 
-- Camera đi theo từng quân máy.
+- Camera đi theo từng quân máy **đang được thấy** (ở màn đêm không bám theo quân trong sương mù).
 - Nút **Tua nhanh** (×2) và **Bỏ hoạt cảnh** (chỉ hiện kết quả). Lưu lựa chọn trong cài đặt.
 - Hiện số sát thương nổi lên trên quân bị đánh.
 
@@ -72,7 +76,7 @@ Khởi động → Màn hình tiêu đề ("Đánh cho để dài tóc…" — n
 - Cấp: sao nhỏ góc trên trái (1–4).
 - Trạng thái: biểu tượng nhỏ (lửa = Cháy, nốt nhạc/trống = Hào quang, "z" = Ngủ).
 - Quân đã hành động: xám đi.
-- Màu phe: **Tây Sơn đỏ**, **Thanh xanh lam**, **Lê vàng đất**, trung lập xám. Thêm khác biệt hình dáng (khăn vs mũ có tua,
+- Màu phe: **Tây Sơn đỏ**, **Diễn tập đỏ sẫm** (màn 1–2), **Thanh xanh lam**, **Lê vàng đất**, trung lập xám. Thêm khác biệt hình dáng (khăn vs mũ có tua,
   cờ đuôi nheo vs cờ vuông) để người mù màu vẫn phân biệt được.
 - Đêm: ô ngoài tầm nhìn phủ màu xanh đen 60%; nguồn sáng có quầng ấm (bộ lọc `night()` trong bản nháp).
 
@@ -84,7 +88,7 @@ thuận tay trái (đảo vị trí nút **Hết lượt**).
 ## 7. Lưu game
 
 - Tự lưu đầu mỗi lượt của người chơi và khi app bị đưa xuống nền. Mở lại app → **Tiếp tục** vào đúng lượt đó.
-- Một khe lưu chiến dịch. Chơi lại màn đã qua từ bản đồ chiến dịch (không ảnh hưởng tiến trình).
+- Hai khe: chiến dịch, và chơi lại màn đã qua (không ảnh hưởng tiến trình). Chi tiết kỹ thuật ở 08 §3.4.
 - Không có lưu/tải tùy ý giữa lượt (đúng tinh thần AE2, và seed ngẫu nhiên nằm trong file lưu).
 
 ## 8. Hướng dẫn trong game

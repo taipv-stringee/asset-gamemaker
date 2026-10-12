@@ -19,8 +19,10 @@ Thư mục vẫn tên `quang-trung` (tên mã dự án).
 | [06 – Giao diện](docs/06-giao-dien.md) | Khung màn hình dọc, thao tác chạm, luồng màn hình, lưu game |
 | [07 – Mỹ thuật và âm thanh](docs/07-mi-thuat-am-thanh.md) | Thông số hình, hướng nghệ thuật theo nguồn, danh sách asset, nhạc |
 | [08 – Kỹ thuật](docs/08-ky-thuat.md) | Kiến trúc Godot, dữ liệu, bản đồ, kiểm thử, xuất bản |
-| [09 – Kế hoạch](docs/09-ke-hoach.md) | Các mốc M0–M5, nhân sự, đối chiếu nguồn, pháp lý, câu hỏi mở, rủi ro |
+| [09 – Kế hoạch](docs/09-ke-hoach.md) | Các mốc M0–M5, phân công, đối chiếu nguồn, pháp lý, câu hỏi mở, rủi ro |
+| [10 – Đối chiếu AE2](docs/10-doi-chieu-ae2.md) | Từng con số và luật so với Ancient Empires 2: giữ hay đổi, độ chắc của thông tin |
 | [Nghiên cứu lịch sử](docs/nghien-cuu/bao-cao-lich-su.md) | Báo cáo tổng hợp + [ghi chú gốc](docs/nghien-cuu/ghi-chu/) |
+| [Rà soát 10/2026](docs/ra-soat/) | Báo cáo rà soát lịch sử và thiết kế; các lỗi đã được sửa vào 01–10 |
 
 Người mới đọc theo thứ tự: 01 → 04 → 02 → 03; người vẽ đọc thêm 07; người viết kịch bản đọc 05 trước tiên.
 
@@ -35,11 +37,11 @@ Người mới đọc theo thứ tự: 01 → 04 → 02 → 03; người vẽ đ
 | Màn hình | Dọc, gốc 288 × 512, phóng nguyên số | 06, 08 |
 | Hình ảnh | Pixel art 32px, chân dung hội thoại 80 × 80 | 07 |
 | Màn đêm bắt buộc | Đêm 30 Tết = vượt sông Gián (màn 4); Hà Hồi là đêm mùng 3 (màn 6) | 04 |
-| Mộ / gọi xương của AE2 | Đổi thành quân tan / chiêu hàng | 02 |
+| Mộ / gọi xương của AE2 | Đổi thành quân tan / chiêu hàng; thêm vây đồn / gọi hàng | 02 |
 | Tướng chính bị hạ | Thua màn (không mua lại như AE2) | 02 |
 | Tên game | **Tây Sơn** (tạm) | 01 |
 | Kiếm tiền | Miễn phí hoàn toàn: không quảng cáo, không mua trong app | 01 |
-| Phát hành | Cá nhân chủ dự án; đã có tài khoản Google Play và Apple Developer, có máy Mac | 09 |
+| Phát hành | Đã có tài khoản Google Play và Apple Developer, có máy Mac. Đứng tên cá nhân **chưa hợp lệ ở Việt Nam** theo NĐ 147 — đang chờ chọn hướng | 09 §4 |
 | Build và chơi thử | Chủ dự án build trên máy mình (session Claude Code local + agent kiểm thử local) | 08, 09 |
 | Màn phụ thủy quân, trận diễn tập màn 1–2 | Giữ | 04 |
 | Người làm | Claude làm toàn bộ sản xuất; chủ dự án định hướng, duyệt, chơi thử, lo tài khoản store và pháp lý | 09 |
@@ -47,4 +49,4 @@ Người mới đọc theo thứ tự: 01 → 04 → 02 → 03; người vẽ đ
 
 ## Câu hỏi còn mở
 
-Xem [09 mục 5](docs/09-ke-hoach.md#5-câu-hỏi-còn-mở).
+Xem [09 mục 5](docs/09-ke-hoach.md#5-đã-chốt-và-còn-mở).

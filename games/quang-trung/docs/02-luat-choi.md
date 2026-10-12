@@ -1,178 +1,217 @@
 # 02 — Luật chơi
 
-> Đặc tả luật để lập trình. Mọi con số cụ thể (chỉ số lính, giá, địa hình) nằm ở
-> [03-don-vi-dia-hinh.md](03-don-vi-dia-hinh.md); ở đây chỉ có công thức và quy tắc.
-> Chỗ nào **khác AE2** được đánh dấu **[đổi]** kèm lý do.
+> Đặc tả luật để lập trình. Con số (chỉ số lính, giá, địa hình, thẻ) ở [03-don-vi-dia-hinh.md](03-don-vi-dia-hinh.md);
+> dữ liệu từng màn ở [04-chien-dich.md](04-chien-dich.md). Chỗ nào **khác Ancient Empires 2** được đánh dấu **[đổi]**;
+> bảng đối chiếu từng con số với AE2 ở [10-doi-chieu-ae2.md](10-doi-chieu-ae2.md).
+>
+> Quy ước: mọi phép tính là **số nguyên**. "Lượt" là lượt của một phe; "vòng" gồm lượt của mọi phe theo thứ tự.
+> "8 ô quanh" = khoảng cách Chebyshev 1. "Khoảng cách" không nói gì thêm = Manhattan.
 
-## 1. Bản đồ
+## 1. Bản đồ và phe
 
-- Lưới ô vuông, mỗi ô 32x32 px. Đi 4 hướng (không đi chéo), khoảng cách tính theo Manhattan.
-- Kích thước: rộng 9–16 ô, cao 12–28 ô. Màn hình hiện ít nhất 9 cột; bản đồ lớn hơn thì kéo để cuộn.
-- Mỗi ô có một loại địa hình và tối đa một quân. Một số ô có thêm **vật thể**: chông sắt, địa lôi (ẩn),
-  quân tan (xem mục 8), lửa.
-- Ba phe: **Tây Sơn** (người chơi), **Thanh**, **Lê** (đồng minh của Thanh; máy điều khiển, đi sau quân Thanh).
-  Ngoài ra có phe **trung lập** cho làng chưa ai chiếm.
+- Lưới ô vuông 32 × 32 px. Đi 4 hướng, không đi chéo.
+- Kích thước 9–16 cột × 12–28 hàng. Màn hình thấy được 9–13 cột tùy máy (xem 06); bản đồ rộng hơn thì kéo để cuộn.
+- Mỗi ô có **một địa hình**, tối đa **một quân**, và có thể có **một vật thể** (mục 12).
+- Một số ô gom thành **khu** do kịch bản đánh dấu: khu đồn (mục 11), vùng thắng, vùng thoát của trinh sát, lối viện binh.
+- Phe, theo thứ tự đi trong một vòng:
 
-## 2. Lượt chơi
+| Phe | Ai điều khiển | Quan hệ |
+|---|---|---|
+| **Tây Sơn** | Người chơi | — |
+| **Diễn tập** | Máy | Đối thủ của Tây Sơn, chỉ có ở màn 1–2 (trận diễn tập, *Sáng tạo của game*) |
+| **Thanh** | Máy | Đối thủ của Tây Sơn; đồng minh của Lê |
+| **Lê** | Máy | Đối thủ của Tây Sơn; đồng minh của Thanh |
+| Trung lập | — | Chỉ là chủ của làng / đồn chưa ai chiếm |
 
-1. **Đầu lượt** của một phe, theo thứ tự:
-   - Cộng vàng: mỗi làng +30, mỗi đồn/thành +50.
-   - Hồi máu: quân đứng trên làng/đồn/thành **của phe mình** hồi 20 máu (không vượt quá 100) và hết trạng thái *Cháy*.
-   - Áp trạng thái (*Cháy* trừ máu, v.v.).
-   - Quân tan của phe **kia** quá hạn thì biến mất.
-2. **Hành động**: người chơi chọn từng quân, theo thứ tự tùy ý. Mỗi quân làm được:
-   - **Di chuyển** (một lần, có thể đứng yên), rồi
-   - **Một hành động**: Đánh / Chiếm / Chiêu hàng / Mua lính (chỉ tướng) / Chờ.
-   - Trước khi chọn hành động, được **hoàn tác** bước di chuyển.
-   - Xong hành động, quân chuyển sang màu xám đến hết lượt.
-3. **Kết thúc lượt**: người chơi bấm "Hết lượt". Nếu còn quân chưa đi thì hỏi xác nhận.
-4. Thứ tự phe: Tây Sơn → Thanh → Lê → (lượt mới). Đếm lượt theo lượt của Tây Sơn.
+Đồng minh đi xuyên qua nhau được, không tạo vùng khống chế cho nhau, dùng chung làng / đồn để hồi máu.
+
+## 2. Vòng chơi
+
+1. **Đầu lượt** của mỗi phe, theo thứ tự:
+   1. Cộng vàng: mỗi làng của phe +30, mỗi đồn / thành +50 (không cộng cho phe không mua lính trong màn).
+   2. Hồi máu: quân đứng trên làng / đồn / thành của phe mình **hoặc đồng minh** hồi 20 máu (tối đa 100).
+   3. Hết hạn trạng thái của phe đó (mục 9). Xử lý báo động (mục 10) nếu là lượt Thanh / Lê.
+   4. Quân tan hết hạn thì biến mất (mục 8).
+2. **Hành động**: chọn từng quân theo thứ tự tùy ý. Mỗi quân: **di chuyển** (một lần, có thể đứng yên) rồi **một hành động**
+   — Đánh, Chiếm, Chiêu hàng, Gọi hàng, Đốt, Chờ. Mua lính là thao tác trên ô đồn, không phải hành động của quân (mục 5).
+   - Trước khi chọn hành động được **hoàn tác** bước đi, **trừ khi** bước đi đó đã làm lộ thông tin mới (sương mù, địa lôi, quân ẩn),
+     giẫm bẫy, hoặc đánh thức địch.
+   - Xong hành động, quân xám đến hết lượt.
+3. **Hết lượt**: người chơi bấm "Hết lượt" (hỏi xác nhận nếu còn quân chưa đi).
+4. **Số vòng** đếm theo lượt Tây Sơn: vòng 1 bắt đầu bằng lượt Tây Sơn đầu tiên.
+   - "Thắng **trước lượt N**" = đạt điều kiện trong lượt Tây Sơn có số ≤ N − 1.
+   - "**Hết lượt N**" (điều kiện thua) = cuối vòng N (sau lượt phe cuối cùng) mà chưa thắng.
 
 ## 3. Di chuyển
 
-- Mỗi quân có **điểm di chuyển** (Di) và một **kiểu di chuyển**: *Bộ*, *Nặng*, *Voi*, *Thủy*.
-  Chi phí vào từng loại ô tính theo kiểu di chuyển (bảng ở 03). Ô có chi phí "—" thì không vào được.
-- Tìm ô đi được: Dijkstra từ vị trí quân, tổng chi phí ≤ Di.
-- Đi xuyên qua quân **cùng phe** được, nhưng không dừng trên ô đã có quân.
-- **Không** đi xuyên qua quân địch.
-- **Vùng khống chế [đổi]**: bước vào ô **kề** quân địch thì phải dừng lại. Lý do: màn hình nhỏ cần
-  chiến tuyến rõ, và làm mộc thuẫn / đằng bài có ý nghĩa chặn đường. Voi chiến bỏ qua luật này (xem *Xung phong*).
-- Quân đã di chuyển hiện mũi tên đường đi; chạm ô đích lần hai để xác nhận.
+- Mỗi quân có **Di** (điểm di chuyển) và **kiểu di chuyển**: *Bộ*, *Nặng*, *Voi*, *Thủy*. Chi phí vào ô theo kiểu (bảng 03).
+- Ô đi được: Dijkstra từ vị trí quân, tổng chi phí ≤ Di.
+- Đi xuyên qua quân **cùng phe / đồng minh**; không dừng trên ô có quân. Không đi xuyên quân địch, không vào ô có quân tan.
+- **Vùng khống chế [đổi]**: quân có thẻ `chan` (cận chiến đứng chặn) khống chế 4 ô kề nó. Quân đối phương **bước vào** một ô
+  bị khống chế thì phải dừng ở đó. Quân bắt đầu lượt trong vùng vẫn đi được, nhưng ô đầu tiên nó vào mà bị khống chế thì dừng.
+  - Quân đang ngủ vẫn khống chế. Quân bị sương che vẫn khống chế; khi đó quân bị dừng lại phát hiện ra nó ("phục kích")
+    và không được hoàn tác.
+  - Quân có thẻ `xung_phong` (voi chiến) bỏ qua vùng khống chế.
+  - Lý do đổi: màn hình nhỏ cần chiến tuyến rõ; chỉ quân cận chiến mới chặn để quân bắn xa không quá mạnh.
 
 ## 4. Đánh
 
-### 4.1. Tầm đánh
+### 4.1. Tầm và điều kiện
 
-- Mỗi quân có tầm `[tầm_min, tầm_max]`. Cận chiến là `[1,1]`, hỏa mai `[1,2]`, thần công `[2,4]`.
-- Quân có cờ **"bắn đứng"** (thần công, pháo binh) không được đánh trong lượt đã di chuyển.
+- Tầm `[tầm_min, tầm_max]` theo Manhattan. Chỉ chọn được mục tiêu **đang thấy** (đêm, mục 10).
+- Quân có thẻ `ban_dung` (thần công, pháo binh) không đánh trong lượt đã di chuyển, và **không bao giờ phản đòn**.
 
-### 4.2. Công thức sát thương
+### 4.2. Công thức
 
 ```
-công  = random_int(công_min, công_max) + cộng_công
-thủ   = thủ_gốc + thủ_địa_hình + cộng_thủ
-sát_thương = max(0, công − thủ) × máu_người_đánh / 100      (làm tròn xuống, tối thiểu 1 nếu công > thủ)
+công = random_int_bao_gom_hai_dau(công_min, công_max) + Σ cộng_công
+thủ  = thủ_gốc + thủ_địa_hình + Σ cộng_thủ
+st   = (max(0, công − thủ) × máu_người_đánh) // 100
+st   = max(st, công // 10)            # sàn sát thương: luôn gây ít nhất 10% công
+máu_bị_đánh = max(0, máu_bị_đánh − st)
 ```
 
-- `cộng_công`: cấp bậc, hào quang trống trận, khắc chế (bảng ở 03), *Bất ngờ* (đánh quân đang ngủ).
-- `cộng_thủ`: cấp bậc, khắc chế phòng thủ (mộc thuẫn chống đánh xa), trừ đi khi bị *Cháy*.
-- Máu tối đa của mọi quân là **100**. Máu về 0 thì quân bị hạ.
-- Quân không đứng trên đất liền (ví dụ thủy binh dưới sông) chỉ nhận thủ địa hình của ô đó theo bảng.
+- `Σ cộng_công`: cấp bậc, khắc chế (bảng 03), Hào quang + Uy danh (**tổng tối đa +10**), Xung phong, Hăng máu, Bất ngờ, trừ khi bị Cháy.
+- `Σ cộng_thủ`: cấp bậc, khắc chế phòng thủ (mộc thuẫn, đằng bài khi bị đánh xa), Thận trọng, Chặn hậu, Tử thủ; trừ khi bị Cháy / Hăng máu.
+- "Đánh xa" xác định theo **loại quân** có thẻ `ban_xa`, kể cả khi bắn ở cự ly 1.
+- Máu tối đa của mọi quân là 100. Máu 0 thì bị hạ (trừ thẻ `toi_thieu_1`, mục 7).
 
 ### 4.3. Phản đòn
 
-- Nếu quân bị đánh **còn sống** và người đánh nằm trong tầm của nó, nó **phản đòn ngay**, tính bằng máu còn lại của nó.
-- Quân "bắn đứng" không phản đòn ở cự ly 1. Quân đang **ngủ** không phản đòn.
-- Mỗi lần đánh chỉ có một lần phản đòn.
+- Quân bị đánh **còn sống** và người đánh trong tầm của nó thì phản đòn ngay, tính bằng máu còn lại.
+- Không phản đòn: quân `ban_dung`; quân đang ngủ; cung tiễn khi bị đánh ở cự ly 1.
+- Phản đòn được hưởng: khắc chế, Hào quang / Uy danh, cấp, thủ địa hình. **Không** được: Xung phong, Hăng máu, Bất ngờ.
+- Phản đòn của hỏa hổ cũng gây Cháy.
 
 ### 4.4. Dự báo [đổi]
 
-Chạm vào quân địch trong tầm sẽ hiện **dự báo**: khoảng sát thương gây ra, khoảng phản đòn nhận lại, và xác suất hạ.
-AE2 không có tính năng này. Thêm vào vì người chơi điện thoại cần ra quyết định nhanh mà không phải nhớ bảng số.
+Chạm quân địch trong tầm → hiện khoảng sát thương gây ra, khoảng phản đòn nhận lại, % hạ. AE2 không có; thêm vì người chơi
+điện thoại cần quyết nhanh. Hàm dự báo dùng đúng công thức 4.2 với mọi giá trị công trong khoảng.
 
 ### 4.5. Ngẫu nhiên
 
-- Dùng một bộ sinh số ngẫu nhiên có seed, lưu trong file save. Tải lại save thì kết quả không đổi
-  (chống "load lại cho đến khi trúng").
-- Seed của mỗi màn được sinh lúc bắt đầu màn.
+- Mỗi màn có `seed` sinh lúc bắt đầu, lưu trong file save.
+- Số ngẫu nhiên của một đòn lấy từ `hash(seed, số_vòng, id_người_đánh, id_bị_đánh, số_lần_đánh_trong_vòng)` — thứ tự hành động
+  khác nhau không làm đổi kết quả, tải lại save không "quay lại" được kết quả khác.
 
 ## 5. Kinh tế và mua lính
 
-- Mỗi màn có **vàng khởi đầu** và **giới hạn quân** riêng (ghi ở 04).
-- **Chiếm**: lính giáo, hàng binh và tướng chiếm được **làng**. Chỉ **tướng** chiếm được **đồn/thành**.
-  Chiếm là hành động, xong ngay (giống AE2). Ô chiếm được phải không có quân địch đứng trên.
-- **Mua lính**: tướng đang đứng trên **đồn/thành của phe mình** chọn "Mua lính" → chọn loại → đặt quân vào
-  một ô trống **kề** đồn/thành đó. Quân mới mua không hành động được trong lượt mua. Tướng mua xong vẫn còn
-  đứng nguyên chỗ và kết thúc lượt của mình.
-- Danh sách lính mua được **mở dần theo chiến dịch** (ghi ở 04), không phải mọi màn đều có đủ 10 loại.
+- Mỗi màn ghi rõ: **vàng khởi đầu**, **giới hạn quân**, **nơi mua lính**, **danh sách lính mua được** (`mua_duoc`). Màn không có nơi mua
+  thì không có vàng.
+- **Mua lính [giống AE2]**: chọn một **đồn / thành của phe mình đang trống** → chọn loại → quân xuất hiện **ngay trên ô đồn**, xám đến hết lượt.
+  Không cần tướng đứng ở đó. Loại không đủ vàng, hoặc giới hạn đã đầy, thì mờ.
+- **Giới hạn quân** tính mọi quân phe mình, kể cả tướng và hàng binh, **trừ** quân do kịch bản đưa vào (viện binh).
+- **Chiếm** (hành động): quân có thẻ `chiem_lang` chiếm được **làng**; quân có thẻ `tuong` chiếm được **đồn / thành**. Ô phải đang đứng trên,
+  không phải của phe mình hoặc đồng minh. Chiếm xong ngay.
+- Thần công **không** phá làng **[đổi]** (AE2: Catapult phá được làng) — không cho phá làng dân.
 
 ## 6. Cấp bậc
 
-- Quân nhận **kinh nghiệm (KN)** = sát thương gây ra (cả khi phản đòn) + 30 nếu hạ được địch.
-- Mốc lên cấp: **100 / 250 / 450 / 700** KN, tối đa **cấp 4**.
-- Mỗi cấp: **+5 công, +4 thủ**. Lên cấp hồi 10 máu (khoảnh khắc thưởng).
-- Tướng có tên giữ cấp qua các màn; lính thường không mang sang màn sau.
+- Kinh nghiệm (KN) = sát thương gây ra (kể cả phản đòn) + 30 nếu hạ được địch. Cộng **sau khi xong cả đòn và phản đòn**.
+- Mốc: **100 / 250 / 450 / 700** KN → cấp 1–4 (tối đa).
+- Mỗi cấp: **+3 công, +2 thủ**. Lên cấp hồi ngay 10 máu.
+- Tướng có tên **giữ cấp và KN qua các màn** của lượt chơi chiến dịch chính. Đầu mỗi màn lưu ảnh chụp cấp tướng; chơi lại màn cũ
+  dùng ảnh chụp đó và không ghi đè tiến trình. Lính thường không mang sang màn sau (trừ màn 9, xem 04).
+- AE2 cũng có kinh nghiệm và cấp, nhưng con số cụ thể chưa xác minh được (xem 10).
 
 ## 7. Tướng
 
-- **Quang Trung** là "vua" của phe Tây Sơn như Galamar trong AE2. Các màn không có ông thì một tướng khác
-  (Ngô Văn Sở, Đô đốc Long, Đô đốc Bảo...) giữ vai này.
-- Tướng **không mua được**. Tướng của người chơi về 0 máu thì **thua màn [đổi]**.
-  AE2 cho mua lại vua; ở đây tướng là người thật, nên không "hồi sinh". Tướng phụ có tên (không phải tướng chính)
-  về 0 máu thì **rút lui bị thương**: rời bản đồ, màn vẫn tiếp tục, không chết trong cốt truyện.
-- Tướng địch có tên về 0 máu: hiện câu thoại, rời bản đồ. Cái chết của họ chỉ được kể **theo đúng các phiên bản trong nguồn**
-  (Sầm Nghi Đống tự vẫn; Hứa Thế Hanh chết ở bờ sông khi chặn hậu theo sử Thanh, ở Ngọc Hồi theo cách kể phổ biến ở Việt Nam)
-  trong hội thoại và Sử liệu, không phải trong hoạt cảnh chiến đấu.
+- Thẻ `tuong`: chiếm được đồn / thành, có kỹ năng riêng. Mỗi màn chỉ định **tướng chính** cho phe Tây Sơn.
+- Tướng chính về 0 máu → **thua màn [đổi]** (AE2: hồi sinh vua ở castle). Tướng là người thật nên không "hồi sinh".
+- Tướng phụ phe Tây Sơn về 0 máu → **rút lui bị thương**: rời bản đồ, không chết trong cốt truyện.
+- Tướng địch có tên: kịch bản gán một trong các thẻ:
+  - `toi_thieu_1`: máu không xuống dưới 1 trong màn đó (vd. Tôn Sĩ Nghị ở màn 9).
+  - `rut_khi_yeu X`: sau một đòn khiến máu < X thì chuyển sang chế độ AI *Rút lui* và không bị hạ trong màn (máu tối thiểu 1).
+  - Không thẻ: bị hạ bình thường, hiện câu thoại rồi rời bản đồ.
+- Cái chết của tướng có tên chỉ được kể **theo các phiên bản trong nguồn**, trong hội thoại và Sử liệu, không trong hoạt cảnh.
 
-## 8. Quân tan và chiêu hàng [đổi so với "mộ" của AE2]
+## 8. Quân tan và chiêu hàng [thay "mộ" và "gọi xương" của AE2]
 
-AE2: quân chết để lại **mộ**, phù thủy gọi **bộ xương** từ mộ. Game này đổi thành chiêu hàng, lấy cảm hứng từ cảnh
-đồn Hà Hồi ra hàng sau khi bị vây và gọi hàng (*Theo HLNTC*) và việc trận này có nhiều quân Thanh bị bắt
-(Wikipedia tiếng Anh ghi ít nhất 3.400 tù binh cho **cả chiến dịch**, chưa kiểm nguồn gốc).
+AE2: quân chết để lại mộ khoảng 1 lượt, Sorceress đứng kề mộ gọi Skeleton. Game này giữ nhịp đó nhưng đổi hình thức để không
+động tới người chết, lấy cảm hứng từ cảnh đồn Hà Hồi ra hàng (*Theo HLNTC*).
 
-- Quân thường của Thanh/Lê bị hạ để lại **quân tan** (cờ rách, vũ khí vứt lại) trên ô đó, tồn tại **2 lượt**.
-- **Quân sư** đứng cách quân tan ≤ 2 ô dùng **Chiêu hàng** → quân tan thành **hàng binh** (phe Tây Sơn,
-  50 máu, đi được từ lượt sau). Hàng binh tính vào giới hạn quân.
-- Quân tan làm ô đó **không đi vào được** cho đến khi biến mất hoặc được chiêu hàng (giống mộ trong AE2).
-- Quân Tây Sơn bị hạ **không** để lại gì. Không có cơ chế liên quan đến xác người chết.
+- Quân thường của Thanh / Lê bị hạ để lại **quân tan** (cờ rách, vũ khí vứt) trên ô đó. Tướng, quân phe Diễn tập, quân Tây Sơn không để lại gì.
+  Không sinh quân tan trên cầu, cầu phao, sông, đầm lầy (quân bị hạ ở đó coi như chạy mất).
+- Quân tan sinh ra trong vòng N **biến mất đầu lượt Tây Sơn của vòng N + 2** (tức còn đến hết lượt Tây Sơn kế tiếp).
+- Quân tan chặn di chuyển của mọi phe, chặn chiếm làng, chặn mua lính trên ô đó; không chặn đường bắn.
+- **Chiêu hàng** (hành động của quân có thẻ `chieu_hang`: quân sư): đứng **kề** quân tan → quân tan thành
+  **hàng binh** của Tây Sơn ngay trên ô đó (máu 50/100, cấp 0, xám đến hết lượt). Giới hạn quân đầy thì không chiêu hàng được.
 
 ## 9. Trạng thái
 
 | Trạng thái | Do đâu | Hiệu ứng | Hết khi |
 |---|---|---|---|
-| **Cháy** | Hỏa hổ đánh trúng; đứng trên ô lửa | −10 máu đầu mỗi lượt của phe đó (không xuống dưới 1), −5 thủ | 2 lượt, hoặc hồi máu ở làng/đồn/thành |
-| **Hào quang** | Đứng trong 8 ô quanh trống trận | +10 công | Rời khỏi vùng |
-| **Uy danh** | Đứng trong 8 ô quanh Quang Trung | +5 công (không cộng dồn với chính nó) | Rời khỏi vùng |
-| **Ngủ** | Quân địch trong màn đêm, lúc bắt đầu màn | Không phản đòn, bị đánh nhận +15 công (*Bất ngờ*). Không di chuyển | Bị đánh (sau đòn đó); có báo động; trời sáng |
+| **Cháy** [giống độc của AE2] | Hỏa hổ đánh hoặc phản đòn trúng; đứng trên ô lửa | Trong **lượt kế tiếp** của quân đó: −1 Di, −10 công, −10 thủ. Không mất máu theo lượt | Hết lượt kế tiếp của quân đó. Bị Cháy lại thì đặt lại thời hạn, không cộng dồn. Mộc thuẫn không bị Cháy |
+| **Hào quang** | Đứng trong 8 ô quanh trống trận (không tính chính trống) | +10 công | Tính lúc ra đòn. Nhiều trống không cộng dồn |
+| **Uy danh** | Đứng trong 8 ô quanh Quang Trung (không tính chính ông) | +5 công | Như trên. Hào quang + Uy danh ≤ +10 |
+| **Ngủ** | Kịch bản đặt cho quân địch ở màn đêm | Không di chuyển, không thấy, không phản đòn; bị đánh nhận **Bất ngờ** +15 công | Bị đánh (sau đòn đó); báo động; trời sáng |
+| **Kêu** | Quân địch bị đánh mà còn sống, ở màn đêm | Đánh dấu để gây báo động đầu lượt phe nó | Bị hạ trước khi tới lượt phe nó; hoặc đã gây báo động |
 
-## 10. Đêm và sương mù
+Ghi chú: AE2 Dire Wolf gây độc làm quân "chậm và yếu ở lượt kế". Cháy giữ đúng cơ chế đó, chỉ đổi hình thức thành lửa.
 
-Dùng cho các màn đêm 30 Tết (Gián Khẩu), đêm mùng 3 (Hà Hồi), đêm mùng 4 rạng mùng 5 (Khương Thượng).
+## 10. Đêm, sương mù, báo động [đổi — AE2 không có đánh đêm]
 
-- **Tầm nhìn**: mỗi quân Tây Sơn thấy 2 ô quanh nó (Manhattan); quân cầm đuốc 3 ô. Ô có nguồn sáng
-  (đuốc ở đồn, đèn trong làng, lửa) và các ô kề nó luôn thấy được.
-- Ô ngoài tầm nhìn bị phủ tối: thấy địa hình nhưng không thấy quân địch.
-- **Báo động**: khi một quân địch còn sống sau khi bị đánh, hoặc thấy quân Tây Sơn đứng kề trong vùng sáng,
-  mọi quân địch trong bán kính 5 ô thức dậy. Một số màn có **trống báo động** (vật thể) làm cả đồn thức dậy.
-- **Trời sáng**: màn có nhiều lượt ban đêm thì có lượt "rạng sáng" (ghi ở 04): sương mù giảm dần rồi tắt,
-  mọi quân thức dậy.
-- AE2 không có đánh đêm. Đây là phần mở rộng lớn nhất **[đổi]**, bắt buộc theo yêu cầu "màn đánh đêm Tết".
+Tham số của màn: `tam_nhin` (đêm 2, rạng sáng 3 → 5, ngày = không giới hạn).
 
-## 11. Vây đồn
+- **Tầm nhìn Tây Sơn**: mỗi quân thấy các ô trong `tam_nhin` (Manhattan). Quân có cờ `duoc` (cầm đuốc, do kịch bản đặt) thấy thêm 1 ô
+  nhưng chính nó là **nguồn sáng**.
+- **Nguồn sáng**: đuốc ở đồn, đèn trong làng, ô lửa, quân cầm đuốc. Ô nguồn sáng và các ô kề nó luôn được thấy (cả hai phe).
+- Ô ngoài tầm nhìn: thấy địa hình, không thấy quân địch. Camera trong lượt máy chỉ đi theo quân đang được thấy.
+- **Tầm nhìn địch**: quân **thức** thấy quân Tây Sơn trong 2 ô, hoặc quân Tây Sơn đứng trên / kề ô sáng trong 5 ô. Quân ngủ không thấy gì.
+- **Báo động**: đầu lượt Thanh / Lê, nếu có quân của phe đó đang *Kêu*, hoặc có quân thức đang thấy quân Tây Sơn, thì mọi quân phe đó
+  trong 5 ô quanh nó thức dậy; quân *Ngủ* / *Tuần tra* chuyển sang *Giữ đồn* (R = 4) quanh đồn gần nhất.
+  **Trống báo động** (vật thể gắn với một đồn): nếu quân *Kêu* hoặc quân thức đứng kề trống lúc báo động, **cả khu đồn** thức.
+  → Hai quân phối hợp hạ gọn một mục tiêu trong cùng lượt thì không gây báo động.
+- **Rạng sáng** (màn có lượt R ghi trong 04): đầu vòng R mọi quân thức, `tam_nhin` = 3; vòng R + 1 = 5; từ vòng R + 2 tắt sương mù.
 
-Cơ chế riêng cho màn Hà Hồi, dùng lại được ở màn khác.
+## 11. Khu đồn, vây đồn, gọi hàng
 
-- Một **đồn bị vây** khi mọi ô đi được kề đồn đều có quân Tây Sơn hoặc bị chặn.
-- Đầu lượt của Tây Sơn, nếu đồn bị vây và có **quân sư hoặc tướng** kề đồn, thì có thể chọn **Gọi hàng**:
-  quân trong đồn đầu hàng nếu tổng máu quân địch trong đồn ≤ tổng máu quân Tây Sơn đang vây.
-  Quân đầu hàng biến thành quân tan (chiêu hàng được), đồn đổi sang trung lập để tướng chiếm.
+- **Khu đồn**: tập ô kịch bản đánh dấu (`khu_don_<id>`), gồm ô đồn và các ô lũy / doanh bên trong.
+- **Bị vây** khi mọi ô đi được **kề ngoài** khu đồn đều: có quân Tây Sơn, hoặc không vào được, hoặc nằm trong vùng khống chế của quân Tây Sơn.
+- **Gọi hàng** (hành động của quân có thẻ `goi_hang`: quân sư, tướng) đứng kề khu đồn đang bị vây, mỗi khu một lần mỗi lượt:
+  - Thành công nếu `Σ máu quân Tây Sơn trong 2 ô quanh khu ≥ Σ máu quân địch trong khu × k`, với k = 1/2 nếu **quá nửa** quân trong khu
+    đang ngủ, k = 1 nếu không.
+  - Thành công: mọi quân địch trong khu (kể cả quan giữ đồn) rời bản đồ; Tây Sơn nhận hàng binh trên các ô đó, số lượng
+    = min(số quân hàng, chỗ trống trong giới hạn); phần còn lại tính là **tù binh** (chỉ để tính mục tiêu phụ). Đồn chuyển trung lập để tướng chiếm.
+  - Thất bại: không có gì xảy ra, quân gọi hàng hết lượt; nếu quân trong khu đang ngủ thì vẫn ngủ.
 
-## 12. Bẫy và vật thể
+## 12. Vật thể và hành động đặc biệt
 
-| Vật thể | Hiệu ứng |
+| Vật thể | Luật |
 |---|---|
-| **Chông sắt** | Hiện rõ. Bước vào: dừng lại, −15 máu. Mộc thuẫn và voi bị −5 máu |
-| **Địa lôi** | Ẩn cho đến khi giẫm phải hoặc quân sư đứng kề. Giẫm: −30 máu, mất 1 lần. Quân Thanh cũng bị (theo *Liệt truyện*, quân Thanh tháo chạy giẫm phải địa lôi của mình) |
-| **Lửa** | Ô đang cháy: vào thì bị *Cháy*. Lửa lan sang ô *doanh trại* kề 1 lần mỗi lượt, tắt sau 3 lượt |
+| **Chông sắt** | Hiện rõ. Bước vào: dừng lại, −15 máu (mộc thuẫn, voi: −5). Không mất đi |
+| **Địa lôi** | Ẩn với Tây Sơn cho đến khi giẫm phải hoặc có quân sư đứng kề. Giẫm: −30 máu, dừng lại, mất địa lôi. AI biết và tránh địa lôi của phe mình, **trừ** chế độ *Chạy* / *Rút lui* (theo *Liệt truyện*, quân Thanh tháo chạy giẫm phải địa lôi của mình) |
+| **Lửa** | Ô đang cháy (3 vòng). Quân đứng trên / bước vào: Cháy (trừ mộc thuẫn). Hết lửa: ô doanh trại thành "doanh trại cháy" (thủ 0, đi như cỏ) |
+| **Kho lương** | Quân `tuong` hoặc `chiem_lang` đứng lên rồi chọn Chiếm → cờ mục tiêu phụ |
+| **Trống báo động** | Mục 10 |
 | **Quân tan** | Mục 8 |
-| **Cầu phao** | Đi như cầu. Màn 9 có sự kiện: cầu đứt ở lượt định sẵn, quân đứng trên cầu rơi xuống sông và bị hạ |
+| **Cầu phao** | Đi như cầu. Kịch bản có thể làm **rung** (cảnh báo) rồi **đứt** ở vòng sau: quân trên cầu rơi xuống sông và bị hạ, trừ thủy binh (chuyển sang ô sông gần nhất) |
+
+**Đốt** (hành động của hỏa hổ): chọn một ô doanh trại trong tầm 1 → ô đó thành Lửa.
 
 ## 13. Thắng thua
 
-Mỗi màn có:
-- **Điều kiện thắng** chính, ví dụ: chiếm đồn X, hạ tướng Y, giữ quân sống đến lượt N, đưa tướng tới ô Z.
-- **Điều kiện thua**: tướng chính bị hạ, hết số lượt tối đa (nếu có), hoặc điều kiện riêng.
-- **Mục tiêu phụ** (0–3, không bắt buộc): ví dụ thắng trước lượt N ("kịp mùng 7"), không mất quân, chiêu hàng ≥ N quân.
-  Mục tiêu phụ mở mục Sử liệu, không cho sức mạnh (để không phá cân bằng).
+- Mỗi màn có điều kiện thắng, điều kiện thua (luôn gồm "tướng chính bị hạ"), và 0–3 **mục tiêu phụ**.
+- Mục tiêu phụ mở mục Sử liệu, không cho sức mạnh.
 
-## 14. Trí tuệ máy (AI)
+## 14. AI
 
-- Mỗi quân máy lần lượt chấm điểm mọi cặp *(ô đứng, hành động)* trong tầm và chọn điểm cao nhất:
-  - Đánh: sát thương dự kiến gây ra × hệ số giá trị mục tiêu − sát thương phản đòn dự kiến; thưởng lớn nếu hạ được.
-  - Chiếm: giá trị làng/đồn; ưu tiên chiếm lại của mình.
-  - Đứng: thủ địa hình, khoảng cách tới mục tiêu chiến lược của màn, nguy hiểm (tổng sát thương địch có thể gây ở lượt sau).
-- Mỗi quân có **chế độ** do kịch bản màn đặt: *Giữ đồn* (không rời bán kính R), *Tấn công* (tiến về mục tiêu),
-  *Chạy* (tránh giao chiến, về ô Z; dùng cho trinh sát, tàn quân).
-- Quân đang ngủ không làm gì.
-- Máy mua lính nếu màn cho phép, theo danh sách và ngân sách của màn.
-- Mục tiêu: máy không gian lận (không thấy qua sương mù trong màn đêm cho phe Thanh trừ khi đã báo động).
+- Mỗi quân máy chấm điểm mọi cặp *(ô đứng, hành động)* hợp lệ và chọn điểm cao nhất:
+  - Đánh: sát thương dự kiến × giá trị mục tiêu − phản đòn dự kiến; thưởng lớn nếu hạ được.
+  - Chiếm: giá trị làng / đồn; ưu tiên chiếm lại của mình.
+  - Đứng: thủ địa hình, khoảng cách tới mục tiêu của chế độ, nguy hiểm ở lượt sau.
+- **Chế độ** (kịch bản đặt cho từng quân, đổi được giữa màn):
+
+| Chế độ | Hành vi |
+|---|---|
+| *Ngủ* | Không làm gì (mục 9, 10) |
+| *Giữ đồn (R)* | Không rời bán kính R quanh một ô; đánh địch vào tầm |
+| *Tuần tra (điểm…)* | Đi vòng qua danh sách điểm; thấy địch → báo động |
+| *Tấn công (mục tiêu)* | Tiến về mục tiêu, đánh trên đường |
+| *Chặn hậu (ô)* | Như Giữ đồn quanh một ô cầu / đê / bến |
+| *Chạy (vùng)* | Tránh giao chiến, đi tới vùng; tới nơi thì rời bản đồ (trinh sát: "báo tin") |
+| *Rút lui (vùng, X)* | Như Chạy, kích hoạt khi máu < X |
+
+- Máy không nhìn qua sương mù: phe Thanh / Lê chỉ biết quân Tây Sơn mà quân mình đang thấy (mục 10), trừ khi kịch bản cho phép.
+- Máy mua lính nếu màn cho phép, theo `mua_duoc` và ngân sách của màn.
+- **AI Tây Sơn đơn giản** (chỉ dùng cho kiểm thử): tiến về mục tiêu màn, chiếm đồn mục tiêu, để phát hiện màn bị kẹt.

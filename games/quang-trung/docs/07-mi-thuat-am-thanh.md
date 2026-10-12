@@ -13,7 +13,7 @@
 | Màn hình gốc | 288 × 512 px logic |
 | Viền | Viền tối 1px quanh lính và vật thể; ô địa hình không viền |
 | Ánh sáng | Từ trên – trái cho lính và ô; từ trên – phải cho chân dung (mặt hướng về khung chữ) |
-| Bảng màu | Một bảng màu chung (khoảng 64 màu), mỗi phe 3 sắc độ màu phe |
+| Bảng màu | Một bảng màu chung (khoảng 64 màu), mỗi phe 3 sắc độ màu phe (Tây Sơn, Diễn tập, Thanh, Lê, trung lập) |
 | Phông chữ | Be Vietnam Pro (OFL) cho giao diện và hội thoại; một phông pixel có dấu tiếng Việt cho số trên bản đồ |
 | Không anti-alias | Mọi hình pixel art phóng bằng nearest-neighbor |
 
@@ -72,7 +72,7 @@ Tướng có tên dùng chung thân với một loại lính + đầu/mũ riêng
 
 Cỏ (4 biến thể), đường (nối 16 kiểu), đê, ruộng, vườn/cây đào, rừng tre, đồi, núi đá vôi, sông (viền bờ tự nối — autotile 47),
 sông cạn/bến đò, cầu, cầu phao (+ bản đứt), đầm lầy, làng (3 màu chủ + trung lập), doanh trại (+ bản cháy), lũy đất, đồn
-(4 màu chủ), thành, chông sắt, địa lôi (hiện), quân tan, lửa (4 frame), kho lương, trống báo động.
+(5 màu chủ), thành, chông sắt, địa lôi (hiện), quân tan, lửa (4 frame), kho lương, trống báo động.
 Bản đêm **không vẽ riêng**: dùng bộ lọc đêm và nguồn sáng.
 
 ### Hiệu ứng
@@ -89,7 +89,8 @@ con trỏ chọn ô, ô xanh / đỏ / vùng nguy hiểm, bản đồ chiến d�
 
 1. **Hình tạm**: tiếp tục dùng script Python (`generate_v2.py`) để sinh hình tạm cho mọi loại lính / ô mới, đủ để chơi thử.
 2. **Hình thật**: Claude vẽ lại bằng code ở mức chi tiết cao hơn, giữ đúng kích thước, bảng màu và tên file của hình tạm → thay file là xong, không sửa code. Chủ dự án duyệt từng nhóm hình.
-3. Tên file: `unit_<phe>_<loai>_<hanhdong>_strip<N>.png`, `tile_<loai>.png`, `portrait_<nhanvat>_<bieucam>.png`.
+3. Tên file dùng **mã định danh** ở 03 §1 (ASCII, không dấu): `unit_<phe>_<ma>_<hanhdong>_strip<N>.png` (vd. `unit_tayson_hoa_mai_danh_strip3.png`),
+   `tile_<ma_dia_hinh>.png`, `portrait_<ma_nhan_vat>_<bieucam>.png`. Hình nháp cũ (`noithu`, `daibac`, không có phần hành động) phải đổi tên khi chuyển vào project.
 4. Mỗi hình tướng / chân dung qua **kiểm tra sử** theo bảng mục 2 trước khi duyệt.
 
 ## 5. Âm thanh

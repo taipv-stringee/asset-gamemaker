@@ -28,7 +28,7 @@ Quy tắc:
 
 | Nhân vật | Vai trong game | Tính cách để viết thoại | Ngoại hình (chân dung) | Nguồn |
 |---|---|---|---|---|
-| **Quang Trung** (Nguyễn Huệ) | Tướng chính màn 1–9 | Quyết đoán, nhanh, nghiêm với tướng sai nhưng biết tha; nói ngắn | Áo bào đỏ (*Theo HLNTC*), cưỡi voi (sử Thanh). Mô tả từ nguồn thù địch: "tiếng vang như chuông, mắt sáng như ánh điện". **Không** chép mặt từ tranh *Đông Thanh* 1932 hay tượng đài (có thể bắt nguồn từ tranh Càn Long) | Sử liệu |
+| **Quang Trung** (Nguyễn Huệ) | Tướng chính màn 1, 2, 4, 5, 6, 8, 9 | Quyết đoán, nhanh, nghiêm với tướng sai nhưng biết tha; nói ngắn | Áo bào đỏ (*Theo HLNTC*), cưỡi voi (sử Thanh). Mô tả từ nguồn thù địch: "tiếng vang như chuông, mắt sáng như ánh điện". **Không** chép mặt từ tranh *Đông Thanh* 1932 hay tượng đài (có thể bắt nguồn từ tranh Càn Long) | Sử liệu |
 | **Ngô Văn Sở** | Tướng chính màn 0 | Thận trọng, chịu trách nhiệm | Võ quan, khăn, áo bào sẫm (hình dung của game) | Sử liệu |
 | **Ngô Thì Nhậm** | Mưu sĩ màn 0, 3 | Điềm tĩnh, lý lẽ | Văn quan (hình dung của game) | Sử liệu; HLNTC do họ Ngô Thì soạn nên vai trò có thể được tô đậm |
 | **Phan Văn Lân** (Nội hầu Lân) | Tướng phụ màn 0 | Hăng máu, thẳng tính | Võ tướng trẻ (hình dung của game) | Sử liệu; có nguồn ghi họ Nguyễn — cần kiểm |
@@ -120,7 +120,7 @@ Nguyên tắc: phe đối địch là **con người**, không phải quái vậ
 
 | Trong game | Nghĩa | Ghi chú |
 |---|---|---|
-| Đồn | Doanh trại có lũy đất, nơi mua lính | Vai "castle" của AE2 |
+| Đồn | Doanh trại có lũy đất, nơi mua lính; nhiều ô quanh nó gộp thành **khu đồn** | Vai "castle" của AE2 |
 | Thành | Thăng Long, Phú Xuân | |
 | Làng | Nguồn vàng | Vai "town" |
 | Quân tan | Dấu tích quân địch vừa bị hạ | Thay "mộ" |

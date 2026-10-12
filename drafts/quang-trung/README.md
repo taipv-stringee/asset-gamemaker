@@ -13,7 +13,7 @@ store di động. Dựa trên chiến dịch Quang Trung đại phá quân Thanh
 |---|---|
 | Tên nhân vật, phe | Dùng tên thật: Quang Trung, Tôn Sĩ Nghị, quân Thanh... |
 | Lối chơi | Bám sát AE2 (mua lính ở thành, chiếm làng, thăng cấp, mộ, 10 vai trò lính) |
-| Màn bắt buộc | Đánh đêm 30 Tết (Hà Hồi) |
+| Màn bắt buộc | Đánh đêm 30 Tết — theo nghiên cứu là trận vượt sông Gián, đồn Gián Khẩu (Hà Hồi là đêm mùng 3) |
 | Chế độ chơi | Trước mắt chỉ có chiến dịch |
 | Màn hình | Dọc |
 | Hình ảnh | Bản chi tiết (`assets_v2/`): ô 32px, có chân dung khi hội thoại |
@@ -42,8 +42,9 @@ python generate_v2.py         # -> assets_v2/
 - Địa hình mới: **đồn** (lũy đất, hàng rào cọc, chòi canh, đuốc) cho các trận Hà Hồi, Ngọc Hồi.
 - Font giao diện: Be Vietnam Pro (OFL, thiết kế cho tiếng Việt), trong `fonts/`.
 - Tôn Sĩ Nghị đứng ở đồn Hà Hồi chỉ để minh họa; thực tế lúc đó ông ở Thăng Long.
-- Câu thoại trong mockup ("Đánh cho để dài tóc...") được ghi lại trong *Hoàng Lê nhất thống chí*.
-  Cần đối chiếu nguồn khi viết kịch bản.
+- Câu thoại trong mockup ("Đánh cho để dài tóc...") là **lời tương truyền**, không có trong *Hoàng Lê nhất thống chí*.
+- Mockup còn 2 điểm sai sử, chờ sửa: nhãn "Đêm 30 Tết · Hà Hồi" (Hà Hồi là đêm mùng 3) và nón cho lính Tây Sơn
+  (nguồn gần thời chỉ thấy khăn quấn đầu). Xem báo cáo nghiên cứu.
 
 Bản đầu (`generate_assets.py` → `assets/`, ô 24px) vẫn giữ lại để so sánh.
 
@@ -86,15 +87,22 @@ Vai trò lấy theo AE2; **lính Việt / Thanh tương ứng chỉ là gợi ý
 2. Nghệ An — tuyển quân dọc đường
 3. Tam Điệp — hội quân
 4. Sông Gián / Thanh Quyết — vượt sông
-5. **Hà Hồi — đêm 30 Tết** (màn đêm)
+5. **Gián Khẩu — đêm 30 Tết** và **Hà Hồi — đêm mùng 3** (màn đêm)
 6. Ngọc Hồi — mộc thuẫn + voi chiến phá đồn
 7. Khương Thượng (Đống Đa) — đánh từ hướng tây
 8. Thăng Long — vào thành mùng 5 Tết
 
+## Nghiên cứu lịch sử
+
+Báo cáo: [reports/Quang Trung đại phá quân Thanh.md](reports/Quang%20Trung%20đại%20phá%20quân%20Thanh.md)
+(ghi chú gốc trong `research_notes/`). Báo cáo có danh sách màn kèm ngày, bảng 10 vai bám sử, các điểm cần sửa art
+và lời thoại, lưu ý khi phát hành. Người nghiên cứu chỉ đọc được trích đoạn kết quả tìm kiếm, nên phải đối chiếu
+nguyên văn trước khi phát hành (thứ tự ưu tiên ở cuối báo cáo). Phác thảo chiến dịch ở trên đã được thay bằng danh sách
+màn trong báo cáo.
+
 ## Việc tiếp theo
 
-1. Nghiên cứu tài liệu lịch sử: diễn biến, mốc thời gian, nhân vật, binh chủng và vũ khí của hai bên,
-   trang phục; ghi rõ nguồn và chỗ các nguồn nói khác nhau.
+1. ~~Nghiên cứu tài liệu lịch sử~~ — xong, xem báo cáo; còn phải đối chiếu nguyên văn các nguồn chính.
 2. Chốt danh sách lính (10 vai trò AE2) và danh sách màn dựa trên nghiên cứu.
 3. Viết tài liệu thiết kế chi tiết: chỉ số, bảng khắc chế, chi phí địa hình, thăng cấp.
 4. Dựng project Godot 4, làm thử một màn (Hà Hồi đêm 30 Tết).

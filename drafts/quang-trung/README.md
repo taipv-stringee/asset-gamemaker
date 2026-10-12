@@ -1,8 +1,8 @@
-# Quang Trung (tên tạm) — bản nháp thiết kế
+# Quang Trung — bản nháp asset
 
-> **Trạng thái: nháp / thử phong cách.** Chưa chọn xong engine, chưa có project. Asset ở đây dùng để
-> chốt hướng hình ảnh và bàn nội dung. Thiết kế chi tiết (chỉ số lính, màn chơi) sẽ chốt **sau khi
-> nghiên cứu tài liệu lịch sử**.
+> **Nháp, chỉ để xem thử phong cách hình.** Thiết kế chính thức, tài liệu và nghiên cứu lịch sử đã chuyển sang
+> [`games/quang-trung/`](../../games/quang-trung/README.md). Nội dung dưới đây là ghi chép lúc thử phong cách,
+> có thể đã cũ; khi khác nhau thì theo tài liệu trong `games/quang-trung/docs/`.
 
 Game chiến thuật theo lượt trên lưới ô vuông, **bám sát lối chơi Ancient Empires 2**, phát hành trên
 store di động. Dựa trên chiến dịch Quang Trung đại phá quân Thanh (Tết Kỷ Dậu 1789).
@@ -92,18 +92,7 @@ Vai trò lấy theo AE2; **lính Việt / Thanh tương ứng chỉ là gợi ý
 7. Khương Thượng (Đống Đa) — đánh từ hướng tây
 8. Thăng Long — vào thành mùng 5 Tết
 
-## Nghiên cứu lịch sử
+## Nghiên cứu lịch sử và thiết kế
 
-Báo cáo: [reports/Quang Trung đại phá quân Thanh.md](reports/Quang%20Trung%20đại%20phá%20quân%20Thanh.md)
-(ghi chú gốc trong `research_notes/`). Báo cáo có danh sách màn kèm ngày, bảng 10 vai bám sử, các điểm cần sửa art
-và lời thoại, lưu ý khi phát hành. Người nghiên cứu chỉ đọc được trích đoạn kết quả tìm kiếm, nên phải đối chiếu
-nguyên văn trước khi phát hành (thứ tự ưu tiên ở cuối báo cáo). Phác thảo chiến dịch ở trên đã được thay bằng danh sách
-màn trong báo cáo.
-
-## Việc tiếp theo
-
-1. ~~Nghiên cứu tài liệu lịch sử~~ — xong, xem báo cáo; còn phải đối chiếu nguyên văn các nguồn chính.
-2. Chốt danh sách lính (10 vai trò AE2) và danh sách màn dựa trên nghiên cứu.
-3. Viết tài liệu thiết kế chi tiết: chỉ số, bảng khắc chế, chi phí địa hình, thăng cấp.
-4. Dựng project Godot 4, làm thử một màn (Hà Hồi đêm 30 Tết).
-5. Chốt cách kiếm tiền và phạm vi bản đầu.
+Đã chuyển sang [`games/quang-trung/docs/`](../../games/quang-trung/docs/): báo cáo nghiên cứu ở
+`docs/nghien-cuu/bao-cao-lich-su.md`, tài liệu thiết kế 01–09.

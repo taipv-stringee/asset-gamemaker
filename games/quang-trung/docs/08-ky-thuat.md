@@ -97,7 +97,10 @@ games/quang-trung/
   trạng thái Cháy, tầm nhìn đêm.
 - **Test mô phỏng**: chạy AI vs AI trên mỗi màn với nhiều seed, ghi tỉ lệ thắng, số lượt trung bình → dùng để cân bằng.
 - Test "load lại không đổi kết quả": lưu, đánh, tải, đánh lại → cùng kết quả.
-- CI (GitHub Actions): chạy Godot headless, chạy test, xuất bản Android debug mỗi lần push lên nhánh chính.
+- **Build và chơi thử chạy trên máy chủ dự án**: session Claude Code local (có Godot, Android SDK, Xcode) build bản Android/iOS;
+  một agent kiểm thử local chạy test và chơi thử theo kịch bản. Repo phải có `godot/BUILD.md` (lệnh build, export preset, chạy test headless)
+  và `godot/TESTING.md` (checklist chơi thử từng màn) để agent local làm theo không cần hỏi lại.
+- Môi trường cloud (nơi Claude viết code) chạy được test headless nếu tải được Godot; không build iOS ở đây.
 
 ## 8. Xuất bản
 

@@ -1,8 +1,9 @@
-# Quang Trung (tên tạm)
+# Tây Sơn (tên tạm)
 
 Game chiến thuật theo lượt trên điện thoại (màn hình dọc), lối chơi bám sát **Ancient Empires 2**, về chiến dịch
 Quang Trung đại phá quân Thanh, từ núi Bân (22/12/1788) đến Thăng Long trưa mùng 5 Tết Kỷ Dậu (30/01/1789).
-Làm bằng **Godot 4**, phát hành Google Play và App Store.
+Làm bằng **Godot 4**, phát hành **miễn phí** trên Google Play và App Store (chủ dự án đứng tên cá nhân).
+Thư mục vẫn tên `quang-trung` (tên mã dự án).
 
 **Trạng thái: M0 – Tài liệu.** Chưa có project Godot. Hình tạm và mockup: [`drafts/quang-trung/`](../../drafts/quang-trung/).
 
@@ -36,9 +37,14 @@ Người mới đọc theo thứ tự: 01 → 04 → 02 → 03; người vẽ đ
 | Màn đêm bắt buộc | Đêm 30 Tết = vượt sông Gián (màn 4); Hà Hồi là đêm mùng 3 (màn 6) | 04 |
 | Mộ / gọi xương của AE2 | Đổi thành quân tan / chiêu hàng | 02 |
 | Tướng chính bị hạ | Thua màn (không mua lại như AE2) | 02 |
+| Tên game | **Tây Sơn** (tạm) | 01 |
+| Kiếm tiền | Miễn phí hoàn toàn: không quảng cáo, không mua trong app | 01 |
+| Phát hành | Cá nhân chủ dự án; đã có tài khoản Google Play và Apple Developer, có máy Mac | 09 |
+| Build và chơi thử | Chủ dự án build trên máy mình (session Claude Code local + agent kiểm thử local) | 08, 09 |
+| Màn phụ thủy quân, trận diễn tập màn 1–2 | Giữ | 04 |
 | Người làm | Claude làm toàn bộ sản xuất; chủ dự án định hướng, duyệt, chơi thử, lo tài khoản store và pháp lý | 09 |
 | Nguồn lịch sử | Mọi chi tiết gắn một trong bốn nhãn: Sử liệu / Theo HLNTC / Tương truyền / Sáng tạo của game | 05 |
 
 ## Câu hỏi còn mở
 
-Cách kiếm tiền, tên game, máy Mac để build iOS, ai đứng tên phát hành — xem [09 mục 5](docs/09-ke-hoach.md#5-câu-hỏi-còn-mở).
+Xem [09 mục 5](docs/09-ke-hoach.md#5-câu-hỏi-còn-mở).

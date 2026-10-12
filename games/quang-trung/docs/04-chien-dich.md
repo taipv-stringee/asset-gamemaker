@@ -197,7 +197,7 @@ Mỗi màn là một điểm có ngày âm lịch và dương lịch. Chỗ tr�
 - **Bản đồ**: 12 × 16, nhiều sông, bãi bồi.
 - **Quân ta**: Tuyết, Lộc, thủy binh, hỏa mai thủ.
 - **Thắng**: chiếm 2 bến, chặn đường rút giả định của quân Thanh.
-- **Ưu tiên thấp**: có thể bỏ khỏi bản 1.0 nếu thiếu thời gian.
+- **Có trong 1.0** (chủ dự án chốt giữ). Làm sau các màn chính, trong M3.
 
 ## Lời kết
 

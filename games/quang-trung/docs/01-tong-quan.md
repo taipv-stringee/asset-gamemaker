@@ -10,7 +10,7 @@ người chơi cầm quân Tây Sơn đi từ núi Bân (22/12/1788) tới Thăn
 
 ## Tên game
 
-Tên tạm: **Quang Trung**. Một số tên để chọn sau:
+Tên tạm: **Tây Sơn** (chủ dự án chốt). Các tên khác đã cân nhắc:
 
 | Tên | Ý |
 |---|---|
@@ -53,13 +53,12 @@ Tên tạm: **Quang Trung**. Một số tên để chọn sau:
 | Tiếng Việt | Tiếng Anh (để sẵn hạ tầng dịch, làm sau 1.0) |
 | Android, iOS | PC/console |
 
-Cách kiếm tiền **chưa chốt** (xem [09-ke-hoach.md](09-ke-hoach.md)). Thiết kế 1.0 không phụ thuộc cách kiếm tiền:
-không có năng lượng, không có gacha, không bán lính.
+Game **miễn phí hoàn toàn**: không quảng cáo, không mua trong app, không năng lượng, không gacha.
 
 ## Nền tảng và công nghệ
 
 - Engine **Godot 4** (giấy phép MIT, không phí bản quyền), ngôn ngữ GDScript. Chi tiết: [08-ky-thuat.md](08-ky-thuat.md).
-- Android (Google Play) và iOS (App Store; cần máy Mac + tài khoản Apple Developer).
+- Android (Google Play) và iOS (App Store). Chủ dự án đã có máy Mac và tài khoản cả hai store, phát hành dưới tên cá nhân.
 - Chơi hoàn toàn offline.
 
 ## Tham chiếu

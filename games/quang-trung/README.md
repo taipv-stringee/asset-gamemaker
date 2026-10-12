@@ -36,8 +36,9 @@ Người mới đọc theo thứ tự: 01 → 04 → 02 → 03; người vẽ đ
 | Màn đêm bắt buộc | Đêm 30 Tết = vượt sông Gián (màn 4); Hà Hồi là đêm mùng 3 (màn 6) | 04 |
 | Mộ / gọi xương của AE2 | Đổi thành quân tan / chiêu hàng | 02 |
 | Tướng chính bị hạ | Thua màn (không mua lại như AE2) | 02 |
+| Người làm | Claude làm toàn bộ sản xuất; chủ dự án định hướng, duyệt, chơi thử, lo tài khoản store và pháp lý | 09 |
 | Nguồn lịch sử | Mọi chi tiết gắn một trong bốn nhãn: Sử liệu / Theo HLNTC / Tương truyền / Sáng tạo của game | 05 |
 
 ## Câu hỏi còn mở
 
-Cách kiếm tiền, tên game, máy Mac để build iOS, thuê họa sĩ — xem [09 mục 5](docs/09-ke-hoach.md#5-câu-hỏi-còn-mở).
+Cách kiếm tiền, tên game, máy Mac để build iOS, ai đứng tên phát hành — xem [09 mục 5](docs/09-ke-hoach.md#5-câu-hỏi-còn-mở).

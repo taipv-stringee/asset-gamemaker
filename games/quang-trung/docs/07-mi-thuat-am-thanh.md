@@ -88,7 +88,7 @@ con trỏ chọn ô, ô xanh / đỏ / vùng nguy hiểm, bản đồ chiến d�
 ## 4. Quy trình asset
 
 1. **Hình tạm**: tiếp tục dùng script Python (`generate_v2.py`) để sinh hình tạm cho mọi loại lính / ô mới, đủ để chơi thử.
-2. **Hình thật**: họa sĩ pixel vẽ đè theo đúng kích thước, bảng màu và tên file của hình tạm → thay file là xong, không sửa code.
+2. **Hình thật**: Claude vẽ lại bằng code ở mức chi tiết cao hơn, giữ đúng kích thước, bảng màu và tên file của hình tạm → thay file là xong, không sửa code. Chủ dự án duyệt từng nhóm hình.
 3. Tên file: `unit_<phe>_<loai>_<hanhdong>_strip<N>.png`, `tile_<loai>.png`, `portrait_<nhanvat>_<bieucam>.png`.
 4. Mỗi hình tướng / chân dung qua **kiểm tra sử** theo bảng mục 2 trước khi duyệt.
 
@@ -115,4 +115,4 @@ Chọn quân, đi bộ, voi bước / rống, chém, đâm, súng hỏa mai, th�
 lên cấp, chiếm làng, mua lính, vàng, gọi hàng (tiếng loa), trống báo động, cầu phao gãy, nước, gió đêm, lửa cháy,
 giao diện (chạm, mở menu, lật trang Sử liệu).
 
-Bản nháp có thể tổng hợp âm thanh bằng code như `games/diet-rong/generate_sounds.py`; bản phát hành nên thu / mua âm thanh thật.
+Claude tổng hợp nhạc và âm thanh bằng code (như `games/diet-rong/generate_sounds.py`). Nếu chất lượng chưa đạt, có thể bổ sung âm thanh từ thư viện giấy phép CC0 (ghi nguồn trong `CREDITS`).

@@ -59,7 +59,7 @@ Game **miễn phí hoàn toàn**: không quảng cáo, không mua trong app, kh�
 
 - Engine **Godot 4** (giấy phép MIT, không phí bản quyền), ngôn ngữ GDScript. Chi tiết: [08-ky-thuat.md](08-ky-thuat.md).
 - Android (Google Play) và iOS (App Store), điện thoại; màn hình dọc. Chủ dự án đã có máy Mac và tài khoản cả hai store.
-  Đứng tên cá nhân **có thể không hợp lệ ở Việt Nam** theo Nghị định 147 — đang chờ chủ dự án chọn hướng (09 §4).
+  Đứng tên cá nhân; chủ dự án chọn đưa lên store trước, nếu bị chặn theo Nghị định 147 thì xử lý sau (09 §4).
 - Chơi hoàn toàn offline.
 
 ## Tham chiếu

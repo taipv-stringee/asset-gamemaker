@@ -7,11 +7,11 @@ lớn, có commit và push) — chỉ là ước lượng thô, chưa tính th�
 
 | Mốc | Nội dung | Điều kiện xong | Ước lượng |
 |---|---|---|---|
-| **M0 – Tài liệu** | Bộ tài liệu 01–10, rà soát lịch sử và thiết kế | Chủ dự án duyệt; chốt hướng pháp lý (§4) | Xong khi chủ dự án duyệt |
+| **M0 – Tài liệu** | Bộ tài liệu 01–10, rà soát lịch sử và thiết kế | Chủ dự án duyệt | **Xong** (13/10/2026) |
 | **M1 – Mẫu luật chơi** | Project Godot; `core/` (bản đồ, đi, vùng khống chế, đánh, phản đòn, chiếm, mua lính, cấp, quân tan); AI cơ bản; 1 bản đồ thử; hình tạm; chế độ chạy kịch bản; `BUILD.md`, `TESTING.md`. **Hình mẫu chất lượng thật**: 1 loại lính đủ hoạt cảnh + 1 chân dung, để chủ dự án duyệt mức hình vẽ bằng code | Chơi trọn một trận trên điện thoại; test `core/` xanh; chủ dự án duyệt (hoặc từ chối) hình mẫu | 3–5 phiên |
 | **M2 – Lát cắt dọc** | **Màn 4 (Đêm 30 Tết – sông Gián)** hoàn chỉnh: đêm, ngủ, báo động, bến đò, hội thoại có chân dung, Sử liệu, nhạc + âm thanh, giao diện thật, hướng dẫn tối thiểu | Chủ dự án và vài người chơi thử; ghi nhận và sửa | 4–6 phiên |
 | **M3 – Nội dung** | Màn 0–9, màn phụ P (cuối mốc), lời kết, đủ quân và tướng, ~40 mục Sử liệu, hình thật | Chơi được từ đầu đến cuối; AI Tây Sơn đơn giản không kẹt ở màn nào | 10–15 phiên |
-| **M4 – Hoàn thiện** | Cân bằng, hướng dẫn, âm thanh, hiệu năng, thử trên nhiều máy, rà soát sử, đối chiếu nguyên văn nguồn (§3); **thử nghiệm kín** trên Google Play nếu tài khoản cần (§4) | Không lỗi chặn; đối chiếu nguồn xong | 4–6 phiên + 14 ngày thử nghiệm kín (nếu cần) |
+| **M4 – Hoàn thiện** | Cân bằng, hướng dẫn, âm thanh, hiệu năng, thử trên nhiều máy, rà soát sử, đối chiếu nguyên văn nguồn (§3) | Không lỗi chặn; đối chiếu nguồn xong | 4–6 phiên |
 | **M5 – Phát hành** | Trang store, ảnh chụp, phân loại tuổi, giấy tờ theo Nghị định 147 (nếu phát hành ở Việt Nam) | Có mặt trên Google Play và App Store | 1–2 phiên |
 
 Tiếng Anh: sau 1.0.
@@ -51,7 +51,9 @@ Theo rà soát (chỉ đọc được trích đoạn của các trang luật; đ
 - Chủ thể được cấp là **doanh nghiệp**; không thấy điều khoản nào cho cá nhân. Kho ứng dụng phải chỉ đưa lên game có giấy hợp lệ.
 - Văn bản liên quan mới: Nghị định 174/2026/NĐ-CP (xử phạt, từ 01/7/2026); dự thảo sửa Nghị định 147 (7/2026).
 
-→ **Đứng tên cá nhân gần như chắc chắn không phát hành hợp lệ được trên store Việt Nam.** Ba hướng:
+→ **Đứng tên cá nhân gần như chắc chắn không phát hành hợp lệ được trên store Việt Nam.**
+
+**Quyết định của chủ dự án (13/10/2026): cứ đưa lên store dưới tên cá nhân; nếu bị chặn thì xử lý sau.** Các hướng dự phòng:
 - (a) Lập doanh nghiệp (vd. công ty TNHH một thành viên), xin giấy G2–G4, rồi thông báo phát hành.
 - (b) Phát hành qua một nhà phát hành Việt Nam đã có giấy (tên trên store là của họ).
 - (c) Đứng tên cá nhân, **không mở bán ở Việt Nam**, chỉ phát hành ở các nước khác (trái với người chơi mục tiêu chính).
@@ -70,13 +72,12 @@ Theo rà soát (chỉ đọc được trích đoạn của các trang luật; đ
 
 ## 5. Đã chốt và còn mở
 
-Đã chốt: miễn phí hoàn toàn (không quảng cáo, không mua trong app); tên tạm **Tây Sơn**; đã có máy Mac và tài khoản Google Play / Apple Developer;
+Đã chốt: miễn phí hoàn toàn (không quảng cáo, không mua trong app); tên tạm **Tây Sơn**; đã có máy Mac và tài khoản Google Play / Apple Developer
+(tài khoản Google Play có từ trước 11/2023 → không cần thử nghiệm kín 14 ngày); đứng tên cá nhân, pháp lý Việt Nam xử lý khi phát sinh;
 build và chơi thử bằng session local của chủ dự án; giữ màn phụ thủy quân và hai trận diễn tập màn 1–2.
 
 | Còn mở | Ảnh hưởng | Khi nào cần chốt |
 |---|---|---|
-| **Hướng pháp lý ở Việt Nam**: (a) lập doanh nghiệp, (b) qua nhà phát hành, (c) cá nhân và không bán ở Việt Nam | Có phát hành được cho người chơi Việt Nam hay không | **Bây giờ** (M0) — thủ tục có thể mất vài tuần |
-| Tài khoản Google Play tạo trước hay sau 11/2023 | Có cần 14 ngày thử nghiệm kín với ≥ 12 người | Trước M4 |
 | Tên chính thức (bỏ chữ "tạm"); kiểm tra trùng tên trên store | Logo, trang store | Trước M4 |
 | Mức chất lượng hình vẽ bằng code (duyệt hình mẫu ở M1) | Có cần thêm nguồn hình khác | Cuối M1 |
 
@@ -84,7 +85,7 @@ build và chơi thử bằng session local của chủ dự án; giữ màn ph�
 
 | Rủi ro | Mức | Cách giảm |
 |---|---|---|
-| **Pháp lý Việt Nam** (cá nhân không được cấp giấy G4) | Cao | Chốt hướng ở M0 (§4) |
+| **Pháp lý Việt Nam** (cá nhân không được cấp giấy G4) | Cao | Chủ dự án chấp nhận rủi ro; dự phòng (a)/(b)/(c) ở §4 |
 | **Chất lượng hình và nhạc tạo bằng code** không đạt (khoảng 33 loại lính × 6 frame, ~30 chân dung, 8 bản nhạc) | Cao | Hình mẫu chất lượng thật ở M1 cho chủ dự án duyệt sớm; nếu không đạt: dùng tài nguyên CC0 hoặc thuê vẽ riêng chân dung |
 | Sai sử bị cộng đồng bắt lỗi (như *Sử Hộ Vương* 2019) | Cao | Bốn nhãn nguồn, Sử liệu có nguồn, đối chiếu nguyên văn (§3); nếu được, nhờ một người am hiểu sử đọc kịch bản trước M5 |
 | Phạm vi lớn (10 màn + đánh đêm + AI) | Cao | Lát cắt dọc M2 trước; màn phụ P làm cuối M3; tiếng Anh để sau 1.0 |

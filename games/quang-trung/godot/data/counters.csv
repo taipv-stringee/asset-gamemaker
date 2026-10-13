@@ -1,0 +1,13 @@
+ben_danh,ben_bi_danh,cong_them,thu_them
+id:linh_giao,the:voi,10,0
+id:truong_mau,the:voi,15,0
+id:hoa_ho,the:voi,10,0
+id:hoa_ho,o:doanh,10,0
+id:voi_chien,the:bo_binh,10,0
+id:than_cong,o:don,15,0
+id:than_cong,o:thanh,15,0
+id:than_cong,o:doanh,15,0
+id:phao_binh,o:don,15,0
+id:phao_binh,o:doanh,15,0
+the:ban_xa,id:moc_thuan,0,10
+the:ban_xa,id:dang_bai,0,10

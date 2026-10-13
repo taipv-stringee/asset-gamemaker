@@ -1,0 +1,44 @@
+{
+  "id": "m_thu",
+  "ten": "Trận thử",
+  "ghi_chu": "Bản đồ thử cho M1, không thuộc chiến dịch.",
+  "ban_do": [
+    "^^t.F.t^^",
+    "^t..=..t^",
+    "tL..=.hL.",
+    "...r=r...",
+    "rrr.=.rrr",
+    "...h=..t.",
+    "~:~~#~~~~",
+    "...t=..v.",
+    "t..L=...t",
+    "rrr.=.rrr",
+    ".h..=.hL.",
+    "^t..=..t^",
+    "^^t.F.t^^"
+  ],
+  "chu_o": {"4,0": "thanh", "4,12": "tayson", "1,2": "thanh"},
+  "phe": ["tayson", "thanh"],
+  "vang": {"tayson": 300, "thanh": 300},
+  "gioi_han": {"tayson": 12, "thanh": 12},
+  "mua_duoc": {
+    "tayson": ["linh_giao", "hoa_mai", "quan_su", "trong_tran", "voi_chien"],
+    "thanh": ["truong_mau", "dieu_thuong", "cung_tien"]
+  },
+  "quan": [
+    {"id": "quang_trung", "phe": "tayson", "x": 4, "y": 11, "tuong_chinh": true},
+    {"id": "linh_giao", "phe": "tayson", "x": 3, "y": 11},
+    {"id": "linh_giao", "phe": "tayson", "x": 5, "y": 11},
+    {"id": "hoa_mai", "phe": "tayson", "x": 3, "y": 10},
+    {"id": "voi_chien", "phe": "tayson", "x": 5, "y": 10},
+    {"id": "quan_giu_don", "phe": "thanh", "x": 4, "y": 1, "ai": "giu_don", "ban_kinh": 2, "tam": [4, 0]},
+    {"id": "truong_mau", "phe": "thanh", "x": 3, "y": 2},
+    {"id": "truong_mau", "phe": "thanh", "x": 5, "y": 3},
+    {"id": "dieu_thuong", "phe": "thanh", "x": 2, "y": 1},
+    {"id": "dang_bai", "phe": "thanh", "x": 4, "y": 3},
+    {"id": "cung_tien", "phe": "thanh", "x": 6, "y": 2}
+  ],
+  "thang": {"loai": "chiem_o", "o": [4, 0]},
+  "thua_het_luot": 25,
+  "tam_nhin": 0
+}

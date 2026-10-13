@@ -1,0 +1,34 @@
+id,phe,ten,gia,cong_min,cong_max,thu,di,tam_min,tam_max,kieu_di,the
+linh_giao,tayson,Lính giáo,150,50,55,5,4,1,1,bo,bo_binh chan chiem_lang
+hoa_mai,tayson,Hỏa mai thủ,250,50,55,5,4,1,2,bo,ban_xa
+thuy_binh,tayson,Thủy binh,300,50,55,10,4,1,1,thuy,chan
+quan_su,tayson,Quân sư,400,35,40,5,4,1,2,bo,ban_xa chieu_hang goi_hang thay_dia_loi
+trong_tran,tayson,Trống trận,500,30,35,10,4,1,1,bo,hao_quang
+hoa_ho,tayson,Hỏa hổ,600,50,55,10,4,1,1,bo,chan gay_chay dot
+moc_thuan,tayson,Mộc thuẫn,600,45,50,25,3,1,1,nang,chan khong_chay
+than_cong,tayson,Thần công,700,60,70,5,3,2,4,nang,ban_xa ban_dung
+voi_chien,tayson,Voi chiến,1000,70,80,20,4,1,1,voi,voi chan xung_phong
+hang_binh,tayson,Hàng binh,0,40,45,5,4,1,1,bo,bo_binh chan chiem_lang
+truong_mau,thanh,Trường mâu binh,150,45,50,5,4,1,1,bo,bo_binh chan chiem_lang
+dieu_thuong,thanh,Điểu thương binh,250,50,55,5,4,1,2,bo,ban_xa
+cung_tien,thanh,Cung tiễn binh,200,40,45,5,4,2,3,bo,ban_xa
+dang_bai,thanh,Đằng bài binh,400,40,45,20,4,1,1,bo,chan
+phao_binh,thanh,Pháo binh,700,60,70,5,3,2,4,nang,ban_xa ban_dung
+tho_binh,thanh,Thổ binh Điền Châu,100,40,45,5,5,1,1,bo,bo_binh chan chiem_lang tho_dia
+trinh_sat,thanh,Trinh sát,0,30,35,0,5,1,1,bo,bo_binh
+quan_le,le,Quân Lê,100,35,40,5,4,1,1,bo,bo_binh chan chiem_lang
+quan_giu_don,thanh,Quan giữ đồn,0,50,55,15,4,1,1,bo,tuong chan
+quan_giu_don_le,le,Quan giữ đồn,0,50,55,15,4,1,1,bo,tuong chan
+quang_trung,tayson,Quang Trung,0,60,70,20,4,1,1,voi,tuong chan voi goi_hang uy_danh
+ngo_van_so,tayson,Ngô Văn Sở,0,50,60,15,4,1,1,bo,tuong chan goi_hang than_trong
+ngo_thi_nham,tayson,Ngô Thì Nhậm,0,35,40,10,4,1,1,bo,tuong chan goi_hang muu_si
+phan_van_lan,tayson,Phan Văn Lân,0,60,65,5,5,1,1,bo,tuong chan hang_mau
+do_doc_long,tayson,Đô đốc Long,0,60,65,15,5,1,1,bo,tuong chan goi_hang tap_kich
+do_doc_bao,tayson,Đô đốc Bảo,0,60,70,20,4,1,1,voi,tuong chan voi tuong_binh
+do_doc_tuyet,tayson,Đô đốc Tuyết,0,50,60,15,5,1,1,thuy,tuong chan thuy_quan
+do_doc_loc,tayson,Đại đô đốc Lộc,0,50,60,15,5,1,1,thuy,tuong chan thuy_quan
+ton_si_nghi,thanh,Tôn Sĩ Nghị,0,55,65,20,4,1,1,bo,tuong chan thong_soai
+hua_the_hanh,thanh,Hứa Thế Hanh,0,60,70,20,4,1,1,bo,tuong chan chan_hau
+sam_nghi_dong,thanh,Sầm Nghi Đống,0,50,60,15,4,1,1,bo,tuong chan tu_thu
+truong_trieu_long,thanh,Trương Triều Long,0,55,60,15,4,1,1,bo,tuong chan
+thuong_duy_thang,thanh,Thượng Duy Thăng,0,55,60,15,4,1,1,bo,tuong chan

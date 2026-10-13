@@ -141,7 +141,7 @@ AE2: quân chết để lại mộ khoảng 1 lượt, Sorceress đứng kề m�
 
 | Trạng thái | Do đâu | Hiệu ứng | Hết khi |
 |---|---|---|---|
-| **Cháy** [giống độc của AE2] | Hỏa hổ đánh hoặc phản đòn trúng; đứng trên ô lửa | Trong **lượt kế tiếp** của quân đó: −1 Di, −10 công, −10 thủ. Không mất máu theo lượt | Hết lượt kế tiếp của quân đó. Bị Cháy lại thì đặt lại thời hạn, không cộng dồn. Mộc thuẫn không bị Cháy |
+| **Cháy** [giống độc của AE2] | Hỏa hổ đánh hoặc phản đòn trúng; đứng trên ô lửa | **Từ lúc bị Cháy đến hết lượt kế tiếp** của phe quân đó: −1 Di, −10 công, −10 thủ. Không mất máu theo lượt | Cuối lượt kế tiếp của phe quân đó. Bị Cháy lại thì đặt lại thời hạn, không cộng dồn. Mộc thuẫn không bị Cháy |
 | **Hào quang** | Đứng trong 8 ô quanh trống trận (không tính chính trống) | +10 công | Tính lúc ra đòn. Nhiều trống không cộng dồn |
 | **Uy danh** | Đứng trong 8 ô quanh Quang Trung (không tính chính ông) | +5 công | Như trên. Hào quang + Uy danh ≤ +10 |
 | **Ngủ** | Kịch bản đặt cho quân địch ở màn đêm | Không di chuyển, không thấy, không phản đòn; bị đánh nhận **Bất ngờ** +15 công | Bị đánh (sau đòn đó); báo động; trời sáng |

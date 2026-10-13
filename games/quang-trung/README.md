@@ -5,7 +5,7 @@ Quang Trung đại phá quân Thanh, từ núi Bân (22/12/1788) đến Thăng L
 Làm bằng **Godot 4**, phát hành **miễn phí** trên Google Play và App Store (chủ dự án đứng tên cá nhân).
 Thư mục vẫn tên `quang-trung` (tên mã dự án).
 
-**Trạng thái: M0 – Tài liệu.** Chưa có project Godot. Hình tạm và mockup: [`drafts/quang-trung/`](../../drafts/quang-trung/).
+**Trạng thái: M1 – Mẫu luật chơi** (đang làm). Project Godot ở [`godot/`](godot/). Hình tạm và mockup: [`drafts/quang-trung/`](../../drafts/quang-trung/).
 
 ## Tài liệu
 
@@ -41,7 +41,7 @@ Người mới đọc theo thứ tự: 01 → 04 → 02 → 03; người vẽ đ
 | Tướng chính bị hạ | Thua màn (không mua lại như AE2) | 02 |
 | Tên game | **Tây Sơn** (tạm) | 01 |
 | Kiếm tiền | Miễn phí hoàn toàn: không quảng cáo, không mua trong app | 01 |
-| Phát hành | Đã có tài khoản Google Play và Apple Developer, có máy Mac. Đứng tên cá nhân **chưa hợp lệ ở Việt Nam** theo NĐ 147 — đang chờ chọn hướng | 09 §4 |
+| Phát hành | Đứng tên cá nhân, đưa lên store trước; nếu bị chặn theo NĐ 147 thì xử lý sau (rủi ro ghi ở 09 §4). Tài khoản Google Play có từ lâu (không cần thử nghiệm kín 14 ngày) | 09 §4 |
 | Build và chơi thử | Chủ dự án build trên máy mình (session Claude Code local + agent kiểm thử local) | 08, 09 |
 | Màn phụ thủy quân, trận diễn tập màn 1–2 | Giữ | 04 |
 | Người làm | Claude làm toàn bộ sản xuất; chủ dự án định hướng, duyệt, chơi thử, lo tài khoản store và pháp lý | 09 |

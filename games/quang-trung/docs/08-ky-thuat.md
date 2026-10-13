@@ -6,7 +6,8 @@
   phiên bản trong `godot/BUILD.md` kèm link tải và checksum; chỉ nâng cấp giữa các mốc. Đã kiểm: môi trường cloud tải được
   bản Godot Linux từ GitHub Releases, nên test headless chạy được ở cả cloud lẫn máy chủ dự án.
 - Ngôn ngữ: **GDScript** có khai báo kiểu (bật cảnh báo `untyped_declaration` trong Project Settings).
-- Kiểm thử tự động: **GUT** hoặc **gdUnit4** (chọn một khi dựng project).
+- Kiểm thử tự động: bộ chạy test tự viết, không phụ thuộc thư viện ngoài (`godot/tests/run_tests.gd`, xem `godot/BUILD.md`).
+- **Đã ghim: Godot 4.7.2-stable** (13/10/2026).
 - Script Python (Pillow, numpy) tiếp tục dùng để sinh hình tạm, nằm trong `tools/`.
 
 ## 2. Cấu trúc thư mục
@@ -93,7 +94,8 @@ games/quang-trung/
 
 ## 5. Dữ liệu
 
-- `units.csv`: `id, phe, ten_khoa, gia, cong_min, cong_max, thu, di, tam_min, tam_max, kieu_di, the (danh sách thẻ, 03 §2), dac_tinh`.
+- `units.csv`: `id, phe, ten, gia, cong_min, cong_max, thu, di, tam_min, tam_max, kieu_di, the` — `the` là danh sách thẻ (03 §2) và kỹ năng
+  (`hao_quang`, `uy_danh`, `gay_chay`, `than_trong`...), cách nhau bằng dấu cách. Tên hiển thị tạm để tiếng Việt; chuyển sang khóa dịch khi làm bản địa hóa.
   Không có cột mở khóa: danh sách lính mua được nằm trong `missions.json` (`mua_duoc` từng màn).
 - `terrain.csv`: `id, ten_khoa, chi_phi_bo, chi_phi_nang, chi_phi_voi, chi_phi_thuy, thu, vang, hoi_mau, mua_linh, chay_duoc`.
 - `counters.csv`: `ben_danh, ben_bi_danh, cong_them, thu_them`.
@@ -102,10 +104,12 @@ games/quang-trung/
 
 ## 6. Bản đồ
 
-- Mỗi màn là một cảnh có các `TileMapLayer`: `dia_hinh`, `vat_the` (chông, địa lôi, kho lương, trống báo động...), `diem_dat` (ô đặt quân ban đầu,
-  ô viện binh, vùng thắng, vùng thoát, **khu đồn** `khu_don_<id>`).
-- Thông tin địa hình gắn vào **custom data** của TileSet (`terrain_id`), luật chơi đọc `terrain_id` rồi tra `terrain.csv`.
-- Quân ban đầu: các Node đánh dấu trong cảnh (`UnitSpawn` với `unit_id`, `phe`, `ai_mode`, `ngu`, `duoc`, thẻ tướng như `toi_thieu_1`), đổi thành dữ liệu khi vào màn.
+- **Quyết định ở M1**: mỗi màn là một file JSON `data/missions/<id>.json` với bản đồ **chữ ASCII** (mỗi ký tự là một địa hình, cột `ky_tu`
+  trong `terrain.csv`), chủ ô, quân ban đầu (mã lính, phe, ô, chế độ AI, cờ `ngu` / `duoc` / `toi_thieu_1`...), vàng, giới hạn, `mua_duoc`,
+  điều kiện thắng thua. Lý do: dễ đọc, dễ sửa và dễ so sánh trong git, Claude sinh và kiểm tra được mà không cần mở trình biên tập.
+  Lúc chạy, game dựng `TileMapLayer` từ JSON (atlas `assets/tiles/tiles.png` + `tiles.json`).
+- Vật thể, khu đồn, vùng thắng / thoát, lối viện binh: thêm trường trong JSON khi làm M2 (`vat_the`, `khu_don`, `vung`).
+- Sự kiện riêng của màn (cầu phao đứt, viện binh...): script `missions/<id>.gd` gắn theo mã màn (M2 trở đi).
 
 ## 7. Kiểm thử
 

@@ -1,0 +1,21 @@
+# Kịch bản cơ bản trên màn m_thu: chọn voi, đi lên, đánh; mua lính; hết lượt.
+kiem vang
+cham 5 10
+cham 5 7
+cham 5 7
+kiem quan 5 7
+nut Chờ
+cham 3 10
+cham 3 8
+cham 3 8
+nut Chờ
+cham 4 12
+anh kb_mua.png
+nut Hỏa 250
+kiem quan 4 12
+kiem vang
+nut Hết lượt
+nut Hết lượt
+cho 1
+anh kb_sau_luot.png
+kiem vong

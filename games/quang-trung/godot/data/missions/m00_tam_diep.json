@@ -1,0 +1,297 @@
+{
+ "id": "m00_tam_diep",
+ "so": 0,
+ "ten": "Rút về Tam Điệp",
+ "ten_ngan": "Tam Điệp",
+ "ngay": "Tháng 11 năm Mậu Thân (giữa tháng 12/1788; ngày rút chính xác không rõ)",
+ "dia_danh": "Từ Thăng Long về phòng tuyến Tam Điệp – Biện Sơn",
+ "gioi_thieu": "Quân Thanh qua Trấn Nam Quan, kéo về Thăng Long. Ngô Văn Sở theo kế Ngô Thì Nhậm, rút thủy bộ về Tam Điệp để giữ quân. Phan Văn Lân không chịu rút, đánh ở sông Nguyệt Đức và thua.",
+ "nhan_gioi_thieu": "Sử liệu",
+ "muc_tieu_chinh": "Ngô Văn Sở và ít nhất 4 quân khác vào cửa núi Tam Điệp (phía nam) trước khi hết vòng 12.",
+ "dieu_kien_thua": "Ngô Văn Sở bị hạ, hoặc hết vòng 12.",
+ "hoi_thoai": "m00_tam_diep",
+ "nhac": "chu_de",
+ "ghi_chu": "Màn mở đầu + hướng dẫn (04 §Màn 0). Lân bị tách khỏi đoàn ở bờ bắc là Sáng tạo của game.",
+ "ban_do": [
+  "rr..=.rr.",
+  "r...=..r.",
+  "~~~~#~~~~",
+  ".t..=..t.",
+  "rr..=.rrr",
+  "rrr.=.rr.",
+  "th.r=r.ht",
+  "trr.=.rrt",
+  "..rr=rr..",
+  "hrr.=.rrh",
+  "trr.=r.rt",
+  ".hr.=.rh.",
+  "^t.r=r.t^",
+  "^^r.=.r^^",
+  "^^..=..^^",
+  "^^^.=.^^^"
+ ],
+ "chu_o": {},
+ "phe": [
+  "tayson",
+  "thanh",
+  "le"
+ ],
+ "vang": {
+  "tayson": 0,
+  "thanh": 0,
+  "le": 0
+ },
+ "gioi_han": {
+  "tayson": 10,
+  "thanh": 99,
+  "le": 99
+ },
+ "mua_duoc": {
+  "tayson": [],
+  "thanh": [],
+  "le": []
+ },
+ "khu": {
+  "tam_diep": [
+   [
+    2,
+    14
+   ],
+   [
+    3,
+    14
+   ],
+   [
+    4,
+    14
+   ],
+   [
+    5,
+    14
+   ],
+   [
+    6,
+    14
+   ],
+   [
+    3,
+    15
+   ],
+   [
+    4,
+    15
+   ],
+   [
+    5,
+    15
+   ]
+  ]
+ },
+ "quan": [
+  {
+   "id": "ngo_van_so",
+   "phe": "tayson",
+   "x": 4,
+   "y": 4,
+   "tuong_chinh": true
+  },
+  {
+   "id": "ngo_thi_nham",
+   "phe": "tayson",
+   "x": 3,
+   "y": 4
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 2,
+   "y": 3
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 5,
+   "y": 3
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 3,
+   "y": 5
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 5,
+   "y": 5
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 2,
+   "y": 4
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 6,
+   "y": 3
+  },
+  {
+   "id": "phan_van_lan",
+   "phe": "tayson",
+   "x": 4,
+   "y": 1
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 3,
+   "y": 1
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 5,
+   "y": 1
+  }
+ ],
+ "vien_binh": [
+  {
+   "phe": "thanh",
+   "vong": [
+    2
+   ],
+   "quan": [
+    {
+     "id": "truong_mau",
+     "x": 3,
+     "y": 0
+    },
+    {
+     "id": "truong_mau",
+     "x": 5,
+     "y": 0
+    }
+   ]
+  },
+  {
+   "phe": "le",
+   "vong": [
+    2
+   ],
+   "quan": [
+    {
+     "id": "quan_le",
+     "x": 4,
+     "y": 0
+    }
+   ]
+  },
+  {
+   "phe": "le",
+   "vong": [
+    3
+   ],
+   "quan": [
+    {
+     "id": "quan_le",
+     "x": 0,
+     "y": 8
+    },
+    {
+     "id": "quan_le",
+     "x": 0,
+     "y": 7
+    }
+   ]
+  },
+  {
+   "phe": "thanh",
+   "vong": [
+    5
+   ],
+   "quan": [
+    {
+     "id": "dieu_thuong",
+     "x": 8,
+     "y": 8
+    },
+    {
+     "id": "truong_mau",
+     "x": 8,
+     "y": 11
+    }
+   ]
+  },
+  {
+   "phe": "thanh",
+   "tu_vong": 4,
+   "moi": 2,
+   "den_vong": 10,
+   "quan": [
+    {
+     "id": "truong_mau",
+     "x": 3,
+     "y": 0
+    },
+    {
+     "id": "dieu_thuong",
+     "x": 5,
+     "y": 0
+    }
+   ]
+  }
+ ],
+ "thang": {
+  "loai": "vao_vung",
+  "khu": "tam_diep",
+  "so_quan": 4
+ },
+ "thua_het_luot": 12,
+ "ly_do_het_luot": "Hết vòng 12: quân Thanh đã chặn đường vào Tam Điệp.",
+ "muc_tieu_phu": [
+  {
+   "loai": "ve_vung",
+   "quan": "phan_van_lan",
+   "khu": "tam_diep",
+   "ten": "Phan Văn Lân về tới Tam Điệp"
+  },
+  {
+   "loai": "khong_mat_quan_nao",
+   "ten": "Không mất quân nào"
+  }
+ ],
+ "goi_y": [
+  {
+   "khi": "bat_dau",
+   "loi": "Chạm một quân của ta để chọn. Ô xanh là chỗ đi được."
+  },
+  {
+   "khi": "chon_quan",
+   "loi": "Chạm một ô xanh để xem đường, chạm lại lần nữa để đi. Đi rồi, chưa làm gì khác thì còn Hoàn tác được."
+  },
+  {
+   "khi": "sau_di",
+   "loi": "Sau khi đi: Đánh nếu có quân địch ở ô đỏ, hoặc Chờ để quân này xong lượt. Hết quân thì bấm Hết lượt."
+  },
+  {
+   "khi": "du_bao",
+   "loi": "Dự báo cho biết máu gây ra và máu bị đánh trả. Quân bị đánh mà còn sống sẽ phản đòn (trừ quân bắn từ xa)."
+  },
+  {
+   "khi": "vong",
+   "n": 2,
+   "loi": "Lính giáo, lính Thanh cầm giáo khống chế 4 ô quanh mình: quân đối phương bước vào phải dừng lại. Dùng lính giáo chặn hậu cho cả đoàn rút."
+  },
+  {
+   "khi": "vong",
+   "n": 3,
+   "loi": "Quân Lê dẫn đường đánh tạt sườn, quân Thanh có viện binh từ phía bắc mỗi 2 vòng. Đừng nán lại đánh lâu."
+  }
+ ],
+ "su_lieu": [
+  "le_chieu_thong_cau_vien",
+  "quan_so_quan_thanh"
+ ]
+}

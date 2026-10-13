@@ -8,7 +8,7 @@ Dành cho **agent kiểm thử chạy trên máy chủ dự án** và cho chủ 
    Bộ test có cả **lời giải mẫu màn 4** (`tests/loi_giai/m04_gian_khau.txt`): chạy trên luật thật, phải thắng 3 sao.
 2. Chạy từng kịch bản chạm trong `tests/kich_ban/` (lệnh chạy và giá trị mong đợi của từng file: `tests/kich_ban/README.md`):
    - `co_ban.txt`, `quan_tan_choi_lai.txt`, `dem_m04.txt`: vào thẳng trận. `cuon_danh_sach.txt`: cuộn danh sách Chiến dịch.
-   - `tron_m04.txt`: `GODOT --path . -- --menu --moi --seed=1 --kich-ban=res://tests/kich_ban/tron_m04.txt` — đi từ menu,
+   - `tron_m04.txt`: `GODOT --path . -- --menu --moi --mo-het --seed=1 --kich-ban=res://tests/kich_ban/tron_m04.txt` — đi từ menu,
      chơi trọn màn 4 qua giao diện chạm, kiểm tra lưu, sao, Sử liệu. (`--moi` xóa tiến trình trên máy trước khi chạy.)
    - So các dòng `KIỂM` với bảng mong đợi; mở ảnh chụp (dòng `Đã chụp:`) và mô tả bất thường: chữ bị cắt, nút chồng nhau,
      quân hiển thị sai chỗ, quân địch hiện ra trong sương.
@@ -22,7 +22,24 @@ Dành cho **agent kiểm thử chạy trên máy chủ dự án** và cho chủ 
 Lỗi đã biết, bỏ qua: lúc thoát có dòng `ERROR: 1 resources still in use at exit` (một file nhạc còn trong bộ phát âm thanh khi
 tắt; không ảnh hưởng gì).
 
-## 2. Chơi thử trên điện thoại (mốc M2 — lát cắt dọc màn 4)
+## 2. Chơi thử trên điện thoại
+
+### 2.1. M3 — màn 0 và màn 1 (mới)
+
+Xóa dữ liệu app (hoặc `--moi`) để thấy thứ tự mở màn và gợi ý hướng dẫn từ đầu.
+
+| # | Việc | Mong đợi |
+|---|---|---|
+| 1 | Chiến dịch | Chỉ Màn 0 mở; Màn 1, Màn 4 mờ, dòng "Thắng màn trước để mở" (màn đã thắng trước đây vẫn mở) |
+| 2 | Màn 0: giới thiệu, hội thoại | Chân dung Phan Văn Lân (khăn đỏ, giáp), Ngô Thì Nhậm (mũ cánh chuồn), Ngô Văn Sở (khăn đen, giáp) |
+| 3 | Gợi ý hướng dẫn | Khung xanh đậm dưới thanh trên, nút "Đã hiểu"; hiện lần lượt khi chọn quân, sau khi đi, xem dự báo, vòng 2, vòng 3; không chặn bản đồ; ≡ → mục "Gợi ý" xem lại được. Chơi lại màn: gợi ý đã xem không hiện nữa |
+| 4 | Màn 0: viện binh | Vòng 2 quân Thanh + quân Lê xuất hiện ở bờ bắc (dải chữ "Viện binh…" nếu thấy), vòng 3 quân Lê từ sườn tây, vòng 5 sườn đông |
+| 5 | Màn 0: thắng | Ngô Văn Sở + 4 quân vào 2 hàng cuối (cửa núi) là thắng ngay; mục tiêu phụ: Lân về tới nơi, không mất quân |
+| 6 | Màn 1 mở sau màn 0 | Hội thoại lên ngôi ở núi Bân; quân phe Diễn tập màu đỏ sẫm; quân về 0 máu thì biến mất, không để quân tan |
+| 7 | Màn 1: mua lính, lên cấp | Bảng mua lính có lính giáo, hỏa mai; gợi ý Uy danh (vòng 2), lên cấp (khi có quân lên cấp) |
+| 8 | Màn 1: thắng | Quang Trung vào đồn bắc và Chiếm; mục tiêu phụ: một quân lên cấp, thắng trước vòng 10 |
+
+### 2.2. M2 — lát cắt dọc màn 4
 
 Mở game **không có tham số** (như người chơi). Bật tiếng. Lần đầu nên xóa dữ liệu app để bắt đầu từ đầu.
 

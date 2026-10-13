@@ -1,0 +1,27 @@
+# Màn 1 — lời giải 2 sao (một quân lên cấp, thắng trước vòng 10).
+# Vòng 1–4: mua lính giáo, giữ đội hình, đánh hai lính giáo bạn tiến xuống (máy đi hộ phần đánh).
+mua 4 18 linh_giao
+ai
+het
+ai
+het
+ai
+het
+ai
+het
+# Vòng 5 trở đi: cả đoàn tiến thẳng lên đồn bắc, Quang Trung đi theo đường.
+toi_loai quang_trung 4 1
+rut 4 2
+het
+toi_loai quang_trung 4 1
+ai
+het
+toi_loai quang_trung 4 1
+ai
+het
+toi_loai quang_trung 4 1
+ai
+het
+toi_loai quang_trung 4 1
+ai
+het

@@ -1,0 +1,49 @@
+{
+ "_ghi_chu": "Lời thoại là của game (Sáng tạo); sự kiện rút quân theo kế Ngô Thì Nhậm và Lân đánh ở Thị Cầu là Sử liệu.",
+ "truoc": [
+  {
+   "ai": "",
+   "loi": "Cuối năm Mậu Thân (1788). Quân Thanh qua Trấn Nam Quan, kéo về Thăng Long.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "phan_van_lan",
+   "ten": "Phan Văn Lân",
+   "loi": "Quân ta chưa đánh đã lui sao? Để tôi ra bờ sông chặn chúng.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "ngo_thi_nham",
+   "ten": "Ngô Thì Nhậm",
+   "loi": "Quân Thanh đông, thế đang mạnh. Lui về giữ Tam Điệp, giữ lấy quân, chờ tin Phú Xuân.",
+   "nhan": "Sáng tạo của game",
+   "ghi_chu": "Kế rút về Tam Điệp của Ngô Thì Nhậm: Sử liệu. Câu chữ của game."
+  },
+  {
+   "ai": "ngo_van_so",
+   "ten": "Ngô Văn Sở",
+   "loi": "Theo kế ấy. Thủy bộ cùng rút về Tam Điệp. Không ai được ham đánh.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "",
+   "loi": "Phan Văn Lân đã kéo quân lên bờ bắc. Phải đón ông về cùng đoàn.",
+   "nhan": "Sáng tạo của game"
+  }
+ ],
+ "sau_thang": [
+  {
+   "ai": "ngo_van_so",
+   "ten": "Ngô Văn Sở",
+   "loi": "Đã về tới Tam Điệp. Sai người vào Phú Xuân báo tin cho Bắc Bình Vương.",
+   "nhan": "Theo HLNTC",
+   "ghi_chu": "Sai người về Phú Xuân báo tin: Sử liệu / HLNTC. Câu chữ của game."
+  },
+  {
+   "ai": "ngo_thi_nham",
+   "ten": "Ngô Thì Nhậm",
+   "loi": "Còn quân là còn đánh được. Giờ chờ quân Phú Xuân ra.",
+   "nhan": "Sáng tạo của game"
+  }
+ ]
+}

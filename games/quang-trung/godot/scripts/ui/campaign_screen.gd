@@ -16,10 +16,15 @@ func _init() -> void:
 	for m in Story.campaign():
 		var id: String = m["id"]
 		var text := "Màn %s · %s" % [m["so"], m["ten"]]
+		var open := Progress.mission_unlocked(id)
 		if id != "" and Progress.is_won(id):
-			text += "\n" + "★".repeat(Progress.stars(id)) + "☆".repeat(3 - Progress.stars(id))
+			var n := Progress.stars(id)
+			var total := (Missions.load_mission(id).get("muc_tieu_phu", []) as Array).size()
+			text += "\n" + "★".repeat(n) + "☆".repeat(maxi(total - n, 0))
+		elif id != "" and not open:
+			text += "\nThắng màn trước để mở"
 		var b := UiKit.list_button(text, func() -> void: mission_chosen.emit(id))
-		b.disabled = id == ""
+		b.disabled = not open
 		col.add_child(b)
 	col.add_child(UiKit.label("Luyện tập", UiKit.FS_HEAD, UiKit.C_GOLD, true))
 	col.add_child(UiKit.list_button("Trận thử luật (ban ngày)", func() -> void: mission_chosen.emit("m_thu")))

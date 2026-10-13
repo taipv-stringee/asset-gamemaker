@@ -97,6 +97,13 @@ static func _plan_recruit(state: BattleState, f: String) -> Dictionary:
 	return {}
 
 
+## Màn "vao_vung" (màn 0): phe người chơi (khi máy chơi thay) chạy về khu thắng, không ham đánh.
+static func _escaping(state: BattleState, u: Unit) -> bool:
+	var win: Dictionary = state.mission.get("thang", {})
+	return u.faction == state.factions[0] and win.get("loai", "") == "vao_vung" \
+		and not state.zones.get(win["khu"], []).has(u.pos)
+
+
 static func _goals(state: BattleState, u: Unit) -> Array[Vector2i]:
 	var goals: Array[Vector2i] = []
 	if u.ai_mode == "tuan_tra" and u.ai_params.has("diem"):
@@ -117,6 +124,10 @@ static func _goals(state: BattleState, u: Unit) -> Array[Vector2i]:
 		return goals
 	# Tướng chính phe người chơi (khi máy chơi thay để kiểm thử) nhắm thẳng mục tiêu màn.
 	var win: Dictionary = state.mission.get("thang", {})
+	if _escaping(state, u):
+		for p in state.zones.get(win["khu"], []):
+			goals.append(p)
+		return goals
 	if u.tuong_chinh and u.faction == state.factions[0] and win.get("loai", "") == "chiem_o":
 		var obj := Vector2i(int(win["o"][0]), int(win["o"][1]))
 		var guarded := false
@@ -210,7 +221,7 @@ static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 	if u.ai_mode == "dung_yen" or u.ai_mode == "ngu":
 		return plan
 	var reach := Rules.reachable(state, u)
-	var fleeing := u.ai_mode == "rut_lui" or u.ai_mode == "chay" or u.ai_mode == "tuan_tra"
+	var fleeing := u.ai_mode == "rut_lui" or u.ai_mode == "chay" or u.ai_mode == "tuan_tra" or _escaping(state, u)
 	var goals := _goals(state, u)
 	# Quân yếu (máu < 35) lui về làng / đồn của phe mình để hồi máu; chỉ đánh khi chắc hạ được.
 	var healing := false
@@ -230,6 +241,8 @@ static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 	var best_score := -INF
 	var original := u.pos
 	# Tướng chính tránh chỗ nguy hiểm; quân thường chỉ cân nhắc nhẹ.
+	var win: Dictionary = state.mission.get("thang", {})
+	var objective := Vector2i(int(win["o"][0]), int(win["o"][1])) if win.get("loai", "") == "chiem_o" and u.faction == state.factions[0] else Vector2i(-99, -99)
 	var threat := threat_map(state, u.faction)
 	var danger_w := 0.25 if u.tuong_chinh else 0.02
 	# Quân giữ đồn đang ở ngoài vùng (vd. lính tuần vừa báo động) thì chạy về; ở trong vùng thì không ra.
@@ -246,6 +259,8 @@ static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 			base -= 200.0  # có thể bị hạ ở lượt sau
 		if state.terrain_at(p)["mua_linh"] and state.owner_of(p) == u.faction and not u.tuong_chinh:
 			base -= 25.0   # đừng đứng chắn ô mua lính của phe mình
+		if p == objective and not u.has_tag("tuong"):
+			base -= 100.0  # đừng đứng lên ô mục tiêu chiếm: chỉ tướng chiếm được, quân thường đứng đó là chắn đường tướng
 		if base > best_score:
 			best_score = base
 			plan = {"lenh": "ke_hoach", "uid": u.uid, "den": p, "hanh_dong": "cho", "muc_tieu": -1}

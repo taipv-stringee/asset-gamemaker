@@ -1,0 +1,41 @@
+{
+ "_ghi_chu": "Lên ngôi ở núi Bân: Sử liệu. Trận diễn tập và lời thoại: Sáng tạo của game.",
+ "truoc": [
+  {
+   "ai": "",
+   "loi": "Ngày 25 tháng 11 năm Mậu Thân (22/12/1788), núi Bân, kinh thành Phú Xuân.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "",
+   "loi": "Nguyễn Huệ lập đàn tế trời đất, lên ngôi hoàng đế, lấy niên hiệu Quang Trung.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "",
+   "loi": "Ngay trong ngày, đại quân lên đường ra Bắc.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Đường ra Bắc còn dài. Dọc đường, các doanh tập trận với nhau cho quen hiệu lệnh.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Doanh nào giữ được đồn của mình thì thắng. Đánh cho thật, nhưng không ai được giết ai.",
+   "nhan": "Sáng tạo của game"
+  }
+ ],
+ "sau_thang": [
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Hiệu lệnh đã quen. Đi tiếp ra Nghệ An, ở đó sẽ tuyển thêm quân.",
+   "nhan": "Sáng tạo của game",
+   "ghi_chu": "Dừng ở Nghệ An tuyển quân: Sử liệu."
+  }
+ ]
+}

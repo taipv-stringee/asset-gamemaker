@@ -77,6 +77,39 @@ static func stars(mission_id: String) -> int:
 	return n
 
 
+## Gợi ý hướng dẫn đã xem (06 §8: chỉ hiện lần đầu).
+static func hint_seen(id: String) -> bool:
+	return data().get("goi_y", []).has(id)
+
+
+static func mark_hint(id: String) -> void:
+	var d := data()
+	if not d.has("goi_y"):
+		d["goi_y"] = []
+	if not d["goi_y"].has(id):
+		d["goi_y"].append(id)
+		save()
+
+
+## Mở khóa màn theo thứ tự chiến dịch (04): màn mở khi màn chơi được đứng trước nó đã thắng. Màn chưa làm (id rỗng)
+## không chặn. Màn đã thắng luôn mở. `mo_het` (tham số --mo-het, cho kiểm thử) mở tất cả.
+static var unlock_all := false
+
+
+static func mission_unlocked(id: String) -> bool:
+	if id == "":
+		return false
+	if unlock_all or is_won(id):
+		return true
+	var prev := ""
+	for m in Story.campaign():
+		if m["id"] == id:
+			return prev == "" or is_won(prev)
+		if m["id"] != "" and m["so"] != "P":
+			prev = m["id"]
+	return false
+
+
 static func codex_unlocked(id: String) -> bool:
 	return data()["su_lieu"].has(id)
 

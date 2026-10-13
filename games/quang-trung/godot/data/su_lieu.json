@@ -51,6 +51,95 @@
      "url": ""
     }
    ]
+  },
+  {
+   "id": "le_chieu_thong_cau_vien",
+   "nhom": "Sự kiện",
+   "tieu_de": "Lê Chiêu Thống cầu viện nhà Thanh",
+   "nhan": "Sử liệu",
+   "noi_dung": "Mất Thăng Long, vua Lê Chiêu Thống cho mẹ và hoàng tử lên Long Châu (Quảng Tây) xin nhà Thanh cứu viện. Theo tài liệu Thanh, ngày 28 tháng 10 năm Mậu Thân (25/11/1788) Tổng đốc Lưỡng Quảng Tôn Sĩ Nghị cùng Đề đốc Quảng Tây Hứa Thế Hanh dẫn khoảng một vạn quân qua Trấn Nam Quan; một cánh khác từ Vân Nam do Ô Đại Kinh chỉ huy.\n\nTrước sức ép đó, Ngô Văn Sở nghe kế Ngô Thì Nhậm, rút thủy bộ về phòng tuyến Tam Điệp – Biện Sơn và sai người về Phú Xuân báo tin. Phan Văn Lân phản đối, tự đánh ở sông Nguyệt Đức (vùng Thị Cầu) và thua.",
+   "nguon": [
+    {
+     "ten": "Việt Nam sử lược – Nhà Nguyễn Tây Sơn (scov.gov.vn)",
+     "url": "https://scov.gov.vn/dat-nuoc-con-nguoi/viet-nam-su-luoc/tu-chu-thoi-dai-nha-hau-le.-chuong-xi.-nha-nguyen-tay-son.html"
+    },
+    {
+     "ten": "Viện Nghiên cứu Thanh sử, ĐH Nhân dân Trung Quốc",
+     "url": "http://iqh.ruc.edu.cn/old/qdzzsyj/jshd/038e695fde7d472ead2d851973be834c.htm"
+    },
+    {
+     "ten": "Wikipedia: Phan Văn Lân",
+     "url": "https://en.wikipedia.org/wiki/Phan_V%C4%83n_L%C3%A2n"
+    }
+   ]
+  },
+  {
+   "id": "quan_so_quan_thanh",
+   "nhom": "Tranh cãi",
+   "tieu_de": "Quân Thanh có bao nhiêu người?",
+   "nhan": "Sử liệu",
+   "noi_dung": "Các con số chênh nhau rất xa. Tài liệu Thanh ghi khoảng một vạn chính binh cùng 8.000 quân Vân Nam; Nguyễn Duy Chính dựa vào sổ lương cho rằng quân chính quy kể cả viện binh không quá 30.000. Sử Việt truyền thống và báo chí nêu \"29 vạn\" — gấp khoảng 16 lần con số 18.000.\n\nCách giải thích hợp lý: con số cao gộp cả phu dịch, thổ binh, quân Lê và hậu cứ dọc đường, cộng thêm phóng đại; con số thấp chỉ đếm quân chính quy ăn lương. Wikipedia tiếng Việt chọn cách nói thận trọng: quân Thanh đông hơn khoảng 2–3 lần. Game không dùng một con số nào cho quân Thanh.",
+   "nguon": [
+    {
+     "ten": "Nguyễn Duy Chính – Quang Trung đại phá quân Thanh năm 1789 (vietsu.org)",
+     "url": "https://vietsu.org/su-kien/quang-trung-dai-pha-quan-thanh-nam-1789/"
+    },
+    {
+     "ten": "Wikipedia: Battle of Ngọc Hồi-Đống Đa",
+     "url": "https://en.wikipedia.org/wiki/Battle_of_Ng%E1%BB%8Dc_H%E1%BB%93i-%C4%90%E1%BB%91ng_%C4%90a"
+    },
+    {
+     "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
+     "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
+    }
+   ]
+  },
+  {
+   "id": "nui_ban",
+   "nhom": "Địa danh",
+   "tieu_de": "Núi Bân",
+   "nhan": "Sử liệu",
+   "noi_dung": "Núi Bân ở kinh thành Phú Xuân (Huế ngày nay), gần núi Ngự Bình. Ngày 25 tháng 11 năm Mậu Thân (22/12/1788), Nguyễn Huệ lập đàn ở đây tế trời đất, lên ngôi hoàng đế rồi xuất quân ra Bắc ngay.\n\nVài bản ghi ngày 24 là ngày nhận tin cấp báo và ngày 25 là ngày lên ngôi. Đàn tế được kể là lập cạnh núi Ngự Bình.",
+   "nguon": [
+    {
+     "ten": "Thanh Niên – Núi Bân, nơi Quang Trung lên ngôi hoàng đế",
+     "url": "https://thanhnien.vn/nhung-ngon-nui-thieng-nui-ban-noi-quang-trung-len-ngoi-hoang-de-185240915194608861.htm"
+    },
+    {
+     "ten": "Người Kể Sử – Nguyễn Huệ",
+     "url": "https://nguoikesu.com/nhan-vat/nguyen-hue"
+    }
+   ]
+  },
+  {
+   "id": "nien_hieu_quang_trung",
+   "nhom": "Sự kiện",
+   "tieu_de": "Niên hiệu Quang Trung",
+   "nhan": "Sử liệu",
+   "noi_dung": "Khi lên ngôi ở núi Bân, Nguyễn Huệ lấy niên hiệu Quang Trung. Vì vậy sử sách và người đời thường gọi ông là vua Quang Trung, dù Quang Trung là tên niên hiệu chứ không phải tên người.\n\nTrước đó, từ năm 1786, ông mang tước Bắc Bình Vương. Trong game, các cảnh trước lễ lên ngôi gọi ông là Bắc Bình Vương; từ màn này trở đi gọi là Quang Trung.",
+   "nguon": [
+    {
+     "ten": "Thanh Niên – Núi Bân, nơi Quang Trung lên ngôi hoàng đế",
+     "url": "https://thanhnien.vn/nhung-ngon-nui-thieng-nui-ban-noi-quang-trung-len-ngoi-hoang-de-185240915194608861.htm"
+    }
+   ]
+  },
+  {
+   "id": "duong_ra_bac",
+   "nhom": "Sự kiện",
+   "tieu_de": "Đường ra Bắc",
+   "nhan": "Sử liệu",
+   "noi_dung": "Rời Phú Xuân ngày 22/12/1788, đại quân tới Nghệ An ngày 29 tháng 11 (26/12/1788), dừng khoảng mười ngày tuyển quân, duyệt binh, rồi qua Thanh Hóa ra Tam Điệp vào khoảng 20 tháng Chạp (15/01/1789, quy đổi).\n\nCác bài phổ thông ước Phú Xuân – Nghệ An khoảng 350 km và cả chặng tới Tam Điệp khoảng 500 km. Chuyện \"hai người khiêng võng một người nằm\" để đi cho nhanh chỉ có trong bài phổ thông, không thấy dẫn sử liệu gốc (Tương truyền); game không dùng làm cơ chế.",
+   "nguon": [
+    {
+     "ten": "Gò Đống Đa – Quang Trung Nguyễn Huệ và lời hịch vang vọng núi sông",
+     "url": "https://godongda.vn/nghien-cuu-khoa-hoc/quang-trung-nguyen-hue-va-loi-hich-vang-vong-nui-song.html"
+    },
+    {
+     "ten": "vietstamp.net – Quang Trung đại phá quân Thanh",
+     "url": "https://vietstamp.net/vn/chuyen-de/tem-tri-thuc/1000-nam-thang-longha-noi/quang-trung-dai-pha-quan-thanh-giai-phong-thang-long-12-nam-tay-son-o-thang-long-1789-1802/"
+    }
+   ]
   }
  ]
 }

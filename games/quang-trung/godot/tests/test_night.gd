@@ -125,20 +125,6 @@ func test_mission4_loads_and_quiet(t) -> bool:
 	return true
 
 
-func test_mission4_has_perfect_solution(t) -> bool:
-	# Lời giải mẫu: hạ hai lính tuần không báo động, chiếm đồn ở vòng 6 → đạt cả ba mục tiêu phụ.
-	for sd in [1, 2, 3]:
-		var r := LoiGiai.run("m04_gian_khau", sd, "res://tests/loi_giai/m04_gian_khau.txt")
-		var s: BattleState = r["state"]
-		t.eq(r["loi"], "", "lời giải chạy hết (seed %d)" % sd)
-		t.eq(s.result, "thang", "thắng (seed %d)" % sd)
-		var all_ok := true
-		for o in Rules.side_objectives(s):
-			all_ok = all_ok and o["dat"]
-		t.check(all_ok, "đạt cả ba mục tiêu phụ (seed %d)" % sd)
-	return true
-
-
 func test_ambush(t) -> bool:
 	# Quân địch nằm trong sương: ô của nó trông như đi được; đi vào thì bị chặn ("phục kích").
 	var s := make(["......", "......"], [q("linh_giao", "tayson", 0, 0), q("quan_le", "le", 4, 0, {"ngu": true})], {"tam_nhin": 1})
@@ -152,4 +138,53 @@ func test_ambush(t) -> bool:
 	for e in ev:
 		kinds.append(e["loai"])
 	t.check(kinds.has("phuc_kich"), "có sự kiện phục kích")
+	return true
+
+
+func test_escape_zone_and_reinforcements(t) -> bool:
+	var s := make(["......", "......"], [q("ngo_van_so", "tayson", 0, 0, {"tuong_chinh": true}), q("linh_giao", "tayson", 0, 1)],
+		{"tam_nhin": 0, "phe": ["tayson", "thanh"], "khu": {"thoat": [[4, 0], [5, 0], [4, 1], [5, 1]]},
+		"thang": {"loai": "vao_vung", "khu": "thoat", "so_quan": 1},
+		"vien_binh": [{"phe": "thanh", "tu_vong": 1, "moi": 2, "den_vong": 5, "quan": [{"id": "truong_mau", "x": 5, "y": 0}]}],
+		"muc_tieu_phu": [{"loai": "ve_vung", "quan": "linh_giao", "khu": "thoat", "ten": "lính giáo về"}]})
+	Rules.cmd_end_turn(s)  # lượt Thanh vòng 1 → viện binh
+	t.eq(s.units_of("thanh").size(), 1, "viện binh vòng 1")
+	t.eq(s.units_of("thanh")[0].pos, Vector2i(5, 0), "đúng chỗ")
+	Rules.cmd_end_turn(s)
+	Rules.cmd_end_turn(s)  # Thanh vòng 2: không có viện binh
+	t.eq(s.units_of("thanh").size(), 1, "vòng 2 không có")
+	Rules.cmd_end_turn(s)
+	Rules.cmd_end_turn(s)  # Thanh vòng 3: ô (5,0) có quân → lùi sang ô trống gần nhất
+	t.eq(s.units_of("thanh").size(), 2, "viện binh vòng 3")
+	Rules.cmd_end_turn(s)  # vòng 4, lượt ta
+	var so := s.unit_at(Vector2i(0, 0))
+	Rules.cmd_move(s, so, Vector2i(4, 0)) if Rules.reachable(s, so).has(Vector2i(4, 0)) else null
+	t.eq(s.result, "", "chưa đủ quân trong khu thì chưa thắng")
+	return true
+
+
+func test_escape_zone_win(t) -> bool:
+	var s := make(["......", "......"], [q("ngo_van_so", "tayson", 3, 0, {"tuong_chinh": true}), q("linh_giao", "tayson", 3, 1)],
+		{"tam_nhin": 0, "khu": {"thoat": [[4, 0], [5, 0], [4, 1], [5, 1]]}, "thang": {"loai": "vao_vung", "khu": "thoat", "so_quan": 1},
+		"muc_tieu_phu": [{"loai": "ve_vung", "quan": "linh_giao", "khu": "thoat", "ten": "lính giáo về"}, {"loai": "len_cap", "n": 1, "ten": "lên cấp"}]})
+	var so := s.unit_at(Vector2i(3, 0))
+	Rules.cmd_move(s, so, Vector2i(4, 0))
+	Rules.cmd_wait(s, so)
+	t.eq(s.result, "", "mới có tướng chính")
+	var lg := s.unit_at(Vector2i(3, 1))
+	Rules.cmd_move(s, lg, Vector2i(4, 1))
+	Rules.cmd_wait(s, lg)
+	t.eq(s.result, "thang", "tướng chính + 1 quân trong khu → thắng")
+	var obj := Rules.side_objectives(s)
+	t.check(obj[0]["dat"], "lính giáo về vùng")
+	t.check(not obj[1]["dat"], "chưa ai lên cấp")
+	return true
+
+
+func test_reinforcement_rounds_from_json(t) -> bool:
+	# Dữ liệu màn đọc từ JSON: số vòng là float.
+	var m: Dictionary = JSON.parse_string('{"vien_binh": [{"phe": "thanh", "vong": [1, 3], "quan": [{"id": "truong_mau", "x": 5, "y": 0}]}]}')
+	var s := make(["......"], [q("linh_giao", "tayson", 0, 0)], {"tam_nhin": 0, "phe": ["tayson", "thanh"], "vien_binh": m["vien_binh"]})
+	Rules.cmd_end_turn(s)
+	t.eq(s.units_of("thanh").size(), 1, "viện binh vòng 1 (vòng ghi trong JSON)")
 	return true

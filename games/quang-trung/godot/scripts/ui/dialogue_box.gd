@@ -27,7 +27,7 @@ func _init() -> void:
 	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
 	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(dim)
-	var box := UiKit.panel(Color(0.12, 0.04, 0.04, 0.96), 2)
+	var box := UiKit.panel(Color(0.12, 0.04, 0.04, 1.0), 2)
 	box.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	box.offset_left = 8
 	box.offset_right = -8

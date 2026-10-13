@@ -1,0 +1,17 @@
+# Màn 0 — lời giải 2 sao: cả đoàn rút theo đường, lính giáo đi cuối chặn hậu (quân Thanh qua cầu một ô một, kẹt lại
+# sau lính giáo). Mỗi vòng Phan Văn Lân đi trước để vào cửa núi trước khi đủ quân (đủ Ngô Văn Sở + 4 quân là thắng ngay).
+toi_loai phan_van_lan 4 15
+rut 4 15
+het
+toi_loai phan_van_lan 4 15
+rut 4 15
+het
+toi_loai phan_van_lan 4 15
+rut 4 15
+het
+toi_loai phan_van_lan 4 15
+rut 4 15
+het
+toi_loai phan_van_lan 4 15
+rut 4 15
+het

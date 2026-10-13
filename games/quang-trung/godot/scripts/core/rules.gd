@@ -475,7 +475,10 @@ static func cmd_attack(state: BattleState, u: Unit, target: Unit) -> Array[Dicti
 				ev.append_array(_defeat(state, u))
 	for x in [u, target]:
 		if x.hp > 0 and state.units.has(x):
-			ev.append_array(_check_level(x))
+			var lv := _check_level(x)
+			if not lv.is_empty() and x.faction == state.factions[0]:
+				state.flags["cap_cao_nhat"] = maxi(int(state.flags.get("cap_cao_nhat", 0)), x.level)
+			ev.append_array(lv)
 	u.done = true
 	ev.append_array(check_result(state))
 	return ev
@@ -539,6 +542,7 @@ static func cmd_wait(state: BattleState, u: Unit) -> Array[Dictionary]:
 	u.moved = true
 	u.done = true
 	ev.append({"loai": "cho", "uid": u.uid})
+	ev.append_array(check_result(state))
 	return ev
 
 
@@ -656,6 +660,7 @@ static func start_turn(state: BattleState) -> Array[Dictionary]:
 		u.khoa_hoan_tac = false
 		u.than_trong = false
 	ev.append_array(_dawn(state))
+	ev.append_array(_reinforcements(state, f))
 	if f != state.factions[0]:
 		ev.append_array(_alarm(state, f))
 	# Quân tan hết hạn đầu lượt Tây Sơn của vòng N + 2 (02 §8).
@@ -769,6 +774,10 @@ static func side_objectives(state: BattleState) -> Array[Dictionary]:
 				ok = state.result == "thang" and state.flags["mat_quan"].is_empty()
 			"hang_binh_toi_thieu":
 				ok = state.result == "thang" and int(state.flags.get("hang_binh", 0)) >= int(o["n"])
+			"len_cap":
+				ok = state.result == "thang" and int(state.flags.get("cap_cao_nhat", 0)) >= int(o.get("n", 1))
+			"ve_vung":
+				ok = state.result == "thang" and _type_in_zone(state, o["quan"], o["khu"])
 		out.append({"ten": o.get("ten", ""), "dat": ok})
 	return out
 
@@ -799,12 +808,71 @@ static func side_objectives_live(state: BattleState) -> Array[Dictionary]:
 			"hang_binh_toi_thieu":
 				if int(state.flags.get("hang_binh", 0)) >= int(o["n"]):
 					st = "dat" if won else "dang"
+			"len_cap":
+				if int(state.flags.get("cap_cao_nhat", 0)) >= int(o.get("n", 1)):
+					st = "dat" if won else "dang"
+			"ve_vung":
+				if int(state.flags["mat_quan"].get(o["quan"], 0)) > 0:
+					st = "hong"
+				elif won:
+					st = "dat" if _type_in_zone(state, o["quan"], o["khu"]) else "hong"
 		if st == "dang" and won:
 			st = "dat"
 		if st == "dang" and lost_game:
 			st = "hong"
 		out.append({"ten": o.get("ten", ""), "trang_thai": st})
 	return out
+
+
+static func _type_in_zone(state: BattleState, type_id: String, zone_name: String) -> bool:
+	var zone: Array = state.zones.get(zone_name, [])
+	for u in state.units_of(state.factions[0]):
+		if u.type_id == type_id and zone.has(u.pos):
+			return true
+	return false
+
+
+## Viện binh theo kịch bản (04, màn 0): mỗi mục {"phe", "vong": [..] hoặc "tu_vong"/"moi"/"den_vong", "quan": [{id, x, y, ai}]}.
+## Đầu lượt của phe đó; ô đã có quân thì lùi sang ô trống gần nhất đi được.
+static func _reinforcements(state: BattleState, f: String) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	for r in state.mission.get("vien_binh", []):
+		if r.get("phe", "") != f:
+			continue
+		var rounds: Array = []
+		for v in r.get("vong", []):
+			rounds.append(int(v))   # JSON đọc số thành float: 1.0 != 1 với Array.has
+		if rounds.is_empty() and r.has("tu_vong"):
+			var v := int(r["tu_vong"])
+			while v <= int(r.get("den_vong", 99)):
+				rounds.append(v)
+				v += int(r.get("moi", 1))
+		if not rounds.has(state.vong):
+			continue
+		for q in r.get("quan", []):
+			var want := Vector2i(int(q["x"]), int(q["y"]))
+			var at := _free_tile_near(state, want)
+			if at.x < 0:
+				continue
+			var u := state.spawn_unit(q["id"], f, at)
+			u.ai_mode = q.get("ai", "tan_cong")
+			u.ngoai_gioi_han = true
+			u.done = false
+			ev.append({"loai": "vien_binh", "uid": u.uid, "o": at})
+	return ev
+
+
+static func _free_tile_near(state: BattleState, want: Vector2i) -> Vector2i:
+	for r in 4:
+		for dy in range(-r, r + 1):
+			for dx in range(-r, r + 1):
+				if absi(dx) + absi(dy) != r:
+					continue
+				var p := want + Vector2i(dx, dy)
+				if state.in_bounds(p) and state.unit_at(p) == null and int(state.terrain_at(p)["chi_phi"]["bo"]) > 0 \
+						and state.object_at(p).get("loai", "") != "quan_tan":
+					return p
+	return Vector2i(-1, -1)
 
 
 static func check_result(state: BattleState) -> Array[Dictionary]:
@@ -820,6 +888,18 @@ static func check_result(state: BattleState) -> Array[Dictionary]:
 			ok = state.owner_of(p) == player
 		"ha_het":
 			ok = state.enemies_of(player).is_empty()
+		"vao_vung":
+			# Tướng chính và ít nhất `so_quan` quân khác của ta cùng đứng trong khu (02 §12; màn 0).
+			var zone: Array = state.zones.get(win["khu"], [])
+			var general_in := false
+			var others := 0
+			for u in state.units_of(player):
+				if zone.has(u.pos):
+					if u.tuong_chinh:
+						general_in = true
+					else:
+						others += 1
+			ok = general_in and others >= int(win.get("so_quan", 0))
 	if ok:
 		state.result = "thang"
 		state.won_round = state.vong

@@ -38,6 +38,8 @@ var story_mode := false           # trong chiến dịch: tự lưu, kết quả
 var pause_panel: Panel
 var recruit_panel: Panel
 var input_locked := false         # đang có hội thoại phủ lên trận
+var hint_panel: Panel
+var _hint_queue: Array = []
 
 var terrain_layer: TileMapLayer
 var objects_layer: Node2D
@@ -87,6 +89,61 @@ func start_from_state(s: BattleState) -> void:
 		_run_ai_turns()
 	else:
 		_autosave()
+
+
+# ================================================================ gợi ý hướng dẫn (06 §8)
+# Màn khai báo "goi_y": [{"khi": "bat_dau|chon_quan|sau_di|du_bao|mua_linh|len_cap|vong", "n": vòng, "loi": "..."}].
+# Mỗi gợi ý hiện một lần (lưu trong tiến trình), không chặn bản đồ; xem lại trong bảng tạm dừng. Chỉ hiện trong chiến dịch.
+
+func hint(trigger: String, n := 0) -> void:
+	if not story_mode:
+		return
+	var list: Array = state.mission.get("goi_y", [])
+	for i in list.size():
+		var h: Dictionary = list[i]
+		if h.get("khi", "") != trigger or (trigger == "vong" and int(h.get("n", 0)) != n):
+			continue
+		var id := "%s/%d" % [state.mission_id, i]
+		if Progress.hint_seen(id) or _hint_queue.has(id):
+			continue
+		_hint_queue.append(id)
+	_show_next_hint()
+
+
+func _show_next_hint() -> void:
+	if hint_panel != null or _hint_queue.is_empty():
+		return
+	var id: String = _hint_queue.pop_front()
+	var idx := int(id.get_slice("/", 1))
+	var text: String = state.mission["goi_y"][idx]["loi"]
+	hint_panel = _panel(Color(0.08, 0.1, 0.16, 0.95))
+	hint_panel.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	hint_panel.offset_left = 8
+	hint_panel.offset_right = -8
+	hint_panel.offset_top = TOP_H + 6
+	hud.get_child(0).add_child(hint_panel)
+	var row := HBoxContainer.new()
+	row.set_anchors_preset(Control.PRESET_FULL_RECT)
+	row.offset_left = 10
+	row.offset_right = -6
+	row.offset_top = 6
+	row.offset_bottom = -6
+	row.add_theme_constant_override("separation", 8)
+	hint_panel.add_child(row)
+	var l := UiKit.wrap_label(text, UiKit.FS_SMALL, Color(0.92, 0.95, 1.0))
+	l.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(l)
+	var ok := UiKit.button("Đã hiểu", func() -> void:
+		Progress.mark_hint(id)
+		hint_panel.queue_free()
+		hint_panel = null
+		_show_next_hint(), UiKit.FS_SMALL, 70)
+	ok.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	row.add_child(ok)
+	# Chiều cao theo chữ (tối đa 5 dòng).
+	await get_tree().process_frame
+	if hint_panel != null:
+		hint_panel.offset_bottom = TOP_H + 6 + minf(row.get_combined_minimum_size().y + 12, 140)
 
 
 func _autosave() -> void:
@@ -498,7 +555,8 @@ func _faction_name(f: String) -> String:
 func _show_idle_info() -> void:
 	portrait.texture = null
 	name_label.text = "Lượt của %s" % _faction_name(state.current_faction())
-	info_label.text = "Chạm một quân để chọn. Chạm đồn trống của ta để mua lính. Kéo để xem bản đồ."
+	var can_buy: bool = not state.buyable.get(PLAYER, PackedStringArray()).is_empty()
+	info_label.text = "Chạm một quân để chọn.%s Kéo để xem bản đồ." % (" Chạm đồn trống của ta để mua lính." if can_buy else "")
 	_set_buttons([])
 
 
@@ -612,6 +670,7 @@ func _tap_idle(p: Vector2i, u: Unit) -> void:
 
 func _select(u: Unit) -> void:
 	Sfx.play("chon", -4.0)
+	hint("chon_quan")
 	selected = u
 	reach = Rules.reachable(state, u, true)
 	targets = Rules.targets_from(state, u, u.pos, false)
@@ -668,6 +727,7 @@ func _do_move(p: Vector2i) -> void:
 	reach = {}
 	_refresh_top()  # bật lại nút Hết lượt (bị tắt trong lúc BUSY)
 	_show_actions()
+	hint("sau_di")
 
 
 func _show_actions() -> void:
@@ -711,6 +771,7 @@ func _tap_moved(p: Vector2i, u: Unit) -> void:
 
 
 func _open_forecast(t: Unit) -> void:
+	hint("du_bao")
 	forecast_target = t
 	mode = Mode.FORECAST
 	var fc := Rules.forecast(state, selected, selected.pos, t, selected.straight_steps)
@@ -745,6 +806,7 @@ func _run(ev: Array[Dictionary]) -> void:
 ## Bảng mua lính (06 §4): hình, giá, chỉ số, đặc tính; không đủ vàng / đủ quân thì mờ.
 func _show_recruit(p: Vector2i) -> void:
 	_close_recruit()
+	hint("mua_linh")
 	portrait.texture = null
 	name_label.text = "Mua lính — %d vàng" % int(state.gold.get(PLAYER, 0))
 	info_label.text = "Quân: %d/%d. Lính mới đứng ở đồn, đi được từ lượt sau." % [state.count_toward_limit(PLAYER), int(state.limits.get(PLAYER, 0))]
@@ -860,6 +922,7 @@ func _run_ai_turns() -> void:
 	_show_idle_info()
 	_refresh_all()
 	_autosave()
+	hint("vong", state.vong)
 
 
 # ================================================================ hoạt cảnh
@@ -910,6 +973,14 @@ func _play(events: Array[Dictionary]) -> void:
 					tw.tween_property(s, "modulate:a", 0.0, 0.3)
 					await tw.finished
 					s.queue_free()
+			"vien_binh":
+				var vu := state.unit_by_uid(e["uid"])
+				if vu != null and not sprites.has(vu.uid):
+					var vs := _add_sprite(vu)
+					vs.modulate.a = 0.0
+					create_tween().tween_property(vs, "modulate:a", 1.0, 0.3)
+					if _shown(vu):
+						_show_banner("Viện binh %s!" % _faction_name(vu.faction), Color(1, 0.6, 0.5))
 			"mua", "chieu_hang":
 				Sfx.play("mua", -4.0)
 				var nu := state.unit_by_uid(e.get("uid_moi", e["uid"]))
@@ -919,6 +990,9 @@ func _play(events: Array[Dictionary]) -> void:
 					create_tween().tween_property(s, "modulate:a", 1.0, 0.25)
 			"len_cap":
 				Sfx.play("len_cap", -3.0)
+				var lu := state.unit_by_uid(e["uid"])
+				if lu != null and lu.faction == PLAYER:
+					hint("len_cap")
 				var s: UnitSprite = sprites.get(e["uid"])
 				if s != null:
 					_float_text(s.position + Vector2(0, -6), "Lên cấp!", C_GOLD_LIGHT)
@@ -1139,6 +1213,11 @@ func _toggle_pause() -> void:
 		col.add_child(UiKit.label("Mục tiêu phụ", UiKit.FS_HEAD, C_GOLD, true))
 		for o in objs:
 			col.add_child(_objective_line(o["ten"], o["trang_thai"]))
+	var hints: Array = state.mission.get("goi_y", [])
+	if not hints.is_empty():
+		col.add_child(UiKit.label("Gợi ý", UiKit.FS_HEAD, C_GOLD, true))
+		for h in hints:
+			col.add_child(UiKit.wrap_label("• " + h["loi"], UiKit.FS_SMALL, Color(0.88, 0.9, 0.96)))
 	var row: HBoxContainer = pc[2]
 	row.add_child(UiKit.button("Tiếp tục", _toggle_pause))
 	if story_mode:

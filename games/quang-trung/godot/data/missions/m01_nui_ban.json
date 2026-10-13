@@ -1,0 +1,210 @@
+{
+ "id": "m01_nui_ban",
+ "so": 1,
+ "ten": "Núi Bân: hành quân",
+ "ten_ngan": "Núi Bân",
+ "ngay": "Ngày 25 tháng 11 năm Mậu Thân (22/12/1788)",
+ "dia_danh": "Núi Bân (Phú Xuân, gần núi Ngự Bình) – đường thiên lý ra Bắc",
+ "gioi_thieu": "Nhận tin cấp báo, Nguyễn Huệ lập đàn tế trời đất ở núi Bân, lên ngôi hoàng đế, lấy niên hiệu Quang Trung và xuất quân ra Bắc ngay trong ngày.",
+ "nhan_gioi_thieu": "Sử liệu",
+ "muc_tieu_chinh": "Quang Trung chiếm đồn của doanh bạn (phía bắc) trước khi hết vòng 15.",
+ "dieu_kien_thua": "Quang Trung bị loại, hoặc hết vòng 15.",
+ "hoi_thoai": "m01_nui_ban",
+ "nhac": "chu_de",
+ "ghi_chu": "Trận diễn tập giữa hai doanh trên đường ra Bắc là Sáng tạo của game (04 §Màn 1): không có trận đánh lịch sử ở đây nên không bịa kẻ thù. Quân về 0 máu là bị loại, không để lại quân tan.",
+ "ban_do": [
+  "^t..=..t^",
+  "t..DFD..t",
+  "...l=l...",
+  "rr..=..rr",
+  "rrh.=.hrr",
+  "t...=...t",
+  ".tt.=.tt.",
+  "h...=...h",
+  "rr.h=h.rr",
+  "rr..=..rr",
+  "..t.=.t..",
+  "h...=...h",
+  "rr.t=t.rr",
+  "rr..=..rr",
+  ".h..=..h.",
+  "t...=...t",
+  "rrh.=.hrr",
+  "...l=l...",
+  "t..DFD..t",
+  "^t..=..t^"
+ ],
+ "chu_o": {
+  "4,18": "tayson",
+  "4,1": "dien_tap"
+ },
+ "phe": [
+  "tayson",
+  "dien_tap"
+ ],
+ "vang": {
+  "tayson": 300,
+  "dien_tap": 150
+ },
+ "gioi_han": {
+  "tayson": 10,
+  "dien_tap": 10
+ },
+ "mua_duoc": {
+  "tayson": [
+   "linh_giao",
+   "hoa_mai"
+  ],
+  "dien_tap": [
+   "linh_giao"
+  ]
+ },
+ "quan": [
+  {
+   "id": "quang_trung",
+   "phe": "tayson",
+   "x": 4,
+   "y": 17,
+   "tuong_chinh": true
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 3,
+   "y": 16
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 5,
+   "y": 16
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 4,
+   "y": 15
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 2,
+   "y": 17
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 6,
+   "y": 17
+  },
+  {
+   "id": "quan_giu_don",
+   "phe": "dien_tap",
+   "x": 4,
+   "y": 1,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    1
+   ],
+   "ban_kinh": 2
+  },
+  {
+   "id": "linh_giao",
+   "phe": "dien_tap",
+   "x": 4,
+   "y": 3,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    2
+   ],
+   "ban_kinh": 3
+  },
+  {
+   "id": "linh_giao",
+   "phe": "dien_tap",
+   "x": 2,
+   "y": 6,
+   "ai": "tan_cong"
+  },
+  {
+   "id": "linh_giao",
+   "phe": "dien_tap",
+   "x": 6,
+   "y": 6,
+   "ai": "tan_cong"
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "dien_tap",
+   "x": 5,
+   "y": 4,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    2
+   ],
+   "ban_kinh": 4
+  }
+ ],
+ "thang": {
+  "loai": "chiem_o",
+  "o": [
+   4,
+   1
+  ]
+ },
+ "thua_het_luot": 15,
+ "ly_do_het_luot": "Hết vòng 15: doanh bạn giữ được đồn.",
+ "muc_tieu_phu": [
+  {
+   "loai": "len_cap",
+   "n": 1,
+   "ten": "Một quân lên cấp 1"
+  },
+  {
+   "loai": "truoc_luot",
+   "n": 10,
+   "ten": "Thắng trước vòng 10"
+  }
+ ],
+ "goi_y": [
+  {
+   "khi": "bat_dau",
+   "loi": "Trận diễn tập: quân về 0 máu thì bị loại khỏi trận, không ai chết thật. Đưa Quang Trung vào đồn phía bắc là thắng."
+  },
+  {
+   "khi": "chon_quan",
+   "loi": "Mỗi loại ô tốn điểm đi khác nhau: đường, cỏ 1; ruộng, đồi, rừng tre 2. Đứng ở đồi, rừng tre được thêm thủ."
+  },
+  {
+   "khi": "mua_linh",
+   "loi": "Mua lính ở đồn của ta khi đồn trống. Đồn cho 50 vàng mỗi lượt. Lính mới phải chờ đến lượt sau mới đi được."
+  },
+  {
+   "khi": "vong",
+   "n": 2,
+   "loi": "Quang Trung có Uy danh: quân ta đứng kề ông được thêm 5 công."
+  },
+  {
+   "khi": "vong",
+   "n": 3,
+   "loi": "Chạm vào đồn trống của ta (phía nam) để mua lính giáo, hỏa mai."
+  },
+  {
+   "khi": "len_cap",
+   "loi": "Lên cấp! Mỗi cấp +3 công, +2 thủ và hồi 10 máu. Quân có cấp đáng được giữ lại."
+  },
+  {
+   "khi": "vong",
+   "n": 5,
+   "loi": "Chỉ tướng mới chiếm được đồn. Mở đường cho Quang Trung lên đồn phía bắc."
+  }
+ ],
+ "su_lieu": [
+  "nui_ban",
+  "nien_hieu_quang_trung",
+  "duong_ra_bac"
+ ]
+}

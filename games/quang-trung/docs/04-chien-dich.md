@@ -45,6 +45,10 @@ Mỗi điểm ghi ngày âm và dương lịch.
 - **Mua lính**: không. Vàng 0. Giới hạn 10.
 - **Địch**: tiền quân Thanh (trường mâu, điểu thương) từ mép bắc, quân Lê dẫn đường; viện binh 2 quân mỗi 2 vòng (chế độ *Tấn công*).
 - **Thắng**: Ngô Văn Sở và ≥ 4 quân khác vào vùng thắng trước khi hết lượt 12. **Thua**: Sở bị hạ; hết lượt 12.
+- **Đã dựng** (`data/missions/m00_tam_diep.json`): sông và **cầu một ô** ở bắc (Lân + 2 lính giáo bên kia cầu), đường thiên lý một ô
+  giữa ruộng (đi chậm, dễ tắc), cửa núi 2 hàng cuối. Viện binh: vòng 2 tiền quân Thanh + quân Lê ở mép bắc; vòng 3 quân Lê tạt sườn
+  tây, vòng 5 quân Thanh tạt sườn đông; từ vòng 4 mỗi 2 vòng thêm trường mâu + điểu thương. Lời giải mẫu 2 sao:
+  `tests/loi_giai/m00_tam_diep.txt` (rút theo đường, lính giáo chặn hậu, Lân đi trước để vào núi trước khi đủ quân).
 - **Mục tiêu phụ**: Phan Văn Lân về tới vùng thắng; không mất quân nào.
 - **Hướng dẫn**: chọn quân, đi, hoàn tác, đánh, phản đòn, vùng khống chế.
 - **Truyện**: Lân muốn đánh, Sở và Nhậm thuyết phục rút. Sau màn: sai người vào Phú Xuân báo tin *[Theo HLNTC]*.
@@ -62,6 +66,8 @@ Mỗi điểm ghi ngày âm và dương lịch.
   `mua_duoc`: linh_giao, hoa_mai.
 - **Địch (Diễn tập)**: 4 lính giáo, 2 hỏa mai, 1 `quan_giu_don` (mặc quân phục Tây Sơn màu sẫm); đồn bắc có 200 vàng để mua lính giáo.
 - **Thắng**: Quang Trung chiếm đồn bắc trước khi hết lượt 15.
+- **Đã dựng** (`data/missions/m01_nui_ban.json`), giảm quân phe Diễn tập so với phác thảo cho hợp màn hướng dẫn: quan giữ đồn,
+  3 lính giáo (2 tiến xuống, 1 giữ đồn), 1 hỏa mai; 150 vàng. Lời giải mẫu 2 sao thắng ở vòng 9: `tests/loi_giai/m01_nui_ban.txt`.
 - **Mục tiêu phụ**: một quân lên cấp 1; thắng trước lượt 10.
 - **Hướng dẫn**: chi phí địa hình, thủ địa hình, mua lính, cấp bậc, uy danh.
 - **Mở Sử liệu**: núi Bân, niên hiệu Quang Trung, quãng đường Phú Xuân – Nghệ An.

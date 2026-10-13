@@ -52,7 +52,7 @@ Chạy: `GODOT --path . -- --man=m04_gian_khau --kich-ban=res://tests/kich_ban/d
 
 ## tron_m04.txt (đi qua menu, chơi trọn màn 4) — giá trị mong đợi
 
-Chạy: `GODOT --path . -- --menu --moi --seed=1 --kich-ban=res://tests/kich_ban/tron_m04.txt`
+Chạy: `GODOT --path . -- --menu --moi --mo-het --seed=1 --kich-ban=res://tests/kich_ban/tron_m04.txt`
 (`--moi` xóa tiến trình và file lưu trước khi chạy; `--menu` đi qua menu thay vì vào thẳng trận.)
 
 | Dòng | Mong đợi |

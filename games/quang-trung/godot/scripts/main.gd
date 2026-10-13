@@ -7,6 +7,7 @@ extends Node
 ##   --vong=<n>          khi tự động: chụp khi tới vòng n
 ##   --kich-ban=<file>   chạy kịch bản chạm (xem tests/kich_ban/README.md), mỗi bước có thể chụp ảnh
 ##   --moi               xóa tiến trình và file lưu trước khi chạy (kiểm thử từ đầu)
+##   --mo-het            mở khóa mọi màn đã làm (kiểm thử)
 ##   --menu              vẫn đi qua menu (dùng kèm --kich-ban để kiểm thử menu, hội thoại, lưu)
 ## Không có tham số nào: vào menu chính như người chơi.
 
@@ -29,6 +30,7 @@ func _ready() -> void:
 	var args := _args()
 	_seed = int(args.get("seed", "0"))
 	_auto = args.has("tu-dong")
+	Progress.unlock_all = args.has("mo-het")
 	if args.has("moi"):
 		Progress.clear_battle()
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(Progress.PROGRESS_PATH))
@@ -103,6 +105,9 @@ func _start_story_battle(id: String) -> void:
 	_set_screen(null)
 	_new_battle()
 	await _dialogue(Story.dialogue(battle.state.mission.get("hoi_thoai", ""), "truoc"))
+	if battle != null:
+		battle.hint("bat_dau")
+		battle.hint("vong", battle.state.vong)
 
 
 func _continue() -> void:

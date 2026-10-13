@@ -1,5 +1,5 @@
 # Toàn bộ màn 4 qua menu và giao diện chạm, theo lời giải mẫu tests/loi_giai/m04_gian_khau.txt.
-# Chạy: GODOT --path . -- --menu --moi --seed=1 --kich-ban=res://tests/kich_ban/tron_m04.txt
+# Chạy: GODOT --path . -- --menu --moi --mo-het --seed=1 --kich-ban=res://tests/kich_ban/tron_m04.txt
 # (tạo từ lời giải mẫu: mỗi "di/danh/chiem/mua/het" thành các lần chạm tương ứng)
 kiem man_hinh
 anh menu.png

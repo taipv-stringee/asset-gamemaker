@@ -64,11 +64,15 @@ games/quang-trung/
 | **Hội thoại** | File CSV: `id, nguoi_noi, bieu_cam, khoa_chu, lenh`. Chữ lấy qua `tr(khoa_chu)` để dịch về sau. Bộ chạy hội thoại tự viết (nhu cầu đơn giản: chân dung, tên, chữ, vài lệnh camera) |
 | **Sử liệu** | Mỗi mục một file, có `id`, `nhom`, `nhan_nguon` (`su_lieu` / `hlntc` / `tuong_truyen` / `sang_tao`), `nguon[]`, điều kiện mở |
 | **Lưu** | Xem §3.4 |
-| **Âm thanh** | Autoload `Audio`, hai bus Nhạc / Hiệu ứng |
+| **Âm thanh** | Autoload `AmThanh` (`scripts/core/am_thanh.gd`), hai bus `Nhac` / `HieuUng`; gọi qua lớp tĩnh `Sfx` để test headless không cần autoload |
 
 ### 3.3. Autoload
 
 `Game` (tiến trình chiến dịch, cài đặt), `Save`, `Audio`, `Data` (nạp CSV lúc khởi động, kiểm tra lỗi dữ liệu).
+
+**Đã làm (M2)**: chỉ một autoload `AmThanh`. Dữ liệu (`GameData`), tiến trình và file lưu (`Progress`), dữ liệu truyện (`Story`)
+là lớp tĩnh nạp lười — dùng được trong test headless (`-s`) mà không cần cây cảnh. Luồng màn hình (menu → chiến dịch → giới thiệu
+màn → trận → kết quả) do `scripts/main.gd` điều khiển; các màn hình ở `scripts/ui/`.
 
 ### 3.4. Lưu game
 
@@ -79,6 +83,10 @@ games/quang-trung/
 - Ghi an toàn: ghi ra `*.tmp` → đổi tên; giữ một bản `.bak`.
 - Chỉ lưu ở **ranh giới lệnh**: đầu lượt người chơi, và khi app xuống nền (`NOTIFICATION_APPLICATION_PAUSED`). Nếu app xuống nền giữa lượt máy,
   lưu trạng thái đầu lượt máy đó; mở lại thì chạy lại lượt máy (kết quả không đổi nhờ RNG theo hash, 02 §4.5).
+- **Đã làm (M2)**: một khe chiến dịch (`user://luu_tran.txt`, `var_to_str`) + tiến trình (`user://tien_trinh.json`: màn đã thắng,
+  mục tiêu phụ tốt nhất, Sử liệu đã mở — chỉ chứa chuỗi/bool/số nhỏ nên JSON được). Ghi qua `.tmp` + `.bak`. Khi app xuống nền giữa
+  lượt máy hiện đang lưu trạng thái lúc đó (không phải đầu lượt máy); mở lại thì máy đi tiếp các quân còn lại — hợp lệ nhưng chưa
+  đúng ý "chạy lại cả lượt". Khe "chơi lại" chưa làm: chơi lại màn đã thắng hiện dùng chung khe chiến dịch.
 
 ## 4. Độ phân giải và phóng to
 

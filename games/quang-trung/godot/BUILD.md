@@ -73,7 +73,21 @@ khai báo keystore phát hành (không commit keystore vào repo), rồi `--expo
    `scons platform=ios target=template_debug arch=arm64 simulator=yes`.
 5. Biểu tượng: `assets/icon/icon_1024.png` (sinh bằng `tools/gen_icon.py`) đã gán cho project và preset iOS.
 
-## 7. Sau khi build
+## 7. Tạo lại hình và âm thanh (không bắt buộc)
+
+Hình, nhạc, tiếng trong `assets/` đều sinh bằng code và đã commit sẵn; chỉ chạy lại khi sửa công cụ. Cần Python 3 + Pillow + numpy,
+và ffmpeg có libvorbis (cho nhạc .ogg). Chạy ở thư mục `games/quang-trung/`:
+
+```bash
+python3 tools/gen_placeholders.py   # hình quân, ô bản đồ, giao diện tạm
+python3 tools/gen_objects.py        # trống báo động, đèn
+python3 tools/gen_icon.py           # biểu tượng app
+python3 tools/gen_audio.py          # nhạc (chủ đề, đêm, thắng, thua) + 19 tiếng hiệu ứng, khoảng 15 giây
+```
+
+Sau đó mở lại Godot (hoặc `GODOT --headless --path . --import`) để nhập lại.
+
+## 8. Sau khi build
 
 - Ghi lại: phiên bản Godot, commit (`git rev-parse --short HEAD`), máy thử, kết quả test.
 - Làm theo [TESTING.md](TESTING.md) và gửi kết quả cho chủ dự án / Claude.

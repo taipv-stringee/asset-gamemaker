@@ -64,6 +64,7 @@ func _close_battle() -> void:
 
 func _show_menu() -> void:
 	_close_battle()
+	Sfx.music("chu_de")
 	var m := MainMenu.new()
 	m.continue_pressed.connect(_continue)
 	m.campaign_pressed.connect(_show_campaign)

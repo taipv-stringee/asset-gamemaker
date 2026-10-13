@@ -77,6 +77,7 @@ static func button(text: String, cb: Callable, size: int = 12, min_w: int = 44) 
 	b.add_theme_color_override("font_color", C_GOLD_LIGHT)
 	b.add_theme_color_override("font_disabled_color", Color(0.5, 0.42, 0.36))
 	b.custom_minimum_size = Vector2(min_w, 32)
+	b.pressed.connect(func() -> void: Sfx.play("cham", -6.0))
 	b.pressed.connect(cb)
 	return b
 

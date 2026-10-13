@@ -51,6 +51,7 @@ func _show_list() -> void:
 
 
 func _show_entry(e: Dictionary) -> void:
+	Sfx.play("lat_trang", -4.0)
 	_clear()
 	var col := UiKit.scroll_column(_body, 16, 60)
 	col.add_child(UiKit.label(e.get("nhom", ""), 10, UiKit.C_MUTED, true))

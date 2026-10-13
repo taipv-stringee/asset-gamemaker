@@ -11,6 +11,10 @@ run/main_scene="res://scenes/main.tscn"
 config/icon="res://assets/icon/icon_1024.png"
 config/features=PackedStringArray("4.7", "Mobile")
 
+[autoload]
+
+AmThanh="*res://scripts/core/am_thanh.gd"
+
 [display]
 
 window/size/viewport_width=288

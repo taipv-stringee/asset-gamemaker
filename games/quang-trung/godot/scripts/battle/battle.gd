@@ -82,6 +82,7 @@ func start_from_state(s: BattleState) -> void:
 	_refresh_all()
 	_center_camera_on(_first_unit_pos())
 	_show_banner("Lượt Tây Sơn · vòng %d" % state.vong)
+	Sfx.music(state.mission.get("nhac", "chu_de"))
 	if auto_play or state.current_faction() != PLAYER:
 		_run_ai_turns()
 	else:
@@ -390,6 +391,7 @@ func _button(text: String, cb: Callable) -> Button:
 	b.add_theme_stylebox_override("focus", normal)
 	b.add_theme_color_override("font_color", C_GOLD_LIGHT)
 	b.custom_minimum_size = Vector2(44, 26)
+	b.pressed.connect(func() -> void: Sfx.play("cham", -6.0))
 	b.pressed.connect(cb)
 	return b
 
@@ -579,6 +581,7 @@ func _tap_idle(p: Vector2i, u: Unit) -> void:
 
 
 func _select(u: Unit) -> void:
+	Sfx.play("chon", -4.0)
 	selected = u
 	reach = Rules.reachable(state, u, true)
 	targets = Rules.targets_from(state, u, u.pos, false)
@@ -839,6 +842,8 @@ func _play(events: Array[Dictionary]) -> void:
 						s.position = Vector2(path[-1] * T)
 						continue
 				if s != null:
+					if mu != null and e["duong"].size() > 1:
+						Sfx.play("voi_buoc" if mu.has_tag("voi") else "di", -6.0)
 					var tw := create_tween()
 					for p in e["duong"].slice(1):
 						tw.tween_property(s, "position", Vector2(p * T), 0.07)
@@ -847,6 +852,7 @@ func _play(events: Array[Dictionary]) -> void:
 				var a: UnitSprite = sprites.get(e["uid"])
 				var d: UnitSprite = sprites.get(e["muc_tieu"])
 				if a != null and d != null:
+					_attack_sound(e)
 					var dir := (d.position - a.position).normalized() * 5.0
 					var home := a.position
 					var tw := create_tween()
@@ -860,6 +866,8 @@ func _play(events: Array[Dictionary]) -> void:
 					await get_tree().create_timer(0.25).timeout
 			"ha":
 				var s: UnitSprite = sprites.get(e["uid"])
+				if s != null and s.visible:
+					Sfx.play("ha", -3.0)
 				if s != null:
 					sprites.erase(e["uid"])
 					var tw := create_tween()
@@ -867,21 +875,27 @@ func _play(events: Array[Dictionary]) -> void:
 					await tw.finished
 					s.queue_free()
 			"mua", "chieu_hang":
+				Sfx.play("mua", -4.0)
 				var nu := state.unit_by_uid(e.get("uid_moi", e["uid"]))
 				if nu != null and not sprites.has(nu.uid):
 					var s := _add_sprite(nu)
 					s.modulate.a = 0.0
 					create_tween().tween_property(s, "modulate:a", 1.0, 0.25)
 			"len_cap":
+				Sfx.play("len_cap", -3.0)
 				var s: UnitSprite = sprites.get(e["uid"])
 				if s != null:
 					_float_text(s.position + Vector2(0, -6), "Lên cấp!", C_GOLD_LIGHT)
+			"chiem":
+				Sfx.play("chiem", -3.0)
 			"vang":
 				if e["phe"] == PLAYER:
+					Sfx.play("vang", -8.0)
 					_float_text(camera.position + Vector2(_view_size().x - 70, TOP_H + 4), "+%d vàng" % e["them"], C_GOLD_LIGHT)
 			"bat_dau_luot":
 				_refresh_top()
 			"bao_dong":
+				Sfx.play("bao_dong", -2.0)
 				var who := state.unit_by_uid(e["uid"])
 				if who != null and _shown(who) and sprites.has(who.uid):
 					_float_text(sprites[who.uid].position + Vector2(-4, -6), "Báo động!", Color(1, 0.35, 0.3))
@@ -889,9 +903,11 @@ func _play(events: Array[Dictionary]) -> void:
 					_show_banner("Có tiếng hô báo động trong đêm!")
 				await get_tree().create_timer(0.5).timeout
 			"trong_bao_dong":
+				Sfx.play("trong_bao_dong")
 				_show_banner("Trống báo động! Cả đồn đã thức.")
 				await _shake(0.6)
 			"phuc_kich":
+				Sfx.play("phuc_kich")
 				_update_night()
 				var foe: UnitSprite = sprites.get(e["dich"])
 				if foe != null:
@@ -899,6 +915,7 @@ func _play(events: Array[Dictionary]) -> void:
 					_float_text(foe.position + Vector2(0, -6), "Phục kích!", Color(1, 0.45, 0.3))
 				await get_tree().create_timer(0.4).timeout
 			"lo_dien":
+				Sfx.play("lo_dien", -6.0)
 				var seen: UnitSprite = sprites.get(e["uid"])
 				if seen != null:
 					seen.visible = true
@@ -908,6 +925,23 @@ func _play(events: Array[Dictionary]) -> void:
 			if sprites.has(u.uid):
 				sprites[u.uid].refresh(u)
 		_refresh_top()
+
+
+## Tiếng đánh theo loại quân: hỏa mai bắn xa → súng; hỏa hổ → lửa; voi → rống; còn lại → chém.
+func _attack_sound(e: Dictionary) -> void:
+	var att := state.unit_by_uid(e["uid"])
+	var def := state.unit_by_uid(e["muc_tieu"])
+	var far := att != null and def != null and Rules.manhattan(att.pos, def.pos) > 1
+	var name := "danh"
+	if att != null:
+		if att.has_tag("gay_chay") and not e.get("phan_don", false):
+			name = "lua"
+		elif att.has_tag("ban_xa"):
+			name = "sung"
+		elif att.has_tag("voi") and not e.get("phan_don", false) and randf() < 0.5:
+			name = "voi_rong"
+	Sfx.play(name, -3.0 if not far else 0.0)
+	get_tree().create_timer(0.14).timeout.connect(func() -> void: Sfx.play("trung", -6.0))
 
 
 func _shake(duration: float) -> void:
@@ -969,6 +1003,7 @@ func _finish() -> void:
 ## Bảng kết quả màn (06 §4): số vòng, quân mất, mục tiêu phụ, mục Sử liệu mới mở.
 func show_result(opened: Array) -> void:
 	var win := state.result == "thang"
+	Sfx.music("thang" if win else "thua", false)
 	result_panel = _panel(Color(0.12, 0.04, 0.04, 0.95))
 	result_panel.set_anchors_preset(Control.PRESET_CENTER)
 	result_panel.offset_left = -124

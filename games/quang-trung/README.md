@@ -5,7 +5,7 @@ Quang Trung đại phá quân Thanh, từ núi Bân (22/12/1788) đến Thăng L
 Làm bằng **Godot 4**, phát hành **miễn phí** trên Google Play và App Store (chủ dự án đứng tên cá nhân).
 Thư mục vẫn tên `quang-trung` (tên mã dự án).
 
-**Trạng thái: M1 – Mẫu luật chơi** (đang làm). Project Godot ở [`godot/`](godot/) — cách build và kiểm thử: [`godot/BUILD.md`](godot/BUILD.md), [`godot/TESTING.md`](godot/TESTING.md). Hình tạm và mockup: [`drafts/quang-trung/`](../../drafts/quang-trung/).
+**Trạng thái: M2 – Lát cắt dọc màn 4** (chờ chơi thử). M1 xong 13/10/2026. Project Godot ở [`godot/`](godot/) — cách build và kiểm thử: [`godot/BUILD.md`](godot/BUILD.md), [`godot/TESTING.md`](godot/TESTING.md). Hình tạm và mockup: [`drafts/quang-trung/`](../../drafts/quang-trung/).
 
 ## Tài liệu
 

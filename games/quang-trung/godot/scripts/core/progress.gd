@@ -25,9 +25,22 @@ static func data() -> Dictionary:
 
 
 static func save() -> void:
-	var f := FileAccess.open(PROGRESS_PATH, FileAccess.WRITE)
-	if f != null:
-		f.store_string(JSON.stringify(data(), " "))
+	_write_safely(PROGRESS_PATH, JSON.stringify(data(), " "))
+
+
+## Ghi ra file .tmp rồi mới thay file thật, giữ bản cũ ở .bak (08 §3.4): tắt máy giữa chừng không làm hỏng file lưu.
+static func _write_safely(path: String, text: String) -> void:
+	var tmp := path + ".tmp"
+	var f := FileAccess.open(tmp, FileAccess.WRITE)
+	if f == null:
+		push_error("Không ghi được " + tmp)
+		return
+	f.store_string(text)
+	f.close()
+	var real := ProjectSettings.globalize_path(path)
+	if FileAccess.file_exists(path):
+		DirAccess.copy_absolute(real, real + ".bak")
+	DirAccess.rename_absolute(ProjectSettings.globalize_path(tmp), real)
 
 
 ## Ghi nhận thắng một màn. Trả về id các mục Sử liệu vừa mở lần đầu.
@@ -71,9 +84,7 @@ static func codex_unlocked(id: String) -> bool:
 # ---------------------------------------------------------------- trận đang dở
 
 static func save_battle(state: BattleState) -> void:
-	var f := FileAccess.open(BATTLE_PATH, FileAccess.WRITE)
-	if f != null:
-		f.store_string(var_to_str({"phien_ban": VERSION, "tran": state.to_dict()}))
+	_write_safely(BATTLE_PATH, var_to_str({"phien_ban": VERSION, "tran": state.to_dict()}))
 
 
 static func has_battle() -> bool:
@@ -91,8 +102,9 @@ static func load_battle() -> BattleState:
 
 
 static func clear_battle() -> void:
-	if has_battle():
-		DirAccess.remove_absolute(ProjectSettings.globalize_path(BATTLE_PATH))
+	for p in [BATTLE_PATH, BATTLE_PATH + ".bak"]:
+		if FileAccess.file_exists(p):
+			DirAccess.remove_absolute(ProjectSettings.globalize_path(p))
 
 
 ## Chỉ dùng trong test: xóa bộ nhớ đệm để đọc lại từ đĩa.

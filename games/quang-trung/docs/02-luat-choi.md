@@ -38,9 +38,10 @@
      giẫm bẫy, hoặc đánh thức địch.
    - Xong hành động, quân xám đến hết lượt.
 3. **Hết lượt**: người chơi bấm "Hết lượt" (hỏi xác nhận nếu còn quân chưa đi).
-4. **Số vòng** đếm theo lượt Tây Sơn: vòng 1 bắt đầu bằng lượt Tây Sơn đầu tiên.
-   - "Thắng **trước lượt N**" = đạt điều kiện trong lượt Tây Sơn có số ≤ N − 1.
-   - "**Hết lượt N**" (điều kiện thua) = cuối vòng N (sau lượt phe cuối cùng) mà chưa thắng.
+4. **Vòng và lượt** (quy ước chữ trong game, phản hồi M3): **vòng** = mọi phe đi một lần; **lượt** = phần đi của một phe trong vòng.
+   Vòng 1 bắt đầu bằng lượt Tây Sơn đầu tiên. Thanh trên ghi số vòng; số trong mục tiêu, giới hạn, thu nhập đều tính theo vòng.
+   - "Thắng **trước vòng N**" = đạt điều kiện trong vòng có số ≤ N − 1 (loại mục tiêu `truoc_vong`).
+   - "**Hết vòng N**" (điều kiện thua) = cuối vòng N (sau lượt phe cuối cùng) mà chưa thắng.
 
 ## 3. Di chuyển
 

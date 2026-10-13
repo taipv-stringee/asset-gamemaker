@@ -376,9 +376,9 @@
  "ly_do_het_luot": "Trời sáng. Quân Lê đã nhìn rõ quân ta.",
  "muc_tieu_phu": [
   {
-   "loai": "truoc_luot",
+   "loai": "truoc_vong",
    "n": 7,
-   "ten": "Chiếm đồn trước lượt 7"
+   "ten": "Chiếm đồn trước vòng 7"
   },
   {
    "loai": "khong_bao_dong",

@@ -44,7 +44,7 @@ Mỗi điểm ghi ngày âm và dương lịch.
 - **Quân ta**: Ngô Văn Sở (tướng chính), Ngô Thì Nhậm, 4 lính giáo, 2 hỏa mai. Phan Văn Lân + 2 lính giáo ở phía bắc.
 - **Mua lính**: không. Vàng 0. Giới hạn 10.
 - **Địch**: tiền quân Thanh (trường mâu, điểu thương) từ mép bắc, quân Lê dẫn đường; viện binh 2 quân mỗi 2 vòng (chế độ *Tấn công*).
-- **Thắng**: Ngô Văn Sở và ≥ 4 quân khác vào vùng thắng trước khi hết lượt 12. **Thua**: Sở bị hạ; hết lượt 12.
+- **Thắng**: Ngô Văn Sở và ≥ 4 quân khác vào vùng thắng trước khi hết vòng 12. **Thua**: Sở bị hạ; hết vòng 12.
 - **Đã dựng** (`data/missions/m00_tam_diep.json`): sông và **cầu một ô** ở bắc (Lân + 2 lính giáo bên kia cầu), đường thiên lý một ô
   giữa ruộng (đi chậm, dễ tắc), cửa núi 2 hàng cuối. Viện binh: vòng 2 tiền quân Thanh + quân Lê ở mép bắc; vòng 3 quân Lê tạt sườn
   tây, vòng 5 quân Thanh tạt sườn đông; từ vòng 4 mỗi 2 vòng thêm trường mâu + điểu thương. Lời giải mẫu 2 sao:
@@ -65,10 +65,10 @@ Mỗi điểm ghi ngày âm và dương lịch.
 - **Quân ta**: Quang Trung, 3 lính giáo, 2 hỏa mai. **Mua lính** tại đồn phía nam; vàng 300; giới hạn 10;
   `mua_duoc`: linh_giao, hoa_mai.
 - **Địch (Diễn tập)**: 4 lính giáo, 2 hỏa mai, 1 `quan_giu_don` (mặc quân phục Tây Sơn màu sẫm); đồn bắc có 200 vàng để mua lính giáo.
-- **Thắng**: Quang Trung chiếm đồn bắc trước khi hết lượt 15.
+- **Thắng**: Quang Trung chiếm đồn bắc trước khi hết vòng 15.
 - **Đã dựng** (`data/missions/m01_nui_ban.json`), giảm quân phe Diễn tập so với phác thảo cho hợp màn hướng dẫn: quan giữ đồn,
   3 lính giáo (2 tiến xuống, 1 giữ đồn), 1 hỏa mai; 150 vàng. Lời giải mẫu 2 sao thắng ở vòng 9: `tests/loi_giai/m01_nui_ban.txt`.
-- **Mục tiêu phụ**: một quân lên cấp 1; thắng trước lượt 10.
+- **Mục tiêu phụ**: một quân lên cấp 1; thắng trước vòng 10.
 - **Hướng dẫn**: chi phí địa hình, thủ địa hình, mua lính, cấp bậc, uy danh.
 - **Mở Sử liệu**: núi Bân, niên hiệu Quang Trung, quãng đường Phú Xuân – Nghệ An.
 
@@ -84,7 +84,7 @@ Mỗi điểm ghi ngày âm và dương lịch.
   Đưa một quân tới làng của Nguyễn Thiếp để mời ông → cảnh hội thoại trong doanh.
 - **Giai đoạn 2 – duyệt binh** (mở khi đã chiếm 6 làng): phe Diễn tập xuất hiện ở bãi bắc (doanh voi: 2 voi chiến, 3 lính giáo, 1 trống trận).
   Bãi có sẵn 2 **hình nộm quân tan** do kịch bản đặt để dạy chiêu hàng (ngoại lệ duy nhất: quân tan không do quân bị hạ sinh ra).
-- **Thắng**: chiếm đủ 6 làng **và** hạ hết quân Diễn tập trước khi hết lượt 20.
+- **Thắng**: chiếm đủ 6 làng **và** hạ hết quân Diễn tập trước khi hết vòng 20.
 - **Mục tiêu phụ**: mời được Nguyễn Thiếp; chiêu hàng 2 hình nộm.
 - **Mở Sử liệu**: Nguyễn Thiếp; voi chiến Tây Sơn; đội – cơ – đạo – doanh.
 
@@ -117,8 +117,8 @@ Mỗi điểm ghi ngày âm và dương lịch.
 - **Quân ta**: Quang Trung, 4 lính giáo, 2 hỏa mai, 2 thủy binh, 1 hỏa hổ, 1 voi chiến. **Mua lính** ở đồn hậu cứ; vàng 400; giới hạn 14;
   `mua_duoc`: linh_giao, hoa_mai, thuy_binh, hoa_ho, quan_su, trong_tran, voi_chien.
 - **Địch (Lê)**: `quan_giu_don_le`, 6 quân Lê trong khu đồn (ngủ), 2 quân Lê tuần tra.
-- **Thắng**: Quang Trung chiếm đồn Gián Khẩu trước khi hết lượt 12. **Thua**: Quang Trung bị hạ; hết lượt 12 (trời sáng).
-- **Mục tiêu phụ**: chiếm đồn trước lượt 7; không có báo động nào; không mất voi.
+- **Thắng**: Quang Trung chiếm đồn Gián Khẩu trước khi hết vòng 12. **Thua**: Quang Trung bị hạ; hết vòng 12 (trời sáng).
+- **Mục tiêu phụ**: chiếm đồn trước vòng 7; không có báo động nào; không mất voi.
 - **Truyện**: giao thừa bên sông. Không dùng câu "Đánh cho để dài tóc..." ở đây (*Tương truyền*, nơi và lúc nói không thống nhất).
   Nhắc lời hẹn mùng 7 (*Theo HLNTC*).
 - **Mở Sử liệu**: sông Gián; vì sao Hà Hồi **không** phải đêm 30 (lỗi phổ biến); Tết năm Mậu Thân có ngày 30.
@@ -133,9 +133,9 @@ Mỗi điểm ghi ngày âm và dương lịch.
   Vàng 500; giới hạn 16; `mua_duoc`: như màn 4 + than_cong.
 - **Địch**: quân Lê và quân Thanh tàn từ Gián Khẩu, giữ Thanh Quyết và Nhật Tảo. **5 trinh sát** (Di 5) xuất phát ở dải giữa – nam
   (đang dò quân ta), chế độ *Chạy* tới vùng thoát **từ khi thấy quân ta**; đường chạy đi qua tiền quân của ta.
-- **Thắng**: chiếm đồn Nhật Tảo trước khi hết lượt 16.
+- **Thắng**: chiếm đồn Nhật Tảo trước khi hết vòng 16.
 - **Hệ quả**: có trinh sát thoát → ở màn 6 quân Hà Hồi **thức sẵn**. Không thoát → màn 6 đúng như sử.
-- **Mục tiêu phụ**: không trinh sát nào thoát; thắng trước lượt 12.
+- **Mục tiêu phụ**: không trinh sát nào thoát; thắng trước vòng 12.
 - **Mở Sử liệu**: Thanh Quyết, Nhật Tảo, Phú Xuyên; thần công Tây Sơn.
 
 ## Màn 6 — Đêm mùng 3: vây Hà Hồi
@@ -165,7 +165,7 @@ Mỗi điểm ghi ngày âm và dương lịch.
 - **Địch**: Sầm Nghi Đống (`toi_thieu_1`), 6 thổ binh Điền Châu, 2 điểu thương, 1 pháo binh; phần lớn ngủ ở doanh ngoài.
 - **Thắng**: Đô đốc Long chiếm đồn Khương Thượng. Khi đó (hoặc khi Sầm Nghi Đống còn 1 máu) → cảnh hội thoại về cái chết của ông,
   giọng trang nghiêm, không chế giễu.
-- **Mục tiêu phụ**: đốt ≥ 4 ô doanh trại trước lượt 7; thắng trước lượt 10.
+- **Mục tiêu phụ**: đốt ≥ 4 ô doanh trại trước vòng 7; thắng trước vòng 10.
 - **Mở Sử liệu**: Sầm Nghi Đống (thổ quan người Tráng, được Càn Long khen, đền thờ về sau); tranh cãi Đô đốc Long.
 
 ## Màn 8 — Ngọc Hồi (màn trùm)
@@ -189,7 +189,7 @@ Mỗi điểm ghi ngày âm và dương lịch.
 - **Thắng**: Quang Trung chiếm đồn Ngọc Hồi.
 - **Hứa Thế Hanh rút về sông** là *[Sáng tạo của game]*, để giữ được cả hai phiên bản nơi ông tử trận (sử Thanh: bờ sông khi chặn hậu;
   cách kể phổ biến ở Việt Nam: Ngọc Hồi).
-- **Mục tiêu phụ**: thắng trước lượt 15; hạ ≥ 3 quân Thanh khi chúng đứng trên ô Đầm Mực; không mất mộc thuẫn nào trước khi qua hàng chông.
+- **Mục tiêu phụ**: thắng trước vòng 15; hạ ≥ 3 quân Thanh khi chúng đứng trên ô Đầm Mực; không mất mộc thuẫn nào trước khi qua hàng chông.
 - **Mở Sử liệu**: mộc thuẫn (ván ghép phủ rơm hay bó rơm lăn); voi chiến; Lục doanh; địa lôi.
 
 ## Màn 9 — Cầu phao sông Nhị – vào Thăng Long
@@ -204,7 +204,7 @@ Mỗi điểm ghi ngày âm và dương lịch.
   (*Chặn hậu* ở đầu cầu bờ tây; bị hạ bình thường); tàn quân.
 - **Cầu phao**: đầu vòng 4 cầu **rung** (cảnh báo), đầu vòng 5 **đứt** (hoặc ngay khi Tôn Sĩ Nghị qua hết cầu, nếu sớm hơn; luôn có rung trước 1 vòng).
 - **Thắng**: hạ cả ba tướng chặn hậu **và** Quang Trung vào khu thành Thăng Long. Không hạ được Tôn Sĩ Nghị (mọi nguồn: ông thoát).
-- **Mục tiêu phụ**: vào thành trước lượt 8 ("trước mùng 7"); tổng hàng binh ≥ 5.
+- **Mục tiêu phụ**: vào thành trước vòng 8 ("trước mùng 7"); tổng hàng binh ≥ 5.
 - **Cảnh kết**: Sử liệu hiện **hai phiên bản**: Tôn Sĩ Nghị ra lệnh chặt cầu, Hứa Thế Hanh can và sai người kéo cương ngựa đưa Nghị đi
   "giữ quốc thể" (sử Thanh); hay quân chen nhau làm gãy cầu, Nghị "ngựa không kịp đóng yên" (HLNTC).
 
@@ -216,7 +216,7 @@ Mỗi điểm ghi ngày âm và dương lịch.
 - **Quân ta**: Đô đốc Lộc (tướng chính), Đô đốc Tuyết, 3 thủy binh, 2 hỏa mai, 2 lính giáo. Vàng 400; giới hạn 14;
   `mua_duoc`: thuy_binh, hoa_mai, linh_giao, hoa_ho.
 - **Địch (Thanh)**: 2 trường mâu, 3 điểu thương, 1 đằng bài, 1 pháo binh giữ hai bến; `quan_giu_don` ở bến lớn.
-- **Thắng**: chiếm cả hai bến trước khi hết lượt 15. **Mục tiêu phụ**: không mất thủy binh; thắng trước lượt 10.
+- **Thắng**: chiếm cả hai bến trước khi hết vòng 15. **Mục tiêu phụ**: không mất thủy binh; thắng trước vòng 10.
 
 ## Lời kết
 

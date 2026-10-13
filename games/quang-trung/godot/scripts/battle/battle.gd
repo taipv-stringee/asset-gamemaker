@@ -40,6 +40,8 @@ var recruit_panel: Panel
 var input_locked := false         # đang có hội thoại phủ lên trận
 var hint_panel: Panel
 var _hint_queue: Array = []
+var _hint_h := 0.0                # chiều cao khung gợi ý đang hiện (camera chừa chỗ)
+var _hints_shown: Array = []      # chỉ số gợi ý đã hiện trong trận này (bảng tạm dừng chỉ liệt kê những cái này)
 
 var terrain_layer: TileMapLayer
 var objects_layer: Node2D
@@ -83,7 +85,7 @@ func start_from_state(s: BattleState) -> void:
 	_build_hud()
 	_refresh_all()
 	_center_camera_on(_first_unit_pos())
-	_show_banner("Lượt Tây Sơn · vòng %d" % state.vong)
+	_show_banner("Vòng %d · lượt Tây Sơn" % state.vong)
 	Sfx.music(state.mission.get("nhac", "chu_de"))
 	if auto_play or state.current_faction() != PLAYER:
 		_run_ai_turns()
@@ -96,7 +98,7 @@ func start_from_state(s: BattleState) -> void:
 # Mỗi gợi ý hiện một lần (lưu trong tiến trình), không chặn bản đồ; xem lại trong bảng tạm dừng. Chỉ hiện trong chiến dịch.
 
 func hint(trigger: String, n := 0) -> void:
-	if not story_mode:
+	if not story_mode or mode == Mode.ENDED:
 		return
 	var list: Array = state.mission.get("goi_y", [])
 	for i in list.size():
@@ -116,11 +118,15 @@ func _show_next_hint() -> void:
 	var id: String = _hint_queue.pop_front()
 	var idx := int(id.get_slice("/", 1))
 	var text: String = state.mission["goi_y"][idx]["loi"]
+	# Đặt ngay trên bảng dưới (báo cáo M3: đặt dưới thanh trên thì che quân ở các hàng trên cùng, đúng chỗ viện binh hiện).
+	# Chạm xuyên qua phần chữ (chỉ nút "Đã hiểu" bắt chạm); camera chừa thêm chỗ để kéo bản đồ ra khỏi chỗ bị che.
 	hint_panel = _panel(Color(0.08, 0.1, 0.16, 0.95))
-	hint_panel.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	hint_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hint_panel.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	hint_panel.offset_left = 8
 	hint_panel.offset_right = -8
-	hint_panel.offset_top = TOP_H + 6
+	hint_panel.offset_bottom = -BOTTOM_H - 6
+	hint_panel.offset_top = -BOTTOM_H - 60
 	hud.get_child(0).add_child(hint_panel)
 	var row := HBoxContainer.new()
 	row.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -129,21 +135,32 @@ func _show_next_hint() -> void:
 	row.offset_top = 6
 	row.offset_bottom = -6
 	row.add_theme_constant_override("separation", 8)
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hint_panel.add_child(row)
 	var l := UiKit.wrap_label(text, UiKit.FS_SMALL, Color(0.92, 0.95, 1.0))
 	l.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.add_child(l)
+	_hints_shown.append(idx)
 	var ok := UiKit.button("Đã hiểu", func() -> void:
 		Progress.mark_hint(id)
-		hint_panel.queue_free()
-		hint_panel = null
+		_close_hint()
 		_show_next_hint(), UiKit.FS_SMALL, 70)
 	ok.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	row.add_child(ok)
 	# Chiều cao theo chữ (tối đa 5 dòng).
 	await get_tree().process_frame
 	if hint_panel != null:
-		hint_panel.offset_bottom = TOP_H + 6 + minf(row.get_combined_minimum_size().y + 12, 140)
+		_hint_h = minf(row.get_combined_minimum_size().y + 12, 140)
+		hint_panel.offset_top = -BOTTOM_H - 6 - _hint_h
+		camera.position = _clamp_camera(camera.position)
+
+
+func _close_hint() -> void:
+	if hint_panel != null:
+		hint_panel.queue_free()
+		hint_panel = null
+	_hint_h = 0.0
 
 
 func _autosave() -> void:
@@ -533,7 +550,7 @@ func _terrain_info(p: Vector2i) -> void:
 	name_label.text = t["ten"]
 	var parts: PackedStringArray = ["Thủ %+d" % int(t["thu"])]
 	if int(t["vang"]) > 0:
-		parts.append("+%d vàng/lượt" % int(t["vang"]))
+		parts.append("+%d vàng mỗi vòng" % int(t["vang"]))
 	if t["mua_linh"]:
 		parts.append("mua lính")
 	var o := state.owner_of(p)
@@ -582,7 +599,7 @@ func _map_px() -> Vector2:
 func _clamp_camera(pos: Vector2) -> Vector2:
 	var vs := _view_size()
 	var map := _map_px()
-	var area_h := vs.y - TOP_H - BOTTOM_H
+	var area_h := vs.y - TOP_H - BOTTOM_H - _hint_h
 	var x: float
 	if map.x <= vs.x:
 		x = -(vs.x - map.x) / 2.0
@@ -598,7 +615,7 @@ func _clamp_camera(pos: Vector2) -> Vector2:
 
 func _center_camera_on(p: Vector2i) -> void:
 	var vs := _view_size()
-	var area_h := vs.y - TOP_H - BOTTOM_H
+	var area_h := vs.y - TOP_H - BOTTOM_H - _hint_h
 	camera.position = _clamp_camera(Vector2(p * T) + Vector2(T, T) / 2.0 - Vector2(vs.x / 2.0, TOP_H + area_h / 2.0))
 
 
@@ -809,7 +826,7 @@ func _show_recruit(p: Vector2i) -> void:
 	hint("mua_linh")
 	portrait.texture = null
 	name_label.text = "Mua lính — %d vàng" % int(state.gold.get(PLAYER, 0))
-	info_label.text = "Quân: %d/%d. Lính mới đứng ở đồn, đi được từ lượt sau." % [state.count_toward_limit(PLAYER), int(state.limits.get(PLAYER, 0))]
+	info_label.text = "Quân: %d/%d. Lính mới đứng ở đồn, đi được từ vòng sau." % [state.count_toward_limit(PLAYER), int(state.limits.get(PLAYER, 0))]
 	_set_buttons([["Đóng", _close_recruit]])
 	var data := GameData.get_data()
 	recruit_panel = _panel(Color(0.12, 0.04, 0.04, 0.97))
@@ -918,7 +935,7 @@ func _run_ai_turns() -> void:
 		_finish()
 		return
 	mode = Mode.IDLE
-	_show_banner("Lượt Tây Sơn · vòng %d" % state.vong)
+	_show_banner("Vòng %d · lượt Tây Sơn" % state.vong)
 	_show_idle_info()
 	_refresh_all()
 	_autosave()
@@ -1105,6 +1122,8 @@ func _draw_overlay() -> void:
 
 func _finish() -> void:
 	mode = Mode.ENDED
+	_hint_queue.clear()
+	_close_hint()  # không để gợi ý đè lên hội thoại cuối trận và bảng kết quả (báo cáo M3)
 	selected = null
 	_refresh_all()
 	portrait.texture = null
@@ -1213,11 +1232,16 @@ func _toggle_pause() -> void:
 		col.add_child(UiKit.label("Mục tiêu phụ", UiKit.FS_HEAD, C_GOLD, true))
 		for o in objs:
 			col.add_child(_objective_line(o["ten"], o["trang_thai"]))
+	# Chỉ những gợi ý đã hiện (trong trận này hoặc đã xem từ trước), không lộ gợi ý chưa tới (báo cáo M3).
 	var hints: Array = state.mission.get("goi_y", [])
-	if not hints.is_empty():
+	var seen: Array = []
+	for i in hints.size():
+		if _hints_shown.has(i) or Progress.hint_seen("%s/%d" % [state.mission_id, i]):
+			seen.append(hints[i]["loi"])
+	if not seen.is_empty():
 		col.add_child(UiKit.label("Gợi ý", UiKit.FS_HEAD, C_GOLD, true))
-		for h in hints:
-			col.add_child(UiKit.wrap_label("• " + h["loi"], UiKit.FS_SMALL, Color(0.88, 0.9, 0.96)))
+		for text in seen:
+			col.add_child(UiKit.wrap_label("• " + text, UiKit.FS_SMALL, Color(0.88, 0.9, 0.96)))
 	var row: HBoxContainer = pc[2]
 	row.add_child(UiKit.button("Tiếp tục", _toggle_pause))
 	if story_mode:

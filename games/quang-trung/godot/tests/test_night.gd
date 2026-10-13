@@ -87,7 +87,7 @@ func test_dawn(t) -> bool:
 func test_side_objectives(t) -> bool:
 	var s := make(["F."], [q("quang_trung", "tayson", 1, 0, {"tuong_chinh": true})],
 		{"chu_o": {"0,0": "le"}, "thang": {"loai": "chiem_o", "o": [0, 0]},
-		"muc_tieu_phu": [{"loai": "truoc_luot", "n": 2, "ten": "nhanh"}, {"loai": "khong_bao_dong", "ten": "im lặng"}]})
+		"muc_tieu_phu": [{"loai": "truoc_vong", "n": 2, "ten": "nhanh"}, {"loai": "khong_bao_dong", "ten": "im lặng"}]})
 	var u := s.unit_at(Vector2i(1, 0))
 	Rules.cmd_move(s, u, Vector2i(0, 0))
 	Rules.cmd_capture(s, u)

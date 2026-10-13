@@ -164,7 +164,7 @@
    "ten": "Một quân lên cấp 1"
   },
   {
-   "loai": "truoc_luot",
+   "loai": "truoc_vong",
    "n": 10,
    "ten": "Thắng trước vòng 10"
   }
@@ -180,7 +180,7 @@
   },
   {
    "khi": "mua_linh",
-   "loi": "Mua lính ở đồn của ta khi đồn trống. Đồn cho 50 vàng mỗi lượt. Lính mới phải chờ đến lượt sau mới đi được."
+   "loi": "Mua lính ở đồn của ta khi đồn trống. Đồn cho 50 vàng mỗi vòng. Lính mới phải chờ đến vòng sau mới đi được."
   },
   {
    "khi": "vong",

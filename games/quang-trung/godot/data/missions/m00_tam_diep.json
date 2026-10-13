@@ -268,6 +268,11 @@
    "loi": "Chạm một quân của ta để chọn. Ô xanh là chỗ đi được."
   },
   {
+   "khi": "vong",
+   "n": 1,
+   "loi": "Mỗi vòng, Tây Sơn đi một lượt, rồi tới lượt các phe khác. Thanh trên ghi số vòng; đi xong thì bấm Hết lượt."
+  },
+  {
    "khi": "chon_quan",
    "loi": "Chạm một ô xanh để xem đường, chạm lại lần nữa để đi. Đi rồi, chưa làm gì khác thì còn Hoàn tác được."
   },

@@ -764,7 +764,7 @@ static func side_objectives(state: BattleState) -> Array[Dictionary]:
 	for o in state.mission.get("muc_tieu_phu", []):
 		var ok := false
 		match o.get("loai", ""):
-			"truoc_luot":
+			"truoc_vong", "truoc_luot":  # thắng trong vòng ≤ n − 1 ("trước vòng n"); tên cũ truoc_luot
 				ok = state.result == "thang" and state.won_round <= int(o["n"]) - 1
 			"khong_bao_dong":
 				ok = state.result == "thang" and int(state.flags.get("bao_dong", 0)) == 0
@@ -790,7 +790,7 @@ static func side_objectives_live(state: BattleState) -> Array[Dictionary]:
 	for o in state.mission.get("muc_tieu_phu", []):
 		var st := "dang"
 		match o.get("loai", ""):
-			"truoc_luot":
+			"truoc_vong", "truoc_luot":  # thắng trong vòng ≤ n − 1 ("trước vòng n"); tên cũ truoc_luot
 				var last := int(o["n"]) - 1
 				if won:
 					st = "dat" if state.won_round <= last else "hong"

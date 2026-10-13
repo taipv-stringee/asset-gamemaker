@@ -137,3 +137,19 @@ func test_mission4_has_perfect_solution(t) -> bool:
 			all_ok = all_ok and o["dat"]
 		t.check(all_ok, "đạt cả ba mục tiêu phụ (seed %d)" % sd)
 	return true
+
+
+func test_ambush(t) -> bool:
+	# Quân địch nằm trong sương: ô của nó trông như đi được; đi vào thì bị chặn ("phục kích").
+	var s := make(["......", "......"], [q("linh_giao", "tayson", 0, 0), q("quan_le", "le", 4, 0, {"ngu": true})], {"tam_nhin": 1})
+	var u := s.unit_at(Vector2i(0, 0))
+	t.check(Rules.reachable(s, u, true).has(Vector2i(4, 0)), "ô có địch ẩn trông như đi được")
+	t.check(not Rules.reachable(s, u).has(Vector2i(4, 0)), "luật thật thì không")
+	var ev := Rules.cmd_move(s, u, Vector2i(4, 0), true)
+	t.eq(u.pos, Vector2i(3, 0), "dừng ở ô kề (bước vào vùng khống chế)")
+	t.check(u.khoa_hoan_tac, "phục kích → không hoàn tác")
+	var kinds := []
+	for e in ev:
+		kinds.append(e["loai"])
+	t.check(kinds.has("phuc_kich"), "có sự kiện phục kích")
+	return true

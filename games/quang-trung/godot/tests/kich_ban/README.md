@@ -38,3 +38,14 @@ Chạy: `GODOT --path . -- --man=m_kiem_thu --kich-ban=res://tests/kich_ban/quan
 | `kiem ket_qua` | `thang` (ảnh `thang.png` có bảng THẮNG) |
 | `kiem vong` (sau Chơi lại) | `1` |
 | `kiem quan 3 1` (sau Chơi lại) | `le quan_le máu 10` |
+
+## dem_m04.txt (màn 4, đêm) — giá trị mong đợi
+
+Chạy: `GODOT --path . -- --man=m04_gian_khau --kich-ban=res://tests/kich_ban/dem_m04.txt`
+
+| Dòng | Mong đợi |
+|---|---|
+| `kiem vong` (đầu) | `1`; ảnh `dem_bat_dau.png`: trời tối xanh, xa thì sương đặc, không thấy quân Lê |
+| `kiem quan 3 7` (vòng 2) | `le quan_le máu 100 (xong)` — lính tuần bị thủy binh chặn ở bờ bắc; ảnh `dem_vong2.png` thấy nó, thấy cổng đồn sáng đèn có quan giữ đồn ngủ (chữ z), trống, đèn |
+| `kiem quan 3 7` (sau 3 đòn) | `trống` (lính tuần đã bị hạ, để lại quân tan); ảnh `dem_ha_tuan.png` |
+| `kiem ket_qua` | `(chưa)`, không có chữ "Báo động!" nào hiện ra |

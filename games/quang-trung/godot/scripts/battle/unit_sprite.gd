@@ -14,6 +14,7 @@ var _level := 0
 var _done := false
 var _burning := false
 var _asleep := false
+var _torch := false
 
 static var _fallback_cache: Dictionary = {}
 
@@ -46,6 +47,7 @@ func refresh(u: Unit) -> void:
 	_done = u.done
 	_burning = u.chay_turns > 0
 	_asleep = u.ngu
+	_torch = u.duoc
 	hp_label.text = str(u.hp) if u.hp < 100 else ""
 	sprite.modulate = Color(0.55, 0.55, 0.6) if u.done else Color.WHITE
 	queue_redraw()
@@ -67,6 +69,11 @@ func _draw() -> void:
 	if _burning:
 		draw_rect(Rect2(26, 2, 4, 5), Color(1.0, 0.55, 0.1))
 		draw_rect(Rect2(27, 1, 2, 2), Color(1.0, 0.9, 0.4))
+	if _torch:  # đuốc: cán gỗ + lửa nhấp nháy theo frame
+		var flick := 1 if sprite.frame == 1 else 0
+		draw_rect(Rect2(28, 12, 1, 8), Color(0.45, 0.28, 0.14))
+		draw_rect(Rect2(27, 9 - flick, 3, 3 + flick), Color(1.0, 0.55, 0.12))
+		draw_rect(Rect2(28, 10, 1, 2), Color(1.0, 0.92, 0.55))
 	if _asleep:
 		draw_string(ThemeDB.fallback_font, Vector2(24, 9), "z", HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.8, 0.9, 1.0))
 

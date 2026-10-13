@@ -1,0 +1,44 @@
+# Màn 4 qua giao diện: 2 vòng đầu của lời giải mẫu, chụp bóng đêm, sương, lính tuần, hạ lính tuần.
+kiem vong
+anh dem_bat_dau.png
+cham 1 10
+cham 3 8
+cham 3 8
+nut Chờ
+cham 3 13
+cham 4 10
+cham 4 10
+nut Chờ
+cham 5 13
+cham 5 10
+cham 5 10
+nut Chờ
+nut Hết lượt
+nut Hết lượt
+cho 4
+anh dem_vong2.png
+kiem quan 3 7
+cham 3 8
+nut Đứng yên
+nut Đánh
+cham 3 7
+cham 3 7
+cho 1.5
+cham 4 10
+cham 4 8
+cham 4 8
+nut Đánh
+cham 3 7
+cham 3 7
+cho 1.5
+cham 5 10
+cham 4 7
+cham 4 7
+nut Đánh
+cham 3 7
+cham 3 7
+cho 1.5
+kiem quan 3 7
+keo 0 400
+anh dem_ha_tuan.png
+kiem ket_qua

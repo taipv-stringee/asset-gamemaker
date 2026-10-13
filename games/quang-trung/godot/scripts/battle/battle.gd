@@ -16,6 +16,11 @@ const C_LACQUER_DARK := Color(0.16, 0.05, 0.05)
 const C_GOLD := Color(0.93, 0.73, 0.2)
 const C_GOLD_LIGHT := Color(1.0, 0.91, 0.55)
 const PLAYER := "tayson"
+const OBJECT_TEX := {
+	"quan_tan": "res://assets/ui/quan_tan.png",
+	"trong": "res://assets/objects/obj_trong_strip2.png",
+	"den": "res://assets/objects/obj_den_strip2.png",
+}
 
 enum Mode { IDLE, SELECTED, MOVED, TARGETING, FORECAST, BUSY, ENDED }
 
@@ -34,6 +39,10 @@ var objects_layer: Node2D
 var overlay: Node2D
 var units_layer: Node2D
 var fx_layer: Node2D
+var night_layer: Node2D            # bóng tối / sương mù theo từng ô (02 §10)
+var night_tint: CanvasModulate
+var vis: Dictionary = {}           # ô phe người chơi đang thấy (rỗng = ban ngày)
+var _obj_time := 0.0
 var cursor: Sprite2D
 var camera: Camera2D
 var sprites: Dictionary = {}       # uid -> UnitSprite
@@ -86,6 +95,12 @@ func _build_world() -> void:
 	add_child(terrain_layer)
 	objects_layer = Node2D.new()
 	add_child(objects_layer)
+	night_layer = Node2D.new()
+	night_layer.draw.connect(_draw_night)
+	add_child(night_layer)
+	night_tint = CanvasModulate.new()
+	night_tint.color = Color.WHITE
+	add_child(night_tint)
 	overlay = Node2D.new()
 	overlay.draw.connect(_draw_overlay)
 	add_child(overlay)
@@ -129,14 +144,86 @@ func _refresh_map() -> void:
 			terrain_layer.set_cell(p, 0, Vector2i(int(tile_index.get(_tile_key(p), 0)), 0))
 	for c in objects_layer.get_children():
 		c.queue_free()
-	var qt: Texture2D = load("res://assets/ui/quan_tan.png")
 	for p in state.objects:
-		if state.objects[p].get("loai", "") == "quan_tan":
-			var s := Sprite2D.new()
-			s.texture = qt
-			s.centered = false
-			s.position = Vector2(p * T)
-			objects_layer.add_child(s)
+		var path: String = OBJECT_TEX.get(state.objects[p].get("loai", ""), "")
+		if path == "":
+			continue
+		var s := Sprite2D.new()
+		s.texture = load(path)
+		s.centered = false
+		s.hframes = 2 if s.texture.get_width() >= T * 2 else 1
+		s.position = Vector2(p * T)
+		objects_layer.add_child(s)
+	_update_night()
+
+
+## Bóng tối, sương mù, ẩn quân địch không thấy. Gọi sau mỗi thay đổi trạng thái.
+func _update_night() -> void:
+	vis = Rules.visible_tiles(state, PLAYER)
+	var dark := Rules.is_dark(state)
+	# Sắc đêm xanh lạnh; rạng sáng ấm dần (02 §10).
+	if not dark:
+		night_tint.color = Color.WHITE
+	elif state.tam_nhin >= 5:
+		night_tint.color = Color(0.92, 0.88, 0.86)
+	elif state.tam_nhin >= 3:
+		night_tint.color = Color(0.82, 0.8, 0.9)
+	else:
+		night_tint.color = Color(0.56, 0.62, 0.9)
+	for u in state.units:
+		if sprites.has(u.uid):
+			sprites[u.uid].visible = _shown(u)
+	night_layer.queue_redraw()
+
+
+func _shown(u: Unit) -> bool:
+	return state.are_allies(u.faction, PLAYER) or not Rules.is_dark(state) or vis.has(u.pos)
+
+
+func _draw_night() -> void:
+	if not Rules.is_dark(state):
+		return
+	var lit := Rules.lit_tiles(state)
+	var fog := Color(0.01, 0.02, 0.07, 0.68 if state.tam_nhin < 3 else 0.45)
+	var dim := Color(0.01, 0.02, 0.07, 0.25 if state.tam_nhin < 3 else 0.12)
+	for y in state.height:
+		for x in state.width:
+			var p := Vector2i(x, y)
+			if lit.has(p):
+				continue
+			var r := Rect2(Vector2(p * T), Vector2(T, T))
+			night_layer.draw_rect(r, dim if vis.has(p) else fog)
+			if not vis.has(p):
+				# viền lốm đốm ở mép sương cho đỡ cứng (pixel art: dither 2px)
+				for d in Rules.DIRS:
+					if vis.has(p + d):
+						_dither_edge(r, d, fog)
+	# Quầng sáng ấm quanh nguồn sáng
+	for p in Rules.light_sources(state):
+		var c := Vector2(p * T) + Vector2(16, 16)
+		night_layer.draw_circle(c, 44.0, Color(1.0, 0.55, 0.15, 0.08))
+		night_layer.draw_circle(c, 26.0, Color(1.0, 0.7, 0.3, 0.1))
+
+
+func _dither_edge(r: Rect2, d: Vector2i, c: Color) -> void:
+	var soft := Color(c.r, c.g, c.b, c.a * 0.5)
+	for i in range(0, T, 4):
+		var o := Vector2.ZERO
+		match d:
+			Vector2i.UP: o = Vector2(i, -2)
+			Vector2i.DOWN: o = Vector2(i, T)
+			Vector2i.LEFT: o = Vector2(-2, i)
+			Vector2i.RIGHT: o = Vector2(T, i)
+		night_layer.draw_rect(Rect2(r.position + o, Vector2(2, 2)), soft)
+
+
+func _process(delta: float) -> void:
+	_obj_time += delta
+	if _obj_time >= 0.45 and objects_layer != null:
+		_obj_time = 0.0
+		for c in objects_layer.get_children():
+			if c is Sprite2D and c.hframes > 1:
+				c.frame = 1 - c.frame
 
 
 func _refresh_all() -> void:
@@ -185,11 +272,16 @@ func _build_hud() -> void:
 	top.offset_bottom = TOP_H
 	root.add_child(top)
 	top_label = _label(FONT_BOLD, 13, C_GOLD_LIGHT)
-	top_label.position = Vector2(8, 7)
+	top_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	top_label.offset_left = 8
+	top_label.offset_right = -92
+	top_label.offset_top = 7
+	top_label.offset_bottom = 25
+	top_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	top.add_child(top_label)
 	gold_label = _label(FONT_BOLD, 13, Color.WHITE)
 	gold_label.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	gold_label.offset_left = -96
+	gold_label.offset_left = -88
 	gold_label.offset_right = -8
 	gold_label.offset_top = 7
 	gold_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -278,8 +370,9 @@ func _set_buttons(list: Array) -> void:
 
 
 func _refresh_top() -> void:
-	var name: String = state.mission.get("ten", "")
-	top_label.text = "%s · Vòng %d" % [name, state.vong]
+	var name: String = state.mission.get("ten_ngan", state.mission.get("ten", ""))
+	var limit := int(state.mission.get("thua_het_luot", 0))
+	top_label.text = "%s · Vòng %d%s" % [name, state.vong, ("/%d" % limit) if limit > 0 else ""]
 	gold_label.text = "%d vàng" % int(state.gold.get(PLAYER, 0))
 	end_button.disabled = mode == Mode.BUSY or mode == Mode.ENDED or state.current_faction() != PLAYER
 
@@ -326,7 +419,13 @@ func _terrain_info(p: Vector2i) -> void:
 	var o := state.owner_of(p)
 	if t["so_huu"]:
 		parts.append("chủ: %s" % _faction_name(o))
-	info_label.text = "   ".join(parts)
+	var obj: String = state.object_at(p).get("loai", "")
+	var obj_note: String = {"trong": "\nTrống báo động: quân địch kêu hay đứng cạnh trống thì cả khu đồn thức.",
+		"den": "\nĐèn: ô này và 4 ô kề luôn sáng; lính canh thấy quân ta ở đây từ 5 ô.",
+		"quan_tan": "\nQuân tan: không đi vào được; quân sư chiêu hàng được."}.get(obj, "")
+	if Rules.is_dark(state) and not vis.has(p) and not Rules.lit_tiles(state).has(p):
+		obj_note += "\nTrong bóng tối: không thấy quân địch."
+	info_label.text = "   ".join(parts) + obj_note
 
 
 func _faction_name(f: String) -> String:
@@ -418,6 +517,8 @@ func _on_tap(screen: Vector2) -> void:
 	cursor.position = Vector2(p * T)
 	end_turn_armed = false
 	var u := state.unit_at(p)
+	if u != null and not _shown(u):
+		u = null  # quân địch trong sương: người chơi không biết
 	match mode:
 		Mode.IDLE:
 			_tap_idle(p, u)
@@ -443,7 +544,7 @@ func _tap_idle(p: Vector2i, u: Unit) -> void:
 
 func _select(u: Unit) -> void:
 	selected = u
-	reach = Rules.reachable(state, u)
+	reach = Rules.reachable(state, u, true)
 	targets = Rules.targets_from(state, u, u.pos, false)
 	pending_dest = Vector2i(-1, -1)
 	mode = Mode.SELECTED
@@ -488,7 +589,7 @@ func _tap_selected(p: Vector2i, u: Unit) -> void:
 func _do_move(p: Vector2i) -> void:
 	var u := selected
 	var stay := p == u.pos
-	var ev := [] as Array[Dictionary] if stay else Rules.cmd_move(state, u, p)
+	var ev := [] as Array[Dictionary] if stay else Rules.cmd_move(state, u, p, true)
 	if stay:
 		u.moved = true
 		u.move_origin = u.pos
@@ -628,7 +729,7 @@ func _run_ai_turns() -> void:
 				continue
 			if a.get("lenh", "") == "ke_hoach":
 				var u := state.unit_by_uid(a["uid"])
-				if u != null:
+				if u != null and _shown(u):
 					_center_camera_on(u.pos)
 			await _play(ev)
 			if state.result != "":
@@ -654,6 +755,14 @@ func _play(events: Array[Dictionary]) -> void:
 		match e["loai"]:
 			"di":
 				var s: UnitSprite = sprites.get(e["uid"])
+				var mu := state.unit_by_uid(e["uid"])
+				if s != null and mu != null and not state.are_allies(mu.faction, PLAYER) and Rules.is_dark(state):
+					# quân địch đi trong sương: chỉ hiện nếu điểm đầu hoặc cuối thấy được
+					var path: Array = e["duong"]
+					s.visible = vis.has(path[0]) or Rules.can_see(state, PLAYER, path[-1])
+					if not s.visible:
+						s.position = Vector2(path[-1] * T)
+						continue
 				if s != null:
 					var tw := create_tween()
 					for p in e["duong"].slice(1):
@@ -697,11 +806,43 @@ func _play(events: Array[Dictionary]) -> void:
 					_float_text(camera.position + Vector2(_view_size().x - 70, TOP_H + 4), "+%d vàng" % e["them"], C_GOLD_LIGHT)
 			"bat_dau_luot":
 				_refresh_top()
+			"bao_dong":
+				var who := state.unit_by_uid(e["uid"])
+				if who != null and _shown(who) and sprites.has(who.uid):
+					_float_text(sprites[who.uid].position + Vector2(-4, -6), "Báo động!", Color(1, 0.35, 0.3))
+				else:
+					_show_banner("Có tiếng hô báo động trong đêm!")
+				await get_tree().create_timer(0.5).timeout
+			"trong_bao_dong":
+				_show_banner("Trống báo động! Cả đồn đã thức.")
+				await _shake(0.6)
+			"phuc_kich":
+				_update_night()
+				var foe: UnitSprite = sprites.get(e["dich"])
+				if foe != null:
+					foe.visible = true
+					_float_text(foe.position + Vector2(0, -6), "Phục kích!", Color(1, 0.45, 0.3))
+				await get_tree().create_timer(0.4).timeout
+			"lo_dien":
+				var seen: UnitSprite = sprites.get(e["uid"])
+				if seen != null:
+					seen.visible = true
+					_float_text(seen.position + Vector2(12, -6), "!", Color(1, 0.9, 0.4))
 		_refresh_map()
 		for u in state.units:
 			if sprites.has(u.uid):
 				sprites[u.uid].refresh(u)
 		_refresh_top()
+
+
+func _shake(duration: float) -> void:
+	var home := camera.offset
+	var tw := create_tween()
+	var steps := int(duration / 0.05)
+	for i in steps:
+		tw.tween_property(camera, "offset", home + Vector2(randf_range(-3, 3), randf_range(-2, 2)).round(), 0.05)
+	tw.tween_property(camera, "offset", home, 0.05)
+	await tw.finished
 
 
 func _float_text(pos: Vector2, text: String, color: Color) -> void:

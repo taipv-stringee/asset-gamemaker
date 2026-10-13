@@ -2,6 +2,7 @@
  "id": "m04_gian_khau",
  "so": 4,
  "ten": "Đêm 30 Tết: vượt sông Gián",
+ "ten_ngan": "Sông Gián",
  "ghi_chu": "Màn đêm bắt buộc (04 §Màn 4). Cầu phao ở bến, lính tuần, trống báo động là Sáng tạo của game.",
  "ban_do": [
   "^t..=..t^^",

@@ -120,22 +120,24 @@ static func move_points(state: BattleState, u: Unit) -> int:
 	return maxi(di, 0)
 
 
-## Ô bị khống chế bởi quân đối phương có thẻ `chan` (02 §3).
-static func zoc_tiles(state: BattleState, u: Unit) -> Dictionary:
+## Ô bị khống chế bởi quân đối phương có thẻ `chan` (02 §3). `vis` khác rỗng: chỉ tính quân địch phe u thấy.
+static func zoc_tiles(state: BattleState, u: Unit, vis: Dictionary = {}) -> Dictionary:
 	var zoc := {}
 	for e in state.units:
 		if state.are_allies(e.faction, u.faction) or not e.has_tag("chan"):
+			continue
+		if not vis.is_empty() and not vis.has(e.pos):
 			continue
 		for d in DIRS:
 			zoc[e.pos + d] = true
 	return zoc
 
 
-static func _enterable(state: BattleState, u: Unit, p: Vector2i) -> bool:
+static func _enterable(state: BattleState, u: Unit, p: Vector2i, vis: Dictionary = {}) -> bool:
 	if not state.in_bounds(p) or move_cost(state, u, p) < 0:
 		return false
 	var occ := state.unit_at(p)
-	if occ != null and not state.are_allies(occ.faction, u.faction):
+	if occ != null and not state.are_allies(occ.faction, u.faction) and (vis.is_empty() or vis.has(p)):
 		return false
 	if state.object_at(p).get("loai", "") == "quan_tan":
 		return false
@@ -143,9 +145,11 @@ static func _enterable(state: BattleState, u: Unit, p: Vector2i) -> bool:
 
 
 ## Các ô quân có thể dừng lại: {Vector2i: {"chi_phi": int, "duong": Array[Vector2i]}}. Gồm cả ô đang đứng.
-static func reachable(state: BattleState, u: Unit) -> Dictionary:
+## `fog`: tính như người chơi thấy — quân địch trong sương coi như không có (02 §3 "phục kích").
+static func reachable(state: BattleState, u: Unit, fog := false) -> Dictionary:
 	var mp := move_points(state, u)
-	var zoc: Dictionary = {} if u.has_tag("xung_phong") else zoc_tiles(state, u)
+	var vis := visible_tiles(state, u.faction) if fog else {}
+	var zoc: Dictionary = {} if u.has_tag("xung_phong") else zoc_tiles(state, u, vis)
 	var dist := {u.pos: 0}
 	var prev := {}
 	var open: Array[Vector2i] = [u.pos]
@@ -164,7 +168,7 @@ static func reachable(state: BattleState, u: Unit) -> Dictionary:
 			continue  # vào vùng khống chế thì dừng
 		for d in DIRS:
 			var n := p + d
-			if not _enterable(state, u, n):
+			if not _enterable(state, u, n, vis):
 				continue
 			var nd: int = dist[p] + move_cost(state, u, n)
 			if nd > mp or nd >= dist.get(n, INF):
@@ -175,7 +179,8 @@ static func reachable(state: BattleState, u: Unit) -> Dictionary:
 	var out := {}
 	for p in dist:
 		var occ := state.unit_at(p)
-		if p == u.pos or occ == null:
+		var hidden := occ != null and not vis.is_empty() and not vis.has(p)
+		if p == u.pos or occ == null or hidden:
 			var path: Array[Vector2i] = [p]
 			var c: Vector2i = p
 			while c != u.pos:
@@ -368,11 +373,11 @@ static func can_act(state: BattleState, u: Unit) -> bool:
 	return state.result == "" and u.faction == state.current_faction() and not u.done
 
 
-static func cmd_move(state: BattleState, u: Unit, target: Vector2i) -> Array[Dictionary]:
+static func cmd_move(state: BattleState, u: Unit, target: Vector2i, fog := false) -> Array[Dictionary]:
 	var ev: Array[Dictionary] = []
 	if not can_act(state, u) or u.moved:
 		return ev
-	var reach := reachable(state, u)
+	var reach := reachable(state, u, fog and is_dark(state))
 	if not reach.has(target):
 		return ev
 	var path: Array[Vector2i] = []
@@ -382,16 +387,43 @@ static func cmd_move(state: BattleState, u: Unit, target: Vector2i) -> Array[Dic
 	if path.is_empty():
 		path = path_to(reach, u.pos, target)
 	var seen_before := _seen_enemies(state, u.faction)
+	var ambush := _ambush_stop(state, u, path)
+	if ambush["dung"] < path.size() - 1:
+		path = path.slice(0, ambush["dung"] + 1)
+		target = path[-1]
+		u.khoa_hoan_tac = true
 	u.move_origin = u.pos
 	u.pos = target
 	u.moved = true
 	ev.append({"loai": "di", "uid": u.uid, "duong": path})
+	if ambush.has("dich"):
+		ev.append({"loai": "phuc_kich", "uid": u.uid, "dich": ambush["dich"], "o": target})
 	if is_dark(state):
 		for uid in _seen_enemies(state, u.faction):
 			if not seen_before.has(uid):
 				u.khoa_hoan_tac = true
 				ev.append({"loai": "lo_dien", "uid": uid})
 	return ev
+
+
+## Đi theo `path` (tính trong sương) với luật thật: gặp quân địch ẩn thì dừng ở ô trước đó;
+## bước vào vùng khống chế của quân địch ẩn thì dừng ở đó. Trả về {"dung": chỉ số ô dừng, "dich": uid (nếu phục kích)}.
+static func _ambush_stop(state: BattleState, u: Unit, path: Array[Vector2i]) -> Dictionary:
+	var last := path.size() - 1
+	var zoc: Dictionary = {} if u.has_tag("xung_phong") else zoc_tiles(state, u)
+	for i in range(1, path.size()):
+		var occ := state.unit_at(path[i])
+		if occ != null and not state.are_allies(occ.faction, u.faction):
+			var stop := i - 1
+			while stop > 0 and state.unit_at(path[stop]) != null:
+				stop -= 1  # không dừng trên ô có quân mình
+			return {"dung": stop, "dich": occ.uid}
+		if zoc.has(path[i]) and i < last and state.unit_at(path[i]) == null:
+			for d in DIRS:
+				var e := state.unit_at(path[i] + d)
+				if e != null and not state.are_allies(e.faction, u.faction) and e.has_tag("chan"):
+					return {"dung": i, "dich": e.uid}
+	return {"dung": last}
 
 
 ## uid các quân địch phe `f` đang thấy (ban đêm).

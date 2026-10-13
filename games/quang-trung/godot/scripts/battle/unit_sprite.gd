@@ -19,6 +19,23 @@ var _torch := false
 var night_boost := Color.WHITE
 
 static var _fallback_cache: Dictionary = {}
+## Quân đã đi: làm xám (bỏ màu) thay vì tô tối — tô tối làm quân Tây Sơn trông như quân Diễn tập đỏ sẫm (báo cáo M3 lần 2).
+static var _gray_shader: Shader
+
+
+static func _gray() -> Shader:
+	if _gray_shader == null:
+		_gray_shader = Shader.new()
+		_gray_shader.code = """
+shader_type canvas_item;
+uniform float xam : hint_range(0.0, 1.0) = 0.0;
+void fragment() {
+	vec4 c = texture(TEXTURE, UV) * COLOR;
+	float l = dot(c.rgb, vec3(0.3, 0.59, 0.11));
+	COLOR = vec4(mix(c.rgb, vec3(l * 0.85 + 0.08), xam), c.a);
+}
+"""
+	return _gray_shader
 
 
 func setup(u: Unit, font: Font) -> void:
@@ -29,6 +46,9 @@ func setup(u: Unit, font: Font) -> void:
 	sprite.texture = _texture_for(u)
 	sprite.hframes = 2 if sprite.texture.get_width() >= T * 2 else 1
 	sprite.flip_h = u.faction != "tayson"
+	var mat := ShaderMaterial.new()
+	mat.shader = _gray()
+	sprite.material = mat
 	add_child(sprite)
 	hp_label = Label.new()
 	hp_label.add_theme_font_override("font", font)
@@ -51,7 +71,8 @@ func refresh(u: Unit) -> void:
 	_asleep = u.ngu
 	_torch = u.duoc
 	hp_label.text = str(u.hp) if u.hp < 100 else ""
-	sprite.modulate = (Color(0.55, 0.55, 0.6) if u.done else Color.WHITE) * night_boost
+	sprite.modulate = night_boost
+	(sprite.material as ShaderMaterial).set_shader_parameter("xam", 1.0 if u.done else 0.0)
 	queue_redraw()
 
 

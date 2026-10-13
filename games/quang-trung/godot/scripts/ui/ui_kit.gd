@@ -90,6 +90,10 @@ static func _styled_button(text: String, size: int, min_w: int) -> Button:
 	b.add_theme_stylebox_override("focus", normal)
 	b.add_theme_stylebox_override("disabled", disabled)
 	b.add_theme_color_override("font_color", C_GOLD_LIGHT)
+	# Mặc định Godot đổi chữ sang trắng khi hover / nhấn / focus; trên điện thoại "hover" còn dính sau khi vuốt
+	# (báo cáo M3 lần 2: dòng dưới ngón tay bị tô trắng như đang chọn) → giữ một màu, nhấn thì đổi nền.
+	for st in ["font_hover_color", "font_pressed_color", "font_hover_pressed_color", "font_focus_color"]:
+		b.add_theme_color_override(st, C_GOLD_LIGHT)
 	b.add_theme_color_override("font_disabled_color", Color(0.5, 0.42, 0.36))
 	b.custom_minimum_size = Vector2(min_w, BTN_H)
 	b.pressed.connect(func() -> void: Sfx.play("cham", -6.0))

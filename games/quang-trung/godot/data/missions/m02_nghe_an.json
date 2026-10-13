@@ -213,7 +213,7 @@
  "goi_y": [
   {
    "khi": "bat_dau",
-   "loi": "Chiếm làng: đưa lính giáo hoặc tướng vào làng rồi bấm Chiếm. Mỗi làng cho 30 vàng mỗi vòng và tặng một lính giáo."
+   "loi": "Chiếm làng: đưa lính giáo hoặc tướng vào làng rồi bấm Chiếm. Mỗi làng tặng một lính giáo và cho thêm 10 vàng mỗi vòng."
   },
   {
    "khi": "vong",
@@ -234,5 +234,6 @@
   "nguyen_thiep",
   "voi_chien_tay_son",
   "tuyen_quan_nghe_an"
- ]
+ ],
+ "vang_lang": 10
 }

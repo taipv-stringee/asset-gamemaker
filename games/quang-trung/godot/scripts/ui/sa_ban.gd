@@ -18,6 +18,7 @@ var _data: Dictionary
 var _map: Control
 var _selected := ""
 var _text_col: VBoxContainer
+var _buttons: Dictionary = {}     # id đạo → nút; đạo đang chọn có dấu ▶ và nền sáng
 
 
 func setup(mission: Dictionary) -> SaBan:
@@ -29,14 +30,22 @@ func setup(mission: Dictionary) -> SaBan:
 	col.add_child(UiKit.wrap_label("Đêm 30 tháng Chạp, quân Tây Sơn chia năm đạo tiến ra Thăng Long (sơ đồ theo sách giáo khoa hiện nay). Chạm một đạo để đọc.", UiKit.FS_SMALL, UiKit.C_MUTED))
 	_map = Control.new()
 	_map.custom_minimum_size = Vector2(0, 300)
+	_map.mouse_filter = Control.MOUSE_FILTER_PASS   # vuốt bắt đầu trên sơ đồ vẫn cuộn được trang
 	_map.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_map.draw.connect(_draw_map)
 	col.add_child(_map)
 	for d in _data.get("dao", []):
 		var b := UiKit.list_button("■ " + d["ten"], _pick.bind(d["id"]))
-		b.add_theme_color_override("font_color", ROUTE_COLORS.get(d["mau"], Color.WHITE).lightened(0.35))
+		var c: Color = ROUTE_COLORS.get(d["mau"], Color.WHITE).lightened(0.35)
+		for st in ["font_color", "font_hover_color", "font_pressed_color", "font_hover_pressed_color", "font_focus_color"]:
+			b.add_theme_color_override(st, c)
+		b.set_meta("chu", "■ " + d["ten"])
+		_buttons[d["id"]] = b
 		col.add_child(b)
-	col.add_child(UiKit.list_button("Cách chia quân trong Hoàng Lê nhất thống chí", _pick.bind("cach_chia_hlntc")))
+	var hl := UiKit.list_button("Cách chia quân trong Hoàng Lê nhất thống chí", _pick.bind("cach_chia_hlntc"))
+	hl.set_meta("chu", hl.text)
+	_buttons["cach_chia_hlntc"] = hl
+	col.add_child(hl)
 	_text_col = VBoxContainer.new()
 	_text_col.add_theme_constant_override("separation", 6)
 	col.add_child(_text_col)
@@ -48,6 +57,13 @@ func _pick(id: String) -> void:
 	Sfx.play("lat_trang", -4.0)
 	_selected = id
 	_map.queue_redraw()
+	for k in _buttons:
+		var b: Button = _buttons[k]
+		b.text = ("▶ " if k == id else "") + String(b.get_meta("chu"))
+		var sb := (b.get_theme_stylebox("normal") as StyleBoxFlat).duplicate() as StyleBoxFlat
+		sb.bg_color = Color(0.32, 0.12, 0.1) if k == id else UiKit.C_LACQUER_DARK
+		b.add_theme_stylebox_override("normal", sb)
+		b.add_theme_stylebox_override("hover", sb)
 	for c in _text_col.get_children():
 		c.queue_free()
 	var e := Story.codex_entry(id)
@@ -104,4 +120,9 @@ func _draw_map() -> void:
 		var tw := font.get_string_size(place["ten"], HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
 		# Địa danh nửa phải sơ đồ ghi sang trái chấm cho khỏi tràn mép.
 		var off := Vector2(-tw - 5, 4) if at.x + 5 + tw > rect.end.x - 2 else Vector2(5, 4)
+		match place.get("nhan", ""):
+			"trai":
+				off = Vector2(-tw - 5, 4)
+			"duoi":
+				off = Vector2(-tw / 2.0, 16)
 		_map.draw_string(font, at + off, place["ten"], HORIZONTAL_ALIGNMENT_LEFT, -1, fs, INK)

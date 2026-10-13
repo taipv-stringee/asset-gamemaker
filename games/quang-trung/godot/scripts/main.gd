@@ -380,10 +380,12 @@ func _inspect(what: String) -> String:
 	if what.begins_with("sao "):
 		return str(Progress.stars(what.substr(4)))
 	if what == "cuon":
+		# danh sách cuộn trên cùng (vẽ sau cùng) đang hiện
+		var top := ""
 		for sc in find_children("*", "ScrollContainer", true, false):
 			if sc.is_visible_in_tree():
-				return str(sc.scroll_vertical)
-		return "(không có danh sách cuộn)"
+				top = "%d/%d" % [sc.scroll_vertical, int(sc.get_v_scroll_bar().max_value - sc.size.y)]
+		return top if top != "" else "(không có danh sách cuộn)"
 	if what == "man_hinh":
 		return "(trận)" if screen == null else str(screen.get_script().get_global_name())
 	if battle == null:

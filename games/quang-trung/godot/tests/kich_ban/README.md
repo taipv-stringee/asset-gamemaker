@@ -76,10 +76,10 @@ Chạy: `GODOT --path . -- --menu --moi --kich-ban=res://tests/kich_ban/cuon_dan
 
 | Dòng | Mong đợi |
 |---|---|
-| `kiem cuon` (trước) | `0` |
-| `kiem cuon` (sau `vuot 140 260 -200`, vuốt bắt đầu trên nút "Màn 2") | > `0` (đã cuộn) |
+| `kiem cuon` (trước) | `0/367` (vị trí / mức cuộn tối đa) |
+| `kiem cuon` (sau `vuot 140 260 -200`, vuốt bắt đầu trên nút "Màn 2") | `367/367` (đã cuộn) |
 | `kiem man_hinh` | `CampaignScreen` (vuốt không bị tính là bấm vào màn) |
 
 Lưu ý: trên máy tính chạy xvfb, danh sách cuộn được cả với bản cũ, nên kịch bản này chỉ bắt được lỗi trên **máy cảm ứng thật**
 (hoặc máy có màn cảm ứng). Trên Pixel 3: vuốt bằng tay trên các nút màn, danh sách phải cuộn.
-Lệnh mới: `vuot X Y DY` (vuốt cảm ứng từ điểm logic X, Y), `kiem cuon` (vị trí cuộn của danh sách đang hiện).
+Lệnh mới: `vuot X Y DY` (vuốt cảm ứng từ điểm logic X, Y), `kiem cuon` (vị trí cuộn / mức tối đa của danh sách trên cùng đang hiện).

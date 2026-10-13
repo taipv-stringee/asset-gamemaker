@@ -729,6 +729,13 @@ static func cmd_end_turn(state: BattleState) -> Array[Dictionary]:
 	return ev
 
 
+## Vàng mỗi vòng của một ô sở hữu. Màn có thể đặt "vang_lang" riêng (màn 2: làng đã tặng lính nên thu ít hơn).
+static func tile_income(state: BattleState, p: Vector2i) -> int:
+	if state.terrain_id(p) == "lang" and state.mission.has("vang_lang"):
+		return int(state.mission["vang_lang"])
+	return int(state.terrain_at(p)["vang"])
+
+
 static func start_turn(state: BattleState) -> Array[Dictionary]:
 	var ev: Array[Dictionary] = []
 	var f := state.current_faction()
@@ -738,7 +745,7 @@ static func start_turn(state: BattleState) -> Array[Dictionary]:
 		var income := 0
 		for p in state.owners:
 			if state.owners[p] == f:
-				income += int(state.terrain_at(p)["vang"])
+				income += tile_income(state, p)
 		if income > 0:
 			state.gold[f] = int(state.gold.get(f, 0)) + income
 			ev.append({"loai": "vang", "phe": f, "them": income})

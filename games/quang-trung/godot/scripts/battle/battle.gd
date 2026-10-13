@@ -550,8 +550,8 @@ func _terrain_info(p: Vector2i) -> void:
 	portrait.texture = null
 	name_label.text = t["ten"]
 	var parts: PackedStringArray = ["Thủ %+d" % int(t["thu"])]
-	if int(t["vang"]) > 0:
-		parts.append("+%d vàng mỗi vòng" % int(t["vang"]))
+	if Rules.tile_income(state, p) > 0:
+		parts.append("+%d vàng mỗi vòng" % Rules.tile_income(state, p))
 	if t["mua_linh"]:
 		parts.append("mua lính")
 	var o := state.owner_of(p)

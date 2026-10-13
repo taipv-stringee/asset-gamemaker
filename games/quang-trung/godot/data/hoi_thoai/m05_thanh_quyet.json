@@ -1,0 +1,87 @@
+{
+ "_ghi_chu": "Mỗi câu có 'nhan' (một trong bốn nhãn của 05 §1). 'ai' rỗng = lời dẫn.",
+ "truoc": [
+  {
+   "ai": "",
+   "loi": "Mùng 1 Tết Kỷ Dậu. Quân Lê, quân Thanh tan từ sông Gián chạy ngược đường thiên lý lên bắc.",
+   "nhan": "Theo HLNTC"
+  },
+  {
+   "ai": "linh_giao",
+   "ten": "Tiền quân",
+   "loi": "Bẩm, phía trước có mấy toán lính Thanh lẩn trong ruộng, dò xem quân ta tới đâu.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Phía trên là Hà Hồi. Một người chạy về được là cả đồn ấy thức.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Bắt cho hết, không để lọt ai. Rồi lấy đồn Nhật Tảo.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "",
+   "loi": "Trinh sát thấy quân ta ở gần là chạy về dải đỏ phía bắc. Tiền quân ta đã ở giữa đường.",
+   "nhan": "Sáng tạo của game"
+  }
+ ],
+ "thanh_quyet": [
+  {
+   "ai": "",
+   "loi": "Đồn Thanh Quyết đã về tay quân ta. Từ đây mua được lính gần mặt trận hơn.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Không nán lại. Lên Nhật Tảo.",
+   "nhan": "Sáng tạo của game"
+  }
+ ],
+ "sau_thang": [
+  {
+   "ai": "",
+   "loi": "Đồn Nhật Tảo bị diệt. Tới Phú Xuyên, quân ta bắt hết toán do thám của địch.",
+   "nhan": "Theo HLNTC"
+  },
+  {
+   "ai": "",
+   "loi": "Tin không về được Hà Hồi. Đêm mùng 3, quân Tây Sơn đã tới dưới chân đồn.",
+   "nhan": "Theo HLNTC"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Đêm nay vây Hà Hồi. Giữ im lặng như đêm sông Gián.",
+   "nhan": "Sáng tạo của game"
+  }
+ ],
+ "sau_thang_lot": [
+  {
+   "ai": "",
+   "loi": "Đồn Nhật Tảo bị diệt. Nhưng đã có trinh sát chạy thoát về phía Hà Hồi.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "",
+   "loi": "Theo Hoàng Lê nhất thống chí, quân Tây Sơn đã bắt hết toán do thám ở Phú Xuyên.",
+   "nhan": "Theo HLNTC"
+  },
+  {
+   "ai": "",
+   "loi": "Lần này thì có người lọt lưới.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Hà Hồi đã có tin. Đêm nay đánh một đồn đã thức, phải vây cho chặt.",
+   "nhan": "Sáng tạo của game"
+  }
+ ]
+}

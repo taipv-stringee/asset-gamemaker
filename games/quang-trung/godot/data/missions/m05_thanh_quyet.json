@@ -1,0 +1,448 @@
+{
+ "id": "m05_thanh_quyet",
+ "so": 5,
+ "ten": "Thanh Quyết – Nhật Tảo – Phú Xuyên",
+ "ten_ngan": "Phú Xuyên",
+ "ngay": "Mùng 1 đến mùng 3 Tết Kỷ Dậu (26–28/01/1789, quy đổi)",
+ "dia_danh": "Đường thiên lý từ sông Gián tới Phú Xuyên (nam Hà Nội ngày nay)",
+ "gioi_thieu": "Qua sông Gián, quân Tây Sơn đuổi theo quân Lê và quân Thanh tan chạy, qua Thanh Quyết, diệt đồn Nhật Tảo. Tới Phú Xuyên, quân ta bắt hết toán do thám của địch, nên tin không về được đồn Hà Hồi.",
+ "nhan_gioi_thieu": "Theo HLNTC",
+ "muc_tieu_chinh": "Quang Trung chiếm đồn Nhật Tảo trước khi hết vòng 16.",
+ "dieu_kien_thua": "Quang Trung bị hạ, hoặc hết vòng 16.",
+ "hoi_thoai": "m05_thanh_quyet",
+ "nhac": "chu_de",
+ "ghi_chu": "Truy kích (04 §Màn 5). Vị trí đồn, sông, số trinh sát là Sáng tạo của game; việc bắt hết toán do thám ở Phú Xuyên theo HLNTC và Liệt truyện.",
+ "ban_do": [
+  "^^t.=.t^^",
+  "^t..=..t^",
+  "t.l.=.l.t",
+  "..lDFDl..",
+  "v.ll=ll.v",
+  "r...=...r",
+  "~:~~#~~:~",
+  "r..L=...r",
+  "rr..=.vrr",
+  "t.v.=..vt",
+  "..r.=.r..",
+  "rr..=..rr",
+  "v..r=.L.v",
+  "..rr=rr..",
+  "t.r.F.r.t",
+  "..rh=.r..",
+  "rr..=..rr",
+  "L..r=r..v",
+  "-.--=--.-",
+  "rr..=..rr",
+  "t...=...t",
+  "..v.F.v..",
+  "t..L=...t",
+  "^t..=..t^"
+ ],
+ "chu_o": {
+  "4,3": "thanh",
+  "4,14": "le",
+  "4,21": "tayson",
+  "3,22": "tayson",
+  "3,7": "le"
+ },
+ "phe": [
+  "tayson",
+  "thanh",
+  "le"
+ ],
+ "vang": {
+  "tayson": 500,
+  "thanh": 0,
+  "le": 0
+ },
+ "gioi_han": {
+  "tayson": 16,
+  "thanh": 99,
+  "le": 99
+ },
+ "mua_duoc": {
+  "tayson": [
+   "linh_giao",
+   "hoa_mai",
+   "thuy_binh",
+   "hoa_ho",
+   "quan_su",
+   "trong_tran",
+   "voi_chien",
+   "than_cong"
+  ],
+  "thanh": [],
+  "le": []
+ },
+ "khu": {
+  "duong_ve_ha_hoi": [
+   [
+    2,
+    0
+   ],
+   [
+    3,
+    0
+   ],
+   [
+    4,
+    0
+   ],
+   [
+    5,
+    0
+   ],
+   [
+    6,
+    0
+   ]
+  ]
+ },
+ "hien_khu": [
+  {
+   "khu": "duong_ve_ha_hoi",
+   "mau": "do",
+   "ghi": "Đường về Hà Hồi: trinh sát chạy tới đây là thoát, mang tin về đồn Hà Hồi."
+  }
+ ],
+ "co_khi_thoat": "trinh_sat_thoat",
+ "luu_co": [
+  "trinh_sat_thoat"
+ ],
+ "quan": [
+  {
+   "id": "quang_trung",
+   "phe": "tayson",
+   "x": 4,
+   "y": 20,
+   "tuong_chinh": true
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 3,
+   "y": 20
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 5,
+   "y": 20
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 4,
+   "y": 19
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 3,
+   "y": 21
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 5,
+   "y": 21
+  },
+  {
+   "id": "voi_chien",
+   "phe": "tayson",
+   "x": 4,
+   "y": 22
+  },
+  {
+   "id": "quan_su",
+   "phe": "tayson",
+   "x": 2,
+   "y": 21
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 4,
+   "y": 9
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 2,
+   "y": 9
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 6,
+   "y": 9
+  },
+  {
+   "id": "trinh_sat",
+   "phe": "thanh",
+   "x": 1,
+   "y": 13,
+   "ai": "do_tham",
+   "khu": "duong_ve_ha_hoi",
+   "thay": 3,
+   "diem": [
+    [
+     1,
+     13
+    ],
+    [
+     1,
+     16
+    ]
+   ]
+  },
+  {
+   "id": "trinh_sat",
+   "phe": "thanh",
+   "x": 7,
+   "y": 13,
+   "ai": "do_tham",
+   "khu": "duong_ve_ha_hoi",
+   "thay": 3,
+   "diem": [
+    [
+     7,
+     13
+    ],
+    [
+     7,
+     16
+    ]
+   ]
+  },
+  {
+   "id": "trinh_sat",
+   "phe": "thanh",
+   "x": 1,
+   "y": 15,
+   "ai": "do_tham",
+   "khu": "duong_ve_ha_hoi",
+   "thay": 3
+  },
+  {
+   "id": "trinh_sat",
+   "phe": "thanh",
+   "x": 7,
+   "y": 15,
+   "ai": "do_tham",
+   "khu": "duong_ve_ha_hoi",
+   "thay": 3
+  },
+  {
+   "id": "trinh_sat",
+   "phe": "thanh",
+   "x": 4,
+   "y": 15,
+   "ai": "do_tham",
+   "khu": "duong_ve_ha_hoi",
+   "thay": 3
+  },
+  {
+   "id": "quan_giu_don_le",
+   "phe": "le",
+   "x": 4,
+   "y": 14,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    14
+   ],
+   "ban_kinh": 0
+  },
+  {
+   "id": "quan_le",
+   "phe": "le",
+   "x": 3,
+   "y": 14,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    14
+   ],
+   "ban_kinh": 2
+  },
+  {
+   "id": "quan_le",
+   "phe": "le",
+   "x": 5,
+   "y": 14,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    14
+   ],
+   "ban_kinh": 2
+  },
+  {
+   "id": "quan_le",
+   "phe": "le",
+   "x": 3,
+   "y": 7,
+   "ai": "giu_don",
+   "tam": [
+    3,
+    7
+   ],
+   "ban_kinh": 1
+  },
+  {
+   "id": "quan_le",
+   "phe": "le",
+   "x": 2,
+   "y": 7,
+   "ai": "giu_don",
+   "tam": [
+    3,
+    7
+   ],
+   "ban_kinh": 1
+  },
+  {
+   "id": "quan_giu_don",
+   "phe": "thanh",
+   "x": 4,
+   "y": 3,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    3
+   ],
+   "ban_kinh": 0
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 3,
+   "y": 3,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    3
+   ],
+   "ban_kinh": 1
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 5,
+   "y": 3,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    3
+   ],
+   "ban_kinh": 1
+  },
+  {
+   "id": "truong_mau",
+   "phe": "thanh",
+   "x": 4,
+   "y": 4,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    3
+   ],
+   "ban_kinh": 2
+  },
+  {
+   "id": "cung_tien",
+   "phe": "thanh",
+   "x": 4,
+   "y": 2,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    3
+   ],
+   "ban_kinh": 1
+  }
+ ],
+ "vien_binh": [
+  {
+   "phe": "tayson",
+   "vong": [
+    3
+   ],
+   "quan": [
+    {
+     "id": "than_cong",
+     "x": 4,
+     "y": 22
+    }
+   ]
+  }
+ ],
+ "su_kien": [
+  {
+   "id": "chiem_thanh_quyet",
+   "khi": {
+    "loai": "chiem_o",
+    "o": [
+     4,
+     14
+    ]
+   },
+   "lam": [
+    {
+     "loai": "hoi_thoai",
+     "phan": "thanh_quyet"
+    }
+   ]
+  }
+ ],
+ "thang": {
+  "loai": "chiem_o",
+  "o": [
+   4,
+   3
+  ]
+ },
+ "thua_het_luot": 16,
+ "ly_do_het_luot": "Hết vòng 16: quân Thanh ở Nhật Tảo đã kịp lui về giữ Hà Hồi.",
+ "muc_tieu_phu": [
+  {
+   "loai": "khong_thoat",
+   "ten": "Không để trinh sát nào thoát về Hà Hồi"
+  },
+  {
+   "loai": "truoc_vong",
+   "n": 14,
+   "ten": "Chiếm Nhật Tảo trước vòng 14"
+  }
+ ],
+ "goi_y": [
+  {
+   "khi": "bat_dau",
+   "loi": "Năm trinh sát Thanh đang dò quân ta. Thấy quân ta trong 3 ô là chúng chạy về dải đỏ phía bắc. Chạm vào trinh sát để xem."
+  },
+  {
+   "khi": "vong",
+   "n": 2,
+   "loi": "Trinh sát yếu nhưng chạy nhanh (5 ô). Hạ gọn trong một lượt khi chúng chưa chạy, hoặc dùng lính giáo khống chế đường chạy. Tiền quân ở giữa bản đồ chặn được ở cầu và chỗ sông cạn."
+  },
+  {
+   "khi": "vong",
+   "n": 3,
+   "loi": "Thần công theo kịp: bắn xa 2–4 ô, mạnh khi bắn quân trên đồn, doanh trại. Đã đi thì lượt đó không bắn được, và không phản đòn. Thần công không qua chỗ sông cạn."
+  },
+  {
+   "khi": "vong",
+   "n": 5,
+   "loi": "Chiếm đồn Thanh Quyết (giữa – nam) để có chỗ mua lính gần mặt trận hơn."
+  }
+ ],
+ "su_lieu": [
+  "thanh_quyet_nhat_tao",
+  "phu_xuyen_do_tham",
+  "than_cong_tay_son"
+ ],
+ "sau_thang_theo_co": {
+  "trinh_sat_thoat": "sau_thang_lot"
+ }
+}

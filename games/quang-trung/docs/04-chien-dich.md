@@ -134,17 +134,24 @@ Mỗi điểm ghi ngày âm và dương lịch.
 ## Màn 5 — Thanh Quyết – Nhật Tảo – Phú Xuyên: truy kích
 
 - **Lịch sử**: Mùng 1 đến mùng 3, truy kích qua Thanh Quyết, diệt đồn Nhật Tảo, bắt hết toán do thám ở Phú Xuyên nên tin không về được
-  Hà Hồi. *[Theo HLNTC; Liệt truyện]*
-- **Bản đồ**: 9 × 24, cuộn dọc. Nam: đồn của ta. Giữa – nam: đồn nhỏ Thanh Quyết (chiếm được, không kết thúc màn, thành nơi mua lính
-  thứ hai). Giữa – bắc: khu đồn Nhật Tảo. Mép bắc: vùng thoát "đường về Hà Hồi".
+  Hà Hồi. *[Theo HLNTC; Liệt truyện]* Vị trí đồn, con sông và cầu trước Nhật Tảo, số trinh sát là *[Sáng tạo của game]*.
+- **Bản đồ**: 9 × 24, cuộn dọc (`data/missions/m05_thanh_quyet.json`). Nam: đồn của ta (4,21). Giữa – nam: đồn nhỏ Thanh Quyết (4,14),
+  quân Lê giữ; chiếm được, không kết thúc màn, thành chỗ mua lính thứ hai (sự kiện `chiem_o` → hội thoại). Giữa: làng có 2 quân Lê tàn
+  (giữ làng, bán kính 1), sông ngang có **cầu** (4,6) và hai **chỗ cạn** (1,6), (7,6) — thần công không qua chỗ cạn. Bắc: khu đồn Nhật Tảo
+  (đồn giữa, hai doanh trại, lũy, cổng phía nam). Mép bắc: **dải đỏ "đường về Hà Hồi"** (`hien_khu`).
 - **Quân ta**: Quang Trung, 3 lính giáo, 2 hỏa mai, 1 voi chiến, 1 quân sư; **tiền quân** (2 hỏa mai, 1 lính giáo) đặt sẵn ở giữa bản đồ.
-  Vàng 500; giới hạn 16; `mua_duoc`: như màn 4 + than_cong.
-- **Địch**: quân Lê và quân Thanh tàn từ Gián Khẩu, giữ Thanh Quyết và Nhật Tảo. **5 trinh sát** (Di 5) xuất phát ở dải giữa – nam
-  (đang dò quân ta), chế độ *Chạy* tới vùng thoát **từ khi thấy quân ta**; đường chạy đi qua tiền quân của ta.
-- **Thắng**: chiếm đồn Nhật Tảo trước khi hết vòng 16.
-- **Hệ quả**: có trinh sát thoát → ở màn 6 quân Hà Hồi **thức sẵn**. Không thoát → màn 6 đúng như sử.
-- **Mục tiêu phụ**: không trinh sát nào thoát; thắng trước vòng 12.
-- **Mở Sử liệu**: Thanh Quyết, Nhật Tảo, Phú Xuyên; thần công Tây Sơn.
+  **Thần công** theo kịp ở vòng 3 (viện binh, có gợi ý). Vàng 500; giới hạn 16; `mua_duoc`: như màn 4 + than_cong.
+- **Địch**: **5 trinh sát** ở dải giữa – nam, chế độ *Dò thám* (thấy quân ta trong 3 ô → *Chạy* về dải đỏ; 2 con đi tuần xuống phía nam).
+  Thanh Quyết: quan giữ đồn Lê + 2 quân Lê. Nhật Tảo: quan giữ đồn, 2 điểu thương trong doanh, trường mâu ở cổng, cung tiễn (5 quân).
+- **Thắng**: Quang Trung chiếm đồn Nhật Tảo trước khi hết vòng 16. **Thua**: Quang Trung bị hạ; hết vòng 16.
+- **Hệ quả**: có trinh sát thoát → cờ `trinh_sat_thoat` ghi vào tiến trình (`luu_co`); màn 6 đọc cờ này để quân Hà Hồi **thức sẵn**.
+  Hội thoại cuối cũng khác (`sau_thang_lot`). Chơi lại và thắng sạch thì xóa hệ quả.
+- **Mục tiêu phụ**: không trinh sát nào thoát; chiếm Nhật Tảo trước vòng 14 (bản phác ghi 12; chơi thử lời giải mẫu thì 13 vòng là vừa sức).
+- **Lời giải mẫu** (`tests/loi_giai/m05_thanh_quyet.txt`): vòng 1 dàn quân cách trinh sát 4 ô; vòng 2 hai trinh sát đi tuần xuống sát
+  quân ta → đánh gọn 3 con; tiền quân và quân sư bắt 2 con chạy (vòng 3–5); thần công hạ quan giữ đồn Thanh Quyết, Quang Trung chiếm (vòng 6);
+  mua thêm thần công, dẹp quân Lê ở làng, hai thần công bắn cổng và đồn Nhật Tảo từ bờ nam; voi vào cổng; Quang Trung chiếm ở vòng 13.
+- **Luật thêm khi làm màn này**: quân bị hạ trên đồn / thành không để lại quân tan (02 §8), nếu không ô mục tiêu bị chặn 2 vòng.
+- **Mở Sử liệu**: Thanh Quyết và đồn Nhật Tảo; bắt hết do thám ở Phú Xuyên; thần công Tây Sơn.
 
 ## Màn 6 — Đêm mùng 3: vây Hà Hồi
 

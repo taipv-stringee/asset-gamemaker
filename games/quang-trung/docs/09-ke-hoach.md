@@ -10,7 +10,7 @@ lớn, có commit và push) — chỉ là ước lượng thô, chưa tính th�
 | **M0 – Tài liệu** | Bộ tài liệu 01–10, rà soát lịch sử và thiết kế | Chủ dự án duyệt | **Xong** (13/10/2026) |
 | **M1 – Mẫu luật chơi** | Project Godot; `core/` (bản đồ, đi, vùng khống chế, đánh, phản đòn, chiếm, mua lính, cấp, quân tan); AI cơ bản; 1 bản đồ thử; hình tạm; chế độ chạy kịch bản; `BUILD.md`, `TESTING.md`. **Hình mẫu chất lượng thật**: 1 loại lính đủ hoạt cảnh + 1 chân dung, để chủ dự án duyệt mức hình vẽ bằng code | Chơi trọn một trận trên điện thoại; test `core/` xanh; chủ dự án duyệt (hoặc từ chối) hình mẫu | 3–5 phiên |
 | **M2 – Lát cắt dọc** | **Màn 4 (Đêm 30 Tết – sông Gián)** hoàn chỉnh: đêm, ngủ, báo động, bến đò, hội thoại có chân dung, Sử liệu, nhạc + âm thanh, giao diện thật, hướng dẫn tối thiểu | Chủ dự án và vài người chơi thử; ghi nhận và sửa | **Xong** (13/10/2026) |
-| **M3 – Nội dung** | Màn 0–9, màn phụ P (cuối mốc), lời kết, đủ quân và tướng, ~40 mục Sử liệu, hình thật | Chơi được từ đầu đến cuối; AI Tây Sơn đơn giản không kẹt ở màn nào | 10–15 phiên — **đang làm**: màn 0–4 xong |
+| **M3 – Nội dung** | Màn 0–9, màn phụ P (cuối mốc), lời kết, đủ quân và tướng, ~40 mục Sử liệu, hình thật | Chơi được từ đầu đến cuối; AI Tây Sơn đơn giản không kẹt ở màn nào | 10–15 phiên — **đang làm**: màn 0–5 xong |
 | **M4 – Hoàn thiện** | Cân bằng, hướng dẫn, âm thanh, hiệu năng, thử trên nhiều máy, rà soát sử, đối chiếu nguyên văn nguồn (§3) | Không lỗi chặn; đối chiếu nguồn xong | 4–6 phiên |
 | **M5 – Phát hành** | Trang store, ảnh chụp, phân loại tuổi, giấy tờ theo Nghị định 147 (nếu phát hành ở Việt Nam) | Có mặt trên Google Play và App Store | 1–2 phiên |
 

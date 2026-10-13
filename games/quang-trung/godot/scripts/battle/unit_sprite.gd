@@ -12,6 +12,8 @@ var _frame_time := 0.0
 var _hp := 100
 var _level := 0
 var _done := false
+## Phe đang đi (Battle đặt): chỉ quân đã đi của phe này mới xám; quân phe khác giữ màu dù cờ done còn từ lượt trước.
+static var turn_faction := ""
 var _burning := false
 var _asleep := false
 var _torch := false
@@ -66,13 +68,13 @@ func setup(u: Unit, font: Font) -> void:
 func refresh(u: Unit) -> void:
 	_hp = u.hp
 	_level = u.level
-	_done = u.done
+	_done = u.done and (turn_faction == "" or u.faction == turn_faction)
 	_burning = u.chay_turns > 0
 	_asleep = u.ngu
 	_torch = u.duoc
 	hp_label.text = str(u.hp) if u.hp < 100 else ""
 	sprite.modulate = night_boost
-	(sprite.material as ShaderMaterial).set_shader_parameter("xam", 1.0 if u.done else 0.0)
+	(sprite.material as ShaderMaterial).set_shader_parameter("xam", 1.0 if _done else 0.0)
 	queue_redraw()
 
 

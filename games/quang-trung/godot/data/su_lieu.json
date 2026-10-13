@@ -314,6 +314,57 @@
      "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
     }
    ]
+  },
+  {
+   "id": "thanh_quyet_nhat_tao",
+   "nhom": "Địa danh",
+   "tieu_de": "Thanh Quyết và đồn Nhật Tảo",
+   "nhan": "Theo HLNTC",
+   "noi_dung": "Từ mùng 1 đến mùng 3 Tết Kỷ Dậu (26–28/01/1789, quy đổi), quân Tây Sơn theo đường thiên lý đuổi theo quân Lê và quân Thanh tan từ sông Gián, qua Thanh Quyết rồi diệt đồn Nhật Tảo. Diễn biến này theo Hoàng Lê nhất thống chí và Đại Nam chính biên liệt truyện.\n\nCác nguồn tìm được không tả hình dáng hay quân số của hai đồn. Trong màn chơi, vị trí đồn, con sông và cây cầu trước Nhật Tảo là sáng tạo của game.",
+   "nguon": [
+    {
+     "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
+     "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
+    },
+    {
+     "ten": "Quang Trung đại phá quân Thanh (Phương Nam – Văn hóa và Phát triển)",
+     "url": "https://phuongnam.vanhoavaphattrien.vn/quang-trung-dai-pha-quan-thanh-a10832.html"
+    }
+   ]
+  },
+  {
+   "id": "phu_xuyen_do_tham",
+   "nhom": "Sự kiện",
+   "tieu_de": "Bắt hết do thám ở Phú Xuyên",
+   "nhan": "Theo HLNTC",
+   "noi_dung": "Theo Hoàng Lê nhất thống chí, tới Phú Xuyên quân Tây Sơn bắt được hết toán do thám của địch, không để một người chạy thoát. Vì vậy tin quân Tây Sơn đã tới gần không về được đồn Hà Hồi, và đêm mùng 3 quân trong đồn bị vây mà không hay biết.\n\nNguồn không ghi toán do thám có bao nhiêu người. Năm trinh sát trong màn chơi, và việc màn sau khó hơn nếu có người thoát, là sáng tạo của game.",
+   "nguon": [
+    {
+     "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
+     "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
+    },
+    {
+     "ten": "Quang Trung đại phá quân Thanh (Phương Nam – Văn hóa và Phát triển)",
+     "url": "https://phuongnam.vanhoavaphattrien.vn/quang-trung-dai-pha-quan-thanh-a10832.html"
+    }
+   ]
+  },
+  {
+   "id": "than_cong_tay_son",
+   "nhom": "Binh chủng",
+   "tieu_de": "Thần công của quân Tây Sơn",
+   "nhan": "Sử liệu",
+   "noi_dung": "Thần công là súng lớn bằng đồng hay gang, bắn đạn nặng, dùng để phá đồn lũy. Bảo tàng Quang Trung (Bình Định) còn giữ một khẩu thần công thời Tây Sơn. Wang Zhichun, người Thanh viết ở thế kỷ 19, chép rằng quân Nguyễn Huệ dùng voi chở đại pháo.\n\nNguồn không cho biết quân Tây Sơn mang bao nhiêu thần công ra Bắc năm 1789, hay đã dùng ở trận nào. Trong game, thần công bắn xa 2–4 ô và mạnh khi bắn quân trên đồn, doanh trại.",
+   "nguon": [
+    {
+     "ten": "Khám phá mới về di sản quân sự thời Tây Sơn (Nhân Dân)",
+     "url": "https://nhandan.vn/kham-pha-moi-ve-di-san-quan-su-thoi-tay-son-post928804.html"
+    },
+    {
+     "ten": "Wikipedia tiếng Trung: 阮惠 (dẫn Thanh triều nhu viễn ký)",
+     "url": "https://zh.wikipedia.org/zh-hans/%E9%98%AE%E6%83%A0"
+    }
+   ]
   }
  ]
 }

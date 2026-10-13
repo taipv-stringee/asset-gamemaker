@@ -78,6 +78,10 @@ static func from_mission(m: Dictionary, p_seed: int = 0) -> BattleState:
 			for p in q["vung"]:
 				zone.append(Vector2i(int(p[0]), int(p[1])))
 			params["vung"] = zone
+		if q.has("khu"):
+			params["khu"] = String(q["khu"])      # trinh sát (do_tham): khu thoát
+		if q.has("thay"):
+			params["thay"] = int(q["thay"])        # trinh sát: thấy quân đối phương trong bán kính này thì chạy
 		if q.has("diem"):
 			var pts: Array[Vector2i] = []
 			for p in q["diem"]:

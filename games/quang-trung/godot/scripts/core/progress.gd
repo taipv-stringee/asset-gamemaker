@@ -56,6 +56,11 @@ static func record_win(state: BattleState) -> Array[String]:
 		if i < best.size() and best[i]:
 			got[i] = true
 	d["xong"][state.mission_id] = {"muc_tieu_phu": got, "vong": mini(int(prev.get("vong", 999)), state.won_round)}
+	# Hệ quả sang màn sau (04 §Màn 5): cờ trong "luu_co" lấy theo lần thắng gần nhất (chơi lại sạch thì xóa được hệ quả).
+	var carried: Dictionary = d.get("co", {})
+	for name in state.mission.get("luu_co", []):
+		carried[name] = Rules.has_flag(state, name)
+	d["co"] = carried
 	var opened: Array[String] = []
 	for id in state.mission.get("su_lieu", []):
 		if not d["su_lieu"].has(id):
@@ -63,6 +68,11 @@ static func record_win(state: BattleState) -> Array[String]:
 			opened.append(id)
 	save()
 	return opened
+
+
+## Cờ hệ quả do màn trước để lại (vd. "trinh_sat_thoat" từ màn 5).
+static func campaign_flag(name: String) -> bool:
+	return bool(data().get("co", {}).get(name, false))
 
 
 ## Màn chuyện (màn 3): xem xong là qua màn; mở các mục Sử liệu của màn. Trả về id mục mới mở.

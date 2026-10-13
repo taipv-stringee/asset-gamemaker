@@ -1,0 +1,145 @@
+# Lời giải mẫu màn 5 (Thanh Quyết – Nhật Tảo): bắt hết 5 trinh sát, chiếm Thanh Quyết, hai thần công phá Nhật Tảo, thắng ở vòng 13.
+# Vòng 1–5: trinh sát thấy quân ta trong 3 ô là chạy — dàn quân cách 4 ô, chờ chúng đi tuần xuống rồi đánh gọn, tiền quân chặn con chạy.
+# Vòng 1: dàn quân, cách mọi trinh sát ít nhất 4 ô
+di 3 20 2 18
+di 4 19 3 18
+di 5 20 6 18
+di 3 21 2 19
+di 5 21 6 19
+di 4 20 4 19
+di 4 22 5 19
+di 2 21 1 19
+di 6 9 7 9
+di 2 9 1 9
+het
+# Vòng 2: trinh sát đã đi tuần xuống sát quân ta → đánh gọn những con với tới được
+danh 2 18 1 17 1 16
+danh 2 19 2 17 1 16
+danh 1 19 2 16 1 15
+danh 4 19 4 16 4 15
+danh 6 18 5 15 4 15
+danh 6 19 6 17 7 16
+danh 5 19 7 17 7 16
+het
+# Vòng 3: hai trinh sát đang chạy → tiền quân và quân sư chặn đánh
+danh 1 9 1 10 2 11
+danh 4 9 3 11 2 11
+danh 7 9 7 11 6 12
+di 4 16 4 17
+di 2 16 2 14
+het
+# Vòng 4: bắn tiếp trinh sát cuối; đánh Thanh Quyết
+danh 7 11 7 9 6 8
+danh 2 14 2 14 3 14
+danh 2 17 2 15 3 14
+danh 5 15 5 15 5 14
+di 4 17 4 16
+toi 4 22 4 18
+toi 7 17 6 15
+toi 6 17 6 16
+toi 3 18 3 16
+toi 1 17 1 14
+toi 3 11 4 9
+toi 1 10 3 8
+het
+# Vòng 5: hạ trinh sát cuối trước cầu Nhật Tảo; đánh đồn Thanh Quyết
+danh 3 8 4 7 4 5
+danh 6 15 6 14 5 14
+toi 2 14 2 14
+danh 4 16 4 15 4 14
+danh 2 15 3 15 4 14
+di 4 19 4 17
+di 5 15 5 16
+het
+# Vòng 6: thần công bắn quan giữ đồn Thanh Quyết, Quang Trung chiếm đồn; cả đoàn tiến lên
+danh 4 17 4 17 4 14
+chiem 4 15 4 14
+toi 4 7 5 10
+toi 1 14 1 10
+toi 2 14 2 11
+toi 3 15 3 12
+toi 3 16 3 12
+toi 3 14 4 11
+toi 6 14 6 11
+toi 6 16 6 12
+het
+# Vòng 7: mua thêm thần công ở Thanh Quyết; dẹp quân Lê giữ làng trước sông
+toi 4 14 5 11
+mua 4 14 than_cong
+danh 4 9 3 8 3 7
+danh 7 9 4 8 3 7
+danh 1 11 2 8 2 7
+toi 6 11 5 8
+toi 2 11 2 9
+toi 4 11 4 10
+toi 4 12 3 10
+toi 4 13 4 11
+toi 4 17 4 13
+toi 7 14 6 11
+toi 5 10 5 13
+toi 5 16 4 16
+het
+# Vòng 8: hạ nốt quân Lê ở làng; thần công lên theo đường cái
+danh 3 8 3 8 3 7
+danh 4 8 4 8 3 7
+danh 2 8 2 8 2 7
+danh 2 9 2 9 2 7
+di 4 11 3 11
+toi 4 15 4 12
+toi 4 14 4 11
+mua 4 14 hoa_mai
+toi 5 8 5 7
+toi 4 10 4 9
+toi 3 10 4 8
+toi 5 11 5 9
+toi 6 11 6 8
+het
+# Vòng 9: dọn đường cái cho thần công; bộ binh dừng ở bờ nam
+toi 5 7 6 7
+toi 4 8 4 7
+di 5 8 5 7
+toi 4 9 3 9
+toi 4 11 4 8
+toi 4 12 4 9
+toi 4 14 4 11
+toi 3 8 2 7
+toi 2 8 1 8
+het
+# Vòng 10: thần công và hai hỏa mai bắn cung tiễn ở cổng đồn; thần công thứ hai vào làng (3,7)
+danh 4 8 4 8 4 4
+danh_neu 4 7 4 6 4 4
+danh_neu 5 7 5 5 4 4
+di 4 9 3 7
+het
+# Vòng 11: hỏa mai qua cầu bắn doanh phía đông (dòng dự phòng khi trường mâu đã ra lũy 5,4); thần công vào chỗ bắn
+danh_neu 5 7 5 5 5 3
+danh_neu 5 5 5 5 5 4
+danh_neu 4 6 5 4 5 3
+danh_neu 4 6 4 5 5 4
+di 4 8 5 7
+di 3 7 4 7
+toi 5 9 4 8
+toi 6 7 4 6
+toi 1 7 2 7
+toi 1 8 3 8
+het
+# Vòng 12: thần công bắn đồn và doanh phía đông; hỏa mai, voi đánh quan giữ đồn
+danh 4 7 4 7 4 3
+danh_neu 5 7 5 7 5 3
+danh_neu 5 5 5 5 5 3
+danh_neu 5 4 5 4 4 3
+danh_neu 4 5 4 5 4 3
+danh_neu 4 6 4 4 4 3
+toi 4 8 4 5
+toi 2 9 3 7
+toi 2 7 3 5
+het
+# Vòng 13: hạ quân còn trên ô đồn (nếu có), Quang Trung vào chiếm Nhật Tảo
+danh_neu 4 7 4 7 4 3
+danh_neu 4 4 3 3 4 3
+danh_neu 5 4 5 4 4 3
+danh_neu 5 5 5 3 4 3
+# (dự phòng) trường mâu đứng lũy 5,4 khống chế cổng đồn: hạ nó cho Quang Trung đi qua
+danh_neu 5 7 5 7 5 4
+danh_neu 4 5 4 5 5 4
+toi_loai quang_trung 4 3

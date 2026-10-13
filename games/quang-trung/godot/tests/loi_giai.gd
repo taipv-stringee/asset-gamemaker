@@ -5,6 +5,8 @@ extends RefCounted
 ##   di X Y X2 Y2              đi rồi chờ
 ##   danh X Y X2 Y2 X3 Y3      đi tới X2 Y2 rồi đánh quân ở X3 Y3
 ##   chiem X Y X2 Y2           đi rồi chiếm
+##   danh_neu X Y X2 Y2 X3 Y3  như "danh" nhưng bỏ qua (không lỗi) nếu không có quân ta chưa đi ở X Y, mục tiêu không còn,
+##                             hoặc không đi / đánh được — để viết dòng dự phòng khi bàn cờ khác nhau theo seed
 ##   mua X Y LOAI              mua lính ở ô X Y
 ##   toi X Y TX TY             đi tới ô đi được gần (TX, TY) nhất (cùng gần thì ô tốn ít điểm đi hơn), rồi chiếm nếu chiếm
 ##                             được ô đó, chiêu hàng nếu kề quân tan (quân sư), không thì chờ
@@ -33,6 +35,19 @@ static func run(mission: String, p_seed: int, path: String, verbose := false) ->
 		var w := line.split(" ", false)
 		var ev: Array[Dictionary] = []
 		match w[0]:
+			"danh_neu":
+				var nu := s.unit_at(Vector2i(int(w[1]), int(w[2])))
+				var nt := s.unit_at(Vector2i(int(w[5]), int(w[6])))
+				if nu == null or nu.done or nt == null or s.are_allies(nt.faction, nu.faction):
+					continue
+				var nto := Vector2i(int(w[3]), int(w[4]))
+				if nto != nu.pos and not Rules.reachable(s, nu).has(nto):
+					continue   # ô đứng bị chặn (bàn cờ khác đi theo seed): dòng dự phòng sau sẽ lo
+				if not Rules.targets_from(s, nu, nto, nto != nu.pos).has(nt):
+					continue
+				if nto != nu.pos:
+					ev = Rules.cmd_move(s, nu, nto)
+				ev.append_array(Rules.cmd_attack(s, nu, nt))
 			"di", "danh", "chiem":
 				var u := s.unit_at(Vector2i(int(w[1]), int(w[2])))
 				if u == null:
@@ -146,7 +161,7 @@ static func _toward(s: BattleState, u: Unit, goal: Vector2i, path := true) -> Ar
 
 
 static func print_map(s: BattleState) -> void:
-	print("--- vòng %d, báo động %d, vàng %d" % [s.vong, int(s.flags["bao_dong"]), s.gold.get(s.factions[0], 0)])
+	print("--- vòng %d, báo động %d, vàng %d, thoát %d" % [s.vong, int(s.flags["bao_dong"]), s.gold.get(s.factions[0], 0), int(s.flags.get("thoat", 0))])
 	var marks := {"quang_trung": "@", "voi_chien": "V", "thuy_binh": "W", "hoa_ho": "X"}
 	for y in s.height:
 		var row := "%2d " % y
@@ -157,9 +172,14 @@ static func print_map(s: BattleState) -> void:
 				if u.faction == s.factions[0]:
 					ch = marks.get(u.type_id, u.type_id.substr(0, 1).to_upper())
 				else:
-					ch = "z" if u.ngu else "e"
+					ch = "z" if u.ngu else ("e" if u.type_id != "trinh_sat" else ("c" if u.ai_mode == "chay" else "s"))
 			row += ch + " "
 		for u in s.units:
 			if u.pos.y == y and u.hp < 100:
 				row += " %s%s:%d" % [u.type_id.substr(0, 4), u.pos, u.hp]
 		print(row)
+	var foes: PackedStringArray = []
+	for u in s.units:
+		if u.faction != s.factions[0]:
+			foes.append("%s%s:%d" % [u.type_id.substr(0, 6), u.pos, u.hp])
+	print("   địch: ", " ".join(foes))

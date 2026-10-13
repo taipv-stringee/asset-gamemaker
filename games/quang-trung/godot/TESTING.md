@@ -5,7 +5,7 @@ Dành cho **agent kiểm thử chạy trên máy chủ dự án** và cho chủ 
 ## 1. Kiểm thử tự động (máy tính)
 
 1. `GODOT --headless --path . -s res://tests/run_tests.gd` → phải `0 lỗi`.
-   Bộ test có cả **lời giải mẫu màn 4** (`tests/loi_giai/m04_gian_khau.txt`): chạy trên luật thật, phải thắng 3 sao.
+   Bộ test có **lời giải mẫu** cho mọi màn đánh (`tests/loi_giai/<màn>.txt`, màn 0, 1, 2, 4, 5): chạy trên luật thật với 3 seed, phải thắng đủ sao.
 2. Chạy từng kịch bản chạm trong `tests/kich_ban/` (lệnh chạy và giá trị mong đợi của từng file: `tests/kich_ban/README.md`):
    - `co_ban.txt`, `quan_tan_choi_lai.txt`, `dem_m04.txt`: vào thẳng trận. `cuon_danh_sach.txt`: cuộn danh sách Chiến dịch.
    - `tron_m04.txt`: `GODOT --path . -- --menu --moi --mo-het --seed=1 --kich-ban=res://tests/kich_ban/tron_m04.txt` — đi từ menu,
@@ -24,7 +24,7 @@ tắt; không ảnh hưởng gì).
 
 ## 2. Chơi thử trên điện thoại
 
-### 2.1. M3 — màn 0, 1, 2, 3 (mới)
+### 2.1. M3 — màn 0, 1, 2, 3, 5 (mới)
 
 Xóa dữ liệu app (hoặc `--moi`) để thấy thứ tự mở màn và gợi ý hướng dẫn từ đầu.
 
@@ -41,6 +41,9 @@ Xóa dữ liệu app (hoặc `--moi`) để thấy thứ tự mở màn và gợ
 | 9 | Màn 2 (Nghệ An) | Chiếm làng → "Tuyển quân!" và một lính giáo mới cạnh làng. Đưa một quân tới làng ở đồi phía tây → hội thoại với Nguyễn Thiếp (chân dung râu tóc bạc) giữa trận. Đủ 6 làng → hội thoại duyệt binh, doanh voi Diễn tập xuất hiện ở bãi phía bắc. Quân sư đứng kề hình nộm (cờ rách) → Chiêu hàng |
 | 10 | Màn 2: thắng | Đủ 6 làng và hạ hết doanh voi trước vòng 20; mục tiêu phụ: mời Nguyễn Thiếp, chiêu hàng 2 hình nộm |
 | 11 | Màn 3 (màn chuyện) | Giới thiệu màn có nút "Xem"; 3 cảnh hội thoại (Sở, Lân xin tội; ăn Tết sớm; chia quân); sa bàn năm đạo: chạm từng đạo → đạo đó đậm lên, hiện chữ bên dưới; Xong → "Xong màn chuyện", 7 Sử liệu mới; Chiến dịch ghi "Đã xem", Màn 4 mở |
+| 12 | Màn 5: trinh sát | Dải đỏ ở mép bắc ("đường về Hà Hồi"; chạm vào ô thì có chữ). Chạm trinh sát → "dò thám: thấy quân ta trong 3 ô sẽ chạy". Đưa quân vào trong 3 ô rồi Hết lượt → dải chữ "Trinh sát thấy quân ta, bỏ chạy về báo tin!", nó chạy về phía bắc. Để một con tới dải đỏ → nó biến mất, dải chữ "Một trinh sát đã thoát…", ≡ → mục tiêu phụ ✗ |
+| 13 | Màn 5: thần công, Thanh Quyết | Vòng 3 thần công xuất hiện ở đồn của ta (gợi ý). Thần công đã đi thì không có nút Đánh trong lượt đó. Chiếm đồn Thanh Quyết → hội thoại ngắn, mua lính được ở đó. Quân địch bị hạ trên đồn không để lại cờ rách |
+| 14 | Màn 5: thắng | Quang Trung chiếm Nhật Tảo. Không ai thoát → hội thoại "bắt hết toán do thám"; có người thoát → hội thoại khác ("có người lọt lưới"). Quân địch không bị xám trong lượt của ta (chỉ quân ta đã đi mới xám) |
 
 ### 2.2. M2 — lát cắt dọc màn 4
 

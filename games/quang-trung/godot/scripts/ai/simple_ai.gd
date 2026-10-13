@@ -36,6 +36,8 @@ static func execute(state: BattleState, action: Dictionary) -> Array[Dictionary]
 				return ev
 			if action["den"] != u.pos:
 				ev.append_array(Rules.cmd_move(state, u, action["den"]))
+			if not state.units.has(u):
+				return ev   # trinh sát tới khu thoát, đã rời bản đồ
 			var done_ev: Array[Dictionary] = []
 			match action["hanh_dong"]:
 				"danh":
@@ -112,7 +114,7 @@ static func _escaping(state: BattleState, u: Unit) -> bool:
 
 static func _goals(state: BattleState, u: Unit) -> Array[Vector2i]:
 	var goals: Array[Vector2i] = []
-	if u.ai_mode == "tuan_tra" and u.ai_params.has("diem"):
+	if (u.ai_mode == "tuan_tra" or u.ai_mode == "do_tham") and u.ai_params.has("diem"):
 		var pts: Array = u.ai_params["diem"]
 		var i := int(u.ai_params.get("i", 0)) % pts.size()
 		if u.pos == pts[i]:
@@ -235,10 +237,10 @@ static func threat_map(state: BattleState, f: String) -> Dictionary:
 
 static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 	var plan := {"lenh": "ke_hoach", "uid": u.uid, "den": u.pos, "hanh_dong": "cho", "muc_tieu": -1}
-	if u.ai_mode == "dung_yen" or u.ai_mode == "ngu":
+	if u.ai_mode == "dung_yen" or u.ai_mode == "ngu" or (u.ai_mode == "do_tham" and not u.ai_params.has("diem")):
 		return plan
 	var reach := Rules.reachable(state, u)
-	var fleeing := u.ai_mode == "rut_lui" or u.ai_mode == "chay" or u.ai_mode == "tuan_tra" or _escaping(state, u)
+	var fleeing := u.ai_mode in ["rut_lui", "chay", "tuan_tra", "do_tham"] or _escaping(state, u)
 	var goals := _goals(state, u)
 	# Quân yếu (máu < 35) lui về làng / đồn của phe mình để hồi máu; chỉ đánh khi chắc hạ được.
 	var healing := false

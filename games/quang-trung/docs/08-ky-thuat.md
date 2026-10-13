@@ -116,8 +116,16 @@ màn → trận → kết quả) do `scripts/main.gd` điều khiển; các màn
   trong `terrain.csv`), chủ ô, quân ban đầu (mã lính, phe, ô, chế độ AI, cờ `ngu` / `duoc` / `toi_thieu_1`...), vàng, giới hạn, `mua_duoc`,
   điều kiện thắng thua. Lý do: dễ đọc, dễ sửa và dễ so sánh trong git, Claude sinh và kiểm tra được mà không cần mở trình biên tập.
   Lúc chạy, game dựng `TileMapLayer` từ JSON (atlas `assets/tiles/tiles.png` + `tiles.json`).
-- Vật thể, khu đồn, vùng thắng / thoát, lối viện binh: thêm trường trong JSON khi làm M2 (`vat_the`, `khu_don`, `vung`).
-- Sự kiện riêng của màn (cầu phao đứt, viện binh...): script `missions/<id>.gd` gắn theo mã màn (M2 trở đi).
+- Các trường đã dùng (M2–M3), đều là dữ liệu, chưa cần script riêng cho màn nào:
+  - `khu` {tên: [ô]}: khu đồn (trống báo động), vùng thắng `vao_vung`, vùng thoát của trinh sát. `hien_khu` [{khu, mau: vang|do, ghi}]:
+    khu vẽ lên bản đồ cho người chơi thấy, `ghi` hiện khi chạm vào ô.
+  - `vat_the`, `tam_nhin`, `rang_sang` (đêm); `vien_binh` (theo vòng); `su_kien` (khi `vao_o` / `so_lang` / `chiem_o` → cờ, hội thoại, quân, dải chữ);
+    `thuong_chiem_lang`, `vang_lang`; `goi_y`.
+  - `thang` (`chiem_o`, `ha_het`, `vao_vung`, `so_lang`, `co`, `tat_ca`), `thua_het_luot`, `muc_tieu_phu` (02 §13).
+  - Quân: `ai` (`tan_cong`, `giu_don` + `tam` / `ban_kinh`, `tuan_tra` + `diem`, `ngu`, `dung_yen`, `do_tham` + `khu` / `thay` / `diem`).
+  - Hệ quả sang màn sau: `co_khi_thoat` (cờ bật khi có trinh sát thoát), `luu_co` (cờ ghi vào tiến trình khi thắng, `Progress.campaign_flag`),
+    `sau_thang_theo_co` {cờ: phần hội thoại} (hội thoại cuối khác đi theo cờ).
+- Sự kiện quá riêng để làm bằng dữ liệu (cầu phao đứt ở màn 9...): khi cần mới thêm script `missions/<id>.gd`.
 
 ## 7. Kiểm thử
 

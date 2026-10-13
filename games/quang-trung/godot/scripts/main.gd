@@ -203,7 +203,13 @@ func _on_battle_finished(result: String) -> void:
 	var opened: Array[String] = []
 	if result == "thang":
 		opened = Progress.record_win(battle.state)
-		await _dialogue(Story.dialogue(battle.state.mission.get("hoi_thoai", ""), "sau_thang"))
+		# Hội thoại cuối theo cờ trong trận (màn 5: có trinh sát thoát → "sau_thang_lot").
+		var part := "sau_thang"
+		var by_flag: Dictionary = battle.state.mission.get("sau_thang_theo_co", {})
+		for flag in by_flag:
+			if Rules.has_flag(battle.state, flag):
+				part = by_flag[flag]
+		await _dialogue(Story.dialogue(battle.state.mission.get("hoi_thoai", ""), part))
 	battle.show_result(opened)
 
 

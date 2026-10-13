@@ -335,6 +335,7 @@ func _process(delta: float) -> void:
 
 func _refresh_all() -> void:
 	_refresh_map()
+	UnitSprite.turn_faction = state.current_faction()
 	for u in state.units:
 		if sprites.has(u.uid):
 			sprites[u.uid].refresh(u)
@@ -540,6 +541,10 @@ func _unit_info(u: Unit) -> void:
 		notes.append("đang Cháy")
 	if u.ngu:
 		notes.append("đang ngủ")
+	if u.ai_mode == "do_tham":
+		notes.append("dò thám: thấy quân ta trong %d ô sẽ chạy" % int(u.ai_params.get("thay", 3)))
+	elif u.ai_mode == "chay" and u.ai_params.has("khu"):
+		notes.append("đang chạy về báo tin")
 	if not notes.is_empty():
 		lines += "   (" + ", ".join(notes) + ")"
 	info_label.text = lines
@@ -561,6 +566,9 @@ func _terrain_info(p: Vector2i) -> void:
 	var obj_note: String = {"trong": "\nTrống báo động: quân địch kêu hay đứng cạnh trống thì cả khu đồn thức.",
 		"den": "\nĐèn: ô này và 4 ô kề luôn sáng; lính canh thấy quân ta ở đây từ 5 ô.",
 		"quan_tan": "\nQuân tan: không đi vào được; quân sư chiêu hàng được."}.get(obj, "")
+	for z in state.mission.get("hien_khu", []):
+		if (state.zones.get(z["khu"], []) as Array).has(p) and z.has("ghi"):
+			obj_note += "\n" + String(z["ghi"])
 	if Rules.is_dark(state) and not vis.has(p) and not Rules.lit_tiles(state).has(p):
 		obj_note += "\nTrong bóng tối: không thấy quân địch."
 	info_label.text = "   ".join(parts) + obj_note
@@ -1058,6 +1066,24 @@ func _play(events: Array[Dictionary]) -> void:
 					foe.visible = true
 					_float_text(foe.position + Vector2(0, -6), "Phục kích!", Color(1, 0.45, 0.3))
 				await get_tree().create_timer(0.4).timeout
+			"trinh_sat_chay":
+				var su: UnitSprite = sprites.get(e["uid"])
+				if su != null and su.visible:
+					Sfx.play("lo_dien", -4.0)
+					_float_text(su.position + Vector2(-4, -6), "Chạy!", Color(1, 0.6, 0.4))
+					_show_banner("Trinh sát thấy quân ta, bỏ chạy về báo tin!", Color(1, 0.6, 0.45))
+					await get_tree().create_timer(0.6).timeout
+			"thoat":
+				var es: UnitSprite = sprites.get(e["uid"])
+				if es != null:
+					sprites.erase(e["uid"])
+					var tw := create_tween()
+					tw.tween_property(es, "modulate:a", 0.0, 0.4)
+					await tw.finished
+					es.queue_free()
+				Sfx.play("bao_dong", -6.0)
+				_show_banner("Một trinh sát đã thoát về báo tin!", Color(1, 0.5, 0.42))
+				await get_tree().create_timer(0.8).timeout
 			"lo_dien":
 				Sfx.play("lo_dien", -6.0)
 				var seen: UnitSprite = sprites.get(e["uid"])
@@ -1065,6 +1091,7 @@ func _play(events: Array[Dictionary]) -> void:
 					seen.visible = true
 					_float_text(seen.position + Vector2(12, -6), "!", Color(1, 0.9, 0.4))
 		_refresh_map()
+		UnitSprite.turn_faction = state.current_faction()
 		for u in state.units:
 			if sprites.has(u.uid):
 				sprites[u.uid].refresh(u)
@@ -1116,6 +1143,18 @@ func _float_text(pos: Vector2, text: String, color: Color) -> void:
 
 
 func _draw_overlay() -> void:
+	# Khu kịch bản cho người chơi thấy ("hien_khu": [{khu, mau: vang|do}]): vùng thắng, đường thoát của trinh sát…
+	for z in state.mission.get("hien_khu", []):
+		var c := Color(1.0, 0.35, 0.25) if z.get("mau", "vang") == "do" else C_GOLD_LIGHT
+		var cells: Array = state.zones.get(z["khu"], [])
+		for p in cells:
+			var r := Rect2(Vector2(p * T), Vector2(T, T))
+			overlay.draw_rect(r, Color(c, 0.16))
+			for d in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
+				if not cells.has(p + d):
+					var a := r.get_center() + Vector2(d) * (T / 2.0 - 1.0) - Vector2(d.y, d.x) * (T / 2.0 - 1.0)
+					var b := r.get_center() + Vector2(d) * (T / 2.0 - 1.0) + Vector2(d.y, d.x) * (T / 2.0 - 1.0)
+					overlay.draw_dashed_line(a, b, Color(c, 0.85), 2.0, 4.0)
 	if selected != null and mode == Mode.SELECTED:
 		for p in reach:
 			overlay.draw_rect(Rect2(Vector2(p * T), Vector2(T, T)), Color(0.35, 0.6, 1.0, 0.33))

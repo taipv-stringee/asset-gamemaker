@@ -7,7 +7,7 @@ const DIRS: Array[Vector2i] = [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), 
 const XP_LEVELS: Array[int] = [100, 250, 450, 700]
 const LEVEL_ATK := 3
 const LEVEL_DEF := 2
-const NO_QUAN_TAN: Array[String] = ["cau", "cau_phao", "song", "dam"]
+const NO_QUAN_TAN: Array[String] = ["cau", "cau_phao", "song", "dam", "don", "thanh"]
 const CHAN_HAU_TERRAIN: Array[String] = ["cau", "cau_phao", "de", "song_can"]
 const INF := 1 << 30
 
@@ -403,6 +403,49 @@ static func cmd_move(state: BattleState, u: Unit, target: Vector2i, fog := false
 			if not seen_before.has(uid):
 				u.khoa_hoan_tac = true
 				ev.append({"loai": "lo_dien", "uid": uid})
+	ev.append_array(_escape(state, u))
+	return ev
+
+
+# ================================================================ trinh sát (màn 5; 02 §14 chế độ Chạy)
+# Quân "ai": "do_tham" đứng / tuần tra như thường; đầu lượt phe nó, thấy quân đối phương trong bán kính "thay" (mặc định 3)
+# thì đổi sang "chay" về khu "khu". Quân đang chạy tới được khu đó thì rời bản đồ ("báo tin"): đếm vào flags["thoat"]
+# và bật cờ màn "co_khi_thoat" (nếu có) — màn sau đọc được qua Progress (luu_co).
+
+static func _scouts_spot(state: BattleState, f: String) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	var lit := lit_tiles(state) if is_dark(state) else {}
+	for u in state.units_of(f):
+		if u.ai_mode != "do_tham" or u.ngu:
+			continue
+		var r := int(u.ai_params.get("thay", 3))
+		for e in state.enemies_of(f):
+			var near := manhattan(u.pos, e.pos) <= r
+			if near and (not is_dark(state) or watcher_sees(state, u, e, lit)):
+				u.ai_mode = "chay"
+				var zone: Array[Vector2i] = []
+				for c in state.zones.get(u.ai_params.get("khu", ""), []):
+					zone.append(c)
+				u.ai_params["vung"] = zone
+				ev.append({"loai": "trinh_sat_chay", "uid": u.uid})
+				break
+	return ev
+
+
+static func _escape(state: BattleState, u: Unit) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	if u.ai_mode != "chay" or not u.ai_params.has("khu"):
+		return ev
+	if not (state.zones.get(u.ai_params["khu"], []) as Array).has(u.pos):
+		return ev
+	state.remove_unit(u)
+	state.flags["thoat"] = int(state.flags.get("thoat", 0)) + 1
+	var flag: String = state.mission.get("co_khi_thoat", "")
+	if flag != "":
+		var flags: Dictionary = state.flags.get("co", {})
+		flags[flag] = true
+		state.flags["co"] = flags
+	ev.append({"loai": "thoat", "uid": u.uid, "o": u.pos, "phe": u.faction})
 	return ev
 
 
@@ -564,7 +607,8 @@ static func _village_reward(state: BattleState, u: Unit) -> Array[Dictionary]:
 
 # ================================================================ sự kiện kịch bản (màn 2 trở đi)
 # "su_kien": [{"id", "khi": {...}, "lam": [{...}]}] — mỗi sự kiện xảy ra một lần.
-#   khi: {"loai": "vao_o", "o": [x, y]} quân phe người chơi đứng ở ô đó; {"loai": "so_lang", "n": N} phe người chơi giữ ≥ N làng.
+#   khi: {"loai": "vao_o", "o": [x, y]} quân phe người chơi đứng ở ô đó; {"loai": "so_lang", "n": N} phe người chơi giữ ≥ N làng;
+#        {"loai": "chiem_o", "o": [x, y]} phe người chơi làm chủ ô đó.
 #   lam: {"loai": "co", "co": tên} bật cờ; {"loai": "hoi_thoai", "phan": tên phần trong file hội thoại};
 #        {"loai": "quan", "phe": f, "quan": [{id, x, y, ai}]} đặt quân; {"loai": "bang", "chu": "..."} dải chữ.
 
@@ -595,6 +639,8 @@ static func run_events(state: BattleState) -> Array[Dictionary]:
 				ok = u != null and u.faction == player
 			"so_lang":
 				ok = villages_owned(state, player) >= int(cond["n"])
+			"chiem_o":
+				ok = state.owner_of(Vector2i(int(cond["o"][0]), int(cond["o"][1]))) == player
 		if not ok:
 			continue
 		fired.append(e["id"])
@@ -767,6 +813,7 @@ static func start_turn(state: BattleState) -> Array[Dictionary]:
 	ev.append_array(_reinforcements(state, f))
 	if f != state.factions[0]:
 		ev.append_array(_alarm(state, f))
+		ev.append_array(_scouts_spot(state, f))
 	# Quân tan hết hạn đầu lượt Tây Sơn của vòng N + 2 (02 §8).
 	if state.current == 0:
 		for p in state.objects.keys():
@@ -884,6 +931,8 @@ static func side_objectives(state: BattleState) -> Array[Dictionary]:
 				ok = state.result == "thang" and has_flag(state, o["co"])
 			"ve_vung":
 				ok = state.result == "thang" and _type_in_zone(state, o["quan"], o["khu"])
+			"khong_thoat":
+				ok = state.result == "thang" and int(state.flags.get("thoat", 0)) == 0
 		out.append({"ten": o.get("ten", ""), "dat": ok})
 	return out
 
@@ -910,6 +959,9 @@ static func side_objectives_live(state: BattleState) -> Array[Dictionary]:
 					st = "hong"
 			"khong_mat_quan_nao":
 				if not state.flags["mat_quan"].is_empty():
+					st = "hong"
+			"khong_thoat":
+				if int(state.flags.get("thoat", 0)) > 0:
 					st = "hong"
 			"hang_binh_toi_thieu":
 				if int(state.flags.get("hang_binh", 0)) >= int(o["n"]):

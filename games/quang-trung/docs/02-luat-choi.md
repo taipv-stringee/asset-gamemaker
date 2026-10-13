@@ -132,7 +132,7 @@ AE2: quân chết để lại mộ khoảng 1 lượt, Sorceress đứng kề m�
 động tới người chết, lấy cảm hứng từ cảnh đồn Hà Hồi ra hàng (*Theo HLNTC*).
 
 - Quân thường của Thanh / Lê bị hạ để lại **quân tan** (cờ rách, vũ khí vứt) trên ô đó. Tướng, quân phe Diễn tập, quân Tây Sơn không để lại gì.
-  Không sinh quân tan trên cầu, cầu phao, sông, đầm lầy (quân bị hạ ở đó coi như chạy mất).
+  Không sinh quân tan trên cầu, cầu phao, sông, đầm lầy (quân bị hạ ở đó coi như chạy mất), và trên đồn, thành (quân giữ đồn tan chạy khỏi đồn, để ô mục tiêu luôn chiếm được ngay).
 - Quân tan sinh ra trong vòng N **biến mất đầu lượt Tây Sơn của vòng N + 2** (tức còn đến hết lượt Tây Sơn kế tiếp).
 - Quân tan chặn di chuyển của mọi phe, chặn chiếm làng, chặn mua lính trên ô đó; không chặn đường bắn.
 - **Chiêu hàng** (hành động của quân có thẻ `chieu_hang`: quân sư): đứng **kề** quân tan → quân tan thành
@@ -210,7 +210,8 @@ Tham số của màn: `tam_nhin` (đêm 2, rạng sáng 3 → 5, ngày = không 
 | *Tuần tra (điểm…)* | Đi vòng qua danh sách điểm; thấy địch → báo động |
 | *Tấn công (mục tiêu)* | Tiến về mục tiêu, đánh trên đường |
 | *Chặn hậu (ô)* | Như Giữ đồn quanh một ô cầu / đê / bến |
-| *Chạy (vùng)* | Tránh giao chiến, đi tới vùng; tới nơi thì rời bản đồ (trinh sát: "báo tin") |
+| *Dò thám (vùng, R)* | Đứng / tuần tra, không đánh. Đầu lượt phe nó, thấy quân đối phương trong R ô (mặc định 3; ban đêm phải thấy được) thì đổi sang *Chạy (vùng)* |
+| *Chạy (vùng)* | Tránh giao chiến, đi tới vùng; tới nơi thì rời bản đồ (trinh sát: "báo tin"; màn 5: hệ quả sang màn 6) |
 | *Rút lui (vùng, X)* | Như Chạy, kích hoạt khi máu < X |
 
 - Máy không nhìn qua sương mù: phe Thanh / Lê chỉ biết quân Tây Sơn mà quân mình đang thấy (mục 10), trừ khi kịch bản cho phép.

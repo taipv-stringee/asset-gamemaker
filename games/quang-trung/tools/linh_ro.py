@@ -23,6 +23,9 @@ v1.C.update({
     "coat_white_dark": (176, 168, 150), "coat_white": (226, 220, 202), "coat_white_light": (250, 246, 232),
     "wave_dark": (60, 120, 180), "wave": (120, 184, 230), "wave_light": (210, 238, 255),
     "smoke_light": (236, 234, 228),
+    "coat_slate_dark": (46, 56, 72), "coat_slate": (74, 88, 108), "coat_slate_light": (110, 126, 148),
+    "coat_indigo_dark": (24, 28, 50), "coat_indigo": (42, 48, 84), "coat_indigo_light": (70, 80, 124),
+    "yak": (196, 30, 34), "yak_dark": (128, 16, 22), "yak_light": (236, 84, 70),
 })
 
 
@@ -213,7 +216,185 @@ def hoa_ho(team, f):
     return finish(img)
 
 
+# ---------------------------------------------------------------- quân Thanh, quân Lê
+# Lính Lục doanh (07 §2; ghi chú trang phục §3): đuôi sam, mũ có tua đỏ, trường thương tua đỏ lông bò yak. Màu xanh lam
+# là màu phe để dễ đọc (không phải màu áo thật). Không vẽ chữ 勇 / hình tròn trên ngực (dấu hiệu thế kỷ 19, chưa có nguồn).
+
+def mu_tua(p, y):
+    """Mũ lính Thanh: chỏm tròn, vành lật, tua đỏ phủ đỉnh (kiểu "mu" của bản nháp)."""
+    v2.hat2(p, "mu", y)
+
+
+def duoi_sam(p, y):
+    """Đuôi sam buông sau gáy."""
+    p.vline(12, 9 + y, 17 + y, "hair")
+    p.vline(11, 11 + y, 18 + y, "hair")
+    p.px(11, 19 + y, "yak_dark")
+
+
+def truong_mau(team, f):
+    """Trường mâu binh: áo màu phe, mũ tua đỏ, đuôi sam, trường thương có chùm tua đỏ to dưới mũi."""
+    img = v2.canvas()
+    p = Pen(img, team)
+    body3(p, f, "team", sash=False)
+    v2.head2(p, f)
+    mu_tua(p, f)
+    duoi_sam(p, f)
+    y = f
+    p.vline(24, 1 + y, 30, "wood")
+    p.vline(25, 3 + y, 30, "wood_dark")
+    p.rect(24, -1 + y, 24, 1 + y, "steel_light")
+    p.px(25, 1 + y, "steel")
+    sway = f
+    for dy in range(4):                              # chùm tua lông yak
+        p.hline(22 + sway, 27, 3 + dy + y, "yak" if dy % 2 == 0 else "yak_light")
+    p.hline(23, 26, 7 + y, "yak_dark")
+    v2.arm(p, y, 22, 16)
+    return finish(img)
+
+
+def dieu_thuong(team, f):
+    """Điểu thương binh: áo xám chàm, mũ tua đỏ, súng điểu thương dài nằm ngang trước ngực, mồi dây và khói."""
+    img = v2.canvas()
+    p = Pen(img, team)
+    body3(p, f, "coat_slate")
+    v2.head2(p, f)
+    mu_tua(p, f)
+    duoi_sam(p, f)
+    y = f
+    p.hline(16, 31, 15 + y, "steel_dark")
+    p.hline(18, 31, 14 + y, "steel_light")
+    p.rect(11, 15 + y, 17, 17 + y, "wood")
+    p.hline(11, 16, 15 + y, "wood_light")
+    p.px(20, 13 + y, "fire")
+    p.px(20, 12 + y, "fire_light")
+    p.rect(10, 21, 12, 23, "straw_dark")             # túi thuốc
+    v2.arm(p, y, 20, 15)
+    if f:
+        for cx, cy, r in ((30, 11, 1), (28, 9, 2)):
+            p.ellipse(cx, cy + y, r, r, "smoke_light")
+    return finish(img)
+
+
+def cung_tien(team, f):
+    """Cung tiễn binh: áo màu phe, mũ tua đỏ, cung lớn cao gần bằng người, ống tên sau lưng lòi chuôi tên."""
+    img = v2.canvas()
+    p = Pen(img, team)
+    p.rect(8, 9, 11, 22, "wood_dark")                # ống tên sau lưng
+    p.rect(9, 10, 10, 21, "wood")
+    for x, c in ((8, "white"), (9, "yak"), (10, "white"), (11, "yak")):
+        p.vline(x, 5, 8, c)
+    body3(p, f, "team", sash=False)
+    v2.head2(p, f)
+    mu_tua(p, f)
+    y = f
+    for yy in range(3, 28):                          # cánh cung
+        t = (yy - 15) / 12.0
+        x = 24 + round(4 * (1 - t * t))
+        p.px(x, yy + y, "wood_light")
+        p.px(x + 1, yy + y, "wood_dark")
+    p.vline(24, 3 + y, 27 + y, "white_dark")         # dây cung
+    if f:                                            # lắp tên
+        p.hline(19, 31, 15 + y, "wood_light")
+        p.px(31, 15 + y, "steel_light")
+        p.px(19, 14 + y, "white")
+    v2.arm(p, y, 27, 15)
+    return finish(img)
+
+
+def dang_bai(team, f):
+    """Đằng bài binh: áo xám chàm, mũ tua đỏ, khiên mây tròn to che trước người, đao giơ cao."""
+    img = v2.canvas()
+    p = Pen(img, team)
+    body3(p, f, "coat_slate")
+    v2.head2(p, f)
+    mu_tua(p, f)
+    duoi_sam(p, f)
+    y = f
+    p.line(18, 12 + y, 23 - f, 3 + y, "steel_light")  # đao
+    p.line(19, 12 + y, 24 - f, 3 + y, "steel")
+    p.hline(17, 20, 13 + y, "gold_dark")
+    p.ellipse(22, 20, 8, 8, "straw_dark")            # khiên mây
+    p.ellipse(22, 20, 7, 7, "straw")
+    for r in (5, 3):
+        p.ellipse(22, 20, r, r, "straw_dark")
+        p.ellipse(22, 20, r - 1, r - 1, "straw_light" if r == 5 else "straw")
+    p.ellipse(22, 20, 1, 1, "team")
+    return finish(img)
+
+
+def tho_binh(team, f):
+    """Thổ binh Điền Châu: khăn đen, áo chàm sẫm, chân đất, giáo trơn không tua, khiên gỗ nhỏ."""
+    img = v2.canvas()
+    p = Pen(img, team)
+    body3(p, f, "coat_indigo", sash=False)
+    p.hline(12, 15, 29, "skin_dark")                 # chân đất
+    p.hline(17, 21, 29, "skin")
+    p.hline(12, 20, 20 + f, "team")                  # đai màu phe
+    v2.head2(p, f)
+    khan(p, f, color="coat_black")
+    y = f
+    p.vline(23, 3 + y, 30, "bamboo_dark")
+    p.rect(23, 0 + y, 23, 2 + y, "steel_light")
+    p.ellipse(13, 19, 3, 4, "wood")                   # khiên gỗ nhỏ bên trái
+    p.ellipse(13, 19, 1, 2, "wood_light")
+    v2.arm(p, y, 21, 15)
+    return finish(img)
+
+
+def trinh_sat(team, f):
+    """Trinh sát: áo nâu gọn, mũ tua đỏ, cờ hiệu tam giác màu phe cắm sau lưng, đao ngắn; dáng chạy."""
+    img = v2.canvas()
+    p = Pen(img, team)
+    p.vline(9, 1, 20, "wood_dark")                   # cán cờ sau lưng
+    for i in range(6):                               # cờ đuôi nheo bay
+        p.hline(10, 16 - i - f, 1 + i, "team" if i % 2 == 0 else "team_light")
+    body3(p, f, "coat_brown", legs=False)
+    if f == 0:                                       # chân chạy
+        p.rect(12, 23, 14, 28, "pants_dark")
+        p.rect(18, 23, 20, 27, "pants")
+        p.hline(11, 14, 29, "shoe")
+        p.hline(19, 22, 28, "shoe")
+    else:
+        p.rect(14, 23, 16, 28, "pants_dark")
+        p.rect(16, 23, 18, 28, "pants")
+        p.hline(13, 16, 29, "shoe")
+        p.hline(16, 19, 29, "shoe")
+    v2.head2(p, f)
+    mu_tua(p, f)
+    duoi_sam(p, f)
+    y = f
+    p.line(22, 15 + y, 27, 9 + y, "steel_light")
+    p.hline(21, 23, 16 + y, "gold_dark")
+    v2.arm(p, y, 21, 15)
+    return finish(img)
+
+
+def quan_le(team, f):
+    """Quân Lê: khăn đen, áo màu phe (vàng đất), giáo có cờ nhỏ màu phe."""
+    img = v2.canvas()
+    p = Pen(img, team)
+    body3(p, f, "team", sash=False)
+    v2.head2(p, f)
+    khan(p, f, color="coat_black")
+    y = f
+    p.vline(23, 2 + y, 30, "wood")
+    p.vline(24, 4 + y, 30, "wood_dark")
+    p.rect(23, 0 + y, 23, 1 + y, "steel_light")
+    for i in range(4):                               # cờ nhỏ trên cán giáo
+        p.hline(25, 29 - i + f, 3 + i + y, "team_dark" if i == 3 else "team_light")
+    v2.arm(p, y, 21, 16)
+    return finish(img)
+
+
 DRAW = {
+    "truong_mau": truong_mau,
+    "dieu_thuong": dieu_thuong,
+    "cung_tien": cung_tien,
+    "dang_bai": dang_bai,
+    "tho_binh": tho_binh,
+    "trinh_sat": trinh_sat,
+    "quan_le": quan_le,
     "hoa_mai": hoa_mai,
     "thuy_binh": thuy_binh,
     "quan_su": quan_su,

@@ -32,7 +32,7 @@ Mở game **không có tham số** (như người chơi). Bật tiếng. Lần �
 | 2 | Chiến dịch | Danh sách màn 0–9 + màn phụ; chỉ màn 4 và "Trận thử luật" bấm được; tên dài xuống dòng; **vuốt trên các nút vẫn cuộn**, vuốt không mở màn |
 | 3 | Màn 4 | Giới thiệu màn: ngày âm và dương lịch, bản đồ nhỏ, đoạn lịch sử có nhãn, mục tiêu, 3 mục tiêu phụ |
 | 4 | Vào trận | Trời tối, nhạc đêm (dế, gió, trống xa, sáo). Hội thoại có chân dung Quang Trung; chạm để tiếp; Bỏ qua được |
-| 5a | Mua đủ các loại lính, xem trên bản đồ (ngày: Trận thử luật; đêm: màn 4) | Phân biệt được từng loại không cần chạm: lính giáo (giáo dài), hỏa mai (áo nâu, súng chếch, khói), thủy binh (cởi trần, mái chèo, sóng nước), quân sư (áo dài đen, loa), trống trận (trống to trước ngực), hỏa hổ (áo đen, lửa) |
+| 5a | Mua đủ các loại lính, xem trên bản đồ (ngày: Trận thử luật; đêm: màn 4) | Phân biệt được từng loại không cần chạm: lính giáo (giáo dài), hỏa mai (áo nâu, súng chếch, khói), thủy binh (cởi trần, mái chèo, sóng nước), quân sư (áo dài đen, loa), trống trận (trống to trước ngực), hỏa hổ (áo đen, lửa). Quân Thanh (Trận thử luật): trường mâu (tua đỏ), điểu thương (súng ngang, khói), cung tiễn (cung lớn), đằng bài (khiên mây tròn); quân Lê (màn 4): áo vàng đất, khăn đen |
 | 5 | Nhìn bản đồ | Xa quân ta thì sương đặc, không thấy quân Lê; cổng đồn có đèn sáng, thấy quan giữ đồn đang ngủ (chữ z), trống, đèn ở làng |
 | 6 | Đi quân về phía sông | Thấy lính tuần khi tới gần (có dấu "!"); khi đi vào chỗ có quân ẩn → "Phục kích!", quân dừng, không Hoàn tác được |
 | 7 | Mua lính ở đồn của ta (bến đò) | Bảng mua lính hiện đủ các loại kèm hình, giá, chỉ số; loại không đủ vàng thì mờ |

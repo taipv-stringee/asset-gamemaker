@@ -381,16 +381,34 @@ static func cmd_move(state: BattleState, u: Unit, target: Vector2i) -> Array[Dic
 	u.straight_steps = path.size() - 1 if path.size() > 1 else 0
 	if path.is_empty():
 		path = path_to(reach, u.pos, target)
+	var seen_before := _seen_enemies(state, u.faction)
 	u.move_origin = u.pos
 	u.pos = target
 	u.moved = true
 	ev.append({"loai": "di", "uid": u.uid, "duong": path})
+	if is_dark(state):
+		for uid in _seen_enemies(state, u.faction):
+			if not seen_before.has(uid):
+				u.khoa_hoan_tac = true
+				ev.append({"loai": "lo_dien", "uid": uid})
 	return ev
+
+
+## uid các quân địch phe `f` đang thấy (ban đêm).
+static func _seen_enemies(state: BattleState, f: String) -> Dictionary:
+	var out := {}
+	if not is_dark(state):
+		return out
+	var vis := visible_tiles(state, f)
+	for e in state.enemies_of(f):
+		if vis.has(e.pos):
+			out[e.uid] = true
+	return out
 
 
 static func cmd_undo_move(state: BattleState, u: Unit) -> Array[Dictionary]:
 	var ev: Array[Dictionary] = []
-	if not can_act(state, u) or not u.moved:
+	if not can_act(state, u) or not u.moved or u.khoa_hoan_tac:
 		return ev
 	var from := u.pos
 	u.pos = u.move_origin
@@ -448,7 +466,8 @@ static func _defeat(state: BattleState, u: Unit) -> Array[Dictionary]:
 		var lost: Dictionary = state.flags["mat_quan"]
 		lost[u.type_id] = int(lost.get(u.type_id, 0)) + 1
 	var leaves_trace: bool = (u.faction == "thanh" or u.faction == "le") and not u.has_tag("tuong")
-	if leaves_trace and not NO_QUAN_TAN.has(state.terrain_id(u.pos)):
+	var keeps_object: bool = state.objects.has(u.pos) and state.objects[u.pos].get("loai", "") != "quan_tan"
+	if leaves_trace and not keeps_object and not NO_QUAN_TAN.has(state.terrain_id(u.pos)):
 		state.objects[u.pos] = {"loai": "quan_tan", "vong": state.vong}
 		ev.append({"loai": "quan_tan", "o": u.pos})
 	if u.tuong_chinh and u.faction == state.factions[0]:
@@ -602,6 +621,7 @@ static func start_turn(state: BattleState) -> Array[Dictionary]:
 		u.done = false
 		u.straight_steps = 0
 		u.move_origin = u.pos
+		u.khoa_hoan_tac = false
 		u.than_trong = false
 	ev.append_array(_dawn(state))
 	if f != state.factions[0]:
@@ -635,34 +655,47 @@ static func _alarm(state: BattleState, f: String) -> Array[Dictionary]:
 		if u.keu or spotted:
 			triggers.append(u)
 		u.keu = false
+	# Một lần báo động = một quân phát hiện làm thức / đổi lệnh ít nhất một quân (kể cả chính nó).
+	# Quân đã thức cả rồi mà vẫn thấy quân ta thì không tính thêm.
+	var raised := false
 	for t in triggers:
-		var woken: Array[Unit] = []
+		var woken: Array[Unit] = [t]
 		for o in state.units_of(f):
 			if manhattan(o.pos, t.pos) <= 5:
 				woken.append(o)
+		var drum_hit := false
 		for p in state.objects:
 			if state.objects[p].get("loai", "") == "trong" and manhattan(p, t.pos) <= 1:
 				var khu: String = state.objects[p].get("khu", "")
 				for o in state.units_of(f):
 					if (khu != "" and state.zone_of(o.pos) == khu) or manhattan(o.pos, p) <= 6:
+						if o.ngu or o.ai_mode == "ngu" or o.ai_mode == "tuan_tra":
+							drum_hit = true
 						woken.append(o)
-				ev.append({"loai": "trong_bao_dong", "o": p})
+				if drum_hit:
+					ev.append({"loai": "trong_bao_dong", "o": p})
+		var changed := false
 		for o in woken:
+			if o.ngu or o.ai_mode == "ngu" or o.ai_mode == "tuan_tra":
+				changed = true
 			o.ngu = false
 			if o.ai_mode == "ngu" or o.ai_mode == "tuan_tra":
 				o.ai_mode = "giu_don"
-				o.ai_params["tam"] = _nearest_fort(state, o.pos)
+				o.ai_params["tam"] = _nearest_fort(state, o.pos, f)
 				o.ai_params["ban_kinh"] = 4
+		if changed:
+			raised = true
+			ev.append({"loai": "bao_dong", "uid": t.uid, "o": t.pos})
+	if raised:
 		state.flags["bao_dong"] = int(state.flags.get("bao_dong", 0)) + 1
-		ev.append({"loai": "bao_dong", "uid": t.uid, "o": t.pos})
 	return ev
 
 
-static func _nearest_fort(state: BattleState, from: Vector2i) -> Vector2i:
+static func _nearest_fort(state: BattleState, from: Vector2i, f: String) -> Vector2i:
 	var best := from
 	var best_d := INF
 	for p in state.owners:
-		if state.terrain_at(p)["mua_linh"] and manhattan(p, from) < best_d:
+		if state.terrain_at(p)["mua_linh"] and state.are_allies(state.owner_of(p), f) and manhattan(p, from) < best_d:
 			best_d = manhattan(p, from)
 			best = p
 	return best

@@ -15,6 +15,7 @@ var moved: bool = false          # đã đi trong lượt này (kể cả đứn
 var done: bool = false           # đã hành động xong, xám đến hết lượt
 var move_origin: Vector2i = Vector2i.ZERO
 var straight_steps: int = 0      # số ô đi thẳng trong lượt (cho Xung phong)
+var khoa_hoan_tac: bool = false  # nước đi vừa rồi làm lộ quân địch → không hoàn tác được (02 §10)
 
 # Trạng thái kéo dài
 var chay_turns: int = 0          # số lần "hết lượt của phe mình" còn lại trước khi hết Cháy

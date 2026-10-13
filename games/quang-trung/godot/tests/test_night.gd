@@ -94,3 +94,46 @@ func test_side_objectives(t) -> bool:
 	var obj := Rules.side_objectives(s)
 	t.check(obj[0]["dat"] and obj[1]["dat"], "đạt cả hai mục tiêu phụ")
 	return true
+
+
+func test_reveal_locks_undo(t) -> bool:
+	var s := make(["........"], [q("linh_giao", "tayson", 0, 0), q("quan_le", "le", 6, 0, {"ngu": true})])
+	var u := s.unit_at(Vector2i(0, 0))
+	var ev := Rules.cmd_move(s, u, Vector2i(4, 0))
+	t.check(u.khoa_hoan_tac, "lộ quân địch → khóa hoàn tác")
+	t.eq(Rules.cmd_undo_move(s, u).size(), 0, "không hoàn tác được")
+	t.eq(ev[-1]["loai"], "lo_dien", "có sự kiện lộ diện")
+	return true
+
+
+func test_mission4_loads_and_quiet(t) -> bool:
+	var s := Missions.new_battle("m04_gian_khau", 7)
+	t.eq(s.width, 10, "rộng 10")
+	t.eq(s.height, 18, "cao 18")
+	t.eq(s.units_of("le").size(), 9, "9 quân Lê")
+	t.eq(s.units_of("tayson").size(), 11, "11 quân ta")
+	t.eq(s.zone_of(Vector2i(4, 2)), "gian_khau", "đồn thuộc khu")
+	var patrol := s.unit_at(Vector2i(8, 7))
+	# Quân ta đứng yên 3 vòng: lính tuần đi lại, không báo động.
+	for i in 3:
+		Rules.cmd_end_turn(s)
+		SimpleAI.play_turn(s)
+		Rules.cmd_end_turn(s)
+	t.eq(int(s.flags["bao_dong"]), 0, "đứng yên ở bờ nam thì không bị phát hiện")
+	t.check(patrol.pos != Vector2i(8, 7), "lính tuần có đi")
+	t.check(s.unit_at(Vector2i(4, 2)).ngu, "quan giữ đồn vẫn ngủ")
+	return true
+
+
+func test_mission4_has_perfect_solution(t) -> bool:
+	# Lời giải mẫu: hạ hai lính tuần không báo động, chiếm đồn ở vòng 6 → đạt cả ba mục tiêu phụ.
+	for sd in [1, 2, 3]:
+		var r := LoiGiai.run("m04_gian_khau", sd, "res://tests/loi_giai/m04_gian_khau.txt")
+		var s: BattleState = r["state"]
+		t.eq(r["loi"], "", "lời giải chạy hết (seed %d)" % sd)
+		t.eq(s.result, "thang", "thắng (seed %d)" % sd)
+		var all_ok := true
+		for o in Rules.side_objectives(s):
+			all_ok = all_ok and o["dat"]
+		t.check(all_ok, "đạt cả ba mục tiêu phụ (seed %d)" % sd)
+	return true

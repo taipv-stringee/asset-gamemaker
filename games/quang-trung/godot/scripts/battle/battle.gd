@@ -514,7 +514,7 @@ func _show_actions() -> void:
 	if not ch.is_empty():
 		list.append(["Chiêu hàng", func() -> void: _run(Rules.cmd_chieu_hang(state, u, ch[0]))])
 	list.append(["Chờ", func() -> void: _run(Rules.cmd_wait(state, u))])
-	if u.pos != u.move_origin:
+	if u.pos != u.move_origin and not u.khoa_hoan_tac:
 		list.append(["Hoàn tác", _undo])
 	_unit_info(u)
 	_set_buttons(list)

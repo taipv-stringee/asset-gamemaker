@@ -101,8 +101,11 @@ Mỗi điểm ghi ngày âm và dương lịch.
 
 - **Lịch sử**: Đêm 30 tháng Chạp, quân Tây Sơn vượt sông Gián, diệt đồn Gián Khẩu, đồn tiền tiêu của quân Lê Chiêu Thống. *[Sử liệu]*
   Theo HLNTC quân Lê tan chạy khi thấy quân Tây Sơn. Lính tuần, trống báo động là *[Sáng tạo của game]*.
-- **Bản đồ**: 10 × 18. Nam: bờ sông, **đồn hậu cứ của ta** ở bến đò, hai chỗ sông cạn. Giữa: sông Gián chạy ngang. Bắc: khu đồn Gián Khẩu
-  (đồn + 4 doanh trại) trên đường thiên lý, trống báo động, một làng có đèn.
+- **Bản đồ**: 10 × 18 (`data/missions/m04_gian_khau.json`). Nam: bờ sông, **đồn hậu cứ của ta** ở bến đò, hai chỗ sông cạn và
+  **cầu phao** quân ta bắc ngay ở bến (*Sáng tạo của game*; sử chỉ nói vượt sông). Giữa: sông Gián (2 hàng) chạy ngang.
+  Bắc: khu đồn Gián Khẩu (đồn + 4 doanh trại, lũy) trên đường thiên lý, trống báo động cạnh cổng, đèn ở cổng đồn và một làng có đèn.
+- **Lời giải mẫu** (`tests/loi_giai/m04_gian_khau.txt`, chạy trong bộ test): thủy binh chặn lính tuần ở bờ bắc, ba quân hạ gọn từng
+  lính tuần trong một lượt; voi xung phong có trống trận cổ vũ hạ quan giữ đồn đang ngủ; Quang Trung chiếm đồn ở vòng 6, không báo động.
 - **Đêm**: `tam_nhin` 2 suốt màn. Quân Lê **ngủ** khi bắt đầu, trừ 2 lính tuần (*Tuần tra* dọc bờ bắc).
   Quân ta cầm đuốc: Quang Trung, 2 lính giáo (`duoc`).
 - **Quân ta**: Quang Trung, 4 lính giáo, 2 hỏa mai, 2 thủy binh, 1 hỏa hổ, 1 voi chiến. **Mua lính** ở đồn hậu cứ; vàng 400; giới hạn 14;

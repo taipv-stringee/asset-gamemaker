@@ -232,12 +232,14 @@ static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 	# Tướng chính tránh chỗ nguy hiểm; quân thường chỉ cân nhắc nhẹ.
 	var threat := threat_map(state, u.faction)
 	var danger_w := 0.25 if u.tuong_chinh else 0.02
+	# Quân giữ đồn đang ở ngoài vùng (vd. lính tuần vừa báo động) thì chạy về; ở trong vùng thì không ra.
+	var guard_outside := u.ai_mode == "giu_don" and radius >= 0 and Rules.manhattan(u.pos, center) > radius
 	for p in reach:
-		if u.ai_mode == "giu_don" and radius >= 0 and Rules.manhattan(p, center) > radius:
+		if u.ai_mode == "giu_don" and radius >= 0 and not guard_outside and Rules.manhattan(p, center) > radius:
 			continue
 		var base: float = -float(dmap.get(p, UNREACHABLE)) * (3.0 if fleeing else 1.5)
 		if u.ai_mode == "giu_don":
-			base = -float(Rules.manhattan(p, center)) * 0.5
+			base = -float(Rules.manhattan(p, center)) * (3.0 if guard_outside else 0.5)
 		base += float(state.terrain_at(p)["thu"]) * 0.3
 		base -= float(threat.get(p, 0)) * danger_w
 		if u.tuong_chinh and int(threat.get(p, 0)) >= u.hp + 20:

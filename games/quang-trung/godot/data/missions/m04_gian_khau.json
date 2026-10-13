@@ -1,0 +1,389 @@
+{
+ "id": "m04_gian_khau",
+ "so": 4,
+ "ten": "Đêm 30 Tết: vượt sông Gián",
+ "ghi_chu": "Màn đêm bắt buộc (04 §Màn 4). Cầu phao ở bến, lính tuần, trống báo động là Sáng tạo của game.",
+ "ban_do": [
+  "^t..=..t^^",
+  "t.D.=.D.Lt",
+  "..lDFDl...",
+  "..l.=.l.v.",
+  "v...=...vv",
+  "rr..=..rrr",
+  "rrr.=.rr.t",
+  "-.--=--.-.",
+  "~~:~%~~:~~",
+  "~~:~%~~:~~",
+  "-.--.--.-.",
+  "rr..F..rrt",
+  "rrr.=.rr..",
+  "t...=...tt",
+  "tt.L=..rrr",
+  "...r=r...t",
+  "^t..=..t^^",
+  "^^t.=.t^^^"
+ ],
+ "chu_o": {
+  "4,2": "le",
+  "8,1": "le",
+  "4,11": "tayson",
+  "3,14": "tayson"
+ },
+ "phe": [
+  "tayson",
+  "le"
+ ],
+ "vang": {
+  "tayson": 400,
+  "le": 0
+ },
+ "gioi_han": {
+  "tayson": 14,
+  "le": 99
+ },
+ "mua_duoc": {
+  "tayson": [
+   "linh_giao",
+   "hoa_mai",
+   "thuy_binh",
+   "hoa_ho",
+   "quan_su",
+   "trong_tran",
+   "voi_chien"
+  ],
+  "le": []
+ },
+ "tam_nhin": 2,
+ "khu": {
+  "gian_khau": [
+   [
+    1,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    3,
+    0
+   ],
+   [
+    4,
+    0
+   ],
+   [
+    5,
+    0
+   ],
+   [
+    6,
+    0
+   ],
+   [
+    7,
+    0
+   ],
+   [
+    1,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    3,
+    1
+   ],
+   [
+    4,
+    1
+   ],
+   [
+    5,
+    1
+   ],
+   [
+    6,
+    1
+   ],
+   [
+    7,
+    1
+   ],
+   [
+    1,
+    2
+   ],
+   [
+    2,
+    2
+   ],
+   [
+    3,
+    2
+   ],
+   [
+    4,
+    2
+   ],
+   [
+    5,
+    2
+   ],
+   [
+    6,
+    2
+   ],
+   [
+    7,
+    2
+   ],
+   [
+    1,
+    3
+   ],
+   [
+    2,
+    3
+   ],
+   [
+    3,
+    3
+   ],
+   [
+    4,
+    3
+   ],
+   [
+    5,
+    3
+   ],
+   [
+    6,
+    3
+   ],
+   [
+    7,
+    3
+   ]
+  ]
+ },
+ "vat_the": [
+  {
+   "loai": "trong",
+   "o": [
+    5,
+    3
+   ],
+   "khu": "gian_khau"
+  },
+  {
+   "loai": "den",
+   "o": [
+    4,
+    3
+   ]
+  },
+  {
+   "loai": "den",
+   "o": [
+    8,
+    1
+   ]
+  }
+ ],
+ "quan": [
+  {
+   "id": "quang_trung",
+   "phe": "tayson",
+   "x": 4,
+   "y": 13,
+   "tuong_chinh": true,
+   "duoc": true
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 3,
+   "y": 12,
+   "duoc": true
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 5,
+   "y": 12,
+   "duoc": true
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 2,
+   "y": 12
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 6,
+   "y": 12
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 3,
+   "y": 13
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 5,
+   "y": 13
+  },
+  {
+   "id": "thuy_binh",
+   "phe": "tayson",
+   "x": 1,
+   "y": 10
+  },
+  {
+   "id": "thuy_binh",
+   "phe": "tayson",
+   "x": 8,
+   "y": 10
+  },
+  {
+   "id": "hoa_ho",
+   "phe": "tayson",
+   "x": 4,
+   "y": 14
+  },
+  {
+   "id": "voi_chien",
+   "phe": "tayson",
+   "x": 4,
+   "y": 15
+  },
+  {
+   "id": "quan_giu_don_le",
+   "phe": "le",
+   "x": 4,
+   "y": 2,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "quan_le",
+   "phe": "le",
+   "x": 2,
+   "y": 1,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "quan_le",
+   "phe": "le",
+   "x": 6,
+   "y": 1,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "quan_le",
+   "phe": "le",
+   "x": 3,
+   "y": 2,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "quan_le",
+   "phe": "le",
+   "x": 5,
+   "y": 2,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "quan_le",
+   "phe": "le",
+   "x": 3,
+   "y": 0,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "quan_le",
+   "phe": "le",
+   "x": 5,
+   "y": 1,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "quan_le",
+   "phe": "le",
+   "x": 1,
+   "y": 7,
+   "ai": "tuan_tra",
+   "diem": [
+    [
+     1,
+     7
+    ],
+    [
+     4,
+     7
+    ]
+   ]
+  },
+  {
+   "id": "quan_le",
+   "phe": "le",
+   "x": 8,
+   "y": 7,
+   "ai": "tuan_tra",
+   "diem": [
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     4
+    ]
+   ]
+  }
+ ],
+ "thang": {
+  "loai": "chiem_o",
+  "o": [
+   4,
+   2
+  ]
+ },
+ "thua_het_luot": 12,
+ "ly_do_het_luot": "Trời sáng. Quân Lê đã nhìn rõ quân ta.",
+ "muc_tieu_phu": [
+  {
+   "loai": "truoc_luot",
+   "n": 7,
+   "ten": "Chiếm đồn trước lượt 7"
+  },
+  {
+   "loai": "khong_bao_dong",
+   "ten": "Không để quân Lê báo động"
+  },
+  {
+   "loai": "khong_mat",
+   "quan": "voi_chien",
+   "ten": "Không mất voi chiến"
+  }
+ ],
+ "su_lieu": [
+  "song_gian",
+  "ha_hoi_khong_phai_dem_30",
+  "tet_mau_than_co_ngay_30"
+ ]
+}

@@ -20,7 +20,7 @@ func _init() -> void:
 		for u in s.units:
 			if u.tuong_chinh:
 				qt_alive = true
-		print("seed %d: %s ở vòng %d (tướng chính %s)" % [1000 + i, s.result if s.result != "" else "chưa xong", s.vong, "còn" if qt_alive else "mất"])
+		print("seed %d: %s ở vòng %d (tướng chính %s, báo động %d, mất %s)" % [1000 + i, s.result if s.result != "" else "chưa xong", s.vong, "còn" if qt_alive else "mất", int(s.flags["bao_dong"]), s.flags["mat_quan"]])
 		if s.result == "thang":
 			wins += 1
 		total_rounds += s.vong

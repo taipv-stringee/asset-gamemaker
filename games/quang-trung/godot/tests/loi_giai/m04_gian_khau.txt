@@ -1,0 +1,40 @@
+# Vòng 1: áp sát bờ sông, ngoài tầm nhìn lính tuần (A ở 1,7; B ở 8,7)
+di 1 10 3 8
+di 3 13 4 10
+di 5 13 5 10
+het
+# Vòng 2: A bị thủy binh chặn ở 3,7 → hạ gọn trong một lượt
+danh 3 8 3 8 3 7
+danh 4 10 4 8 3 7
+danh 5 10 4 7 3 7
+# Quang Trung (cầm đuốc) và voi tiến lên sau khi lính tuần A đã bị hạ
+di 4 13 4 11
+di 4 15 4 12
+het
+# Vòng 3: B ở 8,7 → hạ gọn; đại quân qua cầu phao
+danh 8 10 8 8 8 7
+danh 4 7 7 7 8 7
+danh 4 8 6 7 8 7
+di 4 11 4 9
+mua 4 11 trong_tran
+di 4 14 3 11
+di 4 12 4 10
+het
+# Vòng 4: tiến lên bờ bắc (khu đồn vẫn ngủ, không còn lính tuần)
+di 4 9 4 6
+di 4 10 4 8
+di 4 11 4 7
+di 6 7 5 4
+di 7 7 5 5
+het
+# Vòng 5: dàn quân quanh đồn
+di 5 5 3 3
+di 5 4 5 3
+di 4 6 4 5
+di 4 7 4 4
+di 4 8 4 6
+het
+# Vòng 6: voi đánh quan giữ đồn (có trống trận cổ vũ), một hỏa mai bắn, Quang Trung chiếm đồn
+danh 4 6 4 3 4 2
+danh 3 3 3 3 4 2
+chiem 4 5 4 2

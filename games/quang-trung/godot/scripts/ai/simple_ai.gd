@@ -107,6 +107,23 @@ static func _goals(state: BattleState, u: Unit) -> Array[Vector2i]:
 			for x in state.width:
 				goals.append(Vector2i(x, 0))
 		return goals
+	# Tướng chính phe người chơi (khi máy chơi thay để kiểm thử) nhắm thẳng mục tiêu màn.
+	var win: Dictionary = state.mission.get("thang", {})
+	if u.tuong_chinh and u.faction == state.factions[0] and win.get("loai", "") == "chiem_o":
+		var obj := Vector2i(int(win["o"][0]), int(win["o"][1]))
+		var guarded := false
+		for e in state.enemies_of(u.faction):
+			if Rules.manhattan(e.pos, obj) <= 3:
+				guarded = true
+		if not guarded:
+			goals.append(obj)
+			return goals
+		# Mục tiêu còn quân giữ: đi sau đội hình (ô của quân mình), không xông lên một mình.
+		for o in state.units_of(u.faction):
+			if o != u:
+				goals.append(o.pos)
+		if not goals.is_empty():
+			return goals
 	for e in state.enemies_of(u.faction):
 		goals.append(e.pos)
 	for p in state.owners:
@@ -155,17 +172,55 @@ static func _target_value(t: Unit) -> float:
 	return 0.6 + float(t.data()["gia"]) / 1000.0
 
 
+## Mối đe dọa ở lượt sau: với mỗi ô, tổng công tối đa của quân đối phương có thể đi tới và đánh ô đó.
+static func threat_map(state: BattleState, f: String) -> Dictionary:
+	var threat := {}
+	for e in state.enemies_of(f):
+		if e.ngu:
+			continue
+		var hit := {}
+		var spots: Array = [e.pos] if e.has_tag("ban_dung") else Rules.reachable(state, e).keys()
+		var lo := int(e.data()["tam_min"])
+		var hi := int(e.data()["tam_max"])
+		for sp in spots:
+			for dy in range(-hi, hi + 1):
+				for dx in range(-hi, hi + 1):
+					var dist := absi(dx) + absi(dy)
+					if dist >= lo and dist <= hi:
+						hit[Vector2i(sp.x + dx, sp.y + dy)] = true
+		var power := int(e.data()["cong_max"]) + e.level * Rules.LEVEL_ATK
+		for p in hit:
+			threat[p] = int(threat.get(p, 0)) + power
+	return threat
+
+
 static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 	var plan := {"lenh": "ke_hoach", "uid": u.uid, "den": u.pos, "hanh_dong": "cho", "muc_tieu": -1}
 	if u.ai_mode == "dung_yen":
 		return plan
 	var reach := Rules.reachable(state, u)
 	var fleeing := u.ai_mode == "rut_lui" or u.ai_mode == "chay"
-	var dmap := distance_map(state, u, _goals(state, u))
+	var goals := _goals(state, u)
+	# Quân yếu (máu < 35) lui về làng / đồn của phe mình để hồi máu; chỉ đánh khi chắc hạ được.
+	var healing := false
+	if not fleeing and u.hp < 35 and u.ai_mode != "giu_don":
+		var heal_spots: Array[Vector2i] = []
+		for p in state.owners:
+			if state.are_allies(state.owners[p], u.faction) and int(state.terrain_at(p)["hoi_mau"]) > 0:
+				var occ := state.unit_at(p)
+				if occ == null or occ == u:
+					heal_spots.append(p)
+		if not heal_spots.is_empty():
+			goals = heal_spots
+			healing = true
+	var dmap := distance_map(state, u, goals)
 	var center: Vector2i = u.ai_params.get("tam", u.pos)
 	var radius: int = u.ai_params.get("ban_kinh", -1)
 	var best_score := -INF
 	var original := u.pos
+	# Tướng chính tránh chỗ nguy hiểm; quân thường chỉ cân nhắc nhẹ.
+	var threat := threat_map(state, u.faction)
+	var danger_w := 0.25 if u.tuong_chinh else 0.02
 	for p in reach:
 		if u.ai_mode == "giu_don" and radius >= 0 and Rules.manhattan(p, center) > radius:
 			continue
@@ -173,6 +228,11 @@ static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 		if u.ai_mode == "giu_don":
 			base = -float(Rules.manhattan(p, center)) * 0.5
 		base += float(state.terrain_at(p)["thu"]) * 0.3
+		base -= float(threat.get(p, 0)) * danger_w
+		if u.tuong_chinh and int(threat.get(p, 0)) >= u.hp + 20:
+			base -= 200.0  # có thể bị hạ ở lượt sau
+		if state.terrain_at(p)["mua_linh"] and state.owner_of(p) == u.faction and not u.tuong_chinh:
+			base -= 25.0   # đừng đứng chắn ô mua lính của phe mình
 		if base > best_score:
 			best_score = base
 			plan = {"lenh": "ke_hoach", "uid": u.uid, "den": p, "hanh_dong": "cho", "muc_tieu": -1}
@@ -198,7 +258,12 @@ static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 			var exp: float = (fc["st_min"] + fc["st_max"]) / 2.0
 			var val: float = _target_value(t)
 			var counter: float = (fc["pd_min"] + fc["pd_max"]) / 2.0 if fc["phan_don"] else 0.0
-			var s2: float = base * 0.2 + exp * val + fc["ti_le_ha"] * 60.0 * val - counter * 0.7
+			var counter_w := 2.0 if u.tuong_chinh else 0.7
+			if healing and fc["ti_le_ha"] < 0.5:
+				continue
+			var s2: float = base * 0.2 + exp * val + fc["ti_le_ha"] * 60.0 * val - counter * counter_w
+			if u.tuong_chinh:
+				s2 -= float(threat.get(p, 0)) * danger_w
 			if s2 > best_score:
 				best_score = s2
 				plan = {"lenh": "ke_hoach", "uid": u.uid, "den": p, "hanh_dong": "danh", "muc_tieu": t.uid}

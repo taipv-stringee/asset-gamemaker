@@ -1,0 +1,27 @@
+# Màn m_kiem_thu: voi hạ quân Lê → quân tan; quân sư chiêu hàng → hàng binh;
+# Quang Trung hạ quân Lê còn lại → THẮNG; bấm Chơi lại → màn bắt đầu lại.
+# Chạy: GODOT --path . -- --man=m_kiem_thu --kich-ban=res://tests/kich_ban/quan_tan_choi_lai.txt
+cham 2 1
+nut Đứng yên
+cham 3 1
+cham 3 1
+kiem vat 3 1
+anh quan_tan.png
+cham 5 1
+cham 4 1
+cham 4 1
+nut Chiêu hàng
+kiem quan 3 1
+cham 4 3
+cham 5 2
+cham 5 2
+cham 6 2
+cham 6 2
+kiem ket_qua
+anh thang.png
+nut Chơi lại
+cho 1
+kiem vong
+kiem quan 3 1
+keo 0 40
+kiem camera

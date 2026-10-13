@@ -8,14 +8,29 @@ extends Node
 ##   --kich-ban=<file>   chạy kịch bản chạm (xem tests/kich_ban/README.md), mỗi bước có thể chụp ảnh
 
 var battle: Battle
+var _mission := "m_thu"
+var _seed := 0
+var _auto := false
+
+
+func _new_battle() -> void:
+	if battle != null:
+		battle.queue_free()
+	battle = Battle.new()
+	battle.auto_play = _auto
+	battle.restart_requested.connect(_new_battle, CONNECT_DEFERRED)
+	add_child(battle)
+	battle.start(_mission, _seed)
 
 
 func _ready() -> void:
+	_apply_pixel_scale()
+	get_window().size_changed.connect(_apply_pixel_scale)
 	var args := _args()
-	battle = Battle.new()
-	battle.auto_play = args.has("tu-dong")
-	add_child(battle)
-	battle.start(args.get("man", "m_thu"), int(args.get("seed", "0")))
+	_mission = args.get("man", "m_thu")
+	_seed = int(args.get("seed", "0"))
+	_auto = args.has("tu-dong")
+	_new_battle()
 	if args.has("kich-ban"):
 		_run_script(args["kich-ban"])
 	elif args.has("anh"):
@@ -50,7 +65,8 @@ func _screenshot_later(path: String, wait: float, until_round: int) -> void:
 ##   nut <chữ>       bấm nút có chữ đó (ở bảng dưới, kể cả "Hết lượt")
 ##   cho <giây>      chờ
 ##   anh <file.png>  chụp màn hình (đường dẫn tương đối → <thư mục dữ liệu người dùng>/anh/)
-##   kiem <biểu thức đơn giản>  ghi ra trạng thái: vang | vong | ket_qua | quan X Y
+##   keo DX DY       kéo bản đồ (điểm ảnh logic)
+##   kiem <...>      ghi ra trạng thái: vang | vong | ket_qua | camera | quan X Y | vat X Y
 ##   thoat           thoát
 func _run_script(path: String) -> void:
 	var f := FileAccess.open(path, FileAccess.READ)
@@ -75,6 +91,14 @@ func _run_script(path: String) -> void:
 				var world := Vector2(tile * Battle.T) + Vector2(Battle.T, Battle.T) / 2.0
 				var screen := get_viewport().get_canvas_transform() * world
 				battle._on_tap(screen)
+			"keo":
+				var d := rest.split(" ", false)
+				var ev := InputEventScreenDrag.new()
+				ev.position = get_viewport().get_visible_rect().size / 2.0
+				ev.relative = Vector2(float(d[0]), float(d[1]))
+				battle._dragging = true
+				battle._unhandled_input(ev)
+				battle._dragging = false
 			"nut":
 				if not _press(rest):
 					print("KỊCH BẢN dòng %d: không thấy nút '%s'" % [line_no, rest])
@@ -99,10 +123,8 @@ func _run_script(path: String) -> void:
 
 
 func _press(text: String) -> bool:
-	var candidates: Array = battle.buttons.get_children()
-	candidates.append(battle.end_button)
-	for b in candidates:
-		if b is Button and b.text == text and not b.disabled:
+	for b in battle.hud.find_children("*", "Button", true, false):
+		if b.text == text and not b.disabled and b.is_visible_in_tree() and not b.is_queued_for_deletion():
 			b.pressed.emit()
 			return true
 	return false
@@ -118,7 +140,27 @@ func _inspect(what: String) -> String:
 			return str(st.vong)
 		"ket_qua":
 			return st.result if st.result != "" else "(chưa)"
+		"camera":
+			return "%d,%d" % [int(battle.camera.position.x), int(battle.camera.position.y)]
+		"vat":
+			var o := st.object_at(Vector2i(int(p[1]), int(p[2])))
+			return o.get("loai", "trống")
 		"quan":
 			var u := st.unit_at(Vector2i(int(p[1]), int(p[2])))
 			return "trống" if u == null else "%s %s máu %d%s" % [u.faction, u.type_id, u.hp, " (xong)" if u.done else ""]
 	return "?"
+
+
+## Phóng nguyên số (docs/08 §4) nhưng dùng hết màn hình: chọn hệ số s = floor(min(rộng/288, cao/512)),
+## rồi đặt vùng logic = kích thước màn hình / s. Chế độ "integer" có sẵn của Godot để lại viền đen
+## (báo cáo kiểm thử 13/10/2026, Pixel 3), nên tự tính ở đây.
+func _apply_pixel_scale() -> void:
+	var win := get_window()
+	var screen := win.size
+	if screen.x <= 0 or screen.y <= 0:
+		return
+	var s := maxi(1, mini(screen.x / 288, screen.y / 512))
+	win.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
+	win.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND
+	win.content_scale_stretch = Window.CONTENT_SCALE_STRETCH_FRACTIONAL
+	win.content_scale_size = Vector2i(screen.x / s, screen.y / s)

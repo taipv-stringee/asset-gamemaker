@@ -19,3 +19,6 @@ nut Hết lượt
 cho 1
 anh kb_sau_luot.png
 kiem vong
+kiem camera
+keo 0 -60
+kiem camera

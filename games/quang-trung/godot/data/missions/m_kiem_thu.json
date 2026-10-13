@@ -1,0 +1,66 @@
+{
+  "id": "m_kiem_thu",
+  "ten": "Kiểm thử",
+  "ghi_chu": "Bản đồ nhỏ cho kịch bản chạm: quân tan, chiêu hàng, thắng, chơi lại. Không thuộc chiến dịch.",
+  "ban_do": [
+    ".........",
+    ".........",
+    "....F....",
+    "........."
+  ],
+  "chu_o": {
+    "4,2": "tayson"
+  },
+  "phe": [
+    "tayson",
+    "le"
+  ],
+  "vang": {
+    "tayson": 0,
+    "thanh": 0
+  },
+  "gioi_han": {
+    "tayson": 10,
+    "thanh": 10
+  },
+  "quan": [
+    {
+      "id": "quang_trung",
+      "phe": "tayson",
+      "x": 4,
+      "y": 3,
+      "tuong_chinh": true
+    },
+    {
+      "id": "voi_chien",
+      "phe": "tayson",
+      "x": 2,
+      "y": 1,
+      "cap": 4
+    },
+    {
+      "id": "quan_su",
+      "phe": "tayson",
+      "x": 5,
+      "y": 1
+    },
+    {
+      "id": "quan_le",
+      "phe": "le",
+      "x": 3,
+      "y": 1,
+      "mau": 10
+    },
+    {
+      "id": "quan_le",
+      "phe": "le",
+      "x": 6,
+      "y": 2,
+      "mau": 5
+    }
+  ],
+  "thang": {
+    "loai": "ha_het"
+  },
+  "thua_het_luot": 10
+}

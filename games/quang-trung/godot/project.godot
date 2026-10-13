@@ -8,6 +8,7 @@ config_version=5
 config/name="Tây Sơn"
 config/description="Game chiến thuật theo lượt kiểu Ancient Empires 2 về chiến dịch Quang Trung 1789."
 run/main_scene="res://scenes/main.tscn"
+config/icon="res://assets/icon/icon_1024.png"
 config/features=PackedStringArray("4.7", "Mobile")
 
 [display]
@@ -18,7 +19,6 @@ window/size/window_width_override=576
 window/size/window_height_override=1024
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/stretch/scale_mode="integer"
 window/handheld/orientation=1
 
 [input_devices]

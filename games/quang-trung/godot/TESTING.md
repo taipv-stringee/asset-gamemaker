@@ -9,7 +9,9 @@ Dành cho **agent kiểm thử chạy trên máy chủ dự án** và cho chủ 
    `GODOT --path . -- --kich-ban=res://tests/kich_ban/<file>.txt`
    - So các dòng `KIỂM` với giá trị ghi trong chú thích của kịch bản.
    - Mở các ảnh chụp (đường dẫn in ở dòng `Đã chụp:`) và mô tả bất thường: chữ bị cắt, nút chồng nhau, quân hiển thị sai chỗ.
-3. Máy tự chơi: `GODOT --path . -- --tu-dong --vong=10 --anh=<file>` → không treo, không lỗi `SCRIPT ERROR` trong log.
+3. Máy tự chơi có hình: `GODOT --path . -- --tu-dong --vong=10 --anh=<file>` → không treo, không lỗi `SCRIPT ERROR` trong log.
+4. Mô phỏng nhanh (không hình): `GODOT --headless --path . -s res://tools/mo_phong.gd -- --man=m_thu --lan=10`
+   → in kết quả từng trận. Dùng để phát hiện kẹt / lỗi, **không** dùng để kết luận cân bằng (AI phe ta đơn giản hơn người chơi).
 
 ## 2. Chơi thử trên điện thoại (mốc M1)
 

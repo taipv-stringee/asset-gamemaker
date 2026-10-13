@@ -68,6 +68,10 @@ khai báo keystore phát hành (không commit keystore vào repo), rồi `--expo
    GODOT --headless --path . --export-debug "iOS" export/ios/TaySon.ipa
    ```
    Nếu export trực tiếp lỗi ký, mở project Xcode Godot tạo ra trong `export/ios/`, chọn team, cắm iPhone, bấm Run.
+4. **Không dùng iOS Simulator** với template chính thức 4.7.2: phần simulator trong template chỉ có x86_64, simulator iOS 27 không chạy được
+   (báo cáo 13/10/2026). Thử trên **iPhone thật**. Nếu bắt buộc cần simulator: tự build template
+   `scons platform=ios target=template_debug arch=arm64 simulator=yes`.
+5. Biểu tượng: `assets/icon/icon_1024.png` (sinh bằng `tools/gen_icon.py`) đã gán cho project và preset iOS.
 
 ## 7. Sau khi build
 

@@ -4,6 +4,7 @@ extends Node2D
 ## Toàn bộ luật nằm ở Rules / SimpleAI; ở đây chỉ hiển thị và gọi lệnh.
 
 signal battle_finished(result: String)
+signal restart_requested
 
 const T := 32
 const TOP_H := 32
@@ -543,12 +544,12 @@ func _open_forecast(t: Unit) -> void:
 	mode = Mode.FORECAST
 	var fc := Rules.forecast(state, selected, selected.pos, t, selected.straight_steps)
 	_unit_info(t)
-	var txt := "Gây %d–%d   (hạ: %d%%)" % [fc["st_min"], fc["st_max"], roundi(fc["ti_le_ha"] * 100.0)]
+	var txt := "Gây %d–%d · hạ %d%%" % [fc["st_min"], fc["st_max"], roundi(fc["ti_le_ha"] * 100.0)]
 	if fc["phan_don"]:
-		txt += "\nBị phản đòn %d–%d" % [fc["pd_min"], fc["pd_max"]]
+		txt += " · phản đòn %d–%d" % [fc["pd_min"], fc["pd_max"]]
 	else:
-		txt += "\nKhông bị phản đòn"
-	info_label.text = txt + "   — chạm lần nữa để đánh"
+		txt += " · không phản đòn"
+	info_label.text = txt + "\nChạm lần nữa để đánh"
 	_set_buttons([["Đánh", func() -> void: _run(Rules.cmd_attack(state, selected, t))], ["Thôi", _show_actions]])
 	overlay.queue_redraw()
 
@@ -759,7 +760,7 @@ func _finish() -> void:
 	sub.size = Vector2(220, 18)
 	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	result_panel.add_child(sub)
-	var again := _button("Chơi lại", func() -> void: get_tree().reload_current_scene())
+	var again := _button("Chơi lại", func() -> void: restart_requested.emit())
 	again.position = Vector2(70, 70)
 	again.size = Vector2(80, 28)
 	result_panel.add_child(again)

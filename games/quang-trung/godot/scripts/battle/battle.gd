@@ -725,14 +725,18 @@ func _show_recruit(p: Vector2i) -> void:
 	recruit_panel.offset_right = -6
 	recruit_panel.offset_bottom = -BOTTOM_H - 4
 	hud.get_child(0).add_child(recruit_panel)
+	var scroll := ScrollContainer.new()
+	scroll.set_anchors_preset(Control.PRESET_FULL_RECT)
+	scroll.offset_left = 6
+	scroll.offset_right = -6
+	scroll.offset_top = 6
+	scroll.offset_bottom = -6
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	recruit_panel.add_child(scroll)
 	var col := VBoxContainer.new()
-	col.set_anchors_preset(Control.PRESET_FULL_RECT)
-	col.offset_left = 6
-	col.offset_right = -6
-	col.offset_top = 6
-	col.offset_bottom = -6
+	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	col.add_theme_constant_override("separation", 3)
-	recruit_panel.add_child(col)
+	scroll.add_child(col)
 	var opts := Rules.recruit_options(state, PLAYER, p)
 	for id in opts:
 		var d := data.unit(id)
@@ -747,7 +751,9 @@ func _show_recruit(p: Vector2i) -> void:
 		b.add_theme_constant_override("icon_max_width", 32)
 		b.disabled = not Rules.can_afford(state, PLAYER, id)
 		col.add_child(b)
-	recruit_panel.offset_top = -BOTTOM_H - 4 - 12 - opts.size() * 39
+	# Cao theo nội dung thật (nút hai dòng cao hơn custom_minimum_size), tối đa là chỗ trống giữa hai thanh; dư thì cuộn.
+	var room := _view_size().y - TOP_H - BOTTOM_H - 12
+	recruit_panel.offset_top = -BOTTOM_H - 4 - minf(col.get_combined_minimum_size().y + 12, room)
 
 
 func _unit_icon(id: String) -> Texture2D:
@@ -957,9 +963,13 @@ func _shake(duration: float) -> void:
 func _float_text(pos: Vector2, text: String, color: Color) -> void:
 	var l := _label(FONT_BOLD, 10, color)
 	l.text = text
-	l.position = pos
 	l.add_theme_color_override("font_outline_color", Color(0.08, 0.04, 0.04))
 	l.add_theme_constant_override("outline_size", 3)
+	# Giữ chữ trong khung nhìn: quân ở cột sát mép phải thì chữ không bị cắt.
+	var left := camera.position.x + 2.0
+	var right := camera.position.x + _view_size().x - l.get_combined_minimum_size().x - 2.0
+	pos.x = clampf(pos.x, left, maxf(left, right))
+	l.position = pos
 	fx_layer.add_child(l)
 	var tw := create_tween()
 	tw.tween_property(l, "position", pos + Vector2(0, -14), 0.6)

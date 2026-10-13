@@ -3,6 +3,13 @@
  "so": 4,
  "ten": "Đêm 30 Tết: vượt sông Gián",
  "ten_ngan": "Sông Gián",
+ "ngay": "Đêm 30 tháng Chạp năm Mậu Thân (25/01/1789, quy đổi)",
+ "dia_danh": "Sông Gián, đồn Gián Khẩu (giáp Ninh Bình và Hà Nam ngày nay)",
+ "gioi_thieu": "Từ Tam Điệp, quân Tây Sơn chia làm năm đạo tiến ra Bắc. Đạo chủ lực của Quang Trung theo đường thiên lý, mở màn bằng việc vượt sông Gián và diệt đồn Gián Khẩu của quân Lê ngay trong đêm 30.",
+ "nhan_gioi_thieu": "Sử liệu",
+ "muc_tieu_chinh": "Quang Trung chiếm đồn Gián Khẩu trước khi hết vòng 12.",
+ "dieu_kien_thua": "Quang Trung bị hạ, hoặc hết vòng 12 (trời sáng).",
+ "hoi_thoai": "m04_gian_khau",
  "ghi_chu": "Màn đêm bắt buộc (04 §Màn 4). Cầu phao ở bến, lính tuần, trống báo động là Sáng tạo của game.",
  "ban_do": [
   "^t..=..t^^",

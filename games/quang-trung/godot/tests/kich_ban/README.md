@@ -22,7 +22,7 @@ Sau mỗi lệnh, kịch bản chờ đến khi hết hoạt cảnh rồi mới 
 |---|---|
 | `kiem vang` (đầu) | `450` (400 khởi đầu + 50 từ đồn) |
 | `kiem quan 5 7` | `tayson voi_chien máu 100` |
-| `kiem quan 4 12` | `tayson hoa_mai máu 100 (xong)` |
+| `kiem quan 4 12` | `tayson hoa_mai máu 100 (xong)` (mua qua bảng mua lính: nút "Hỏa mai thủ · 250") |
 | `kiem vang` (sau khi mua) | `200` |
 | `kiem vong` | `2` |
 | `kiem camera` (trước / sau khi kéo) | `0,-32` rồi `0,8` (đã cuộn hết xuống dưới) |
@@ -49,3 +49,23 @@ Chạy: `GODOT --path . -- --man=m04_gian_khau --kich-ban=res://tests/kich_ban/d
 | `kiem quan 3 7` (vòng 2) | `le quan_le máu 100 (xong)` — lính tuần bị thủy binh chặn ở bờ bắc; ảnh `dem_vong2.png` thấy nó, thấy cổng đồn sáng đèn có quan giữ đồn ngủ (chữ z), trống, đèn |
 | `kiem quan 3 7` (sau 3 đòn) | `trống` (lính tuần đã bị hạ, để lại quân tan); ảnh `dem_ha_tuan.png` |
 | `kiem ket_qua` | `(chưa)`, không có chữ "Báo động!" nào hiện ra |
+
+## tron_m04.txt (đi qua menu, chơi trọn màn 4) — giá trị mong đợi
+
+Chạy: `GODOT --path . -- --menu --moi --seed=1 --kich-ban=res://tests/kich_ban/tron_m04.txt`
+(`--moi` xóa tiến trình và file lưu trước khi chạy; `--menu` đi qua menu thay vì vào thẳng trận.)
+
+| Dòng | Mong đợi |
+|---|---|
+| `kiem man_hinh` (đầu) | `MainMenu`; ảnh `menu.png` không có nút "Tiếp tục" |
+| ảnh `gioi_thieu.png` | Giới thiệu màn: "Màn 4", ngày âm + dương, bản đồ nhỏ, đoạn lịch sử có nhãn [Sử liệu], mục tiêu, 3 mục tiêu phụ ☆ |
+| ảnh `hoi_thoai_qt.png` | Khung hội thoại có chân dung Quang Trung, bảng tên, nút "Bỏ qua" |
+| `kiem luu` (sau hội thoại) | `có` (tự lưu đầu lượt) |
+| `kiem ket_qua` | `thang`; ảnh `ket_qua.png`: THẮNG, "Sau 6 vòng · mất 0 quân", 3 sao, 3 mục Sử liệu mới |
+| `kiem luu` (sau khi thắng) | `không` (xong trận thì xóa file lưu) |
+| `kiem sao m04_gian_khau` | `3` |
+| `kiem man_hinh` (sau "Tiếp") | `CampaignScreen`; ảnh `chien_dich_sau.png`: màn 4 có ★★★ |
+| ảnh `su_lieu_muc.png` | Mục "Sông Gián và đồn Gián Khẩu", nhãn [Sử liệu], 2 nguồn có đường dẫn |
+| `kiem man_hinh` (cuối) | `MainMenu` |
+
+Lệnh thêm cho kịch bản này: `tiep` (chạm vào khung hội thoại), `kiem luu`, `kiem sao <màn>`, `kiem man_hinh`.

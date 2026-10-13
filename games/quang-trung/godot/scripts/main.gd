@@ -6,35 +6,187 @@ extends Node
 ##   --anh=<đường dẫn>   chụp màn hình sau --cho=<giây> (mặc định 1.5) rồi thoát
 ##   --vong=<n>          khi tự động: chụp khi tới vòng n
 ##   --kich-ban=<file>   chạy kịch bản chạm (xem tests/kich_ban/README.md), mỗi bước có thể chụp ảnh
+##   --moi               xóa tiến trình và file lưu trước khi chạy (kiểm thử từ đầu)
+##   --menu              vẫn đi qua menu (dùng kèm --kich-ban để kiểm thử menu, hội thoại, lưu)
+## Không có tham số nào: vào menu chính như người chơi.
 
 var battle: Battle
+var screen: Control                # màn hình menu đang mở (null khi đang trong trận)
+var ui_layer: CanvasLayer          # menu, giới thiệu màn, hội thoại nằm trên trận
 var _mission := "m_thu"
 var _seed := 0
 var _auto := false
-
-
-func _new_battle() -> void:
-	if battle != null:
-		battle.queue_free()
-	battle = Battle.new()
-	battle.auto_play = _auto
-	battle.restart_requested.connect(_new_battle, CONNECT_DEFERRED)
-	add_child(battle)
-	battle.start(_mission, _seed)
+var _story := false
 
 
 func _ready() -> void:
 	_apply_pixel_scale()
 	get_window().size_changed.connect(_apply_pixel_scale)
+	get_tree().set_quit_on_go_back(false)
+	ui_layer = CanvasLayer.new()
+	ui_layer.layer = 10
+	add_child(ui_layer)
 	var args := _args()
-	_mission = args.get("man", "m_thu")
 	_seed = int(args.get("seed", "0"))
 	_auto = args.has("tu-dong")
-	_new_battle()
+	if args.has("moi"):
+		Progress.clear_battle()
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(Progress.PROGRESS_PATH))
+		Progress.reset_cache()
+	# Có --man / --kich-ban / --anh / --tu-dong: vào thẳng trận (kiểm thử). Không có: vào menu như người chơi.
+	var direct := args.has("man") or args.has("kich-ban") or args.has("anh") or _auto
+	if direct and not args.has("menu"):
+		_mission = args.get("man", "m_thu")
+		_new_battle()
+	else:
+		_show_menu()
 	if args.has("kich-ban"):
 		_run_script(args["kich-ban"])
 	elif args.has("anh"):
 		_screenshot_later(args["anh"], float(args.get("cho", "1.5")), int(args.get("vong", "0")))
+
+
+# ================================================================ luồng màn hình (06 §4)
+
+func _set_screen(c: Control) -> void:
+	if screen != null:
+		screen.queue_free()
+	screen = c
+	if c != null:
+		ui_layer.add_child(c)
+
+
+func _close_battle() -> void:
+	if battle != null:
+		battle.queue_free()
+		battle = null
+
+
+func _show_menu() -> void:
+	_close_battle()
+	var m := MainMenu.new()
+	m.continue_pressed.connect(_continue)
+	m.campaign_pressed.connect(_show_campaign)
+	m.codex_pressed.connect(_show_codex)
+	_set_screen(m)
+
+
+func _show_campaign() -> void:
+	var c := CampaignScreen.new()
+	c.mission_chosen.connect(_show_briefing)
+	c.back.connect(_show_menu)
+	_set_screen(c)
+
+
+func _show_codex() -> void:
+	var c := CodexScreen.new()
+	c.back.connect(_show_menu)
+	_set_screen(c)
+
+
+func _show_briefing(id: String) -> void:
+	var m := Missions.load_mission(id)
+	if not m.has("gioi_thieu"):
+		_start_story_battle(id)  # màn luyện tập: không có giới thiệu
+		return
+	var b := Briefing.new().setup(m)
+	b.start_pressed.connect(_start_story_battle.bind(id))
+	b.back.connect(_show_campaign)
+	_set_screen(b)
+
+
+func _start_story_battle(id: String) -> void:
+	_mission = id
+	_story = true
+	Progress.clear_battle()
+	_set_screen(null)
+	_new_battle()
+	await _dialogue(Story.dialogue(battle.state.mission.get("hoi_thoai", ""), "truoc"))
+
+
+func _continue() -> void:
+	var s := Progress.load_battle()
+	if s == null:
+		Progress.clear_battle()
+		_show_menu()
+		return
+	_mission = s.mission_id
+	_story = true
+	_set_screen(null)
+	_new_battle(s)
+
+
+func _new_battle(from: BattleState = null) -> void:
+	_close_battle()
+	battle = Battle.new()
+	battle.auto_play = _auto
+	battle.story_mode = _story
+	battle.restart_requested.connect(_restart, CONNECT_DEFERRED)
+	battle.exit_requested.connect(_on_battle_exit, CONNECT_DEFERRED)
+	battle.battle_finished.connect(_on_battle_finished)
+	add_child(battle)
+	if from != null:
+		battle.start_from_state(from)
+	else:
+		# Trong chiến dịch mỗi lần chơi một seed mới (trừ khi kiểm thử truyền --seed).
+		var sd := _seed if _seed != 0 or not _story else randi_range(1, 999999)
+		battle.start(_mission, sd)
+
+
+func _on_battle_exit() -> void:
+	# Xong trận → về danh sách màn; bỏ dở (đã lưu) → về menu chính để thấy "Tiếp tục".
+	if battle != null and battle.state.result != "":
+		_show_campaign()
+	else:
+		_show_menu()
+
+
+func _restart() -> void:
+	if _story:
+		Progress.clear_battle()
+	_new_battle()
+
+
+func _on_battle_finished(result: String) -> void:
+	if not _story:
+		return
+	Progress.clear_battle()
+	var opened: Array[String] = []
+	if result == "thang":
+		opened = Progress.record_win(battle.state)
+		await _dialogue(Story.dialogue(battle.state.mission.get("hoi_thoai", ""), "sau_thang"))
+	battle.show_result(opened)
+
+
+func _dialogue(lines: Array) -> void:
+	if lines.is_empty() or battle == null:
+		return
+	battle.input_locked = true
+	var box := DialogueBox.new()
+	ui_layer.add_child(box)
+	await box.play(lines)
+	box.queue_free()
+	if battle != null:
+		battle.input_locked = false
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		_go_back()
+
+
+## Nút Back của Android.
+func _go_back() -> void:
+	if screen is CodexScreen and (screen as CodexScreen).go_back():
+		return
+	if screen is Briefing:
+		_show_campaign()
+	elif screen is CampaignScreen or screen is CodexScreen:
+		_show_menu()
+	elif screen is MainMenu:
+		get_tree().quit()
+	elif battle != null:
+		battle._toggle_pause()
 
 
 func _args() -> Dictionary:
@@ -66,6 +218,7 @@ func _screenshot_later(path: String, wait: float, until_round: int) -> void:
 ##   cho <giây>      chờ
 ##   anh <file.png>  chụp màn hình (đường dẫn tương đối → <thư mục dữ liệu người dùng>/anh/)
 ##   keo DX DY       kéo bản đồ (điểm ảnh logic)
+##   tiep            chạm vào khung hội thoại (hiện hết chữ / sang câu sau)
 ##   kiem <...>      ghi ra trạng thái: vang | vong | ket_qua | camera | quan X Y | vat X Y
 ##   thoat           thoát
 func _run_script(path: String) -> void:
@@ -85,6 +238,9 @@ func _run_script(path: String) -> void:
 		var cmd := parts[0]
 		var rest := parts[1] if parts.size() > 1 else ""
 		match cmd:
+			"tiep":
+				for box in ui_layer.find_children("*", "DialogueBox", true, false):
+					box.advance()
 			"cham":
 				var xy := rest.split(" ", false)
 				var tile := Vector2i(int(xy[0]), int(xy[1]))
@@ -117,20 +273,28 @@ func _run_script(path: String) -> void:
 				get_tree().quit()
 				return
 		await get_tree().create_timer(0.35).timeout
-		while battle.mode == Battle.Mode.BUSY:
+		while battle != null and battle.mode == Battle.Mode.BUSY:
 			await get_tree().create_timer(0.1).timeout
 	get_tree().quit()
 
 
 func _press(text: String) -> bool:
-	for b in battle.hud.find_children("*", "Button", true, false):
-		if b.text == text and not b.disabled and b.is_visible_in_tree() and not b.is_queued_for_deletion():
+	for b in find_children("*", "Button", true, false):
+		if (b.text == text or b.text.split("\n")[0] == text) and not b.disabled and b.is_visible_in_tree() and not b.is_queued_for_deletion():
 			b.pressed.emit()
 			return true
 	return false
 
 
 func _inspect(what: String) -> String:
+	if what == "luu":
+		return "có" if Progress.has_battle() else "không"
+	if what.begins_with("sao "):
+		return str(Progress.stars(what.substr(4)))
+	if what == "man_hinh":
+		return "(trận)" if screen == null else str(screen.get_script().get_global_name())
+	if battle == null:
+		return "(không có trận)"
 	var st := battle.state
 	var p := what.split(" ", false)
 	match p[0]:

@@ -11,7 +11,7 @@ cham 3 8
 nut Chờ
 cham 4 12
 anh kb_mua.png
-nut Hỏa 250
+nut Hỏa mai thủ · 250
 kiem quan 4 12
 kiem vang
 nut Hết lượt

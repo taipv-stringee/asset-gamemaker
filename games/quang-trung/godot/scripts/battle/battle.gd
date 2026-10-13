@@ -5,6 +5,7 @@ extends Node2D
 
 signal battle_finished(result: String)
 signal restart_requested
+signal exit_requested               # về menu (chế độ chiến dịch)
 
 const T := 32
 const TOP_H := 32
@@ -33,6 +34,10 @@ var targets: Array[Unit] = []
 var forecast_target: Unit = null
 var end_turn_armed := false
 var auto_play := false            # cả hai phe do máy chơi (kiểm thử)
+var story_mode := false           # trong chiến dịch: tự lưu, kết quả do main hiện sau hội thoại
+var pause_panel: Panel
+var recruit_panel: Panel
+var input_locked := false         # đang có hội thoại phủ lên trận
 
 var terrain_layer: TileMapLayer
 var objects_layer: Node2D
@@ -66,14 +71,33 @@ var _dragging := false
 
 
 func start(mission_id: String, p_seed: int = 0) -> void:
-	state = Missions.new_battle(mission_id, p_seed)
+	start_from_state(Missions.new_battle(mission_id, p_seed))
+
+
+## Mở trận từ một trạng thái có sẵn (màn mới, hoặc "Tiếp tục" từ file lưu).
+func start_from_state(s: BattleState) -> void:
+	state = s
 	_build_world()
 	_build_hud()
 	_refresh_all()
 	_center_camera_on(_first_unit_pos())
 	_show_banner("Lượt Tây Sơn · vòng %d" % state.vong)
-	if auto_play:
+	if auto_play or state.current_faction() != PLAYER:
 		_run_ai_turns()
+	else:
+		_autosave()
+
+
+func _autosave() -> void:
+	if story_mode and state.result == "":
+		Progress.save_battle(state)
+
+
+func _notification(what: int) -> void:
+	# Đưa app xuống nền / đóng cửa sổ: lưu ngay (06 §7).
+	if what == NOTIFICATION_APPLICATION_PAUSED or what == NOTIFICATION_WM_CLOSE_REQUEST:
+		if state != null and mode != Mode.ENDED:
+			_autosave()
 
 
 # ================================================================ dựng cảnh
@@ -274,18 +298,26 @@ func _build_hud() -> void:
 	top_label = _label(FONT_BOLD, 13, C_GOLD_LIGHT)
 	top_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
 	top_label.offset_left = 8
-	top_label.offset_right = -92
+	top_label.offset_right = -124
 	top_label.offset_top = 7
 	top_label.offset_bottom = 25
 	top_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	top.add_child(top_label)
 	gold_label = _label(FONT_BOLD, 13, Color.WHITE)
 	gold_label.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	gold_label.offset_left = -88
-	gold_label.offset_right = -8
+	gold_label.offset_left = -120
+	gold_label.offset_right = -40
 	gold_label.offset_top = 7
 	gold_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	top.add_child(gold_label)
+	var menu_btn := _button("≡", _toggle_pause)
+	menu_btn.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	menu_btn.offset_left = -34
+	menu_btn.offset_right = -4
+	menu_btn.offset_top = 3
+	menu_btn.offset_bottom = 29
+	menu_btn.custom_minimum_size = Vector2(30, 26)
+	top.add_child(menu_btn)
 	# Bảng dưới
 	bottom = _panel(C_LACQUER)
 	bottom.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
@@ -510,6 +542,10 @@ func _screen_to_tile(screen: Vector2) -> Vector2i:
 func _on_tap(screen: Vector2) -> void:
 	if mode == Mode.BUSY or mode == Mode.ENDED or state.current_faction() != PLAYER:
 		return
+	if pause_panel != null or input_locked:
+		return
+	if recruit_panel != null:
+		_close_recruit()
 	var p := _screen_to_tile(screen)
 	if not state.in_bounds(p):
 		return
@@ -672,22 +708,60 @@ func _run(ev: Array[Dictionary]) -> void:
 	_refresh_all()
 
 
+## Bảng mua lính (06 §4): hình, giá, chỉ số, đặc tính; không đủ vàng / đủ quân thì mờ.
 func _show_recruit(p: Vector2i) -> void:
+	_close_recruit()
 	portrait.texture = null
 	name_label.text = "Mua lính — %d vàng" % int(state.gold.get(PLAYER, 0))
-	var opts := Rules.recruit_options(state, PLAYER, p)
+	info_label.text = "Quân: %d/%d. Lính mới đứng ở đồn, đi được từ lượt sau." % [state.count_toward_limit(PLAYER), int(state.limits.get(PLAYER, 0))]
+	_set_buttons([["Đóng", _close_recruit]])
 	var data := GameData.get_data()
-	var names: PackedStringArray = []
-	var list: Array = []
+	recruit_panel = _panel(Color(0.12, 0.04, 0.04, 0.97))
+	recruit_panel.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+	recruit_panel.offset_left = 6
+	recruit_panel.offset_right = -6
+	recruit_panel.offset_bottom = -BOTTOM_H - 4
+	hud.get_child(0).add_child(recruit_panel)
+	var col := VBoxContainer.new()
+	col.set_anchors_preset(Control.PRESET_FULL_RECT)
+	col.offset_left = 6
+	col.offset_right = -6
+	col.offset_top = 6
+	col.offset_bottom = -6
+	col.add_theme_constant_override("separation", 3)
+	recruit_panel.add_child(col)
+	var opts := Rules.recruit_options(state, PLAYER, p)
 	for id in opts:
 		var d := data.unit(id)
-		names.append("%s %d" % [d["ten"], d["gia"]])
-		if Rules.can_afford(state, PLAYER, id):
-			list.append([String(d["ten"]).split(" ")[0] + " " + str(d["gia"]), func() -> void: _run(Rules.cmd_recruit(state, PLAYER, p, id))])
-	info_label.text = ", ".join(names) if list.is_empty() else "Chọn loại lính:"
-	if list.size() > 4:
-		list = list.slice(0, 4)
-	_set_buttons(list)
+		var tam := str(d["tam_min"]) if d["tam_min"] == d["tam_max"] else "%d–%d" % [d["tam_min"], d["tam_max"]]
+		var text := "%s · %d\nCông %d–%d  Thủ %d  Di %d  Tầm %s" % [d["ten"], d["gia"], d["cong_min"], d["cong_max"], d["thu"], d["di"], tam]
+		var b := UiKit.button(text, func() -> void:
+			_close_recruit()
+			_run(Rules.cmd_recruit(state, PLAYER, p, id)), 10)
+		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		b.custom_minimum_size = Vector2(0, 36)
+		b.icon = _unit_icon(id)
+		b.add_theme_constant_override("icon_max_width", 32)
+		b.disabled = not Rules.can_afford(state, PLAYER, id)
+		col.add_child(b)
+	recruit_panel.offset_top = -BOTTOM_H - 4 - 12 - opts.size() * 39
+
+
+func _unit_icon(id: String) -> Texture2D:
+	var path := "res://assets/units/unit_%s_%s_dung_strip2.png" % [PLAYER, id]
+	if not ResourceLoader.exists(path):
+		return null
+	var at := AtlasTexture.new()
+	at.atlas = load(path)
+	at.region = Rect2(0, 0, T, T)
+	return at
+
+
+func _close_recruit() -> void:
+	if recruit_panel != null:
+		recruit_panel.queue_free()
+		recruit_panel = null
+		_show_idle_info()
 
 
 func _on_end_turn_pressed() -> void:
@@ -746,6 +820,7 @@ func _run_ai_turns() -> void:
 	_show_banner("Lượt Tây Sơn · vòng %d" % state.vong)
 	_show_idle_info()
 	_refresh_all()
+	_autosave()
 
 
 # ================================================================ hoạt cảnh
@@ -880,29 +955,101 @@ func _draw_overlay() -> void:
 
 func _finish() -> void:
 	mode = Mode.ENDED
+	selected = null
 	_refresh_all()
-	var win := state.result == "thang"
-	result_panel = _panel(Color(0.12, 0.04, 0.04, 0.92))
-	result_panel.set_anchors_preset(Control.PRESET_CENTER)
-	result_panel.offset_left = -110
-	result_panel.offset_right = 110
-	result_panel.offset_top = -70
-	result_panel.offset_bottom = 40
-	hud.get_child(0).add_child(result_panel)
-	var title := _label(FONT_BOLD, 20, C_GOLD_LIGHT)
-	title.text = "THẮNG" if win else "THUA"
-	title.position = Vector2(0, 14)
-	title.size = Vector2(220, 28)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	result_panel.add_child(title)
-	var sub := _label(FONT_MED, 11, Color.WHITE)
-	sub.text = "Sau %d vòng" % state.vong
-	sub.position = Vector2(0, 44)
-	sub.size = Vector2(220, 18)
-	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	result_panel.add_child(sub)
-	var again := _button("Chơi lại", func() -> void: restart_requested.emit())
-	again.position = Vector2(70, 70)
-	again.size = Vector2(80, 28)
-	result_panel.add_child(again)
+	portrait.texture = null
+	name_label.text = "Trận đã kết thúc"
+	info_label.text = ""
+	_set_buttons([])
 	battle_finished.emit(state.result)
+	if not story_mode:
+		show_result([])
+
+
+## Bảng kết quả màn (06 §4): số vòng, quân mất, mục tiêu phụ, mục Sử liệu mới mở.
+func show_result(opened: Array) -> void:
+	var win := state.result == "thang"
+	result_panel = _panel(Color(0.12, 0.04, 0.04, 0.95))
+	result_panel.set_anchors_preset(Control.PRESET_CENTER)
+	result_panel.offset_left = -124
+	result_panel.offset_right = 124
+	result_panel.offset_top = -150
+	result_panel.offset_bottom = 120
+	hud.get_child(0).add_child(result_panel)
+	var col := VBoxContainer.new()
+	col.set_anchors_preset(Control.PRESET_FULL_RECT)
+	col.offset_left = 12
+	col.offset_right = -12
+	col.offset_top = 10
+	col.offset_bottom = -10
+	col.add_theme_constant_override("separation", 4)
+	result_panel.add_child(col)
+	var title := UiKit.label("THẮNG" if win else "THUA", 20, C_GOLD_LIGHT, true)
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	col.add_child(title)
+	var lost := 0
+	for k in state.flags.get("mat_quan", {}):
+		lost += int(state.flags["mat_quan"][k])
+	var sub := "Sau %d vòng · mất %d quân" % [state.won_round if win else state.vong, lost]
+	if not win and state.result_reason != "":
+		sub = state.result_reason
+	var sub_l := UiKit.wrap_label(sub, 11, Color.WHITE)
+	sub_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	col.add_child(sub_l)
+	var objs := Rules.side_objectives(state)
+	if win and not objs.is_empty():
+		col.add_child(UiKit.label("Mục tiêu phụ", 11, C_GOLD, true))
+		for o in objs:
+			col.add_child(UiKit.wrap_label(("★ " if o["dat"] else "☆ ") + o["ten"], 10, C_GOLD_LIGHT if o["dat"] else Color(0.75, 0.7, 0.65)))
+	if not opened.is_empty():
+		col.add_child(UiKit.label("Sử liệu mới", 11, C_GOLD, true))
+		for id in opened:
+			col.add_child(UiKit.wrap_label("• " + Story.codex_entry(id).get("tieu_de", id), 10, UiKit.C_PAPER))
+	var spacer := Control.new()
+	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	col.add_child(spacer)
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 8)
+	col.add_child(row)
+	row.add_child(UiKit.button("Chơi lại", func() -> void: restart_requested.emit(), 12, 80))
+	if story_mode:
+		row.add_child(UiKit.button("Tiếp", func() -> void: exit_requested.emit(), 12, 80))
+
+
+# ================================================================ tạm dừng
+
+func _toggle_pause() -> void:
+	if pause_panel != null:
+		pause_panel.queue_free()
+		pause_panel = null
+		return
+	if mode == Mode.ENDED:
+		return
+	pause_panel = _panel(Color(0.12, 0.04, 0.04, 0.96))
+	pause_panel.set_anchors_preset(Control.PRESET_CENTER)
+	pause_panel.offset_left = -120
+	pause_panel.offset_right = 120
+	pause_panel.offset_top = -130
+	pause_panel.offset_bottom = 110
+	hud.get_child(0).add_child(pause_panel)
+	var col := VBoxContainer.new()
+	col.set_anchors_preset(Control.PRESET_FULL_RECT)
+	col.offset_left = 12
+	col.offset_right = -12
+	col.offset_top = 10
+	col.offset_bottom = -10
+	col.add_theme_constant_override("separation", 6)
+	pause_panel.add_child(col)
+	col.add_child(UiKit.label("Tạm dừng", 14, C_GOLD_LIGHT, true))
+	col.add_child(UiKit.wrap_label("Mục tiêu: " + state.mission.get("muc_tieu_chinh", "theo giới thiệu màn"), 10, Color.WHITE))
+	for o in state.mission.get("muc_tieu_phu", []):
+		col.add_child(UiKit.wrap_label("☆ " + o.get("ten", ""), 10, Color(0.85, 0.8, 0.7)))
+	var spacer := Control.new()
+	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	col.add_child(spacer)
+	col.add_child(UiKit.button("Tiếp tục", _toggle_pause, 12))
+	if story_mode:
+		col.add_child(UiKit.button("Lưu và về menu", func() -> void:
+			_autosave()
+			exit_requested.emit(), 12))

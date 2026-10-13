@@ -1,0 +1,53 @@
+{
+ "_ghi_chu": "Mỗi câu có 'nhan' (một trong bốn nhãn của 05 §1). Nhãn không hiện giữa hội thoại; dùng cho bảng tra kịch bản. 'ai' rỗng = lời dẫn.",
+ "truoc": [
+  {
+   "ai": "",
+   "loi": "Đêm 30 tháng Chạp năm Mậu Thân. Bên kia sông Gián là Gián Khẩu, đồn tiền tiêu của quân Lê.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "linh_giao",
+   "ten": "Lính trinh sát",
+   "loi": "Bẩm, trong đồn đèn đuốc mờ cả. Chỉ thấy hai toán lính tuần đi dọc bờ bắc.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Đêm nay giao thừa, họ không nghĩ có ai vượt sông.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Hạ lính tuần cho gọn, đừng để chúng kịp hô. Trống trong đồn mà nổi thì cả đồn thức dậy.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Ta đã hẹn với tướng sĩ: mùng 7 vào Thăng Long ăn Tết. Đường ấy bắt đầu từ bến sông này.",
+   "nhan": "Theo HLNTC",
+   "ghi_chu": "Lời hẹn mùng 7 theo HLNTC; câu chữ là của game, không phải trích dẫn."
+  },
+  {
+   "ai": "",
+   "loi": "Đêm tối chỉ thấy địch ở gần quân ta hay ở chỗ sáng. Đuốc soi xa nhưng làm lộ người cầm.",
+   "nhan": "Sáng tạo của game"
+  }
+ ],
+ "sau_thang": [
+  {
+   "ai": "",
+   "loi": "Đồn Gián Khẩu vỡ ngay đêm giao thừa. Quân Tây Sơn qua sông, theo đường thiên lý ra bắc.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Không dừng lại. Đuổi theo ngay, đừng để ai chạy kịp về báo tin.",
+   "nhan": "Sáng tạo của game"
+  }
+ ]
+}

@@ -1,0 +1,195 @@
+# Toàn bộ màn 4 qua menu và giao diện chạm, theo lời giải mẫu tests/loi_giai/m04_gian_khau.txt.
+# Chạy: GODOT --path . -- --menu --moi --seed=1 --kich-ban=res://tests/kich_ban/tron_m04.txt
+# (tạo từ lời giải mẫu: mỗi "di/danh/chiem/mua/het" thành các lần chạm tương ứng)
+kiem man_hinh
+anh menu.png
+nut Chiến dịch
+anh chien_dich.png
+nut Màn 4 · Đêm 30 Tết: vượt sông Gián
+anh gioi_thieu.png
+nut Vào trận
+cho 1.5
+anh hoi_thoai.png
+tiep
+tiep
+cho 2
+tiep
+cho 2
+anh hoi_thoai_qt.png
+nut Bỏ qua
+kiem luu
+# Vòng 1: áp sát bờ sông, ngoài tầm nhìn lính tuần (A ở 1,7; B ở 8,7)
+cham 1 10
+cham 3 8
+cham 3 8
+nut Chờ
+cham 3 13
+cham 4 10
+cham 4 10
+nut Chờ
+cham 5 13
+cham 5 10
+cham 5 10
+nut Chờ
+nut Hết lượt
+nut Hết lượt
+cho 3
+# Vòng 2: A bị thủy binh chặn ở 3,7 → hạ gọn trong một lượt
+cham 3 8
+nut Đứng yên
+nut Đánh
+cham 3 7
+cham 3 7
+cho 1
+cham 4 10
+cham 4 8
+cham 4 8
+nut Đánh
+cham 3 7
+cham 3 7
+cho 1
+cham 5 10
+cham 4 7
+cham 4 7
+nut Đánh
+cham 3 7
+cham 3 7
+cho 1
+# Quang Trung (cầm đuốc) và voi tiến lên sau khi lính tuần A đã bị hạ
+cham 4 13
+cham 4 11
+cham 4 11
+nut Chờ
+cham 4 15
+cham 4 12
+cham 4 12
+nut Chờ
+nut Hết lượt
+nut Hết lượt
+cho 3
+# Vòng 3: B ở 8,7 → hạ gọn; đại quân qua cầu phao
+cham 8 10
+cham 8 8
+cham 8 8
+nut Đánh
+cham 8 7
+cham 8 7
+cho 1
+cham 4 7
+cham 7 7
+cham 7 7
+nut Đánh
+cham 8 7
+cham 8 7
+cho 1
+cham 4 8
+cham 6 7
+cham 6 7
+nut Đánh
+cham 8 7
+cham 8 7
+cho 1
+cham 4 11
+cham 4 9
+cham 4 9
+nut Chờ
+cham 4 11
+nut Trống trận · 500
+cham 4 14
+cham 3 11
+cham 3 11
+nut Chờ
+cham 4 12
+cham 4 10
+cham 4 10
+nut Chờ
+nut Hết lượt
+nut Hết lượt
+cho 3
+# Vòng 4: tiến lên bờ bắc (khu đồn vẫn ngủ, không còn lính tuần)
+cham 4 9
+cham 4 6
+cham 4 6
+nut Chờ
+cham 4 10
+cham 4 8
+cham 4 8
+nut Chờ
+cham 4 11
+cham 4 7
+cham 4 7
+nut Chờ
+cham 6 7
+cham 5 4
+cham 5 4
+nut Chờ
+cham 7 7
+cham 5 5
+cham 5 5
+nut Chờ
+nut Hết lượt
+nut Hết lượt
+cho 3
+# Vòng 5: dàn quân quanh đồn
+cham 5 5
+cham 3 3
+cham 3 3
+nut Chờ
+cham 5 4
+cham 5 3
+cham 5 3
+nut Chờ
+cham 4 6
+cham 4 5
+cham 4 5
+nut Chờ
+cham 4 7
+cham 4 4
+cham 4 4
+nut Chờ
+cham 4 8
+cham 4 6
+cham 4 6
+nut Chờ
+nut Hết lượt
+nut Hết lượt
+cho 3
+# Vòng 6: voi đánh quan giữ đồn (có trống trận cổ vũ), một hỏa mai bắn, Quang Trung chiếm đồn
+cham 4 6
+cham 4 3
+cham 4 3
+nut Đánh
+cham 4 2
+cham 4 2
+cho 1
+cham 3 3
+nut Đứng yên
+nut Đánh
+cham 4 2
+cham 4 2
+cho 1
+cham 4 5
+cham 4 2
+cham 4 2
+nut Chiếm
+cho 2
+anh sau_thang_hoi_thoai.png
+nut Bỏ qua
+cho 1
+kiem ket_qua
+anh ket_qua.png
+kiem luu
+kiem sao m04_gian_khau
+nut Tiếp
+cho 0.5
+kiem man_hinh
+anh chien_dich_sau.png
+nut Quay lại
+cho 0.5
+nut Sử liệu
+anh su_lieu.png
+nut Sông Gián và đồn Gián Khẩu
+anh su_lieu_muc.png
+nut Danh mục
+nut Quay lại
+kiem man_hinh

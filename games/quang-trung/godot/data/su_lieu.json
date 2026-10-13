@@ -1,0 +1,56 @@
+{
+ "_ghi_chu": "Mục Sử liệu (05 §6). nhan: một trong bốn nhãn. Chưa đối chiếu nguyên văn các nguồn (báo cáo nghiên cứu chỉ đọc trích đoạn).",
+ "muc": [
+  {
+   "id": "song_gian",
+   "nhom": "Địa danh",
+   "tieu_de": "Sông Gián và đồn Gián Khẩu",
+   "nhan": "Sử liệu",
+   "noi_dung": "Gián Khẩu là đồn tiền tiêu của quân Lê Chiêu Thống bên sông Gián, trên đường thiên lý, vùng giáp Ninh Bình và Hà Nam ngày nay. Đêm 30 tháng Chạp năm Mậu Thân (25/01/1789, quy đổi), quân Tây Sơn vượt sông và diệt đồn này, mở màn sáu ngày tiến ra Thăng Long.\n\nCác nguồn không ghi quân số hay diễn biến chi tiết của trận. Trong màn chơi, cầu phao, lính tuần và trống báo động là sáng tạo của game để làm nên một trận đánh đêm.",
+   "nguon": [
+    {
+     "ten": "Kỷ niệm 231 năm chiến thắng Ngọc Hồi – Đống Đa (Tỉnh ủy Gia Lai)",
+     "url": "https://gialai.dcs.vn/hoat-dong-tuyen-truyen/-/view-content/67680/k-niem-231-nam-chien-thang-ngoc-hoi-dong-da-1789-2020-quang-trung-dai-pha-quan-thanh"
+    },
+    {
+     "ten": "Quang Trung đại phá quân Thanh (Phương Nam – Văn hóa và Phát triển)",
+     "url": "https://phuongnam.vanhoavaphattrien.vn/quang-trung-dai-pha-quan-thanh-a10832.html"
+    }
+   ]
+  },
+  {
+   "id": "ha_hoi_khong_phai_dem_30",
+   "nhom": "Tranh cãi",
+   "tieu_de": "Hà Hồi không phải đêm 30",
+   "nhan": "Sử liệu",
+   "noi_dung": "Nhiều bài tóm tắt viết rằng quân Tây Sơn đánh đồn Hà Hồi vào đêm 30 Tết. Phần lớn nguồn lại ghi hai trận khác nhau: đêm 30 tháng Chạp là trận vượt sông Gián, diệt đồn Gián Khẩu; còn đồn Hà Hồi (Thường Tín, cách Thăng Long khoảng 20 km) bị vây vào nửa đêm mùng 3 Tết (28/01/1789, quy đổi).\n\nCó lẽ hai mốc bị gộp làm một vì cả hai đều là trận đánh đêm trong những ngày Tết. Game theo phần lớn nguồn: màn 4 là sông Gián đêm 30, màn 6 là Hà Hồi đêm mùng 3.",
+   "nguon": [
+    {
+     "ten": "Kỷ niệm 231 năm chiến thắng Ngọc Hồi – Đống Đa (Tỉnh ủy Gia Lai)",
+     "url": "https://gialai.dcs.vn/hoat-dong-tuyen-truyen/-/view-content/67680/k-niem-231-nam-chien-thang-ngoc-hoi-dong-da-1789-2020-quang-trung-dai-pha-quan-thanh"
+    },
+    {
+     "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
+     "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
+    }
+   ]
+  },
+  {
+   "id": "tet_mau_than_co_ngay_30",
+   "nhom": "Sự kiện",
+   "tieu_de": "Tết năm ấy có ngày 30",
+   "nhan": "Sử liệu",
+   "noi_dung": "Tháng âm lịch có tháng đủ 30 ngày và tháng thiếu 29 ngày, nên không năm nào cũng có \"ngày 30 Tết\". Hoàng Lê nhất thống chí chép việc khao quân ở Tam Điệp vào ngày 30 tháng Chạp.\n\nTính theo thiên văn, tháng Chạp năm Mậu Thân đủ 30 ngày: 30 Chạp ứng với 25/01/1789, mùng 1 Tết Kỷ Dậu là 26/01, mùng 5 là 30/01/1789. Các ngày dương lịch này do đội làm game tự quy đổi, trừ ngày mùng 5 (30/01/1789) vốn được nhiều nguồn ghi.",
+   "nguon": [
+    {
+     "ten": "Trích Hoàng Lê nhất thống chí hồi 14 (hoc24)",
+     "url": "https://hoc24.vn/cau-hoi/cho-doan-trich-sau-vua-quang-trung-ben-sai-mo-tiec-khao-quan-chia-quan-si-ra-lam-nam-dao-hom-do-la-ngay-30-thang-chap-roi-nha-vua-bao-kin-voi-cac.1599423074111"
+    },
+    {
+     "ten": "Jean Meeus, Astronomical Algorithms (cách tính ngày sóc)",
+     "url": ""
+    }
+   ]
+  }
+ ]
+}

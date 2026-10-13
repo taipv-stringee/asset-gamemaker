@@ -1,0 +1,60 @@
+{
+ "_ghi_chu": "Danh sách màn theo docs/04. 'id' rỗng = chưa làm.",
+ "man": [
+  {
+   "so": "0",
+   "ten": "Rút về Tam Điệp",
+   "id": ""
+  },
+  {
+   "so": "1",
+   "ten": "Núi Bân: hành quân",
+   "id": ""
+  },
+  {
+   "so": "2",
+   "ten": "Nghệ An: tuyển quân",
+   "id": ""
+  },
+  {
+   "so": "3",
+   "ten": "Tam Điệp: ăn Tết sớm",
+   "id": ""
+  },
+  {
+   "so": "4",
+   "ten": "Đêm 30 Tết: vượt sông Gián",
+   "id": "m04_gian_khau"
+  },
+  {
+   "so": "P",
+   "ten": "Màn phụ: thủy quân (mở sau màn 4)",
+   "id": ""
+  },
+  {
+   "so": "5",
+   "ten": "Thanh Quyết – Nhật Tảo – Phú Xuyên",
+   "id": ""
+  },
+  {
+   "so": "6",
+   "ten": "Đêm mùng 3: vây Hà Hồi",
+   "id": ""
+  },
+  {
+   "so": "7",
+   "ten": "Khương Thượng (đạo Đô đốc Long)",
+   "id": ""
+  },
+  {
+   "so": "8",
+   "ten": "Ngọc Hồi",
+   "id": ""
+  },
+  {
+   "so": "9",
+   "ten": "Cầu phao sông Nhị – vào Thăng Long",
+   "id": ""
+  }
+ ]
+}

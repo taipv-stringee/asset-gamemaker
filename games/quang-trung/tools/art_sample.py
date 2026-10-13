@@ -162,9 +162,9 @@ HEAD = Part(10, 7, """
     qrkqqqqqqqq.
     qq.kddsssss.
     q..kdSssess.
-    q.kkdsssesss
-    ...kdsssssD.
-    ....ddsssd..
+    q.kkdsssess.
+    ...kdsssssss
+    ....ddssDd..
     .....dddd...
 """)
 
@@ -178,8 +178,8 @@ HEAD_HIT = Part(10, 7, """
     qrkqqqqqqqq.
     qq.kddsssss.
     q..kdSsDsss.
-    q.kkdsseesss
-    ...kdsssDeD.
+    q.kkdsseess.
+    ...kdsssDeDs
     ....ddssdd..
     .....dddd...
 """)
@@ -416,7 +416,8 @@ PP = {
     "hr_lt":     (96, 80, 80),
     # Mắt, môi
     "eye_w":     (250, 246, 236),
-    "iris":      (88, 52, 34),
+    "iris":      (70, 40, 28),
+    "iris_lt":   (176, 108, 48),
     "lip":       (168, 86, 72),
     # Khăn vàng
     "gd_hi":     (255, 244, 176),
@@ -499,23 +500,33 @@ def portrait_qt():
     b = Brush(img)
 
     # --- Áo bào đỏ ------------------------------------------------------------
-    b.poly([(0, 79), (0, 72), (6, 67), (18, 63), (30, 62), (56, 62), (66, 63), (74, 66), (79, 71), (79, 79)], "rd")
-    b.poly([(0, 79), (0, 72), (6, 67), (18, 63), (26, 63), (20, 68), (16, 79)], "rd_sh")    # vai trái khuất
-    b.poly([(60, 63), (68, 63), (75, 66), (79, 71), (79, 74), (72, 69), (64, 66)], "rd_lt")  # vai phải bắt sáng
-    b.poly([(16, 79), (20, 68), (26, 63), (30, 63), (24, 70), (21, 79)], "rd")
-    b.line([(27, 68), (24, 79)], "rd_sh")                                                     # nếp áo
-    b.line([(64, 69), (67, 79)], "rd_sh")
-    b.line([(9, 73), (6, 79)], "rd_dp")
-    # Cổ tròn viền vàng, cổ áo trong trắng (giao lĩnh)
-    b.ell((31, 61, 63, 83), "gd_sh")
-    b.ell((32, 61, 62, 82), "gd")
-    b.ell((35, 63, 59, 80), "rd_sh")
-    b.poly([(36, 63), (58, 63), (54, 70), (47, 75), (40, 70)], "wt_sh")
-    b.poly([(38, 63), (58, 63), (54, 69), (48, 73)], "wt")
+    b.poly([(0, 79), (0, 72), (6, 67), (18, 63), (30, 61), (58, 61), (68, 63), (75, 66), (79, 71), (79, 79)], "rd")
+    b.poly([(0, 79), (0, 72), (6, 67), (18, 63), (27, 62), (21, 68), (17, 79)], "rd_sh")    # vai trái khuất
+    b.poly([(62, 62), (69, 63), (75, 66), (79, 71), (79, 74), (72, 68), (64, 65)], "rd_lt")  # vai phải bắt sáng
+    b.line([(27, 69), (25, 79)], "rd_sh")                                                     # nếp áo
+    b.line([(66, 70), (68, 79)], "rd_sh")
+    b.line([(9, 73), (7, 79)], "rd_dp")
+    b.px([(70, 66), (71, 67)], "rd_lt")
+    # thêu mây vàng trên vai (gợi ý hoa văn áo bào)
+    for x, y in ((8, 72), (66, 73)):
+        b.px([(x, y), (x + 1, y - 1), (x + 2, y - 1), (x + 3, y), (x + 3, y + 1), (x + 2, y + 1),
+              (x + 4, y + 2), (x + 5, y + 2), (x + 6, y + 1)], "gd_sh" if x < 40 else "gd")
+    # mây cuộn chìm (đỏ sẫm) trên áo bào
+    cloud = ((1, 0), (2, 0), (0, 1), (3, 1), (5, 1), (6, 1), (0, 2), (2, 2), (4, 2), (1, 3))
+    for ox, oy in ((11, 69), (20, 74), (56, 72), (69, 75), (3, 76)):
+        b.px([(ox + x, oy + y) for x, y in cloud], "rd_sh")
+    # cổ áo sau gáy (sau cổ)
+    b.poly([(34, 60), (58, 59), (60, 63), (33, 64)], "gd_sh")
     # --- Cổ ------------------------------------------------------------------
-    b.poly([(36, 54), (55, 55), (55, 66), (48, 72), (39, 66)], "sk_sh")
-    b.poly([(47, 60), (55, 58), (55, 66), (49, 71)], "sk")
-    b.line([(40, 62), (46, 66)], "sk_dp")                                                    # gân cổ / bóng hàm
+    b.poly([(38, 55), (54, 56), (55, 68), (46, 72), (38, 66)], "sk_sh")
+    b.poly([(47, 60), (54, 58), (55, 67), (49, 70)], "sk")
+    b.poly([(38, 55), (54, 56), (53, 59), (40, 60)], "sk_dp")                              # bóng hàm đổ xuống cổ
+    # cổ áo trong trắng bắt chéo + viền vàng cổ tròn phía trước
+    b.poly([(33, 63), (40, 64), (47, 72), (40, 72)], "wt_sh")
+    b.poly([(60, 62), (54, 64), (47, 72), (53, 72)], "wt")
+    b.line([(31, 64), (35, 69), (41, 73), (47, 75), (53, 73), (59, 69), (62, 63)], "gd", 3)
+    b.line([(33, 63), (37, 68), (42, 71), (47, 72), (52, 71), (58, 67), (61, 62)], "gd_lt")
+    b.line([(31, 66), (35, 71), (41, 75), (47, 77), (53, 75), (59, 71), (63, 65)], "gd_sh")
 
     # --- Tai -------------------------------------------------------------------
     b.ell((21, 36, 29, 50), "sk_sh")
@@ -527,12 +538,12 @@ def portrait_qt():
     face = [(27, 30), (26, 38), (27, 46), (29, 52), (33, 57), (38, 61), (43, 64), (48, 64), (52, 61), (55, 56),
             (57, 50), (58, 46), (59, 41), (58, 36), (57, 30)]
     b.poly(face, "sk")
-    # bóng má trái (phía khuất sáng), hẹp ở thái dương, rộng ở hàm
-    b.poly([(27, 30), (31, 30), (30, 37), (31, 45), (34, 52), (38, 57), (43, 61), (43, 64), (38, 61), (33, 57),
+    # bóng má trái (phía khuất sáng): hẹp ở thái dương, ôm theo hàm
+    b.poly([(27, 30), (31, 30), (31, 38), (31, 45), (33, 51), (37, 56), (42, 60), (43, 64), (38, 61), (33, 57),
             (29, 52), (27, 46), (26, 38)], "sk_sh")
-    b.poly([(27, 30), (57, 30), (57, 33), (46, 34), (36, 34), (29, 35)], "sk_sh")          # bóng khăn đổ xuống trán
-    # sáng: trán phải, gò má phải, cằm
-    b.poly([(47, 35), (56, 34), (57, 39), (52, 40), (48, 38)], "sk_lt")
+    b.poly([(27, 30), (57, 30), (57, 34), (46, 35), (36, 35), (29, 36)], "sk_sh")          # bóng khăn đổ xuống trán
+    # sáng: trán phải, gò má phải
+    b.poly([(47, 36), (56, 35), (57, 39), (52, 40), (48, 39)], "sk_lt")
     b.poly([(53, 46), (57, 45), (56, 51), (53, 50)], "sk_lt")
     # hốc mắt
     b.poly([(33, 40), (42, 40), (43, 42), (33, 42)], "sk_sh")
@@ -541,93 +552,112 @@ def portrait_qt():
     b.poly([(46, 42), (48, 42), (51, 50), (50, 52), (47, 52)], "sk_lt")
     b.poly([(44, 43), (46, 43), (46, 52), (44, 52)], "sk_sh")
     b.poly([(43, 52), (51, 52), (51, 54), (44, 55)], "sk_sh")
-    # bóng dưới môi + cằm
-    b.poly([(43, 59), (51, 59), (50, 61), (44, 61)], "sk_sh")
+    # bóng dưới môi
+    b.poly([(44, 59), (51, 59), (50, 60), (45, 60)], "sk_sh")
     despeckle(img)
 
     # --- Chi tiết vẽ tay -------------------------------------------------------
     b.px([(48, 45), (49, 47), (50, 49)], "sk_hi")                                          # sống mũi
     b.px([(46, 53), (49, 53)], "sk_dp")                                                     # lỗ mũi
     b.px([(51, 51)], "sk")
-    # mắt gần (trái): mí trên đậm, tròng trắng, con ngươi + chấm sáng
-    b.run(33, 41, 42, "line")
-    b.px([(32, 43), (42, 43)], "line")
+    b.px([(54, 47), (55, 47)], "sk_hi")                                                     # gò má
+    # mắt gần (trái): mí trên đậm, tròng trắng, con ngươi nâu hổ phách + chấm sáng -> "mắt sáng"
+    b.run(33, 41, 41, "line")
+    b.px([(32, 42), (42, 42)], "line")
+    b.run(33, 41, 42, "eye_w")
     b.run(33, 41, 43, "eye_w")
     b.run(34, 40, 44, "eye_w")
-    b.rect((38, 43, 40, 45), "iris")
-    b.px([(39, 43)], "line")
-    b.px([(38, 43)], "eye_w")
+    b.rect((38, 42, 40, 44), "iris")
+    b.px([(39, 44), (40, 43)], "iris_lt")
+    b.px([(39, 42), (39, 43)], "line")
+    b.px([(38, 42)], "eye_w")
     b.run(34, 40, 45, "sk_sh")
-    # mắt xa (phải, hẹp hơn)
-    b.run(49, 55, 42, "line")
-    b.px([(56, 43)], "line")
+    b.px([(33, 44), (41, 44)], "sk_sh")
+    # mắt xa (phải, hẹp hơn vì mặt quay)
+    b.run(49, 55, 41, "line")
+    b.px([(56, 42)], "line")
+    b.run(49, 55, 42, "eye_w")
     b.run(49, 55, 43, "eye_w")
     b.run(50, 54, 44, "eye_w")
-    b.rect((51, 43, 53, 45), "iris")
-    b.px([(52, 43)], "line")
-    b.px([(51, 43)], "eye_w")
+    b.rect((52, 42, 54, 44), "iris")
+    b.px([(53, 44), (54, 43)], "iris_lt")
+    b.px([(53, 42), (53, 43)], "line")
+    b.px([(52, 42)], "eye_w")
     b.run(50, 54, 45, "sk_sh")
+    b.px([(49, 44), (55, 44)], "sk_sh")
     # lông mày rậm, chau xuống ở đầu trong -> quyết đoán
     b.poly([(29, 37), (35, 36), (42, 38), (43, 40), (36, 39), (30, 39)], "hr")
     b.poly([(48, 40), (49, 38), (55, 36), (59, 37), (58, 39), (52, 39)], "hr")
+    b.px([(33, 37), (52, 38)], "hr_md")
     b.px([(44, 39), (45, 40)], "sk_dp")                                                    # nếp chau giữa mày
-    # miệng
+    # miệng mím
     b.run(43, 52, 57, "line")
     b.run(45, 50, 58, "lip")
+    b.px([(43, 58), (52, 58)], "sk_sh")
     # ria mép rủ hai đầu
     b.poly([(41, 56), (44, 54), (48, 55), (52, 54), (55, 56), (55, 58), (52, 56), (48, 56), (44, 56), (41, 59)], "hr")
-    b.px([(47, 55), (48, 55), (52, 55)], "hr_md")
-    # râu cằm ngắn
-    b.poly([(44, 61), (51, 61), (51, 64), (49, 67), (46, 67), (44, 64)], "hr")
-    b.px([(48, 62), (49, 63), (48, 64)], "hr_md")
+    b.px([(46, 55), (50, 55), (53, 55)], "hr_md")
+    # râu cằm ngắn, vuốt nhọn
+    b.poly([(45, 61), (51, 61), (51, 63), (49, 66), (47, 66), (45, 63)], "hr")
+    b.px([(48, 62), (49, 63), (50, 62)], "hr_md")
+    b.px([(49, 62)], "hr_lt")
     # tóc mai trước tai
     b.poly([(27, 31), (31, 31), (31, 39), (30, 42), (28, 40), (27, 36)], "hr")
-    b.px([(30, 33), (30, 35)], "hr_md")
+    b.px([(30, 33), (29, 36)], "hr_md")
 
-    # --- Khăn vấn vàng ---------------------------------------------------------
+    # --- Khăn vấn vàng: rộng, thấp, các vòng quấn võng ra trước, dải chéo chữ nhân ---
     cx = 44
-    outer = [(19, 31), (18, 23), (21, 16), (27, 11), (36, 8), (46, 7), (55, 9), (61, 14), (63, 21), (62, 29), (59, 33)]
-    outer += list(reversed(arc_pts(20, 59, 33, 32, cx)))
+    outer = [(18, 32), (17, 25), (20, 19), (26, 14), (35, 11), (41, 10), (50, 10), (55, 12), (61, 16), (64, 23), (63, 30), (60, 34)]
+    outer += list(reversed(arc_pts(19, 60, 34, 33, cx)))
     b.poly(outer, "gd")
-    b.poly([(27, 11), (36, 8), (46, 7), (55, 9), (59, 12), (50, 13), (40, 13), (30, 14)], "gd_lt")   # đỉnh khăn
-    # các vòng quấn: mỗi vòng sáng ở trên, tối ở mép dưới; võng xuống phía trước
-    for ys, ym in ((15, 19), (21, 25), (27, 31)):
-        b.line(arc_pts(19, 62, ys, ym, cx), "gd_sh")
-        b.line([(p[0], p[1] + 1) for p in arc_pts(19, 62, ys, ym, cx)], "gd_dp")
-        b.line([(p[0], p[1] - 4) for p in arc_pts(30, 60, ys, ym, cx)], "gd_lt")
+    b.poly([(26, 14), (35, 11), (46, 10), (55, 12), (60, 15), (50, 16), (40, 16), (30, 17)], "gd_lt")   # đỉnh khăn
+    b.poly([(44, 11), (52, 12), (56, 14), (48, 14)], "gd_hi")
+    for ys, ym in ((17, 21), (23, 27)):                    # mép dưới mỗi vòng quấn
+        pts = arc_pts(22, 62, ys, ym, cx)
+        b.line(pts, "gd_sh")
+        b.line([(x, y + 1) for x, y in pts if x > 22], "gd_dp")
+        b.line([(x, y + 2) for x, y in arc_pts(34, 62, ys, ym, cx)], "gd_lt")   # mép trên vòng kế bắt sáng
     # dải chéo chữ nhân phía trước trán
-    b.poly([(40, 33), (47, 15), (51, 15), (45, 33)], "gd_lt")
-    b.poly([(46, 15), (50, 15), (57, 31), (52, 33)], "gd")
-    b.line([(46, 33), (51, 18)], "gd_sh")
-    b.line([(50, 16), (56, 31)], "gd_sh")
+    b.poly([(41, 34), (47, 17), (52, 17), (46, 34)], "gd_lt")
+    b.poly([(47, 17), (51, 17), (58, 32), (53, 34)], "gd")
+    b.line([(46, 34), (51, 19)], "gd_sh")
+    b.line([(51, 18), (57, 32)], "gd_sh")
+    b.line([(48, 18), (43, 32)], "gd_hi")
     # mép trái khuất sáng
-    b.poly([(19, 31), (18, 23), (21, 16), (25, 13), (23, 22), (24, 33)], "gd_sh")
-    b.line([(19, 32), (40, 33)], "gd_dp")
+    b.poly([(18, 32), (17, 25), (20, 19), (25, 15), (23, 24), (24, 34)], "gd_sh")
+    b.line(arc_pts(19, 60, 34, 33, cx), "gd_dp")
 
     return outline(img, PP["line"])
 
 
 def portrait_frame(port):
-    """Khung sơn mài 88x88: nền đỏ-đen chia bậc, viền vàng nổi, góc đồng tiền."""
-    fr = blank(88, 88, (40, 14, 14))
-    p = fr.load()
-    for y in range(2, 86):                      # nền: 4 bậc màu, không chuyển mượt
-        band = min(3, (y - 2) // 21)
-        col = ((44, 16, 16), (52, 18, 18), (62, 22, 20), (74, 26, 22))[band]
-        for x in range(2, 86):
-            p[x, y] = rgba(col)
-    fr.alpha_composite(port, (4, 4))
+    """Khung sơn mài 88x88: nền đỏ-đen chia bậc, viền vàng nổi 3 lớp, góc đồng Quang Trung thông bảo."""
+    LQ = {"dk": (30, 10, 12), "l0": (46, 16, 16), "l1": (56, 20, 18), "l2": (68, 24, 20), "red": (128, 30, 28)}
+    fr = blank(88, 88, LQ["dk"])
     d = ImageDraw.Draw(fr)
-    gold, gold_l, gold_d = rgba(PAL["gold"]), rgba(PAL["gold_light"]), rgba(PAL["gold_dark"])
-    d.rectangle((0, 0, 87, 1), fill=gold_l)
-    d.rectangle((0, 0, 1, 87), fill=gold_l)
-    d.rectangle((0, 86, 87, 87), fill=gold_d)
-    d.rectangle((86, 0, 87, 87), fill=gold_d)
-    d.rectangle((2, 2, 85, 2), fill=gold_d)
-    d.rectangle((2, 2, 2, 85), fill=gold_d)
-    for cx, cy in ((3, 3), (84, 3), (3, 84), (84, 84)):       # đồng Quang Trung thông bảo
-        d.ellipse((cx - 3, cy - 3, cx + 3, cy + 3), fill=gold)
-        d.rectangle((cx - 1, cy - 1, cx + 1, cy + 1), fill=rgba((40, 14, 14)))
+    # nền sơn mài: tối ở trên, ấm dần xuống dưới (3 bậc, không chuyển mượt)
+    d.rectangle((4, 4, 83, 83), fill=rgba(LQ["l0"]))
+    d.rectangle((4, 34, 83, 83), fill=rgba(LQ["l1"]))
+    d.rectangle((4, 60, 83, 83), fill=rgba(LQ["l2"]))
+    for x in range(5, 83, 2):                          # răng cưa nhỏ giữa các bậc cho mềm
+        fr.putpixel((x, 34), rgba(LQ["l0"]))
+        fr.putpixel((x + 1, 60), rgba(LQ["l1"]))
+    fr.alpha_composite(port, (4, 4))
+    g = {k: rgba(PAL[k]) for k in ("gold_light", "gold", "gold_dark")}
+    # viền vàng: sáng trên-trái, tối dưới-phải; trong cùng một nét son đỏ
+    d.rectangle((0, 0, 87, 87), outline=rgba(LQ["dk"]))
+    d.line((1, 1, 86, 1), fill=g["gold_light"])
+    d.line((1, 1, 1, 86), fill=g["gold_light"])
+    d.rectangle((2, 2, 85, 85), outline=g["gold"])
+    d.line((1, 86, 86, 86), fill=g["gold_dark"])
+    d.line((86, 1, 86, 86), fill=g["gold_dark"])
+    d.rectangle((3, 3, 84, 84), outline=rgba(LQ["red"]))
+    for cx, cy in ((4, 4), (83, 4), (4, 83), (83, 83)):    # đồng tiền: tròn vàng, lỗ vuông
+        d.ellipse((cx - 4, cy - 4, cx + 4, cy + 4), fill=g["gold_dark"])
+        d.ellipse((cx - 4, cy - 4, cx + 3, cy + 3), fill=g["gold"])
+        fr.putpixel((cx - 2, cy - 3), g["gold_light"])
+        fr.putpixel((cx - 3, cy - 2), g["gold_light"])
+        d.rectangle((cx - 1, cy - 1, cx + 1, cy + 1), fill=rgba(LQ["dk"]))
     return fr
 
 
@@ -713,7 +743,7 @@ def preview(strips, thanh_idle, port, framed):
     cell = blank(80, 80, CELL)
     cell.alpha_composite(port)
     sheet.alpha_composite(big(cell, 3), (24, y))
-    sheet.alpha_composite(big(framed, 3), (24 + 270, y - 12))
+    sheet.alpha_composite(big(framed, 3), (24 + 270, y - 12))  # khung lớn hơn 8px -> lệch 12px để thẳng mặt
     sheet.alpha_composite(port, (24 + 570, y))
     sheet.alpha_composite(framed, (24 + 570, y + 100))
     d.text((24 + 570, y + 200), "×1", font=f_l, fill=LABEL)

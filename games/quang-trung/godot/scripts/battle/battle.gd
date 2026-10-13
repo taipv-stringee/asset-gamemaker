@@ -486,8 +486,9 @@ func _tap_selected(p: Vector2i, u: Unit) -> void:
 
 func _do_move(p: Vector2i) -> void:
 	var u := selected
-	var ev := Rules.cmd_move(state, u, p) if p != u.pos else [] as Array[Dictionary]
-	if p == u.pos:
+	var stay := p == u.pos
+	var ev := [] as Array[Dictionary] if stay else Rules.cmd_move(state, u, p)
+	if stay:
 		u.moved = true
 		u.move_origin = u.pos
 	mode = Mode.BUSY

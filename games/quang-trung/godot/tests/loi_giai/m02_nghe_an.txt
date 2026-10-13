@@ -1,0 +1,99 @@
+# Màn 2 — lời giải 2 sao. Vòng 1 mua quân sư; hỏa mai đi mời Nguyễn Thiếp (làng đồi tây, 1,7);
+# quân sư lên bãi duyệt binh chiêu hàng hình nộm (9,1) rồi (2,1). Trong lúc đó các quân khác giữ đội hình, chưa chiếm
+# đủ 6 làng (đủ là doanh voi ra bãi). Từ vòng 9 để máy đi chiếm làng và đánh doanh voi.
+# vòng 1
+mua 6 13 quan_su
+toi_loai hoa_mai 1 7
+toi_loai quan_su 9 2
+ai_giu
+het
+# vòng 2
+toi_loai hoa_mai 1 7
+toi_loai quan_su 9 2
+ai_giu
+het
+# vòng 3
+toi_loai hoa_mai 1 7
+toi_loai quan_su 9 2
+ai_giu
+het
+# vòng 4
+toi_loai hoa_mai 1 7
+toi_loai quan_su 9 2
+ai_giu
+het
+# vòng 5
+toi_loai hoa_mai 1 7
+toi_loai quan_su 9 2
+ai_giu
+het
+# vòng 6
+toi_loai hoa_mai 1 7
+toi_loai quan_su 2 2
+ai_giu
+het
+# vòng 7
+toi_loai hoa_mai 1 7
+toi_loai quan_su 2 2
+ai_giu
+het
+# vòng 8
+toi_loai hoa_mai 1 7
+toi_loai quan_su 2 2
+ai_giu
+het
+# vòng 9
+toi_loai hoa_mai 1 7
+toi_loai quan_su 2 2
+ai
+het
+# vòng 10
+toi_loai hoa_mai 1 7
+toi_loai quan_su 2 2
+ai
+het
+# vòng 11
+toi_loai hoa_mai 1 7
+toi_loai quan_su 2 2
+ai
+het
+# vòng 12
+toi_loai hoa_mai 1 7
+toi_loai quan_su 2 2
+ai
+het
+# vòng 13
+toi_loai hoa_mai 1 7
+toi_loai quan_su 2 2
+ai
+het
+# vòng 14
+toi_loai hoa_mai 1 7
+toi_loai quan_su 2 2
+ai
+het
+# vòng 15
+toi_loai hoa_mai 1 7
+toi_loai quan_su 2 2
+ai
+het
+# vòng 16
+toi_loai hoa_mai 1 7
+toi_loai quan_su 2 2
+ai
+het
+# vòng 17
+toi_loai hoa_mai 1 7
+toi_loai quan_su 2 2
+ai
+het
+# vòng 18
+toi_loai hoa_mai 1 7
+toi_loai quan_su 2 2
+ai
+het
+# vòng 19
+toi_loai hoa_mai 1 7
+toi_loai quan_su 2 2
+ai
+het

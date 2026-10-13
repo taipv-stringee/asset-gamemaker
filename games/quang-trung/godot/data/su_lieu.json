@@ -140,6 +140,61 @@
      "url": "https://vietstamp.net/vn/chuyen-de/tem-tri-thuc/1000-nam-thang-longha-noi/quang-trung-dai-pha-quan-thanh-giai-phong-thang-long-12-nam-tay-son-o-thang-long-1789-1802/"
     }
    ]
+  },
+  {
+   "id": "nguyen_thiep",
+   "nhom": "Nhân vật",
+   "tieu_de": "Nguyễn Thiếp – La Sơn Phu tử",
+   "nhan": "Theo HLNTC",
+   "noi_dung": "Nguyễn Thiếp (阮浹), hiệu La Sơn Phu tử, là nhà nho ở ẩn vùng Nghệ An – Hà Tĩnh. Theo Hoàng Lê nhất thống chí, khi đại quân dừng ở Nghệ An, Quang Trung vời ông vào doanh hỏi kế; ông đoán quân Thanh sẽ bị dẹp trong khoảng mười ngày.\n\nViệc gặp và lời đoán chủ yếu biết qua Hoàng Lê nhất thống chí; câu nói của ông trong game là lời của game, chưa đối chiếu nguyên văn. Năm sinh, năm mất thường ghi là 1723–1804 (chưa kiểm).",
+   "nguon": [
+    {
+     "ten": "Wikipedia: Nguyễn Thiếp",
+     "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Thi%E1%BA%BFp"
+    },
+    {
+     "ten": "Tóm lược hồi 14 Hoàng Lê nhất thống chí (loigiaihay)",
+     "url": "https://loigiaihay.com/bai-5-em-hay-thuat-lai-chien-cong-than-toc-dai-pha-quan-thanh-cua-vua-quang-trung-tu-toi-30-tet-den-ngay-mong-5-thang-gieng-a2371.html"
+    }
+   ]
+  },
+  {
+   "id": "voi_chien_tay_son",
+   "nhom": "Binh chủng",
+   "tieu_de": "Voi chiến Tây Sơn",
+   "nhan": "Sử liệu",
+   "noi_dung": "Quân Tây Sơn có tượng binh, với chức Đô đốc quản doanh tượng binh. Ở Ngọc Hồi, voi được tung vào trận; một nguồn Trung Quốc thế kỷ 19 kể voi chở đại pháo phá doanh. Sử Thanh tả Nguyễn Huệ \"tự thúc voi đốc đằng sau\".\n\nSố voi chênh nhau: các bài phổ biến nhất ghi \"hơn 100\" ở Ngọc Hồi; infobox Wikipedia tiếng Anh ghi 100–300; con số \"hơn 200 voi\" sau đợt tuyển quân ở Nghệ An là của báo chí hiện đại. Giả thuyết hỏa cầu phốt pho phóng từ lưng voi là ý kiến cá nhân, chưa được giới sử học công nhận.",
+   "nguon": [
+    {
+     "ten": "Wikipedia: Quân đội nhà Tây Sơn",
+     "url": "https://vi.wikipedia.org/wiki/Qu%C3%A2n_%C4%91%E1%BB%99i_nh%C3%A0_T%C3%A2y_S%C6%A1n"
+    },
+    {
+     "ten": "HistoryNet – The First Tet Offensive of 1789",
+     "url": "https://historynet.com/the-first-tet-offensive-of-1789/"
+    },
+    {
+     "ten": "nghiencuulichsu.com – Chiến thuật hạ thành Ngọc Hồi",
+     "url": "https://nghiencuulichsu.com/2016/09/12/chien-thuat-ha-thanh-ngoc-hoi-cua-quan-tay-son/"
+    }
+   ]
+  },
+  {
+   "id": "tuyen_quan_nghe_an",
+   "nhom": "Sự kiện",
+   "tieu_de": "Tuyển quân ở Nghệ An",
+   "nhan": "Sử liệu",
+   "noi_dung": "Đại quân tới Nghệ An ngày 29 tháng 11 năm Mậu Thân (26/12/1788) và dừng khoảng mười ngày tuyển thêm quân, duyệt binh. Đại Nam chính biên liệt truyện ghi sau khi lấy thêm binh ở Nghệ An, Thanh Hóa, quân Tây Sơn \"hơn mười vạn\".\n\nHoàng Lê nhất thống chí còn kể lời dụ quân lính ở Nghệ An; game chưa dùng lời dụ này vì chưa đọc được nguyên văn. Trong màn chơi, mỗi làng tặng một lính giáo là cách tượng trưng cho việc tuyển quân (Sáng tạo của game).",
+   "nguon": [
+    {
+     "ten": "Hợp Lưu – Nhìn lại mùa xuân khói lửa 1789",
+     "url": "https://hopluu.net/a1707/nhin-lai-mua-xuan-khoi-lua-1789"
+    },
+    {
+     "ten": "vietstamp.net – Quang Trung đại phá quân Thanh",
+     "url": "https://vietstamp.net/vn/chuyen-de/tem-tri-thuc/1000-nam-thang-longha-noi/quang-trung-dai-pha-quan-thanh-giai-phong-thang-long-12-nam-tay-son-o-thang-long-1789-1802/"
+    }
+   ]
   }
  ]
 }

@@ -480,6 +480,7 @@ static func cmd_attack(state: BattleState, u: Unit, target: Unit) -> Array[Dicti
 				state.flags["cap_cao_nhat"] = maxi(int(state.flags.get("cap_cao_nhat", 0)), x.level)
 			ev.append_array(lv)
 	u.done = true
+	ev.append_array(run_events(state))
 	ev.append_array(check_result(state))
 	return ev
 
@@ -531,7 +532,102 @@ static func cmd_capture(state: BattleState, u: Unit) -> Array[Dictionary]:
 	u.moved = true
 	u.done = true
 	ev.append({"loai": "chiem", "uid": u.uid, "o": u.pos, "phe": u.faction})
+	ev.append_array(_village_reward(state, u))
+	ev.append_array(run_events(state))
 	ev.append_array(check_result(state))
+	return ev
+
+
+## Màn 2: mỗi làng chiếm lần đầu tặng một quân (tượng trưng cho tuyển quân) — "thuong_chiem_lang": {"quan": "linh_giao"}.
+static func _village_reward(state: BattleState, u: Unit) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	var reward: Dictionary = state.mission.get("thuong_chiem_lang", {})
+	if reward.is_empty() or u.faction != state.factions[0] or state.terrain_id(u.pos) != "lang":
+		return ev
+	var key := "%d,%d" % [u.pos.x, u.pos.y]
+	var done: Array = state.flags.get("lang_da_thuong", [])
+	if done.has(key):
+		return ev
+	done.append(key)
+	state.flags["lang_da_thuong"] = done
+	if state.count_toward_limit(u.faction) >= int(state.limits.get(u.faction, 99)):
+		return ev
+	var at := _free_tile_near(state, u.pos)
+	if at.x < 0:
+		return ev
+	var nu := state.spawn_unit(reward["quan"], u.faction, at)
+	nu.moved = true
+	nu.done = true
+	ev.append({"loai": "tuyen_quan", "uid": nu.uid, "o": at})
+	return ev
+
+
+# ================================================================ sự kiện kịch bản (màn 2 trở đi)
+# "su_kien": [{"id", "khi": {...}, "lam": [{...}]}] — mỗi sự kiện xảy ra một lần.
+#   khi: {"loai": "vao_o", "o": [x, y]} quân phe người chơi đứng ở ô đó; {"loai": "so_lang", "n": N} phe người chơi giữ ≥ N làng.
+#   lam: {"loai": "co", "co": tên} bật cờ; {"loai": "hoi_thoai", "phan": tên phần trong file hội thoại};
+#        {"loai": "quan", "phe": f, "quan": [{id, x, y, ai}]} đặt quân; {"loai": "bang", "chu": "..."} dải chữ.
+
+static func has_flag(state: BattleState, name: String) -> bool:
+	return (state.flags.get("co", {}) as Dictionary).has(name)
+
+
+static func villages_owned(state: BattleState, f: String) -> int:
+	var n := 0
+	for p in state.owners:
+		if state.owners[p] == f and state.terrain_id(p) == "lang":
+			n += 1
+	return n
+
+
+static func run_events(state: BattleState) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	var player := state.factions[0]
+	var fired: Array = state.flags.get("su_kien_da", [])
+	for e in state.mission.get("su_kien", []):
+		if fired.has(e["id"]):
+			continue
+		var cond: Dictionary = e.get("khi", {})
+		var ok := false
+		match cond.get("loai", ""):
+			"vao_o":
+				var u := state.unit_at(Vector2i(int(cond["o"][0]), int(cond["o"][1])))
+				ok = u != null and u.faction == player
+			"so_lang":
+				ok = villages_owned(state, player) >= int(cond["n"])
+		if not ok:
+			continue
+		fired.append(e["id"])
+		state.flags["su_kien_da"] = fired
+		for a in e.get("lam", []):
+			match a.get("loai", ""):
+				"co":
+					var flags: Dictionary = state.flags.get("co", {})
+					flags[a["co"]] = true
+					state.flags["co"] = flags
+				"hoi_thoai":
+					ev.append({"loai": "hoi_thoai", "phan": a["phan"]})
+				"bang":
+					ev.append({"loai": "bang", "chu": a["chu"]})
+				"quan":
+					ev.append_array(_spawn_list(state, a["phe"], a["quan"], "vien_binh"))
+	return ev
+
+
+static func _spawn_list(state: BattleState, f: String, list: Array, kind: String) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	for q in list:
+		var at := _free_tile_near(state, Vector2i(int(q["x"]), int(q["y"])))
+		if at.x < 0:
+			continue
+		var u := state.spawn_unit(q["id"], f, at)
+		u.ai_mode = q.get("ai", "tan_cong")
+		if q.has("tam"):
+			u.ai_params["tam"] = Vector2i(int(q["tam"][0]), int(q["tam"][1]))
+		if q.has("ban_kinh"):
+			u.ai_params["ban_kinh"] = int(q["ban_kinh"])
+		u.ngoai_gioi_han = true
+		ev.append({"loai": kind, "uid": u.uid, "o": at})
 	return ev
 
 
@@ -542,6 +638,7 @@ static func cmd_wait(state: BattleState, u: Unit) -> Array[Dictionary]:
 	u.moved = true
 	u.done = true
 	ev.append({"loai": "cho", "uid": u.uid})
+	ev.append_array(run_events(state))
 	ev.append_array(check_result(state))
 	return ev
 
@@ -667,7 +764,7 @@ static func start_turn(state: BattleState) -> Array[Dictionary]:
 	if state.current == 0:
 		for p in state.objects.keys():
 			var o: Dictionary = state.objects[p]
-			if o.get("loai", "") == "quan_tan" and int(o["vong"]) <= state.vong - 2:
+			if o.get("loai", "") == "quan_tan" and not o.get("vinh_vien", false) and int(o["vong"]) <= state.vong - 2:
 				state.objects.erase(p)
 				ev.append({"loai": "quan_tan_het", "o": p})
 	return ev
@@ -776,6 +873,8 @@ static func side_objectives(state: BattleState) -> Array[Dictionary]:
 				ok = state.result == "thang" and int(state.flags.get("hang_binh", 0)) >= int(o["n"])
 			"len_cap":
 				ok = state.result == "thang" and int(state.flags.get("cap_cao_nhat", 0)) >= int(o.get("n", 1))
+			"co":
+				ok = state.result == "thang" and has_flag(state, o["co"])
 			"ve_vung":
 				ok = state.result == "thang" and _type_in_zone(state, o["quan"], o["khu"])
 		out.append({"ten": o.get("ten", ""), "dat": ok})
@@ -811,6 +910,9 @@ static func side_objectives_live(state: BattleState) -> Array[Dictionary]:
 			"len_cap":
 				if int(state.flags.get("cap_cao_nhat", 0)) >= int(o.get("n", 1)):
 					st = "dat" if won else "dang"
+			"co":
+				if has_flag(state, o["co"]):
+					st = "dat" if won else "dang"
 			"ve_vung":
 				if int(state.flags["mat_quan"].get(o["quan"], 0)) > 0:
 					st = "hong"
@@ -822,6 +924,38 @@ static func side_objectives_live(state: BattleState) -> Array[Dictionary]:
 			st = "hong"
 		out.append({"ten": o.get("ten", ""), "trang_thai": st})
 	return out
+
+
+## Điều kiện thắng (04): chiem_o, ha_het, vao_vung, so_lang, co, và tat_ca (mọi điều kiện con trong "dk").
+static func _condition(state: BattleState, win: Dictionary) -> bool:
+	var player := state.factions[0]
+	match win.get("loai", ""):
+		"chiem_o":
+			return state.owner_of(Vector2i(int(win["o"][0]), int(win["o"][1]))) == player
+		"ha_het":
+			return state.enemies_of(player).is_empty()
+		"so_lang":
+			return villages_owned(state, player) >= int(win["n"])
+		"co":
+			return has_flag(state, win["co"])
+		"tat_ca":
+			for c in win.get("dk", []):
+				if not _condition(state, c):
+					return false
+			return true
+		"vao_vung":
+			# Tướng chính và ít nhất `so_quan` quân khác của ta cùng đứng trong khu (màn 0).
+			var zone: Array = state.zones.get(win["khu"], [])
+			var general_in := false
+			var others := 0
+			for u in state.units_of(player):
+				if zone.has(u.pos):
+					if u.tuong_chinh:
+						general_in = true
+					else:
+						others += 1
+			return general_in and others >= int(win.get("so_quan", 0))
+	return false
 
 
 static func _type_in_zone(state: BattleState, type_id: String, zone_name: String) -> bool:
@@ -849,16 +983,7 @@ static func _reinforcements(state: BattleState, f: String) -> Array[Dictionary]:
 				v += int(r.get("moi", 1))
 		if not rounds.has(state.vong):
 			continue
-		for q in r.get("quan", []):
-			var want := Vector2i(int(q["x"]), int(q["y"]))
-			var at := _free_tile_near(state, want)
-			if at.x < 0:
-				continue
-			var u := state.spawn_unit(q["id"], f, at)
-			u.ai_mode = q.get("ai", "tan_cong")
-			u.ngoai_gioi_han = true
-			u.done = false
-			ev.append({"loai": "vien_binh", "uid": u.uid, "o": at})
+		ev.append_array(_spawn_list(state, f, r.get("quan", []), "vien_binh"))
 	return ev
 
 
@@ -879,27 +1004,7 @@ static func check_result(state: BattleState) -> Array[Dictionary]:
 	var ev: Array[Dictionary] = []
 	if state.result != "":
 		return ev
-	var player := state.factions[0]
-	var win: Dictionary = state.mission.get("thang", {})
-	var ok := false
-	match win.get("loai", ""):
-		"chiem_o":
-			var p := Vector2i(int(win["o"][0]), int(win["o"][1]))
-			ok = state.owner_of(p) == player
-		"ha_het":
-			ok = state.enemies_of(player).is_empty()
-		"vao_vung":
-			# Tướng chính và ít nhất `so_quan` quân khác của ta cùng đứng trong khu (02 §12; màn 0).
-			var zone: Array = state.zones.get(win["khu"], [])
-			var general_in := false
-			var others := 0
-			for u in state.units_of(player):
-				if zone.has(u.pos):
-					if u.tuong_chinh:
-						general_in = true
-					else:
-						others += 1
-			ok = general_in and others >= int(win.get("so_quan", 0))
+	var ok := _condition(state, state.mission.get("thang", {}))
 	if ok:
 		state.result = "thang"
 		state.won_round = state.vong

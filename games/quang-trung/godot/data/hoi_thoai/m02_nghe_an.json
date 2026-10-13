@@ -1,0 +1,76 @@
+{
+ "_ghi_chu": "Tới Nghệ An, tuyển quân, duyệt binh: Sử liệu. Vời Nguyễn Thiếp và lời đoán khoảng mười ngày: Theo HLNTC (câu chữ của game, chưa đối chiếu nguyên văn).",
+ "truoc": [
+  {
+   "ai": "",
+   "loi": "Ngày 29 tháng 11 năm Mậu Thân (26/12/1788), đại quân tới Nghệ An.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Dừng lại đây ít ngày. Các làng góp người, ta có thêm quân.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Vùng này có La Sơn Phu tử Nguyễn Thiếp. Cho người tới mời ông vào doanh.",
+   "nhan": "Theo HLNTC",
+   "ghi_chu": "Việc vời Nguyễn Thiếp: Theo HLNTC. Câu chữ của game."
+  }
+ ],
+ "gap_thiep": [
+  {
+   "ai": "",
+   "loi": "La Sơn Phu tử Nguyễn Thiếp nhận lời vào doanh.",
+   "nhan": "Theo HLNTC"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Quân Thanh sang đông. Tiên sinh xem việc này thế nào?",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "nguyen_thiep",
+   "ten": "Nguyễn Thiếp",
+   "loi": "Đánh nhanh thì thắng. Chừng mười ngày sẽ dẹp xong.",
+   "nhan": "Theo HLNTC",
+   "ghi_chu": "Lời đoán khoảng mười ngày: Theo HLNTC. Câu chữ của game, không phải trích dẫn."
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Lời tiên sinh, ta ghi nhớ.",
+   "nhan": "Sáng tạo của game"
+  }
+ ],
+ "duyet_binh": [
+  {
+   "ai": "",
+   "loi": "Quân tuyển đã đủ. Quang Trung cho duyệt binh ở bãi phía bắc.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Doanh voi ra bãi! Tập cho voi quen tiếng trống, tiếng súng.",
+   "nhan": "Sáng tạo của game"
+  }
+ ],
+ "sau_thang": [
+  {
+   "ai": "",
+   "loi": "Sau chừng mười ngày ở Nghệ An, quân số được ghi là hơn mười vạn.",
+   "nhan": "Sử liệu",
+   "ghi_chu": "Đại Nam chính biên liệt truyện: hơn mười vạn."
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Lên đường ra Tam Điệp. Sở và Lân đang chờ ở đó.",
+   "nhan": "Sáng tạo của game"
+  }
+ ]
+}

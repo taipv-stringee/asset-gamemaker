@@ -38,6 +38,7 @@ var story_mode := false           # trong chiến dịch: tự lưu, kết quả
 var pause_panel: Panel
 var recruit_panel: Panel
 var input_locked := false         # đang có hội thoại phủ lên trận
+var story_player: Callable        # main đặt: func(phan) phát một phần hội thoại giữa trận (await được)
 var hint_panel: Panel
 var _hint_queue: Array = []
 var _hint_h := 0.0                # chiều cao khung gợi ý đang hiện (camera chừa chỗ)
@@ -990,6 +991,20 @@ func _play(events: Array[Dictionary]) -> void:
 					tw.tween_property(s, "modulate:a", 0.0, 0.3)
 					await tw.finished
 					s.queue_free()
+			"tuyen_quan":
+				var tu := state.unit_by_uid(e["uid"])
+				if tu != null and not sprites.has(tu.uid):
+					var ts := _add_sprite(tu)
+					ts.modulate.a = 0.0
+					create_tween().tween_property(ts, "modulate:a", 1.0, 0.3)
+					Sfx.play("mua", -4.0)
+					_float_text(ts.position + Vector2(-6, -6), "Tuyển quân!", C_GOLD_LIGHT)
+			"hoi_thoai":
+				if story_player.is_valid():
+					await story_player.call(e["phan"])
+			"bang":
+				_show_banner(e["chu"])
+				await get_tree().create_timer(1.0).timeout
 			"vien_binh":
 				var vu := state.unit_by_uid(e["uid"])
 				if vu != null and not sprites.has(vu.uid):

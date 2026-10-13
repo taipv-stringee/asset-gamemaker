@@ -11,7 +11,7 @@ static func next_action(state: BattleState) -> Dictionary:
 	if state.result != "":
 		return {}
 	var f := state.current_faction()
-	var buy := _plan_recruit(state, f)
+	var buy := _plan_recruit(state, f) if allow_recruit else {}
 	if not buy.is_empty():
 		return buy
 	var pending: Array[Unit] = []
@@ -73,6 +73,12 @@ static func _order(u: Unit) -> int:
 	if u.has_tag("ban_xa"):
 		return 0
 	return 1
+
+
+## Tắt mua lính (lời giải mẫu: máy đi hộ quân nhưng người viết lời giải giữ vàng để mua thứ khác).
+static var allow_recruit := true
+## Tắt chiếm ô (lời giải mẫu: hoãn đủ số làng để còn làm việc khác trước khi màn chuyển giai đoạn).
+static var allow_capture := true
 
 
 static func _plan_recruit(state: BattleState, f: String) -> Dictionary:
@@ -148,8 +154,19 @@ static func _goals(state: BattleState, u: Unit) -> Array[Vector2i]:
 	for e in state.enemies_of(u.faction):
 		if Rules.can_see(state, u.faction, e.pos, vis):
 			goals.append(e.pos)
-	for p in state.owners:
-		if not state.are_allies(state.owners[p], u.faction):
+	# Ô chiếm được (cả làng chưa có chủ — màn 2): quân chiếm được thì nhắm tới; quân khác nhắm ô của đối phương.
+	var can_village := u.has_tag("chiem_lang") or u.has_tag("tuong")
+	for y in state.height:
+		for x in state.width:
+			var p := Vector2i(x, y)
+			var t := state.terrain_at(p)
+			if not t["so_huu"]:
+				continue
+			var own := state.owner_of(p)
+			if own != "" and state.are_allies(own, u.faction):
+				continue
+			if own == "" and not (can_village and t["id"] == "lang"):
+				continue
 			goals.append(p)
 	return goals
 
@@ -268,7 +285,7 @@ static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 			continue
 		# Chiếm
 		u.pos = p
-		var cap := Rules.can_capture(state, u)
+		var cap := allow_capture and Rules.can_capture(state, u)
 		u.pos = original
 		if cap:
 			var tid := state.terrain_id(p)

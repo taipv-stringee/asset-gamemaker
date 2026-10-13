@@ -1,0 +1,238 @@
+{
+ "id": "m02_nghe_an",
+ "so": 2,
+ "ten": "Nghệ An: tuyển quân",
+ "ten_ngan": "Nghệ An",
+ "ngay": "Từ ngày 29 tháng 11 năm Mậu Thân (26/12/1788)",
+ "dia_danh": "Nghệ An, bên sông Lam",
+ "gioi_thieu": "Đại quân tới Nghệ An, dừng khoảng mười ngày để tuyển thêm quân và duyệt binh. Theo Hoàng Lê nhất thống chí, Quang Trung vời La Sơn Phu tử Nguyễn Thiếp vào doanh hỏi kế.",
+ "nhan_gioi_thieu": "Sử liệu",
+ "muc_tieu_chinh": "Chiếm 6 làng để tuyển quân, rồi thắng trận duyệt binh với doanh voi (phe Diễn tập) trước khi hết vòng 20.",
+ "dieu_kien_thua": "Quang Trung bị loại, hoặc hết vòng 20.",
+ "hoi_thoai": "m02_nghe_an",
+ "nhac": "chu_de",
+ "ghi_chu": "Mỗi làng tặng một lính giáo, hình nộm quân tan và trận duyệt binh là Sáng tạo của game (04 §Màn 2).",
+ "ban_do": [
+  "^^..h....^^^",
+  "^..........^",
+  "t..........t",
+  "t....==....t",
+  "rr..L.=..Lrr",
+  "rrr...=..rrr",
+  "h.t...=...th",
+  "hLt...=..L.h",
+  "hh....=....h",
+  "~~~~~~#~~~~~",
+  "..L...=..L..",
+  "rr....=...rr",
+  "rrL...=...rr",
+  "..t..DFD..t.",
+  "rr...l=l..rr",
+  "rrL...=..Lrr",
+  "t.....=....t",
+  "^^t...=..t^^"
+ ],
+ "chu_o": {
+  "6,13": "tayson"
+ },
+ "phe": [
+  "tayson",
+  "dien_tap"
+ ],
+ "vang": {
+  "tayson": 350,
+  "dien_tap": 0
+ },
+ "gioi_han": {
+  "tayson": 18,
+  "dien_tap": 20
+ },
+ "mua_duoc": {
+  "tayson": [
+   "linh_giao",
+   "hoa_mai",
+   "quan_su",
+   "trong_tran",
+   "voi_chien"
+  ],
+  "dien_tap": []
+ },
+ "thuong_chiem_lang": {
+  "quan": "linh_giao"
+ },
+ "vat_the": [
+  {
+   "loai": "quan_tan",
+   "o": [
+    2,
+    1
+   ],
+   "vinh_vien": true
+  },
+  {
+   "loai": "quan_tan",
+   "o": [
+    9,
+    1
+   ],
+   "vinh_vien": true
+  }
+ ],
+ "quan": [
+  {
+   "id": "quang_trung",
+   "phe": "tayson",
+   "x": 6,
+   "y": 12,
+   "tuong_chinh": true
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 5,
+   "y": 12
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 7,
+   "y": 12
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 6,
+   "y": 11
+  }
+ ],
+ "su_kien": [
+  {
+   "id": "gap_thiep",
+   "khi": {
+    "loai": "vao_o",
+    "o": [
+     1,
+     7
+    ]
+   },
+   "lam": [
+    {
+     "loai": "co",
+     "co": "moi_thiep"
+    },
+    {
+     "loai": "hoi_thoai",
+     "phan": "gap_thiep"
+    }
+   ]
+  },
+  {
+   "id": "duyet_binh",
+   "khi": {
+    "loai": "so_lang",
+    "n": 6
+   },
+   "lam": [
+    {
+     "loai": "co",
+     "co": "duyet_binh"
+    },
+    {
+     "loai": "quan",
+     "phe": "dien_tap",
+     "quan": [
+      {
+       "id": "voi_chien",
+       "x": 4,
+       "y": 2
+      },
+      {
+       "id": "voi_chien",
+       "x": 7,
+       "y": 2
+      },
+      {
+       "id": "trong_tran",
+       "x": 6,
+       "y": 1
+      },
+      {
+       "id": "linh_giao",
+       "x": 5,
+       "y": 1
+      },
+      {
+       "id": "linh_giao",
+       "x": 3,
+       "y": 3
+      },
+      {
+       "id": "linh_giao",
+       "x": 8,
+       "y": 3
+      }
+     ]
+    },
+    {
+     "loai": "hoi_thoai",
+     "phan": "duyet_binh"
+    }
+   ]
+  }
+ ],
+ "thang": {
+  "loai": "tat_ca",
+  "dk": [
+   {
+    "loai": "so_lang",
+    "n": 6
+   },
+   {
+    "loai": "co",
+    "co": "duyet_binh"
+   },
+   {
+    "loai": "ha_het"
+   }
+  ]
+ },
+ "thua_het_luot": 20,
+ "ly_do_het_luot": "Hết vòng 20: chưa kịp tuyển đủ quân để ra Tam Điệp.",
+ "muc_tieu_phu": [
+  {
+   "loai": "co",
+   "co": "moi_thiep",
+   "ten": "Mời được Nguyễn Thiếp (đưa một quân tới làng ở đồi phía tây)"
+  },
+  {
+   "loai": "hang_binh_toi_thieu",
+   "n": 2,
+   "ten": "Chiêu hàng 2 hình nộm ở bãi duyệt binh (cần quân sư)"
+  }
+ ],
+ "goi_y": [
+  {
+   "khi": "bat_dau",
+   "loi": "Chiếm làng: đưa lính giáo hoặc tướng vào làng rồi bấm Chiếm. Mỗi làng cho 30 vàng mỗi vòng và tặng một lính giáo."
+  },
+  {
+   "khi": "vong",
+   "n": 2,
+   "loi": "Đủ 6 làng thì doanh voi ra bãi duyệt binh ở phía bắc. Nên mua voi chiến hoặc trống trận trước khi đủ làng."
+  },
+  {
+   "khi": "mua_linh",
+   "loi": "Quân sư bắn xa và chiêu hàng được quân tan. Trống trận cổ vũ quân kề bên +10 công. Voi chiến mạnh, đi thẳng 3 ô thì xung phong."
+  },
+  {
+   "khi": "vong",
+   "n": 4,
+   "loi": "Ở bãi duyệt binh có 2 hình nộm (cờ rách). Quân sư đứng kề rồi Chiêu hàng để biến chúng thành hàng binh."
+  }
+ ],
+ "su_lieu": [
+  "nguyen_thiep",
+  "voi_chien_tay_son",
+  "tuyen_quan_nghe_an"
+ ]
+}

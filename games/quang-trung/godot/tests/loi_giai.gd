@@ -7,8 +7,11 @@ extends RefCounted
 ##   chiem X Y X2 Y2           đi rồi chiếm
 ##   mua X Y LOAI              mua lính ở ô X Y
 ##   toi X Y TX TY             đi tới ô đi được gần (TX, TY) nhất (cùng gần thì ô tốn ít điểm đi hơn), rồi chiếm nếu chiếm
-##                             được ô đó, không thì chờ
-##   toi_loai LOAI TX TY       như "toi" cho quân ta đầu tiên thuộc loại LOAI (vd. tướng có tên)
+##                             được ô đó, chiêu hàng nếu kề quân tan (quân sư), không thì chờ
+##   toi_loai LOAI TX TY       như "toi" cho quân ta đầu tiên thuộc loại LOAI chưa đi (không có thì bỏ qua)
+##   mua_neu X Y LOAI          như "mua" nhưng không đủ vàng / đồn có quân thì bỏ qua
+##   ai_khong_mua              như "ai" nhưng máy không mua lính
+##   ai_giu                    như "ai_khong_mua" và máy cũng không chiếm ô (để hoãn điều kiện chuyển giai đoạn)
 ##   ai                        để máy (SimpleAI) đi nốt các quân ta còn lại trong lượt này
 ##   rut TX TY                 mọi quân ta chưa đi làm "toi" về (TX, TY), quân gần đích đi trước
 ##   het                       hết lượt; máy chơi lượt địch
@@ -58,11 +61,13 @@ static func run(mission: String, p_seed: int, path: String, verbose := false) ->
 						found = cu
 						break
 				if found == null:
-					return {"state": s, "loi": "không có quân %s chưa đi (%s)" % [w[1], line], "nhat_ky": log}
+					continue   # chưa có (chưa mua) hoặc đã đi: bỏ qua
 				ev = _toward(s, found, Vector2i(int(w[2]), int(w[3])))
 				if verbose:
 					print("   %s → %s" % [line, found.pos])
-			"ai":
+			"ai", "ai_khong_mua", "ai_giu":
+				SimpleAI.allow_recruit = w[0] == "ai"
+				SimpleAI.allow_capture = w[0] != "ai_giu"
 				for _i in 60:
 					var act := SimpleAI.next_action(s)
 					if act.is_empty() or s.result != "":
@@ -73,12 +78,14 @@ static func run(mission: String, p_seed: int, path: String, verbose := false) ->
 						if stuck != null:
 							stuck.done = true
 					ev.append_array(step)
+				SimpleAI.allow_recruit = true
+				SimpleAI.allow_capture = true
 			"rut":
 				var goal2 := Vector2i(int(w[1]), int(w[2]))
 				var order := s.units_of(s.current_faction()).filter(func(x: Unit) -> bool: return not x.done)
 				order.sort_custom(func(a: Unit, b: Unit) -> bool: return Rules.manhattan(a.pos, goal2) < Rules.manhattan(b.pos, goal2))
 				for ru in order:
-					ev.append_array(_toward(s, ru, goal2))
+					ev.append_array(_toward(s, ru, goal2, false))
 				if verbose:
 					print("   %s" % line)
 			"toi":
@@ -88,6 +95,8 @@ static func run(mission: String, p_seed: int, path: String, verbose := false) ->
 				ev = _toward(s, tu, Vector2i(int(w[3]), int(w[4])))
 				if verbose:
 					print("   %s → %s" % [line, tu.pos])
+			"mua_neu":
+				ev = Rules.cmd_recruit(s, s.current_faction(), Vector2i(int(w[1]), int(w[2])), w[3])
 			"mua":
 				ev = Rules.cmd_recruit(s, s.current_faction(), Vector2i(int(w[1]), int(w[2])), w[3])
 				if ev.is_empty():
@@ -111,19 +120,26 @@ static func run(mission: String, p_seed: int, path: String, verbose := false) ->
 	return {"state": s, "loi": "", "nhat_ky": log}
 
 
-static func _toward(s: BattleState, u: Unit, goal: Vector2i) -> Array[Dictionary]:
+## path=true: khoảng cách đi bộ thật (vòng qua sông, núi); false: khoảng cách thẳng (lệnh "rut", cả đoàn dàn hàng ngang).
+static func _toward(s: BattleState, u: Unit, goal: Vector2i, path := true) -> Array[Dictionary]:
 	var reach := Rules.reachable(s, u)
 	var best := u.pos
+	var walk := SimpleAI.distance_map(s, u, [goal] as Array[Vector2i]) if path else {}
+	var dist := func(p: Vector2i) -> int:
+		return int(walk.get(p, 1000 + Rules.manhattan(p, goal))) if path else Rules.manhattan(p, goal)
 	for rp in reach:
-		var d := Rules.manhattan(rp, goal)
-		var bd := Rules.manhattan(best, goal)
+		var d: int = dist.call(rp)
+		var bd: int = dist.call(best)
 		if d < bd or (d == bd and int(reach[rp]["chi_phi"]) < int(reach[best]["chi_phi"])):
 			best = rp
 	var ev: Array[Dictionary] = []
 	if best != u.pos:
 		ev = Rules.cmd_move(s, u, best)
+	var ch := Rules.chieu_hang_targets(s, u)
 	if Rules.can_capture(s, u):
 		ev.append_array(Rules.cmd_capture(s, u))   # tới đúng ô chiếm được (đồn, làng) thì chiếm luôn
+	elif not ch.is_empty():
+		ev.append_array(Rules.cmd_chieu_hang(s, u, ch[0]))   # quân sư kề quân tan thì chiêu hàng
 	else:
 		ev.append_array(Rules.cmd_wait(s, u))
 	return ev

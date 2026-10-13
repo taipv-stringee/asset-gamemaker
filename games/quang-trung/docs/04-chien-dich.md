@@ -86,6 +86,11 @@ Mỗi điểm ghi ngày âm và dương lịch.
   Bãi có sẵn 2 **hình nộm quân tan** do kịch bản đặt để dạy chiêu hàng (ngoại lệ duy nhất: quân tan không do quân bị hạ sinh ra).
 - **Thắng**: chiếm đủ 6 làng **và** hạ hết quân Diễn tập trước khi hết vòng 20.
 - **Mục tiêu phụ**: mời được Nguyễn Thiếp; chiêu hàng 2 hình nộm.
+- **Đã dựng** (`data/missions/m02_nghe_an.json`): 12 × 18, sông Lam một cầu, 9 làng trung lập (làng Nguyễn Thiếp ở đồi phía tây),
+  bãi duyệt binh phía bắc với 2 hình nộm quân tan (không hết hạn). Đổi so với phác thảo: **vàng 350** (đủ mua quân sư ngay vòng 1,
+  như gợi ý trong màn), **giới hạn 18** (mỗi làng tặng một lính giáo nên quân đầy nhanh, không còn chỗ cho hàng binh).
+  Cơ chế: sự kiện kịch bản `su_kien` (tới ô → cờ + hội thoại giữa trận; đủ 6 làng → doanh voi xuất hiện), thắng `tat_ca`.
+  Lời giải mẫu 2 sao: `tests/loi_giai/m02_nghe_an.txt` (người chơi nên hoãn chiếm làng thứ 6 cho tới khi chiêu hàng xong).
 - **Mở Sử liệu**: Nguyễn Thiếp; voi chiến Tây Sơn; đội – cơ – đạo – doanh.
 
 ## Màn 3 — Tam Điệp: ăn Tết sớm (màn chuyện)

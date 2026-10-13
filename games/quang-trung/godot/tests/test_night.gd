@@ -188,3 +188,48 @@ func test_reinforcement_rounds_from_json(t) -> bool:
 	Rules.cmd_end_turn(s)
 	t.eq(s.units_of("thanh").size(), 1, "viện binh vòng 1 (vòng ghi trong JSON)")
 	return true
+
+
+func test_events_village_reward_and_combined_win(t) -> bool:
+	var s := make(["L.L.", "...."], [q("quang_trung", "tayson", 1, 0, {"tuong_chinh": true}), q("linh_giao", "tayson", 3, 1)],
+		{"tam_nhin": 0, "phe": ["tayson", "dien_tap"], "gioi_han": {"tayson": 10},
+		"thuong_chiem_lang": {"quan": "linh_giao"},
+		"vat_the": [{"loai": "quan_tan", "o": [3, 0], "vinh_vien": true}],
+		"su_kien": [
+			{"id": "gap", "khi": {"loai": "vao_o", "o": [0, 1]}, "lam": [{"loai": "co", "co": "moi"}, {"loai": "hoi_thoai", "phan": "gap"}]},
+			{"id": "gd2", "khi": {"loai": "so_lang", "n": 2}, "lam": [{"loai": "co", "co": "gd2"},
+				{"loai": "quan", "phe": "dien_tap", "quan": [{"id": "linh_giao", "x": 3, "y": 1}]}]}],
+		"thang": {"loai": "tat_ca", "dk": [{"loai": "so_lang", "n": 2}, {"loai": "co", "co": "gd2"}, {"loai": "ha_het"}]},
+		"muc_tieu_phu": [{"loai": "co", "co": "moi", "ten": "gặp"}]})
+	t.eq(s.result, "", "chưa có địch nhưng chưa đủ điều kiện → chưa thắng")
+	var qt := s.unit_at(Vector2i(1, 0))
+	Rules.cmd_move(s, qt, Vector2i(0, 0))
+	var ev := Rules.cmd_capture(s, qt)
+	t.eq(s.units_of("tayson").size(), 3, "chiếm làng đầu tiên được thêm một lính giáo")
+	var lg := s.unit_at(Vector2i(3, 1))
+	Rules.cmd_move(s, lg, Vector2i(2, 0))
+	ev = Rules.cmd_capture(s, lg)
+	t.check(Rules.has_flag(s, "gd2"), "đủ 2 làng → giai đoạn 2")
+	t.eq(s.units_of("dien_tap").size(), 1, "quân diễn tập xuất hiện")
+	t.eq(s.result, "", "còn quân diễn tập → chưa thắng")
+	Rules.cmd_end_turn(s)
+	Rules.cmd_end_turn(s)  # vòng 2
+	t.eq(s.object_at(Vector2i(3, 0)).get("loai", ""), "quan_tan", "hình nộm không hết hạn")
+	Rules.cmd_end_turn(s)
+	Rules.cmd_end_turn(s)
+	Rules.cmd_end_turn(s)
+	Rules.cmd_end_turn(s)  # vòng 4
+	t.eq(s.object_at(Vector2i(3, 0)).get("loai", ""), "quan_tan", "hình nộm vẫn còn ở vòng 4")
+	var walker: Unit = null
+	for u in s.units_of("tayson"):
+		if not u.tuong_chinh and Rules.reachable(s, u).has(Vector2i(0, 1)):
+			walker = u
+	t.check(walker != null, "có quân đi được tới ô hẹn")
+	Rules.cmd_move(s, walker, Vector2i(0, 1))
+	var ev2 := Rules.cmd_wait(s, walker)
+	t.check(Rules.has_flag(s, "moi"), "tới ô hẹn → bật cờ")
+	var kinds := []
+	for e in ev2:
+		kinds.append(e["loai"])
+	t.check(kinds.has("hoi_thoai"), "có sự kiện hội thoại")
+	return true

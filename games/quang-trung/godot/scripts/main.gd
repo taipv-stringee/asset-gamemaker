@@ -130,6 +130,7 @@ func _new_battle(from: BattleState = null) -> void:
 	battle.restart_requested.connect(_restart, CONNECT_DEFERRED)
 	battle.exit_requested.connect(_on_battle_exit, CONNECT_DEFERRED)
 	battle.battle_finished.connect(_on_battle_finished)
+	battle.story_player = _story_part
 	add_child(battle)
 	if from != null:
 		battle.start_from_state(from)
@@ -162,6 +163,13 @@ func _on_battle_finished(result: String) -> void:
 		opened = Progress.record_win(battle.state)
 		await _dialogue(Story.dialogue(battle.state.mission.get("hoi_thoai", ""), "sau_thang"))
 	battle.show_result(opened)
+
+
+## Hội thoại giữa trận do sự kiện kịch bản gọi (màn 2: gặp Nguyễn Thiếp, duyệt binh).
+func _story_part(part: String) -> void:
+	if battle == null:
+		return
+	await _dialogue(Story.dialogue(battle.state.mission.get("hoi_thoai", ""), part))
 
 
 func _dialogue(lines: Array) -> void:
@@ -284,7 +292,8 @@ func _run_script(path: String) -> void:
 				get_tree().quit()
 				return
 		await get_tree().create_timer(0.35).timeout
-		while battle != null and battle.mode == Battle.Mode.BUSY:
+		# Hội thoại giữa trận (màn 2) giữ trận ở BUSY cho tới khi người chơi chạm: đừng chờ, để lệnh "tiep" / "nut Bỏ qua" chạy.
+		while battle != null and battle.mode == Battle.Mode.BUSY and ui_layer.find_children("*", "DialogueBox", true, false).is_empty():
 			await get_tree().create_timer(0.1).timeout
 	get_tree().quit()
 

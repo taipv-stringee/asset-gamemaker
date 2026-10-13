@@ -15,6 +15,8 @@ var _done := false
 var _burning := false
 var _asleep := false
 var _torch := false
+## Bù sắc đêm (CanvasModulate làm tối mọi thứ): quân sáng hơn nền để vẫn nhận ra loại quân (phản hồi M2).
+var night_boost := Color.WHITE
 
 static var _fallback_cache: Dictionary = {}
 
@@ -49,7 +51,7 @@ func refresh(u: Unit) -> void:
 	_asleep = u.ngu
 	_torch = u.duoc
 	hp_label.text = str(u.hp) if u.hp < 100 else ""
-	sprite.modulate = Color(0.55, 0.55, 0.6) if u.done else Color.WHITE
+	sprite.modulate = (Color(0.55, 0.55, 0.6) if u.done else Color.WHITE) * night_boost
 	queue_redraw()
 
 

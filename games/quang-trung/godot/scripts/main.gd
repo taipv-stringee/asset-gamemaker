@@ -220,6 +220,7 @@ func _screenshot_later(path: String, wait: float, until_round: int) -> void:
 ##   anh <file.png>  chụp màn hình (đường dẫn tương đối → <thư mục dữ liệu người dùng>/anh/)
 ##   keo DX DY       kéo bản đồ (điểm ảnh logic)
 ##   tiep            chạm vào khung hội thoại (hiện hết chữ / sang câu sau)
+##   vuot X Y DY     vuốt cảm ứng từ điểm logic (X, Y) theo chiều dọc DY (âm = vuốt lên)
 ##   kiem <...>      ghi ra trạng thái: vang | vong | ket_qua | camera | quan X Y | vat X Y
 ##   thoat           thoát
 func _run_script(path: String) -> void:
@@ -239,6 +240,10 @@ func _run_script(path: String) -> void:
 		var cmd := parts[0]
 		var rest := parts[1] if parts.size() > 1 else ""
 		match cmd:
+			"vuot":
+				# vuốt cảm ứng thật (qua Input) bắt đầu ở điểm logic (X, Y), kéo dọc DY — để thử cuộn danh sách bắt đầu trên nút
+				var v := rest.split(" ", false)
+				await _swipe(Vector2(float(v[0]), float(v[1])), float(v[2]))
 			"tiep":
 				for box in ui_layer.find_children("*", "DialogueBox", true, false):
 					box.advance()
@@ -279,6 +284,31 @@ func _run_script(path: String) -> void:
 	get_tree().quit()
 
 
+func _swipe(from: Vector2, dy: float) -> void:
+	var to_screen := get_viewport().get_screen_transform()
+	var t := InputEventScreenTouch.new()
+	t.position = to_screen * from
+	t.pressed = true
+	Input.parse_input_event(t)
+	await get_tree().process_frame
+	var steps := 12
+	var pos := from
+	for i in steps:
+		var d := InputEventScreenDrag.new()
+		var nxt := from + Vector2(0, dy * (i + 1) / steps)
+		d.position = to_screen * nxt
+		d.relative = to_screen.basis_xform(nxt - pos)
+		d.velocity = d.relative * 60.0
+		pos = nxt
+		Input.parse_input_event(d)
+		await get_tree().process_frame
+	var r := InputEventScreenTouch.new()
+	r.position = to_screen * pos
+	r.pressed = false
+	Input.parse_input_event(r)
+	await get_tree().create_timer(0.3).timeout
+
+
 func _press(text: String) -> bool:
 	for b in find_children("*", "Button", true, false):
 		if (b.text == text or b.text.split("\n")[0] == text) and not b.disabled and b.is_visible_in_tree() and not b.is_queued_for_deletion():
@@ -292,6 +322,11 @@ func _inspect(what: String) -> String:
 		return "có" if Progress.has_battle() else "không"
 	if what.begins_with("sao "):
 		return str(Progress.stars(what.substr(4)))
+	if what == "cuon":
+		for sc in find_children("*", "ScrollContainer", true, false):
+			if sc.is_visible_in_tree():
+				return str(sc.scroll_vertical)
+		return "(không có danh sách cuộn)"
 	if what == "man_hinh":
 		return "(trận)" if screen == null else str(screen.get_script().get_global_name())
 	if battle == null:

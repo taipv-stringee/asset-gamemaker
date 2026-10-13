@@ -1,0 +1,8 @@
+# Danh sách Chiến dịch cuộn được khi vuốt bắt đầu trên một nút màn, và vuốt không bị tính là bấm (báo cáo M2, lỗi mới #1).
+# Chạy: GODOT --path . -- --menu --moi --kich-ban=res://tests/kich_ban/cuon_danh_sach.txt
+nut Chiến dịch
+kiem cuon
+vuot 140 260 -200
+kiem cuon
+kiem man_hinh
+anh cuon_danh_sach.png

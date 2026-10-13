@@ -7,7 +7,7 @@ Dành cho **agent kiểm thử chạy trên máy chủ dự án** và cho chủ 
 1. `GODOT --headless --path . -s res://tests/run_tests.gd` → phải `0 lỗi`.
    Bộ test có cả **lời giải mẫu màn 4** (`tests/loi_giai/m04_gian_khau.txt`): chạy trên luật thật, phải thắng 3 sao.
 2. Chạy từng kịch bản chạm trong `tests/kich_ban/` (lệnh chạy và giá trị mong đợi của từng file: `tests/kich_ban/README.md`):
-   - `co_ban.txt`, `quan_tan_choi_lai.txt`, `dem_m04.txt`: vào thẳng trận.
+   - `co_ban.txt`, `quan_tan_choi_lai.txt`, `dem_m04.txt`: vào thẳng trận. `cuon_danh_sach.txt`: cuộn danh sách Chiến dịch.
    - `tron_m04.txt`: `GODOT --path . -- --menu --moi --seed=1 --kich-ban=res://tests/kich_ban/tron_m04.txt` — đi từ menu,
      chơi trọn màn 4 qua giao diện chạm, kiểm tra lưu, sao, Sử liệu. (`--moi` xóa tiến trình trên máy trước khi chạy.)
    - So các dòng `KIỂM` với bảng mong đợi; mở ảnh chụp (dòng `Đã chụp:`) và mô tả bất thường: chữ bị cắt, nút chồng nhau,
@@ -29,9 +29,10 @@ Mở game **không có tham số** (như người chơi). Bật tiếng. Lần �
 | # | Việc | Mong đợi |
 |---|---|---|
 | 1 | Mở game | Màn khởi động là huy hiệu + chữ TÂY SƠN (không còn logo Godot). Menu: biểu tượng, chữ TÂY SƠN, lời lưu truyền có nhãn [Tương truyền], nút Chiến dịch / Sử liệu. Nhạc chủ đề (trống, kèn, đàn) |
-| 2 | Chiến dịch | Danh sách màn 0–9 + màn phụ; chỉ màn 4 và "Trận thử luật" bấm được |
+| 2 | Chiến dịch | Danh sách màn 0–9 + màn phụ; chỉ màn 4 và "Trận thử luật" bấm được; tên dài xuống dòng; **vuốt trên các nút vẫn cuộn**, vuốt không mở màn |
 | 3 | Màn 4 | Giới thiệu màn: ngày âm và dương lịch, bản đồ nhỏ, đoạn lịch sử có nhãn, mục tiêu, 3 mục tiêu phụ |
 | 4 | Vào trận | Trời tối, nhạc đêm (dế, gió, trống xa, sáo). Hội thoại có chân dung Quang Trung; chạm để tiếp; Bỏ qua được |
+| 5a | Mua đủ các loại lính, xem trên bản đồ (ngày: Trận thử luật; đêm: màn 4) | Phân biệt được từng loại không cần chạm: lính giáo (giáo dài), hỏa mai (áo nâu, súng chếch, khói), thủy binh (cởi trần, mái chèo, sóng nước), quân sư (áo dài đen, loa), trống trận (trống to trước ngực), hỏa hổ (áo đen, lửa) |
 | 5 | Nhìn bản đồ | Xa quân ta thì sương đặc, không thấy quân Lê; cổng đồn có đèn sáng, thấy quan giữ đồn đang ngủ (chữ z), trống, đèn ở làng |
 | 6 | Đi quân về phía sông | Thấy lính tuần khi tới gần (có dấu "!"); khi đi vào chỗ có quân ẩn → "Phục kích!", quân dừng, không Hoàn tác được |
 | 7 | Mua lính ở đồn của ta (bến đò) | Bảng mua lính hiện đủ các loại kèm hình, giá, chỉ số; loại không đủ vàng thì mờ |

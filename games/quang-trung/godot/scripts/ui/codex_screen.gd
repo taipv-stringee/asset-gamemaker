@@ -37,10 +37,7 @@ func _show_list() -> void:
 		col.add_child(UiKit.label(g, UiKit.FS_HEAD, UiKit.C_GOLD, true))
 		for e in in_group:
 			if Progress.codex_unlocked(e["id"]):
-				var b := UiKit.button(e["tieu_de"], _show_entry.bind(e), UiKit.FS_BUTTON)
-				b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-				b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				col.add_child(b)
+				col.add_child(UiKit.list_button(e["tieu_de"], _show_entry.bind(e)))
 			else:
 				locked += 1
 				var l := UiKit.label("  ???", UiKit.FS_BODY, Color(0.5, 0.42, 0.36))

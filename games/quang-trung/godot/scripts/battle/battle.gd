@@ -195,9 +195,16 @@ func _update_night() -> void:
 		night_tint.color = Color(0.82, 0.8, 0.9)
 	else:
 		night_tint.color = Color(0.56, 0.62, 0.9)
+	# Quân được bù gần hết sắc đêm: nền tối, quân vẫn rõ màu áo và vật cầm.
+	var tint := night_tint.color
+	var boost := Color(minf(0.85 / tint.r, 1.6), minf(0.85 / tint.g, 1.6), minf(0.92 / tint.b, 1.6)) if dark else Color.WHITE
 	for u in state.units:
 		if sprites.has(u.uid):
-			sprites[u.uid].visible = _shown(u)
+			var sp: UnitSprite = sprites[u.uid]
+			sp.visible = _shown(u)
+			if sp.night_boost != boost:
+				sp.night_boost = boost
+				sp.refresh(u)
 	night_layer.queue_redraw()
 
 
@@ -766,10 +773,9 @@ func _show_recruit(p: Vector2i) -> void:
 		var d := data.unit(id)
 		var tam := str(d["tam_min"]) if d["tam_min"] == d["tam_max"] else "%d–%d" % [d["tam_min"], d["tam_max"]]
 		var text := "%s · %d\nCông %d–%d  Thủ %d  Di %d  Tầm %s" % [d["ten"], d["gia"], d["cong_min"], d["cong_max"], d["thu"], d["di"], tam]
-		var b := UiKit.button(text, func() -> void:
+		var b := UiKit.list_button(text, func() -> void:
 			_close_recruit()
 			_run(Rules.cmd_recruit(state, PLAYER, p, id)), UiKit.FS_SMALL)
-		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.custom_minimum_size = Vector2(0, 54)
 		b.icon = _unit_icon(id)
 		b.add_theme_constant_override("icon_max_width", 32)
@@ -1046,6 +1052,7 @@ func _overlay_panel() -> Array:
 	panel.offset_top = TOP_H + 10
 	panel.offset_bottom = -10
 	hud.get_child(0).add_child(panel)
+	bottom.visible = false  # nút Hết lượt không lòi ra ở góc (báo cáo M2)
 	var sc := ScrollContainer.new()
 	sc.set_anchors_preset(Control.PRESET_FULL_RECT)
 	sc.offset_left = 14
@@ -1117,6 +1124,7 @@ func _toggle_pause() -> void:
 	if pause_panel != null:
 		pause_panel.queue_free()
 		pause_panel = null
+		bottom.visible = true
 		return
 	if mode == Mode.ENDED:
 		return

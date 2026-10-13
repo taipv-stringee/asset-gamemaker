@@ -17,17 +17,10 @@ func _init() -> void:
 		var id: String = m["id"]
 		var text := "Màn %s · %s" % [m["so"], m["ten"]]
 		if id != "" and Progress.is_won(id):
-			# Sao đặt trước tên để không bị cắt mất khi tên dài.
-			text = "%s %s" % ["★".repeat(Progress.stars(id)) + "☆".repeat(3 - Progress.stars(id)), text]
-		var b := UiKit.button(text, func() -> void: mission_chosen.emit(id), UiKit.FS_BUTTON)
-		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		b.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+			text += "\n" + "★".repeat(Progress.stars(id)) + "☆".repeat(3 - Progress.stars(id))
+		var b := UiKit.list_button(text, func() -> void: mission_chosen.emit(id))
 		b.disabled = id == ""
-		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		col.add_child(b)
 	col.add_child(UiKit.label("Luyện tập", UiKit.FS_HEAD, UiKit.C_GOLD, true))
-	var practice := UiKit.button("Trận thử luật (ban ngày)", func() -> void: mission_chosen.emit("m_thu"), UiKit.FS_BUTTON)
-	practice.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	practice.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	col.add_child(practice)
+	col.add_child(UiKit.list_button("Trận thử luật (ban ngày)", func() -> void: mission_chosen.emit("m_thu")))
 	UiKit.bottom_bar(self).add_child(UiKit.button("Quay lại", func() -> void: back.emit(), UiKit.FS_BUTTON, 100))

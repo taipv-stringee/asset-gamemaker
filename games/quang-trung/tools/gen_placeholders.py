@@ -176,6 +176,11 @@ DRAW = {
     "thuong_duy_thang": lambda t, b: commander(t, "mu", b, "long"),
 }
 
+# Lính Tây Sơn dễ phân biệt (phản hồi M2): áo, dáng, vật cầm riêng từng loại — xem linh_ro.py
+import linh_ro  # noqa: E402
+
+DRAW.update(linh_ro.DRAW)
+
 # Phe nào cần hình của loại lính nào
 FACTIONS_FOR = {"tayson": ["tayson", "dien_tap"], "thanh": ["thanh"], "le": ["le"]}
 

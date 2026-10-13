@@ -62,6 +62,12 @@ static func panel(color: Color = C_LACQUER, border := 1) -> Panel:
 
 
 static func button(text: String, cb: Callable, size: int = FS_BUTTON, min_w: int = 44) -> Button:
+	var b := _styled_button(text, size, min_w)
+	b.pressed.connect(cb)
+	return b
+
+
+static func _styled_button(text: String, size: int, min_w: int) -> Button:
 	var b := Button.new()
 	b.text = text
 	b.add_theme_font_override("font", FONT_BOLD)
@@ -87,7 +93,29 @@ static func button(text: String, cb: Callable, size: int = FS_BUTTON, min_w: int
 	b.add_theme_color_override("font_disabled_color", Color(0.5, 0.42, 0.36))
 	b.custom_minimum_size = Vector2(min_w, BTN_H)
 	b.pressed.connect(func() -> void: Sfx.play("cham", -6.0))
-	b.pressed.connect(cb)
+	return b
+
+
+## Nút trong danh sách cuộn: để sự kiện chạm đi tiếp lên ScrollContainer (vuốt bắt đầu trên nút vẫn cuộn được —
+## báo cáo M2), chữ dài thì xuống dòng thay vì bị cắt, và bỏ qua lần "bấm" nếu ngón tay đã vuốt quá 12 điểm ảnh.
+static func list_button(text: String, cb: Callable, size: int = FS_BUTTON) -> Button:
+	var b := _styled_button(text, size, 44)
+	b.mouse_filter = Control.MOUSE_FILTER_PASS
+	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	b.set_meta("tu", Vector2.ZERO)
+	b.set_meta("da_vuot", false)
+	b.gui_input.connect(func(ev: InputEvent) -> void:
+		if ev is InputEventMouseButton and ev.button_index == MOUSE_BUTTON_LEFT and ev.pressed:
+			b.set_meta("tu", ev.global_position)
+			b.set_meta("da_vuot", false)
+		elif ev is InputEventMouseMotion and (ev.button_mask & MOUSE_BUTTON_MASK_LEFT):
+			if ev.global_position.distance_to(b.get_meta("tu")) > 12.0:
+				b.set_meta("da_vuot", true))
+	b.pressed.connect(func() -> void:
+		if not b.get_meta("da_vuot"):
+			cb.call())
 	return b
 
 

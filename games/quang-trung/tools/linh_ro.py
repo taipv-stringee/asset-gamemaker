@@ -164,28 +164,33 @@ def quan_su(team, f):
 
 
 def trong_tran(team, f):
-    """Trống trận: áo vàng đất, trống to đeo trước ngực (mặt da sáng, thân đỏ, đinh vàng), hai dùi giơ thay phiên."""
+    """Trống trận: áo trắng ngà (khác quân Lê áo vàng đất), trống gỗ nâu đeo thấp bên hông phải (mặt da sáng, đai đỏ),
+    hai dùi dài có quả đỏ giơ thay phiên, cờ đuôi nheo màu phe sau lưng. (Bản trước: trống đỏ che kín áo, lẫn vào thân — báo cáo M2 lần 3.)"""
     img = v2.canvas()
     p = Pen(img, team)
-    body3(p, f, "coat_ochre")
+    p.vline(9, 2, 20, "wood_dark")                   # cờ hiệu sau lưng
+    for i in range(5):
+        p.hline(10, 15 - i + f, 2 + i, "team" if i % 2 == 0 else "team_light")
+    body3(p, f, "coat_white")
     v2.head2(p, f)
     khan(p, f)
     y = f
-    # dùi trống: frame 0 dùi phải giơ cao, frame 1 dùi trái
-    up, down = ((26, 2), (24, 14)) if f == 0 else ((24, 14), (26, 2))
-    p.line(19, 13 + y, up[0], up[1] + y, "wood_light")
-    p.line(19, 14 + y, up[0], up[1] + y + 1, "wood_dark")
-    p.ellipse(up[0], up[1] + y, 1, 1, "team")
-    p.line(19, 15 + y, down[0], down[1] + y, "wood_dark")
-    # trống: thân đỏ nhìn chếch, mặt da bên phải
-    p.ellipse(18, 21, 6, 6, "tassel_dark")
-    p.ellipse(18, 21, 5, 5, "tassel")
-    for dx, dy in ((-4, -3), (-4, 3), (0, -5), (0, 5)):
-        p.px(18 + dx, 21 + dy, "gold")
-    p.ellipse(22, 21, 3, 5, "white_dark")
-    p.ellipse(22, 21, 2, 4, "white")
-    p.px(22, 21, "skin_dark")
-    p.hline(12, 24, 15, "wood_dark")                 # dây đeo
+    # trống gỗ: thân nâu, đai đỏ, mặt da trắng quay sang phải; đeo thấp để lộ áo
+    p.ellipse(22, 22, 6, 6, "wood_dark")
+    p.ellipse(22, 22, 5, 5, "wood")
+    p.ellipse(20, 20, 2, 2, "wood_light")
+    p.vline(18, 17, 27, "tassel")                    # đai đỏ
+    p.vline(24, 17, 27, "tassel")
+    p.ellipse(26, 22, 3, 6, "white_dark")
+    p.ellipse(26, 22, 2, 5, "white")
+    p.px(26, 22, "skin_dark")
+    p.line(14, 14 + y, 20, 17, "wood_dark")          # dây đeo
+    # dùi: frame 0 dùi phải giơ cao, dùi trái gõ mặt trống; frame 1 ngược lại
+    up, down = ((29, 3), (27, 17)) if f == 0 else ((27, 17), (29, 3))
+    for (tx, ty), hand in ((up, 20), (down, 19)):
+        p.line(hand, 14 + y, tx, ty, "wood_light")
+        p.ellipse(tx, ty, 1, 1, "tassel")
+    v2.arm(p, y, 20, 14)
     return finish(img)
 
 

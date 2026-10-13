@@ -195,6 +195,125 @@
      "url": "https://vietstamp.net/vn/chuyen-de/tem-tri-thuc/1000-nam-thang-longha-noi/quang-trung-dai-pha-quan-thanh-giai-phong-thang-long-12-nam-tay-son-o-thang-long-1789-1802/"
     }
    ]
+  },
+  {
+   "id": "an_tet_som",
+   "nhom": "Sự kiện",
+   "tieu_de": "Ăn Tết sớm, hẹn mùng 7",
+   "nhan": "Theo HLNTC",
+   "noi_dung": "Ở Tam Điệp, Quang Trung cho quân ăn Tết trước và hẹn mùng 7 tháng Giêng sẽ vào Thăng Long mở tiệc. Theo Hoàng Lê nhất thống chí, ngày 30 tháng Chạp nhà vua khao quân và chia quân làm năm đạo; đêm ấy quân lên đường.\n\nThực tế quân Tây Sơn vào Thăng Long trưa hoặc chiều mùng 5 Tết (30/01/1789), sớm hơn lời hẹn hai ngày. Ngày chính xác của bữa ăn Tết sớm (29 hay 30 tháng Chạp) không có nguồn xác định. Lời hẹn chủ yếu biết qua Hoàng Lê nhất thống chí; câu nói trong game là lời của game.",
+   "nguon": [
+    {
+     "ten": "Trích Hoàng Lê nhất thống chí hồi 14 (hoc24)",
+     "url": "https://hoc24.vn/cau-hoi/cho-doan-trich-sau-vua-quang-trung-ben-sai-mo-tiec-khao-quan-chia-quan-si-ra-lam-nam-dao-hom-do-la-ngay-30-thang-chap-roi-nha-vua-bao-kin-voi-cac.1599423074111"
+    },
+    {
+     "ten": "HistoryNet – The First Tet Offensive of 1789",
+     "url": "https://historynet.com/the-first-tet-offensive-of-1789/"
+    }
+   ]
+  },
+  {
+   "id": "dao_chu_luc",
+   "nhom": "Sự kiện",
+   "tieu_de": "Đạo chủ lực của Quang Trung",
+   "nhan": "Sử liệu",
+   "noi_dung": "Đạo chủ lực do Quang Trung trực tiếp chỉ huy, đi theo đường thiên lý: vượt sông Gián diệt đồn Gián Khẩu (đêm 30), truy kích qua Thanh Quyết, Nhật Tảo, Phú Xuyên, vây Hà Hồi (đêm mùng 3), rồi mờ sáng mùng 5 đánh Ngọc Hồi và tiến vào Thăng Long.\n\nĐây là đường đi của các màn 4, 5, 6, 8 và 9 trong game. Sơ đồ năm đạo theo sách giáo khoa hiện nay; Hoàng Lê nhất thống chí chia khác (xem mục \"Cách chia quân trong Hoàng Lê nhất thống chí\").",
+   "nguon": [
+    {
+     "ten": "Người Kể Sử – Trận Ngọc Hồi – Đống Đa năm 1789",
+     "url": "https://nguoikesu.com/tu-lieu/quan-su/tran-ngoc-hoi-dong-da-nam-1789"
+    },
+    {
+     "ten": "Kỷ niệm 231 năm chiến thắng Ngọc Hồi – Đống Đa (Tỉnh ủy Gia Lai)",
+     "url": "https://gialai.dcs.vn/hoat-dong-tuyen-truyen/-/view-content/67680/k-niem-231-nam-chien-thang-ngoc-hoi-dong-da-1789-2020-quang-trung-dai-pha-quan-thanh"
+    }
+   ]
+  },
+  {
+   "id": "dao_do_doc_long",
+   "nhom": "Sự kiện",
+   "tieu_de": "Đạo Đô đốc Long",
+   "nhan": "Sử liệu",
+   "noi_dung": "Một đạo thọc sâu qua vùng Chương Mỹ, đánh đồn Khương Thượng nơi quân Điền Châu của Sầm Nghi Đống đóng, rồi vu hồi vào Thăng Long. Sầm Nghi Đống thắt cổ khi đồn bị vây.\n\nNgười chỉ huy đạo này được sách giáo khoa gọi là Đô đốc Long; Hoàng Lê nhất thống chí gọi là Đô đốc Mưu; GS Phan Huy Lê đồng nhất ông với Đặng Tiến Đông. Danh tính còn tranh cãi; game dùng tên \"Đô đốc Long\" và trình bày đủ các thuyết ở màn 7.",
+   "nguon": [
+    {
+     "ten": "Báo Đà Nẵng – Đô đốc Long và mùa xuân Thăng Long xưa",
+     "url": "https://www.baodanang.vn/channel/5433/201003/chuyen-xua-xu-quang-do-doc-long-va-mua-xuan-thang-long-xua-1995422/"
+    },
+    {
+     "ten": "nghiencuulichsu.com – Ai là Đô đốc Long?",
+     "url": "https://nghiencuulichsu.com/2015/02/25/ai-la-do-doc-long/"
+    }
+   ]
+  },
+  {
+   "id": "dao_do_doc_bao",
+   "nhom": "Sự kiện",
+   "tieu_de": "Đạo Đô đốc Bảo",
+   "nhan": "Sử liệu",
+   "noi_dung": "Đạo của Đô đốc Bảo, có tượng binh, đi bên trái đạo chủ lực, qua vùng Ứng Hòa ra Đại Áng (Thanh Trì) để đánh vào mặt tả đồn Ngọc Hồi, rồi chặn và tiêu diệt tàn quân Thanh chạy về Đầm Mực.\n\nViệc gán Đô đốc Bảo với Đặng Xuân Bảo là của nghiên cứu hiện đại.",
+   "nguon": [
+    {
+     "ten": "Báo Đà Nẵng – Đô đốc Long và mùa xuân Thăng Long xưa",
+     "url": "https://www.baodanang.vn/channel/5433/201003/chuyen-xua-xu-quang-do-doc-long-va-mua-xuan-thang-long-xua-1995422/"
+    },
+    {
+     "ten": "Kỷ niệm 231 năm chiến thắng Ngọc Hồi – Đống Đa (Tỉnh ủy Gia Lai)",
+     "url": "https://gialai.dcs.vn/hoat-dong-tuyen-truyen/-/view-content/67680/k-niem-231-nam-chien-thang-ngoc-hoi-dong-da-1789-2020-quang-trung-dai-pha-quan-thanh"
+    },
+    {
+     "ten": "Dân Việt – Trận Ngọc Hồi – Đầm Mực",
+     "url": "https://danviet.vn/tran-ngoc-hoi--dam-muc-nguyen-hue-dung-vu-khi-loi-hai-gi-khien-30-van-quan-thanh-tan-tac-d1379930.html"
+    }
+   ]
+  },
+  {
+   "id": "dao_do_doc_tuyet",
+   "nhom": "Sự kiện",
+   "tieu_de": "Đạo thủy Đô đốc Tuyết",
+   "nhan": "Sử liệu",
+   "noi_dung": "Thủy quân của Đô đốc Tuyết theo đường biển vào sông Lục Đầu, kinh lược mặt Hải Dương, chặn các ngả quân Thanh có thể đổ về, rồi hội với các cánh khác.\n\nTheo Hoàng Lê nhất thống chí, Đô đốc Tuyết cũng là người phi ngựa vào Phú Xuân báo tin quân Thanh sang; việc đồng nhất hai người là suy luận.",
+   "nguon": [
+    {
+     "ten": "Báo Đà Nẵng – Đô đốc Long và mùa xuân Thăng Long xưa",
+     "url": "https://www.baodanang.vn/channel/5433/201003/chuyen-xua-xu-quang-do-doc-long-va-mua-xuan-thang-long-xua-1995422/"
+    },
+    {
+     "ten": "Người Kể Sử – Trận Ngọc Hồi – Đống Đa năm 1789",
+     "url": "https://nguoikesu.com/tu-lieu/quan-su/tran-ngoc-hoi-dong-da-nam-1789"
+    }
+   ]
+  },
+  {
+   "id": "dao_do_doc_loc",
+   "nhom": "Sự kiện",
+   "tieu_de": "Đạo thủy Đại đô đốc Lộc",
+   "nhan": "Theo HLNTC",
+   "noi_dung": "Theo Hoàng Lê nhất thống chí, Đại đô đốc Lộc cùng thủy quân vào sông Lục Đầu rồi kéo lên Lạng Giang, Phượng Nhãn, Yên Thế (Bắc Giang ngày nay) để chặn đường rút của quân Thanh về nước.\n\nCác chi tiết về đạo này chủ yếu đến từ Hoàng Lê nhất thống chí, chưa đối chiếu nguyên văn. Đây là đạo quân của màn phụ \"Thủy quân\" trong game.",
+   "nguon": [
+    {
+     "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
+     "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
+    },
+    {
+     "ten": "Người Kể Sử – Trận Ngọc Hồi – Đống Đa năm 1789",
+     "url": "https://nguoikesu.com/tu-lieu/quan-su/tran-ngoc-hoi-dong-da-nam-1789"
+    }
+   ]
+  },
+  {
+   "id": "cach_chia_hlntc",
+   "nhom": "Tranh cãi",
+   "tieu_de": "Cách chia quân trong Hoàng Lê nhất thống chí",
+   "nhan": "Theo HLNTC",
+   "noi_dung": "Sơ đồ năm đạo trên sa bàn theo sách giáo khoa hiện nay. Hoàng Lê nhất thống chí hồi 14 lại chia theo tiền, hậu, tả, hữu, trung quân: Ngô Văn Sở và Phan Văn Lân cầm tiền quân làm tiên phong; Hám hổ hầu cầm hậu quân; Đại đô đốc Lộc và Đô đốc Tuyết cầm hữu quân cùng thủy quân vượt biển vào sông Lục Đầu; Đại đô đốc Bảo và Đô đốc Mưu cầm tả quân có tượng binh, kỵ binh — Mưu đánh thẳng tới Nhân Mục chỗ quân Điền Châu, Bảo ra Đại Áng tiếp ứng; Quang Trung đốc trung quân.\n\nHai cách chia không trùng nhau; game dùng sơ đồ sách giáo khoa cho sa bàn và giữ cả hai trong Sử liệu. Bản tóm tắt này chưa đối chiếu nguyên văn.",
+   "nguon": [
+    {
+     "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
+     "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
+    }
+   ]
   }
  ]
 }

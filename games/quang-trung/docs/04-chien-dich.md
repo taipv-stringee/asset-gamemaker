@@ -107,6 +107,9 @@ Mỗi điểm ghi ngày âm và dương lịch.
   Chạm từng đạo để đọc Sử liệu. Một mục Sử liệu riêng trình bày **cách chia của HLNTC** (tiền / hậu / tả / hữu / trung quân;
   Sở và Lân làm tiên phong; Bảo và Mưu cùng ở tả quân), vì hai sơ đồ không trùng nhau.
 - **Ghi chú tên**: HLNTC gọi người đánh Khương Thượng là Đô đốc Mưu; xem 05 §3.
+- **Đã dựng** (`data/missions/m03_tam_diep_tet.json`, loại màn `chuyen`): 3 cảnh hội thoại (hội quân và tha tội; ăn Tết sớm, hẹn mùng 7;
+  khao quân, chia quân), rồi màn hình **sa bàn** (`scripts/ui/sa_ban.gd`): sơ đồ cách điệu, chạm từng đạo để tô và đọc mục Sử liệu;
+  xem xong là qua màn, mở 7 mục Sử liệu (ăn Tết sớm, 5 đạo, cách chia của HLNTC).
 
 ## Màn 4 — Đêm 30 Tết: vượt sông Gián (màn bắt buộc)
 

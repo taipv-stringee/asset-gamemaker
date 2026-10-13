@@ -37,6 +37,7 @@ func setup(mission: Dictionary) -> Briefing:
 	col.add_child(row)
 	var mini := Control.new()
 	var rows: Array = mission.get("ban_do", [])
+	mini.visible = not rows.is_empty()  # màn chuyện không có bản đồ
 	var w: int = String(rows[0]).length() if not rows.is_empty() else 0
 	mini.custom_minimum_size = Vector2(w * MINI + 4, rows.size() * MINI + 4)
 	mini.draw.connect(_draw_mini.bind(mini))
@@ -63,7 +64,8 @@ func setup(mission: Dictionary) -> Briefing:
 		col.add_child(UiKit.wrap_label("Chỉ thấy quân địch trong %d ô quanh quân ta hoặc ở vùng sáng. Đánh một quân mà không hạ được, nó sẽ kêu: đầu lượt sau, quân quanh nó thức dậy." % int(mission.get("tam_nhin", 0)), UiKit.FS_BODY, UiKit.C_PAPER))
 	var bar := UiKit.bottom_bar(self)
 	bar.add_child(UiKit.button("Quay lại", func() -> void: back.emit(), UiKit.FS_BUTTON, 90))
-	bar.add_child(UiKit.button("Vào trận", func() -> void: start_pressed.emit(), UiKit.FS_BUTTON, 120))
+	var go := "Xem" if mission.get("loai", "") == "chuyen" else "Vào trận"
+	bar.add_child(UiKit.button(go, func() -> void: start_pressed.emit(), UiKit.FS_BUTTON, 120))
 	return self
 
 

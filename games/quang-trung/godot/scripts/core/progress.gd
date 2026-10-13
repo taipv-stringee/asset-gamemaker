@@ -65,6 +65,19 @@ static func record_win(state: BattleState) -> Array[String]:
 	return opened
 
 
+## Màn chuyện (màn 3): xem xong là qua màn; mở các mục Sử liệu của màn. Trả về id mục mới mở.
+static func record_story(mission: Dictionary) -> Array[String]:
+	var d := data()
+	d["xong"][mission["id"]] = {"muc_tieu_phu": [], "vong": 0}
+	var opened: Array[String] = []
+	for id in mission.get("su_lieu", []):
+		if not d["su_lieu"].has(id):
+			d["su_lieu"].append(id)
+			opened.append(id)
+	save()
+	return opened
+
+
 static func is_won(mission_id: String) -> bool:
 	return data()["xong"].has(mission_id)
 

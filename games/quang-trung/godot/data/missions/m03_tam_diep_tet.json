@@ -1,0 +1,309 @@
+{
+ "id": "m03_tam_diep_tet",
+ "so": 3,
+ "loai": "chuyen",
+ "ten": "Tam Điệp: ăn Tết sớm",
+ "ten_ngan": "Tam Điệp",
+ "ngay": "Khoảng 20–30 tháng Chạp năm Mậu Thân (15–25/01/1789, quy đổi)",
+ "dia_danh": "Phòng tuyến Tam Điệp – Biện Sơn",
+ "gioi_thieu": "Đại quân tới Tam Điệp khoảng ngày 20 tháng Chạp. Theo Hoàng Lê nhất thống chí, Quang Trung tha tội cho Ngô Văn Sở và Phan Văn Lân, cho quân ăn Tết trước, hẹn mùng 7 vào Thăng Long, rồi ngày 30 khao quân và chia làm năm đạo.",
+ "nhan_gioi_thieu": "Theo HLNTC",
+ "muc_tieu_chinh": "Màn chuyện, không có trận đánh. Xem hội thoại, rồi xem sa bàn năm đạo: chạm từng đạo để đọc Sử liệu.",
+ "hoi_thoai": "m03_tam_diep_tet",
+ "nhac": "chu_de",
+ "canh": [
+  "hoi_quan",
+  "an_tet",
+  "chia_quan"
+ ],
+ "sa_ban": {
+  "_ghi_chu": "Toạ độ trên khung 100 × 140 (bắc ở trên). Sơ đồ năm đạo theo sách giáo khoa hiện nay (04 §Màn 3); vị trí là sơ đồ, không phải bản đồ đo đạc.",
+  "dia_danh": [
+   {
+    "ten": "Thăng Long",
+    "o": [
+     50,
+     20
+    ],
+    "lon": true
+   },
+   {
+    "ten": "Tam Điệp",
+    "o": [
+     40,
+     128
+    ],
+    "lon": true
+   },
+   {
+    "ten": "sông Gián",
+    "o": [
+     43,
+     108
+    ]
+   },
+   {
+    "ten": "Hà Hồi",
+    "o": [
+     47,
+     62
+    ]
+   },
+   {
+    "ten": "Ngọc Hồi",
+    "o": [
+     48,
+     44
+    ]
+   },
+   {
+    "ten": "Khương Thượng",
+    "o": [
+     36,
+     29
+    ]
+   },
+   {
+    "ten": "Chương Mỹ",
+    "o": [
+     22,
+     60
+    ]
+   },
+   {
+    "ten": "Đại Áng",
+    "o": [
+     38,
+     52
+    ]
+   },
+   {
+    "ten": "Hải Dương",
+    "o": [
+     82,
+     54
+    ]
+   },
+   {
+    "ten": "Lạng Giang",
+    "o": [
+     80,
+     6
+    ]
+   },
+   {
+    "ten": "Lục Đầu",
+    "o": [
+     88,
+     34
+    ]
+   }
+  ],
+  "song": [
+   [
+    [
+     56,
+     0
+    ],
+    [
+     54,
+     20
+    ],
+    [
+     58,
+     40
+    ],
+    [
+     64,
+     70
+    ],
+    [
+     70,
+     100
+    ],
+    [
+     78,
+     138
+    ]
+   ],
+   [
+    [
+     88,
+     34
+    ],
+    [
+     94,
+     64
+    ],
+    [
+     100,
+     92
+    ]
+   ]
+  ],
+  "bien": [
+   [
+    100,
+    40
+   ],
+   [
+    100,
+    140
+   ],
+   [
+    84,
+    140
+   ]
+  ],
+  "dao": [
+   {
+    "id": "dao_chu_luc",
+    "ten": "Đạo chủ lực – Quang Trung",
+    "mau": "tayson",
+    "duong": [
+     [
+      40,
+      128
+     ],
+     [
+      43,
+      108
+     ],
+     [
+      47,
+      82
+     ],
+     [
+      47,
+      62
+     ],
+     [
+      48,
+      44
+     ],
+     [
+      50,
+      20
+     ]
+    ]
+   },
+   {
+    "id": "dao_do_doc_long",
+    "ten": "Đạo Đô đốc Long",
+    "mau": "vang",
+    "duong": [
+     [
+      38,
+      124
+     ],
+     [
+      24,
+      90
+     ],
+     [
+      22,
+      60
+     ],
+     [
+      28,
+      40
+     ],
+     [
+      36,
+      29
+     ]
+    ]
+   },
+   {
+    "id": "dao_do_doc_bao",
+    "ten": "Đạo Đô đốc Bảo",
+    "mau": "cam",
+    "duong": [
+     [
+      42,
+      122
+     ],
+     [
+      34,
+      90
+     ],
+     [
+      36,
+      66
+     ],
+     [
+      38,
+      52
+     ],
+     [
+      46,
+      45
+     ]
+    ]
+   },
+   {
+    "id": "dao_do_doc_tuyet",
+    "ten": "Đạo thủy Đô đốc Tuyết",
+    "mau": "xanh",
+    "duong": [
+     [
+      46,
+      136
+     ],
+     [
+      84,
+      128
+     ],
+     [
+      96,
+      96
+     ],
+     [
+      92,
+      66
+     ],
+     [
+      82,
+      54
+     ]
+    ]
+   },
+   {
+    "id": "dao_do_doc_loc",
+    "ten": "Đạo thủy Đô đốc Lộc",
+    "mau": "xanh_dam",
+    "duong": [
+     [
+      48,
+      138
+     ],
+     [
+      88,
+      132
+     ],
+     [
+      98,
+      84
+     ],
+     [
+      88,
+      34
+     ],
+     [
+      80,
+      6
+     ]
+    ]
+   }
+  ]
+ },
+ "su_lieu": [
+  "an_tet_som",
+  "dao_chu_luc",
+  "dao_do_doc_long",
+  "dao_do_doc_bao",
+  "dao_do_doc_tuyet",
+  "dao_do_doc_loc",
+  "cach_chia_hlntc"
+ ]
+}

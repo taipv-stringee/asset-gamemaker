@@ -1,0 +1,69 @@
+{
+ "_ghi_chu": "Sự việc theo HLNTC (tha tội Sở, Lân; ăn Tết sớm; hẹn mùng 7; khao quân, chia năm đạo ngày 30). Câu chữ là của game.",
+ "hoi_quan": [
+  {
+   "ai": "",
+   "loi": "Khoảng ngày 20 tháng Chạp, đại quân tới Tam Điệp.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "",
+   "loi": "Ngô Văn Sở và Phan Văn Lân ra đón, mang gươm trên lưng xin chịu tội.",
+   "nhan": "Theo HLNTC"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Lui về giữ quân là phải. Còn đánh liều mà thua thì đáng tội.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Lần này ta tha. Ra trận lập công mà chuộc.",
+   "nhan": "Theo HLNTC",
+   "ghi_chu": "Việc tha tội: Theo HLNTC. Câu chữ của game."
+  },
+  {
+   "ai": "phan_van_lan",
+   "ten": "Phan Văn Lân",
+   "loi": "Xin cho tôi đi tiên phong.",
+   "nhan": "Sáng tạo của game",
+   "ghi_chu": "HLNTC: Sở và Lân cầm tiền quân."
+  }
+ ],
+ "an_tet": [
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Cho quân ăn Tết trước. Mùng 7 vào Thăng Long, ta sẽ mở tiệc lớn.",
+   "nhan": "Theo HLNTC",
+   "ghi_chu": "Hẹn mùng 7: Theo HLNTC. Câu chữ của game."
+  },
+  {
+   "ai": "ngo_thi_nham",
+   "ten": "Ngô Thì Nhậm",
+   "loi": "Quân Thanh đang ăn Tết ở Thăng Long. Ta đến lúc chúng không ngờ.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "ngo_van_so",
+   "ten": "Ngô Văn Sở",
+   "loi": "Mùng 7 thì gấp lắm. Nhưng quân đã sẵn lòng.",
+   "nhan": "Sáng tạo của game"
+  }
+ ],
+ "chia_quan": [
+  {
+   "ai": "",
+   "loi": "Ngày 30 tháng Chạp, khao quân, chia làm năm đạo.",
+   "nhan": "Theo HLNTC"
+  },
+  {
+   "ai": "quang_trung",
+   "ten": "Quang Trung",
+   "loi": "Đêm nay xuất quân. Mỗi đạo một đường, hẹn nhau ở Thăng Long.",
+   "nhan": "Sáng tạo của game"
+  }
+ ]
+}

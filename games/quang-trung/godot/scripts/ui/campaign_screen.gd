@@ -20,7 +20,7 @@ func _init() -> void:
 		if id != "" and Progress.is_won(id):
 			var n := Progress.stars(id)
 			var total := (Missions.load_mission(id).get("muc_tieu_phu", []) as Array).size()
-			text += "\n" + "★".repeat(n) + "☆".repeat(maxi(total - n, 0))
+			text += ("\n" + "★".repeat(n) + "☆".repeat(maxi(total - n, 0))) if total > 0 else "\nĐã xem"
 		elif id != "" and not open:
 			text += "\nThắng màn trước để mở"
 		var b := UiKit.list_button(text, func() -> void: mission_chosen.emit(id))

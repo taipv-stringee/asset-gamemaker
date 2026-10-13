@@ -24,7 +24,7 @@ tắt; không ảnh hưởng gì).
 
 ## 2. Chơi thử trên điện thoại
 
-### 2.1. M3 — màn 0 và màn 1 (mới)
+### 2.1. M3 — màn 0, 1, 2, 3 (mới)
 
 Xóa dữ liệu app (hoặc `--moi`) để thấy thứ tự mở màn và gợi ý hướng dẫn từ đầu.
 
@@ -38,6 +38,9 @@ Xóa dữ liệu app (hoặc `--moi`) để thấy thứ tự mở màn và gợ
 | 6 | Màn 1 mở sau màn 0 | Hội thoại lên ngôi ở núi Bân; quân phe Diễn tập màu đỏ sẫm; quân về 0 máu thì biến mất, không để quân tan |
 | 7 | Màn 1: mua lính, lên cấp | Bảng mua lính có lính giáo, hỏa mai; gợi ý Uy danh (vòng 2), lên cấp (khi có quân lên cấp) |
 | 8 | Màn 1: thắng | Quang Trung vào đồn bắc và Chiếm; mục tiêu phụ: một quân lên cấp, thắng trước vòng 10 |
+| 9 | Màn 2 (Nghệ An) | Chiếm làng → "Tuyển quân!" và một lính giáo mới cạnh làng. Đưa một quân tới làng ở đồi phía tây → hội thoại với Nguyễn Thiếp (chân dung râu tóc bạc) giữa trận. Đủ 6 làng → hội thoại duyệt binh, doanh voi Diễn tập xuất hiện ở bãi phía bắc. Quân sư đứng kề hình nộm (cờ rách) → Chiêu hàng |
+| 10 | Màn 2: thắng | Đủ 6 làng và hạ hết doanh voi trước vòng 20; mục tiêu phụ: mời Nguyễn Thiếp, chiêu hàng 2 hình nộm |
+| 11 | Màn 3 (màn chuyện) | Giới thiệu màn có nút "Xem"; 3 cảnh hội thoại (Sở, Lân xin tội; ăn Tết sớm; chia quân); sa bàn năm đạo: chạm từng đạo → đạo đó đậm lên, hiện chữ bên dưới; Xong → "Xong màn chuyện", 7 Sử liệu mới; Chiến dịch ghi "Đã xem", Màn 4 mở |
 
 ### 2.2. M2 — lát cắt dọc màn 4
 

@@ -98,7 +98,49 @@ func _show_briefing(id: String) -> void:
 	_set_screen(b)
 
 
+## Màn chuyện (loai "chuyen", màn 3): chuỗi cảnh hội thoại trên nền sơn mài, rồi sa bàn; xong là qua màn.
+func _start_story_only(m: Dictionary) -> void:
+	_close_battle()
+	var stage := UiKit.backdrop()
+	var title := UiKit.wrap_label(m.get("ten", ""), UiKit.FS_TITLE, UiKit.C_GOLD_LIGHT, true)
+	title.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	title.offset_left = 20
+	title.offset_right = -20
+	title.offset_top = 130
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	stage.add_child(title)
+	var sub := UiKit.wrap_label(m.get("ngay", ""), UiKit.FS_SMALL, UiKit.C_MUTED)
+	sub.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	sub.offset_left = 20
+	sub.offset_right = -20
+	sub.offset_top = 170
+	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	stage.add_child(sub)
+	_set_screen(stage)
+	for part in m.get("canh", []):
+		await _dialogue(Story.dialogue(m.get("hoi_thoai", ""), part))
+	var sb := SaBan.new().setup(m)
+	_set_screen(sb)
+	await sb.done
+	var opened := Progress.record_story(m)
+	var names: PackedStringArray = []
+	for id in opened:
+		names.append("• " + Story.codex_entry(id).get("tieu_de", id))
+	var end := UiKit.backdrop()
+	var col := UiKit.scroll_column(end, 40, 64)
+	col.add_child(UiKit.label("Xong màn chuyện", UiKit.FS_TITLE, UiKit.C_GOLD_LIGHT, true))
+	if not names.is_empty():
+		col.add_child(UiKit.label("Sử liệu mới", UiKit.FS_HEAD, UiKit.C_GOLD, true))
+		col.add_child(UiKit.wrap_label("\n".join(names), UiKit.FS_BODY, UiKit.C_PAPER))
+	UiKit.bottom_bar(end).add_child(UiKit.button("Tiếp", _show_campaign, UiKit.FS_BUTTON, 120))
+	_set_screen(end)
+
+
 func _start_story_battle(id: String) -> void:
+	var sm := Missions.load_mission(id)
+	if sm.get("loai", "") == "chuyen":
+		_start_story_only(sm)
+		return
 	_mission = id
 	_story = true
 	Progress.clear_battle()
@@ -173,9 +215,10 @@ func _story_part(part: String) -> void:
 
 
 func _dialogue(lines: Array) -> void:
-	if lines.is_empty() or battle == null:
+	if lines.is_empty():
 		return
-	battle.input_locked = true
+	if battle != null:
+		battle.input_locked = true
 	var box := DialogueBox.new()
 	ui_layer.add_child(box)
 	await box.play(lines)

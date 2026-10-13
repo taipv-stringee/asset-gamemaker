@@ -40,3 +40,5 @@ Kịch bản: <tên file → đạt / không đạt, kèm dòng KIỂM sai>
 Chơi thử: <bước nào không như mong đợi, kèm ảnh chụp nếu có>
 Cảm nhận: <...>
 ```
+
+Các báo cáo đã làm lưu trong [bao-cao-kiem-thu/](bao-cao-kiem-thu/) (mỗi lần một file `YYYY-MM-DD-<mốc>.md`).

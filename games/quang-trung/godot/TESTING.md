@@ -12,6 +12,8 @@ Dành cho **agent kiểm thử chạy trên máy chủ dự án** và cho chủ 
      chơi trọn màn 4 qua giao diện chạm, kiểm tra lưu, sao, Sử liệu. (`--moi` xóa tiến trình trên máy trước khi chạy.)
    - So các dòng `KIỂM` với bảng mong đợi; mở ảnh chụp (dòng `Đã chụp:`) và mô tả bất thường: chữ bị cắt, nút chồng nhau,
      quân hiển thị sai chỗ, quân địch hiện ra trong sương.
+   - Trên macOS, nếu cửa sổ game bị cửa sổ khác che kín thì Godot ngừng vẽ và ảnh chụp đứng hình (trông như chạm
+     không ăn): thêm `--always-on-top` trước `--`, ví dụ `GODOT --path . --always-on-top -- --kich-ban=...`.
 3. Máy tự chơi có hình: `GODOT --path . -- --tu-dong --vong=10 --anh=<file>` → không treo, không lỗi `SCRIPT ERROR` trong log.
 4. Mô phỏng nhanh (không hình): `GODOT --headless --path . -s res://tools/mo_phong.gd -- --man=m_thu --lan=10`
    → in kết quả từng trận. Dùng để phát hiện kẹt / lỗi, **không** dùng để kết luận cân bằng (AI phe ta đơn giản hơn người chơi).

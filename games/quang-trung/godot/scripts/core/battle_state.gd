@@ -24,6 +24,10 @@ var tam_nhin: int = 0                  # 0 = ban ngày, không sương mù
 var rng_seed: int = 0
 var strike_counter: int = 0            # số đòn trong vòng, để lấy số ngẫu nhiên
 var result: String = ""                # "", "thang", "thua"
+var result_reason: String = ""
+var won_round: int = 0
+var zones: Dictionary = {}             # tên khu -> Array[Vector2i]
+var flags: Dictionary = {"bao_dong": 0, "mat_quan": {}, "tu_binh": 0, "hang_binh": 0}
 
 
 static func from_mission(m: Dictionary, p_seed: int = 0) -> BattleState:
@@ -74,7 +78,24 @@ static func from_mission(m: Dictionary, p_seed: int = 0) -> BattleState:
 			for p in q["vung"]:
 				zone.append(Vector2i(int(p[0]), int(p[1])))
 			params["vung"] = zone
+		if q.has("diem"):
+			var pts: Array[Vector2i] = []
+			for p in q["diem"]:
+				pts.append(Vector2i(int(p[0]), int(p[1])))
+			params["diem"] = pts
+			params["i"] = 0
 		u.ai_params = params
+	var khu: Dictionary = m.get("khu", {})
+	for name in khu:
+		var cells: Array[Vector2i] = []
+		for c in khu[name]:
+			cells.append(Vector2i(int(c[0]), int(c[1])))
+		s.zones[name] = cells
+	for o in m.get("vat_the", []):
+		var d: Dictionary = o.duplicate()
+		var at := Vector2i(int(o["o"][0]), int(o["o"][1]))
+		d.erase("o")
+		s.objects[at] = d
 	return s
 
 
@@ -116,6 +137,13 @@ func unit_by_uid(uid: int) -> Unit:
 
 func object_at(p: Vector2i) -> Dictionary:
 	return objects.get(p, {})
+
+
+func zone_of(p: Vector2i) -> String:
+	for name in zones:
+		if zones[name].has(p):
+			return name
+	return ""
 
 
 func current_faction() -> String:
@@ -190,6 +218,7 @@ func to_dict() -> Dictionary:
 		"mission": mission, "tiles": tiles, "owners": owner_list, "objects": object_list,
 		"units": unit_list, "next_uid": next_uid, "current": current, "vong": vong,
 		"gold": gold, "seed": rng_seed, "strike_counter": strike_counter, "result": result,
+		"result_reason": result_reason, "won_round": won_round, "flags": flags, "tam_nhin": tam_nhin,
 	}
 	return d.duplicate(true)  # bản sao sâu: trạng thái lưu không dùng chung dữ liệu với trận đang chạy
 
@@ -213,4 +242,8 @@ static func from_dict(src: Dictionary) -> BattleState:
 	s.gold = d["gold"]
 	s.strike_counter = int(d["strike_counter"])
 	s.result = d["result"]
+	s.result_reason = d.get("result_reason", "")
+	s.won_round = int(d.get("won_round", 0))
+	s.flags = d.get("flags", s.flags)
+	s.tam_nhin = int(d.get("tam_nhin", s.tam_nhin))
 	return s

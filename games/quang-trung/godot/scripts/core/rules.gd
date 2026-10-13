@@ -39,6 +39,68 @@ static func is_night(state: BattleState) -> bool:
 	return state.tam_nhin > 0 and state.tam_nhin <= 3
 
 
+# ================================================================ đêm, tầm nhìn (02 §10)
+
+const LIGHT_OBJECTS: Array[String] = ["den", "duoc_don", "lua"]
+
+
+static func is_dark(state: BattleState) -> bool:
+	return state.tam_nhin > 0
+
+
+static func light_sources(state: BattleState) -> Array[Vector2i]:
+	var out: Array[Vector2i] = []
+	for p in state.objects:
+		if LIGHT_OBJECTS.has(state.objects[p].get("loai", "")):
+			out.append(p)
+	for u in state.units:
+		if u.duoc:
+			out.append(u.pos)
+	return out
+
+
+## Ô sáng: nguồn sáng và 4 ô kề — luôn được thấy, cả hai phe.
+static func lit_tiles(state: BattleState) -> Dictionary:
+	var lit := {}
+	for p in light_sources(state):
+		lit[p] = true
+		for d in DIRS:
+			lit[p + d] = true
+	return lit
+
+
+## Các ô phe f thấy được. Ban ngày: trả về {} và dùng can_see() (luôn đúng).
+static func visible_tiles(state: BattleState, f: String) -> Dictionary:
+	if not is_dark(state):
+		return {}
+	var vis := lit_tiles(state)
+	for u in state.units:
+		if not state.are_allies(u.faction, f) or u.ngu:
+			continue
+		var r := state.tam_nhin + (1 if u.duoc else 0)
+		for dy in range(-r, r + 1):
+			for dx in range(-r, r + 1):
+				if absi(dx) + absi(dy) <= r:
+					vis[u.pos + Vector2i(dx, dy)] = true
+	return vis
+
+
+static func can_see(state: BattleState, f: String, p: Vector2i, vis: Dictionary = {}) -> bool:
+	if not is_dark(state):
+		return true
+	if vis.is_empty():
+		vis = visible_tiles(state, f)
+	return vis.has(p)
+
+
+## Quân địch thức có thấy quân `target` không (để báo động).
+static func watcher_sees(state: BattleState, watcher: Unit, target: Unit, lit: Dictionary) -> bool:
+	if watcher.ngu:
+		return false
+	var d := manhattan(watcher.pos, target.pos)
+	return d <= maxi(state.tam_nhin, 2) or (lit.has(target.pos) and d <= 5)
+
+
 # ================================================================ di chuyển
 
 static func move_cost(state: BattleState, u: Unit, p: Vector2i) -> int:
@@ -244,10 +306,11 @@ static func targets_from(state: BattleState, u: Unit, from: Vector2i, will_have_
 	var out: Array[Unit] = []
 	if u.has_tag("ban_dung") and will_have_moved:
 		return out
+	var vis := visible_tiles(state, u.faction)
 	for e in state.units:
 		if state.are_allies(e.faction, u.faction):
 			continue
-		if in_range(u, from, e.pos):
+		if in_range(u, from, e.pos) and can_see(state, u.faction, e.pos, vis):
 			out.append(e)
 	return out
 
@@ -381,13 +444,17 @@ static func _defeat(state: BattleState, u: Unit) -> Array[Dictionary]:
 	var ev: Array[Dictionary] = []
 	ev.append({"loai": "ha", "uid": u.uid, "o": u.pos, "loai_quan": u.type_id, "phe": u.faction})
 	state.remove_unit(u)
+	if u.faction == state.factions[0]:
+		var lost: Dictionary = state.flags["mat_quan"]
+		lost[u.type_id] = int(lost.get(u.type_id, 0)) + 1
 	var leaves_trace: bool = (u.faction == "thanh" or u.faction == "le") and not u.has_tag("tuong")
 	if leaves_trace and not NO_QUAN_TAN.has(state.terrain_id(u.pos)):
 		state.objects[u.pos] = {"loai": "quan_tan", "vong": state.vong}
 		ev.append({"loai": "quan_tan", "o": u.pos})
 	if u.tuong_chinh and u.faction == state.factions[0]:
 		state.result = "thua"
-		ev.append({"loai": "ket_qua", "ket_qua": "thua", "ly_do": "Tướng chính bị hạ"})
+		state.result_reason = "%s bị hạ" % u.display_name()
+		ev.append({"loai": "ket_qua", "ket_qua": "thua", "ly_do": state.result_reason})
 	return ev
 
 
@@ -478,6 +545,7 @@ static func cmd_chieu_hang(state: BattleState, u: Unit, p: Vector2i) -> Array[Di
 	hb.done = true
 	u.moved = true
 	u.done = true
+	state.flags["hang_binh"] = int(state.flags.get("hang_binh", 0)) + 1
 	ev.append({"loai": "chieu_hang", "uid": u.uid, "o": p, "uid_moi": hb.uid})
 	return ev
 
@@ -500,7 +568,8 @@ static func cmd_end_turn(state: BattleState) -> Array[Dictionary]:
 		var limit := int(state.mission.get("thua_het_luot", 0))
 		if limit > 0 and state.vong >= limit:
 			state.result = "thua"
-			ev.append({"loai": "ket_qua", "ket_qua": "thua", "ly_do": "Hết lượt"})
+			state.result_reason = state.mission.get("ly_do_het_luot", "Hết lượt")
+			ev.append({"loai": "ket_qua", "ket_qua": "thua", "ly_do": state.result_reason})
 			return ev
 		state.vong += 1
 		state.strike_counter = 0
@@ -534,14 +603,9 @@ static func start_turn(state: BattleState) -> Array[Dictionary]:
 		u.straight_steps = 0
 		u.move_origin = u.pos
 		u.than_trong = false
-	# Báo động đơn giản (M1): quân đang "kêu" đánh thức quân cùng phe trong 5 ô.
-	for u in state.units_of(f):
-		if u.keu:
-			u.keu = false
-			for o in state.units_of(f):
-				if o.ngu and manhattan(o.pos, u.pos) <= 5:
-					o.ngu = false
-			ev.append({"loai": "bao_dong", "uid": u.uid})
+	ev.append_array(_dawn(state))
+	if f != state.factions[0]:
+		ev.append_array(_alarm(state, f))
 	# Quân tan hết hạn đầu lượt Tây Sơn của vòng N + 2 (02 §8).
 	if state.current == 0:
 		for p in state.objects.keys():
@@ -550,6 +614,98 @@ static func start_turn(state: BattleState) -> Array[Dictionary]:
 				state.objects.erase(p)
 				ev.append({"loai": "quan_tan_het", "o": p})
 	return ev
+
+
+## Báo động đầu lượt phe f (02 §10): quân "kêu" hoặc quân thức đang thấy quân đối phương.
+static func _alarm(state: BattleState, f: String) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	if not is_dark(state):
+		for u in state.units_of(f):
+			u.keu = false
+		return ev
+	var lit := lit_tiles(state)
+	var triggers: Array[Unit] = []
+	for u in state.units_of(f):
+		var spotted := false
+		if not u.ngu:
+			for e in state.enemies_of(f):
+				if watcher_sees(state, u, e, lit):
+					spotted = true
+					break
+		if u.keu or spotted:
+			triggers.append(u)
+		u.keu = false
+	for t in triggers:
+		var woken: Array[Unit] = []
+		for o in state.units_of(f):
+			if manhattan(o.pos, t.pos) <= 5:
+				woken.append(o)
+		for p in state.objects:
+			if state.objects[p].get("loai", "") == "trong" and manhattan(p, t.pos) <= 1:
+				var khu: String = state.objects[p].get("khu", "")
+				for o in state.units_of(f):
+					if (khu != "" and state.zone_of(o.pos) == khu) or manhattan(o.pos, p) <= 6:
+						woken.append(o)
+				ev.append({"loai": "trong_bao_dong", "o": p})
+		for o in woken:
+			o.ngu = false
+			if o.ai_mode == "ngu" or o.ai_mode == "tuan_tra":
+				o.ai_mode = "giu_don"
+				o.ai_params["tam"] = _nearest_fort(state, o.pos)
+				o.ai_params["ban_kinh"] = 4
+		state.flags["bao_dong"] = int(state.flags.get("bao_dong", 0)) + 1
+		ev.append({"loai": "bao_dong", "uid": t.uid, "o": t.pos})
+	return ev
+
+
+static func _nearest_fort(state: BattleState, from: Vector2i) -> Vector2i:
+	var best := from
+	var best_d := INF
+	for p in state.owners:
+		if state.terrain_at(p)["mua_linh"] and manhattan(p, from) < best_d:
+			best_d = manhattan(p, from)
+			best = p
+	return best
+
+
+## Rạng sáng (02 §10): mission["rang_sang"] = R → vòng R tầm nhìn 3, R+1 tầm nhìn 5, từ R+2 hết sương mù.
+static func _dawn(state: BattleState) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	var r := int(state.mission.get("rang_sang", 0))
+	if r <= 0 or state.current != 0:
+		return ev
+	var before := state.tam_nhin
+	if state.vong == r:
+		state.tam_nhin = 3
+		for u in state.units:
+			u.ngu = false
+	elif state.vong == r + 1:
+		state.tam_nhin = 5
+	elif state.vong >= r + 2:
+		state.tam_nhin = 0
+	if state.tam_nhin != before:
+		ev.append({"loai": "rang_sang", "tam_nhin": state.tam_nhin})
+	return ev
+
+
+## Mục tiêu phụ (02 §13): [{"ten": ..., "dat": bool}]. Chỉ có nghĩa khi đã thắng.
+static func side_objectives(state: BattleState) -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	for o in state.mission.get("muc_tieu_phu", []):
+		var ok := false
+		match o.get("loai", ""):
+			"truoc_luot":
+				ok = state.result == "thang" and state.won_round <= int(o["n"]) - 1
+			"khong_bao_dong":
+				ok = state.result == "thang" and int(state.flags.get("bao_dong", 0)) == 0
+			"khong_mat":
+				ok = state.result == "thang" and int(state.flags["mat_quan"].get(o.get("quan", ""), 0)) == 0
+			"khong_mat_quan_nao":
+				ok = state.result == "thang" and state.flags["mat_quan"].is_empty()
+			"hang_binh_toi_thieu":
+				ok = state.result == "thang" and int(state.flags.get("hang_binh", 0)) >= int(o["n"])
+		out.append({"ten": o.get("ten", ""), "dat": ok})
+	return out
 
 
 static func check_result(state: BattleState) -> Array[Dictionary]:
@@ -567,5 +723,6 @@ static func check_result(state: BattleState) -> Array[Dictionary]:
 			ok = state.enemies_of(player).is_empty()
 	if ok:
 		state.result = "thang"
+		state.won_round = state.vong
 		ev.append({"loai": "ket_qua", "ket_qua": "thang"})
 	return ev

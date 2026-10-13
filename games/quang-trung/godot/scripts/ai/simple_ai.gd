@@ -99,6 +99,14 @@ static func _plan_recruit(state: BattleState, f: String) -> Dictionary:
 
 static func _goals(state: BattleState, u: Unit) -> Array[Vector2i]:
 	var goals: Array[Vector2i] = []
+	if u.ai_mode == "tuan_tra" and u.ai_params.has("diem"):
+		var pts: Array = u.ai_params["diem"]
+		var i := int(u.ai_params.get("i", 0)) % pts.size()
+		if u.pos == pts[i]:
+			i = (i + 1) % pts.size()
+			u.ai_params["i"] = i
+		goals.append(pts[i])
+		return goals
 	if u.ai_mode == "rut_lui" or u.ai_mode == "chay":
 		if u.ai_params.has("vung"):
 			for p in u.ai_params["vung"]:
@@ -124,8 +132,11 @@ static func _goals(state: BattleState, u: Unit) -> Array[Vector2i]:
 				goals.append(o.pos)
 		if not goals.is_empty():
 			return goals
+	# Ban đêm máy chỉ biết quân đối phương mà phe mình đang thấy (02 §14).
+	var vis := Rules.visible_tiles(state, u.faction)
 	for e in state.enemies_of(u.faction):
-		goals.append(e.pos)
+		if Rules.can_see(state, u.faction, e.pos, vis):
+			goals.append(e.pos)
 	for p in state.owners:
 		if not state.are_allies(state.owners[p], u.faction):
 			goals.append(p)
@@ -196,10 +207,10 @@ static func threat_map(state: BattleState, f: String) -> Dictionary:
 
 static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 	var plan := {"lenh": "ke_hoach", "uid": u.uid, "den": u.pos, "hanh_dong": "cho", "muc_tieu": -1}
-	if u.ai_mode == "dung_yen":
+	if u.ai_mode == "dung_yen" or u.ai_mode == "ngu":
 		return plan
 	var reach := Rules.reachable(state, u)
-	var fleeing := u.ai_mode == "rut_lui" or u.ai_mode == "chay"
+	var fleeing := u.ai_mode == "rut_lui" or u.ai_mode == "chay" or u.ai_mode == "tuan_tra"
 	var goals := _goals(state, u)
 	# Quân yếu (máu < 35) lui về làng / đồn của phe mình để hồi máu; chỉ đánh khi chắc hạ được.
 	var healing := false

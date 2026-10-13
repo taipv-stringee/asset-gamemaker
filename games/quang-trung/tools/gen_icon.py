@@ -11,11 +11,12 @@ Kết quả (godot/assets/icon/):
     icon_192.png           Android launcher cũ, và config/icon của project
     icon_fg_432.png        Android adaptive: lớp trước (trong suốt)
     icon_bg_432.png        Android adaptive: lớp nền
+    splash.png             màn khởi động (thay logo Godot): huy hiệu + chữ TÂY SƠN trên nền sơn mài sẫm
 """
 
 import os
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(os.path.dirname(HERE), "godot", "assets", "icon")
@@ -110,7 +111,29 @@ def main():
     scaled = fg_small.resize((256, 256), Image.NEAREST)
     fg.alpha_composite(scaled, (88, 88))
     fg.save(os.path.join(OUT, "icon_fg_432.png"))
+    splash()
     print("Đã tạo biểu tượng trong", OUT)
+
+
+SPLASH_BG = (41, 13, 13)   # = UiKit.C_LACQUER_DARK; trùng boot_splash/bg_color trong project.godot
+
+
+def splash():
+    """Màn khởi động 480x640: huy hiệu (phóng nguyên số x5) và chữ TÂY SƠN. Nền trùng màu bg_color để liền với phần màn còn lại."""
+    img = Image.new("RGB", (480, 640), SPLASH_BG)
+    em = Image.new("RGBA", (N, N), (0, 0, 0, 0))
+    emblem(em, 32, 32)
+    em = em.resize((N * 5, N * 5), Image.NEAREST)
+    img.paste(em, ((480 - N * 5) // 2, 90), em)
+    font_path = os.path.join(os.path.dirname(OUT), "fonts", "BeVietnamPro-Bold.ttf")
+    d = ImageDraw.Draw(img)
+    font = ImageFont.truetype(font_path, 64)
+    text = "TÂY SƠN"
+    w = d.textlength(text, font=font)
+    d.text(((480 - w) / 2 + 3, 433), text, font=font, fill=C["ink"])
+    d.text(((480 - w) / 2, 430), text, font=font, fill=C["g_l"])
+    d.rectangle((140, 530, 340, 532), fill=C["g_d"])
+    img.save(os.path.join(OUT, "splash.png"))
 
 
 if __name__ == "__main__":

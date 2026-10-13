@@ -26,50 +26,50 @@ func _clear() -> void:
 func _show_list() -> void:
 	_clear()
 	var col := UiKit.scroll_column(_body, 16, 60)
-	col.add_child(UiKit.label("Sử liệu", 18, UiKit.C_GOLD_LIGHT, true))
-	col.add_child(UiKit.wrap_label("Mỗi mục ghi rõ nguồn: Sử liệu, Theo Hoàng Lê nhất thống chí, Tương truyền, hay Sáng tạo của game.", 10, UiKit.C_MUTED))
+	col.add_child(UiKit.label("Sử liệu", UiKit.FS_TITLE, UiKit.C_GOLD_LIGHT, true))
+	col.add_child(UiKit.wrap_label("Mỗi mục ghi rõ nguồn: Sử liệu, Theo Hoàng Lê nhất thống chí, Tương truyền, hay Sáng tạo của game.", UiKit.FS_SMALL, UiKit.C_MUTED))
 	var entries := Story.codex()
 	var locked := 0
 	for g in GROUPS:
 		var in_group: Array = entries.filter(func(e: Dictionary) -> bool: return e["nhom"] == g)
 		if in_group.is_empty():
 			continue
-		col.add_child(UiKit.label(g, 12, UiKit.C_GOLD, true))
+		col.add_child(UiKit.label(g, UiKit.FS_HEAD, UiKit.C_GOLD, true))
 		for e in in_group:
 			if Progress.codex_unlocked(e["id"]):
-				var b := UiKit.button(e["tieu_de"], _show_entry.bind(e), 11)
+				var b := UiKit.button(e["tieu_de"], _show_entry.bind(e), UiKit.FS_BUTTON)
 				b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 				b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				col.add_child(b)
 			else:
 				locked += 1
-				var l := UiKit.label("  ???", 11, Color(0.5, 0.42, 0.36))
+				var l := UiKit.label("  ???", UiKit.FS_BODY, Color(0.5, 0.42, 0.36))
 				col.add_child(l)
 	if locked > 0:
-		col.add_child(UiKit.wrap_label("Còn %d mục chưa mở. Thắng các màn để mở thêm." % locked, 10, UiKit.C_MUTED))
-	UiKit.bottom_bar(_body).add_child(UiKit.button("Quay lại", func() -> void: back.emit(), 12, 100))
+		col.add_child(UiKit.wrap_label("Còn %d mục chưa mở. Thắng các màn để mở thêm." % locked, UiKit.FS_SMALL, UiKit.C_MUTED))
+	UiKit.bottom_bar(_body).add_child(UiKit.button("Quay lại", func() -> void: back.emit(), UiKit.FS_BUTTON, 100))
 
 
 func _show_entry(e: Dictionary) -> void:
 	Sfx.play("lat_trang", -4.0)
 	_clear()
 	var col := UiKit.scroll_column(_body, 16, 60)
-	col.add_child(UiKit.label(e.get("nhom", ""), 10, UiKit.C_MUTED, true))
-	col.add_child(UiKit.wrap_label(e["tieu_de"], 16, UiKit.C_GOLD_LIGHT, true))
+	col.add_child(UiKit.label(e.get("nhom", ""), UiKit.FS_SMALL, UiKit.C_MUTED, true))
+	col.add_child(UiKit.wrap_label(e["tieu_de"], UiKit.FS_TITLE, UiKit.C_GOLD_LIGHT, true))
 	col.add_child(UiKit.source_tag(e.get("nhan", "")))
-	var text := UiKit.wrap_label(e.get("noi_dung", ""), 11, UiKit.C_PAPER)
-	text.add_theme_constant_override("line_spacing", 2)
+	var text := UiKit.wrap_label(e.get("noi_dung", ""), UiKit.FS_BODY, UiKit.C_PAPER)
+	text.add_theme_constant_override("line_spacing", 3)
 	col.add_child(text)
 	var sources: Array = e.get("nguon", [])
 	if not sources.is_empty():
-		col.add_child(UiKit.label("Nguồn", 12, UiKit.C_GOLD, true))
+		col.add_child(UiKit.label("Nguồn", UiKit.FS_HEAD, UiKit.C_GOLD, true))
 		var rt := RichTextLabel.new()
 		rt.bbcode_enabled = true
 		rt.fit_content = true
 		rt.scroll_active = false
 		rt.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		rt.add_theme_font_override("normal_font", UiKit.FONT_MED)
-		rt.add_theme_font_size_override("normal_font_size", 10)
+		rt.add_theme_font_size_override("normal_font_size", UiKit.FS_SMALL)
 		rt.add_theme_color_override("default_color", UiKit.C_PAPER)
 		var lines: PackedStringArray = []
 		for s in sources:
@@ -80,7 +80,7 @@ func _show_entry(e: Dictionary) -> void:
 		rt.text = "\n".join(lines)
 		rt.meta_clicked.connect(func(meta: Variant) -> void: OS.shell_open(str(meta)))
 		col.add_child(rt)
-	UiKit.bottom_bar(_body).add_child(UiKit.button("Danh mục", _show_list, 12, 100))
+	UiKit.bottom_bar(_body).add_child(UiKit.button("Danh mục", _show_list, UiKit.FS_BUTTON, 100))
 
 
 func go_back() -> bool:

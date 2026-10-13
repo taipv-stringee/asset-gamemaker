@@ -9,6 +9,11 @@ config/name="Tây Sơn"
 config/description="Game chiến thuật theo lượt kiểu Ancient Empires 2 về chiến dịch Quang Trung 1789."
 run/main_scene="res://scenes/main.tscn"
 config/icon="res://assets/icon/icon_1024.png"
+boot_splash/bg_color=Color(0.16078432, 0.050980393, 0.050980393, 1)
+boot_splash/show_image=true
+boot_splash/image="res://assets/icon/splash.png"
+boot_splash/stretch_mode=0
+boot_splash/use_filter=false
 config/features=PackedStringArray("4.7", "Mobile")
 
 [autoload]

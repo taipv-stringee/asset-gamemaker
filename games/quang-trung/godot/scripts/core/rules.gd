@@ -773,6 +773,40 @@ static func side_objectives(state: BattleState) -> Array[Dictionary]:
 	return out
 
 
+## Tình trạng mục tiêu phụ giữa trận (cho bảng tạm dừng): "dat" | "hong" (đã không thể đạt) | "dang" (còn mở).
+static func side_objectives_live(state: BattleState) -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	var won := state.result == "thang"
+	var lost_game := state.result == "thua"
+	for o in state.mission.get("muc_tieu_phu", []):
+		var st := "dang"
+		match o.get("loai", ""):
+			"truoc_luot":
+				var last := int(o["n"]) - 1
+				if won:
+					st = "dat" if state.won_round <= last else "hong"
+				elif state.vong > last:
+					st = "hong"
+			"khong_bao_dong":
+				if int(state.flags.get("bao_dong", 0)) > 0:
+					st = "hong"
+			"khong_mat":
+				if int(state.flags["mat_quan"].get(o.get("quan", ""), 0)) > 0:
+					st = "hong"
+			"khong_mat_quan_nao":
+				if not state.flags["mat_quan"].is_empty():
+					st = "hong"
+			"hang_binh_toi_thieu":
+				if int(state.flags.get("hang_binh", 0)) >= int(o["n"]):
+					st = "dat" if won else "dang"
+		if st == "dang" and won:
+			st = "dat"
+		if st == "dang" and lost_game:
+			st = "hong"
+		out.append({"ten": o.get("ten", ""), "trang_thai": st})
+	return out
+
+
 static func check_result(state: BattleState) -> Array[Dictionary]:
 	var ev: Array[Dictionary] = []
 	if state.result != "":

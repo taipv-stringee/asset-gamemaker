@@ -1,5 +1,5 @@
 {
- "_ghi_chu": "Danh sách màn theo docs/04. 'id' rỗng = chưa làm.",
+ "_ghi_chu": "Danh sách màn theo docs/04. 'id' rỗng = chưa làm (nút mờ). Màn phụ P mở sau màn 4.",
  "man": [
   {
    "so": "0",
@@ -28,7 +28,7 @@
   },
   {
    "so": "P",
-   "ten": "Màn phụ: thủy quân (mở sau màn 4)",
+   "ten": "Màn phụ: thủy quân",
    "id": ""
   },
   {

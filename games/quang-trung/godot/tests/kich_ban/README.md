@@ -25,7 +25,7 @@ Sau mỗi lệnh, kịch bản chờ đến khi hết hoạt cảnh rồi mới 
 | `kiem quan 4 12` | `tayson hoa_mai máu 100 (xong)` (mua qua bảng mua lính: nút "Hỏa mai thủ · 250") |
 | `kiem vang` (sau khi mua) | `200` |
 | `kiem vong` | `2` |
-| `kiem camera` (trước / sau khi kéo) | `0,-32` rồi `0,8` (đã cuộn hết xuống dưới) |
+| `kiem camera` (trước / sau khi kéo) | `0,-40` rồi `0,20` (kéo lên 60 điểm ảnh; thanh trên 40, bảng dưới 168 từ bản chữ to) |
 
 ## quan_tan_choi_lai.txt (màn m_kiem_thu) — giá trị mong đợi
 

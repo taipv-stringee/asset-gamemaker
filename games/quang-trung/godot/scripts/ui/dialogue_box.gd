@@ -6,6 +6,7 @@ extends Control
 signal finished
 
 const CHAR_TIME := 0.022
+const BOX_H := 180   # phủ kín bảng dưới của trận (168)
 const PORTRAIT_DIR := "res://assets/portraits/"
 
 var _lines: Array = []
@@ -30,19 +31,19 @@ func _init() -> void:
 	box.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	box.offset_left = 8
 	box.offset_right = -8
-	box.offset_top = -124
+	box.offset_top = -BOX_H
 	box.offset_bottom = -10
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(box)
-	_text = UiKit.wrap_label("", 12, UiKit.C_PAPER)
+	_text = UiKit.wrap_label("", 16, UiKit.C_PAPER)
 	_text.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_text.offset_left = 12
 	_text.offset_right = -12
-	_text.offset_top = 22
+	_text.offset_top = 28
 	_text.offset_bottom = -18
-	_text.add_theme_constant_override("line_spacing", 2)
+	_text.add_theme_constant_override("line_spacing", 3)
 	box.add_child(_text)
-	_hint = UiKit.label("▼", 10, UiKit.C_GOLD, true)
+	_hint = UiKit.label("▼", UiKit.FS_SMALL, UiKit.C_GOLD, true)
 	_hint.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
 	_hint.offset_left = -20
 	_hint.offset_top = -18
@@ -53,8 +54,8 @@ func _init() -> void:
 	_frame.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
 	_frame.offset_left = 14
 	_frame.offset_right = 14 + 88
-	_frame.offset_top = -124 - 84
-	_frame.offset_bottom = -124 + 4
+	_frame.offset_top = -BOX_H - 84
+	_frame.offset_bottom = -BOX_H + 4
 	_frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_frame)
 	_portrait = TextureRect.new()
@@ -64,15 +65,15 @@ func _init() -> void:
 	_portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	_portrait.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	_frame.add_child(_portrait)
-	_name = UiKit.label("", 12, UiKit.C_GOLD_LIGHT, true)
-	_name.position = Vector2(12, 4)
+	_name = UiKit.label("", UiKit.FS_HEAD + 1, UiKit.C_GOLD_LIGHT, true)
+	_name.position = Vector2(12, 5)
 	box.add_child(_name)
-	var skip := UiKit.button("Bỏ qua", _skip, 10)
+	var skip := UiKit.button("Bỏ qua", _skip)
 	skip.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	skip.offset_left = -70
+	skip.offset_left = -96
 	skip.offset_right = -8
-	skip.offset_top = 8 + 40
-	skip.offset_bottom = 8 + 40 + 28
+	skip.offset_top = 52
+	skip.offset_bottom = 52 + UiKit.BTN_H
 	add_child(skip)
 
 

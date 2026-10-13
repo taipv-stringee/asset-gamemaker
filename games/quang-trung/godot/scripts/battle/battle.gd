@@ -8,8 +8,8 @@ signal restart_requested
 signal exit_requested               # về menu (chế độ chiến dịch)
 
 const T := 32
-const TOP_H := 32
-const BOTTOM_H := 104
+const TOP_H := 40
+const BOTTOM_H := 168   # đủ 3 dòng thông tin + 2 hàng nút cỡ chữ lớn (phản hồi M2)
 const FONT_MED := preload("res://assets/fonts/BeVietnamPro-Medium.ttf")
 const FONT_BOLD := preload("res://assets/fonts/BeVietnamPro-Bold.ttf")
 const C_LACQUER := Color(0.36, 0.09, 0.09)
@@ -61,7 +61,7 @@ var bottom: Panel
 var portrait: TextureRect
 var name_label: Label
 var info_label: Label
-var buttons: HBoxContainer
+var buttons: HFlowContainer
 var end_button: Button
 var banner: Label
 var result_panel: Panel
@@ -291,79 +291,95 @@ func _build_hud() -> void:
 	root.set_anchors_preset(Control.PRESET_FULL_RECT)
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud.add_child(root)
-	# Thanh trên
+	# Thanh trên: tên màn · vòng | vàng | ≡
 	var top := _panel(C_LACQUER)
 	top.set_anchors_preset(Control.PRESET_TOP_WIDE)
 	top.offset_bottom = TOP_H
 	root.add_child(top)
-	top_label = _label(FONT_BOLD, 13, C_GOLD_LIGHT)
-	top_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	top_label.offset_left = 8
-	top_label.offset_right = -124
-	top_label.offset_top = 7
-	top_label.offset_bottom = 25
+	var top_row := HBoxContainer.new()
+	top_row.set_anchors_preset(Control.PRESET_FULL_RECT)
+	top_row.offset_left = 8
+	top_row.offset_right = -4
+	top_row.offset_top = 3
+	top_row.offset_bottom = -3
+	top_row.add_theme_constant_override("separation", 6)
+	top.add_child(top_row)
+	top_label = _label(FONT_BOLD, UiKit.FS_BUTTON, C_GOLD_LIGHT)
+	top_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	top_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	top_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	top.add_child(top_label)
-	gold_label = _label(FONT_BOLD, 13, Color.WHITE)
-	gold_label.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	gold_label.offset_left = -120
-	gold_label.offset_right = -40
-	gold_label.offset_top = 7
-	gold_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	top.add_child(gold_label)
+	top_label.custom_minimum_size.x = 40
+	top_row.add_child(top_label)
+	gold_label = _label(FONT_BOLD, UiKit.FS_BUTTON, Color.WHITE)
+	gold_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	top_row.add_child(gold_label)
 	var menu_btn := _button("≡", _toggle_pause)
-	menu_btn.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	menu_btn.offset_left = -34
-	menu_btn.offset_right = -4
-	menu_btn.offset_top = 3
-	menu_btn.offset_bottom = 29
-	menu_btn.custom_minimum_size = Vector2(30, 26)
-	top.add_child(menu_btn)
-	# Bảng dưới
+	menu_btn.custom_minimum_size = Vector2(40, TOP_H - 6)
+	top_row.add_child(menu_btn)
+	# Bảng dưới: [chân dung | tên + thông tin] / [nút hành động (xuống dòng được) | Hết lượt]
 	bottom = _panel(C_LACQUER)
 	bottom.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	bottom.offset_top = -BOTTOM_H
 	root.add_child(bottom)
+	var col := VBoxContainer.new()
+	col.set_anchors_preset(Control.PRESET_FULL_RECT)
+	col.offset_left = 6
+	col.offset_right = -6
+	col.offset_top = 6
+	col.offset_bottom = -6
+	col.add_theme_constant_override("separation", 4)
+	bottom.add_child(col)
+	var info_row := HBoxContainer.new()
+	info_row.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	info_row.add_theme_constant_override("separation", 8)
+	col.add_child(info_row)
 	var frame := _panel(C_LACQUER_DARK)
-	frame.position = Vector2(6, 8)
-	frame.size = Vector2(56, 56)
-	bottom.add_child(frame)
+	frame.custom_minimum_size = Vector2(52, 52)
+	frame.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	info_row.add_child(frame)
 	portrait = TextureRect.new()
-	portrait.position = Vector2(8, 10)
-	portrait.size = Vector2(52, 52)
+	portrait.position = Vector2(2, 2)
+	portrait.size = Vector2(48, 48)
 	portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	portrait.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	bottom.add_child(portrait)
-	name_label = _label(FONT_BOLD, 13, C_GOLD_LIGHT)
-	name_label.position = Vector2(70, 6)
-	bottom.add_child(name_label)
-	info_label = _label(FONT_MED, 10, Color.WHITE)
-	info_label.position = Vector2(70, 25)
-	info_label.size = Vector2(210, 40)
+	frame.add_child(portrait)
+	var text_col := VBoxContainer.new()
+	text_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	text_col.add_theme_constant_override("separation", 0)
+	info_row.add_child(text_col)
+	name_label = _label(FONT_BOLD, UiKit.FS_HEAD, C_GOLD_LIGHT)
+	name_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	name_label.custom_minimum_size.x = 40
+	text_col.add_child(name_label)
+	info_label = _label(FONT_MED, UiKit.FS_SMALL, Color.WHITE)
 	info_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	bottom.add_child(info_label)
-	buttons = HBoxContainer.new()
-	buttons.position = Vector2(6, 70)
-	buttons.add_theme_constant_override("separation", 4)
-	bottom.add_child(buttons)
+	info_label.custom_minimum_size.x = 40
+	info_label.max_lines_visible = 3
+	text_col.add_child(info_label)
+	var btn_row := HBoxContainer.new()
+	btn_row.add_theme_constant_override("separation", 6)
+	col.add_child(btn_row)
+	buttons = HFlowContainer.new()
+	buttons.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	buttons.add_theme_constant_override("h_separation", 5)
+	buttons.add_theme_constant_override("v_separation", 5)
+	btn_row.add_child(buttons)
 	end_button = _button("Hết lượt", _on_end_turn_pressed)
-	end_button.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
-	end_button.offset_left = -72
-	end_button.offset_top = -32
-	end_button.offset_right = -6
-	end_button.offset_bottom = -6
-	bottom.add_child(end_button)
+	end_button.size_flags_vertical = Control.SIZE_SHRINK_END
+	btn_row.add_child(end_button)
 	# Băng thông báo
-	banner = _label(FONT_BOLD, 14, C_GOLD_LIGHT)
+	banner = _label(FONT_BOLD, 18, C_GOLD_LIGHT)
 	banner.set_anchors_preset(Control.PRESET_CENTER_TOP)
 	banner.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	banner.add_theme_color_override("font_outline_color", C_LACQUER_DARK)
 	banner.add_theme_constant_override("outline_size", 6)
-	banner.offset_left = -130
-	banner.offset_right = 130
-	banner.offset_top = TOP_H + 8
-	banner.offset_bottom = TOP_H + 32
+	banner.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	banner.offset_left = 8
+	banner.offset_right = -8
+	banner.offset_top = TOP_H + 10
+	banner.offset_bottom = TOP_H + 60
+	banner.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	banner.modulate.a = 0.0
 	banner.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.add_child(banner)
@@ -374,15 +390,16 @@ func _button(text: String, cb: Callable) -> Button:
 	var b := Button.new()
 	b.text = text
 	b.add_theme_font_override("font", FONT_BOLD)
-	b.add_theme_font_size_override("font_size", 11)
+	b.add_theme_font_size_override("font_size", UiKit.FS_BUTTON)
 	var normal := StyleBoxFlat.new()
 	normal.bg_color = C_LACQUER_DARK
 	normal.border_color = C_GOLD
 	normal.border_width_top = 1
-	normal.content_margin_left = 6
-	normal.content_margin_right = 6
-	normal.content_margin_top = 4
-	normal.content_margin_bottom = 4
+	normal.border_width_bottom = 1
+	normal.content_margin_left = 9
+	normal.content_margin_right = 9
+	normal.content_margin_top = 6
+	normal.content_margin_bottom = 6
 	var pressed := normal.duplicate()
 	pressed.bg_color = Color(0.5, 0.15, 0.12)
 	b.add_theme_stylebox_override("normal", normal)
@@ -390,7 +407,11 @@ func _button(text: String, cb: Callable) -> Button:
 	b.add_theme_stylebox_override("pressed", pressed)
 	b.add_theme_stylebox_override("focus", normal)
 	b.add_theme_color_override("font_color", C_GOLD_LIGHT)
-	b.custom_minimum_size = Vector2(44, 26)
+	b.custom_minimum_size = Vector2(44, 40)
+	var disabled := normal.duplicate()
+	disabled.bg_color = Color(0.13, 0.08, 0.08)
+	b.add_theme_stylebox_override("disabled", disabled)
+	b.add_theme_color_override("font_disabled_color", Color(0.5, 0.42, 0.36))
 	b.pressed.connect(func() -> void: Sfx.play("cham", -6.0))
 	b.pressed.connect(cb)
 	return b
@@ -406,7 +427,8 @@ func _set_buttons(list: Array) -> void:
 func _refresh_top() -> void:
 	var name: String = state.mission.get("ten_ngan", state.mission.get("ten", ""))
 	var limit := int(state.mission.get("thua_het_luot", 0))
-	top_label.text = "%s · Vòng %d%s" % [name, state.vong, ("/%d" % limit) if limit > 0 else ""]
+	# Vòng đứng trước: màn hẹp thì phần bị cắt là tên màn chứ không phải số vòng.
+	top_label.text = "Vòng %d%s · %s" % [state.vong, ("/%d" % limit) if limit > 0 else "", name]
 	gold_label.text = "%d vàng" % int(state.gold.get(PLAYER, 0))
 	end_button.disabled = mode == Mode.BUSY or mode == Mode.ENDED or state.current_faction() != PLAYER
 
@@ -473,8 +495,9 @@ func _show_idle_info() -> void:
 	_set_buttons([])
 
 
-func _show_banner(text: String) -> void:
+func _show_banner(text: String, color: Color = C_GOLD_LIGHT) -> void:
 	banner.text = text
+	banner.add_theme_color_override("font_color", color)
 	var tw := create_tween()
 	tw.tween_property(banner, "modulate:a", 1.0, 0.15)
 	tw.tween_interval(0.9)
@@ -636,6 +659,7 @@ func _do_move(p: Vector2i) -> void:
 	await _play(ev)
 	mode = Mode.MOVED
 	reach = {}
+	_refresh_top()  # bật lại nút Hết lượt (bị tắt trong lúc BUSY)
 	_show_actions()
 
 
@@ -744,9 +768,9 @@ func _show_recruit(p: Vector2i) -> void:
 		var text := "%s · %d\nCông %d–%d  Thủ %d  Di %d  Tầm %s" % [d["ten"], d["gia"], d["cong_min"], d["cong_max"], d["thu"], d["di"], tam]
 		var b := UiKit.button(text, func() -> void:
 			_close_recruit()
-			_run(Rules.cmd_recruit(state, PLAYER, p, id)), 10)
+			_run(Rules.cmd_recruit(state, PLAYER, p, id)), UiKit.FS_SMALL)
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		b.custom_minimum_size = Vector2(0, 36)
+		b.custom_minimum_size = Vector2(0, 54)
 		b.icon = _unit_icon(id)
 		b.add_theme_constant_override("icon_max_width", 32)
 		b.disabled = not Rules.can_afford(state, PLAYER, id)
@@ -903,14 +927,16 @@ func _play(events: Array[Dictionary]) -> void:
 			"bao_dong":
 				Sfx.play("bao_dong", -2.0)
 				var who := state.unit_by_uid(e["uid"])
+				# Phản hồi M2: chữ nhỏ đỏ sẫm dễ lỡ → luôn có thêm dải chữ to giữa màn.
 				if who != null and _shown(who) and sprites.has(who.uid):
-					_float_text(sprites[who.uid].position + Vector2(-4, -6), "Báo động!", Color(1, 0.35, 0.3))
+					_float_text(sprites[who.uid].position + Vector2(-4, -6), "Báo động!", Color(1, 0.45, 0.38))
+					_show_banner("Báo động! Quân %s đã thức." % _faction_name(who.faction).trim_prefix("quân "), Color(1, 0.55, 0.45))
 				else:
-					_show_banner("Có tiếng hô báo động trong đêm!")
+					_show_banner("Có tiếng hô báo động trong đêm!", Color(1, 0.55, 0.45))
 				await get_tree().create_timer(0.5).timeout
 			"trong_bao_dong":
 				Sfx.play("trong_bao_dong")
-				_show_banner("Trống báo động! Cả đồn đã thức.")
+				_show_banner("Trống báo động! Cả đồn đã thức.", Color(1, 0.55, 0.45))
 				await _shake(0.6)
 			"phuc_kich":
 				Sfx.play("phuc_kich")
@@ -961,7 +987,7 @@ func _shake(duration: float) -> void:
 
 
 func _float_text(pos: Vector2, text: String, color: Color) -> void:
-	var l := _label(FONT_BOLD, 10, color)
+	var l := _label(FONT_BOLD, 13, color)
 	l.text = text
 	l.add_theme_color_override("font_outline_color", Color(0.08, 0.04, 0.04))
 	l.add_theme_constant_override("outline_size", 3)
@@ -1010,26 +1036,55 @@ func _finish() -> void:
 		show_result([])
 
 
+## Bảng nổi giữa hai thanh (kết quả, tạm dừng): rộng gần hết màn, cột nội dung bên trong.
+## Trả về [panel, cột nội dung (cuộn được), hàng nút ở đáy (luôn thấy)]. Bảng phủ cả bảng dưới vì nó là hộp thoại chặn.
+func _overlay_panel() -> Array:
+	var panel := _panel(Color(0.12, 0.04, 0.04, 0.97))
+	panel.set_anchors_preset(Control.PRESET_FULL_RECT)
+	panel.offset_left = 10
+	panel.offset_right = -10
+	panel.offset_top = TOP_H + 10
+	panel.offset_bottom = -10
+	hud.get_child(0).add_child(panel)
+	var sc := ScrollContainer.new()
+	sc.set_anchors_preset(Control.PRESET_FULL_RECT)
+	sc.offset_left = 14
+	sc.offset_right = -14
+	sc.offset_top = 12
+	sc.offset_bottom = -UiKit.BTN_H - 24
+	sc.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	panel.add_child(sc)
+	var col := VBoxContainer.new()
+	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	col.add_theme_constant_override("separation", 8)
+	sc.add_child(col)
+	var row := HBoxContainer.new()
+	row.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+	row.offset_left = 12
+	row.offset_right = -12
+	row.offset_top = -UiKit.BTN_H - 12
+	row.offset_bottom = -12
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 10)
+	panel.add_child(row)
+	return [panel, col, row]
+
+
+func _objective_line(ten: String, st: String) -> Label:
+	var mark: String = {"dat": "★ ", "hong": "✗ ", "dang": "☆ "}[st]
+	var color: Color = {"dat": C_GOLD_LIGHT, "hong": Color(0.95, 0.5, 0.45), "dang": Color(0.9, 0.86, 0.78)}[st]
+	var text := mark + ten + (" (đã hỏng)" if st == "hong" and state.result == "" else "")
+	return UiKit.wrap_label(text, UiKit.FS_BODY, color)
+
+
 ## Bảng kết quả màn (06 §4): số vòng, quân mất, mục tiêu phụ, mục Sử liệu mới mở.
 func show_result(opened: Array) -> void:
 	var win := state.result == "thang"
 	Sfx.music("thang" if win else "thua", false)
-	result_panel = _panel(Color(0.12, 0.04, 0.04, 0.95))
-	result_panel.set_anchors_preset(Control.PRESET_CENTER)
-	result_panel.offset_left = -124
-	result_panel.offset_right = 124
-	result_panel.offset_top = -150
-	result_panel.offset_bottom = 120
-	hud.get_child(0).add_child(result_panel)
-	var col := VBoxContainer.new()
-	col.set_anchors_preset(Control.PRESET_FULL_RECT)
-	col.offset_left = 12
-	col.offset_right = -12
-	col.offset_top = 10
-	col.offset_bottom = -10
-	col.add_theme_constant_override("separation", 4)
-	result_panel.add_child(col)
-	var title := UiKit.label("THẮNG" if win else "THUA", 20, C_GOLD_LIGHT, true)
+	var pc := _overlay_panel()
+	result_panel = pc[0]
+	var col: VBoxContainer = pc[1]
+	var title := UiKit.label("THẮNG" if win else "THUA", 28, C_GOLD_LIGHT, true)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(title)
 	var lost := 0
@@ -1038,28 +1093,22 @@ func show_result(opened: Array) -> void:
 	var sub := "Sau %d vòng · mất %d quân" % [state.won_round if win else state.vong, lost]
 	if not win and state.result_reason != "":
 		sub = state.result_reason
-	var sub_l := UiKit.wrap_label(sub, 11, Color.WHITE)
+	var sub_l := UiKit.wrap_label(sub, UiKit.FS_BODY, Color.WHITE)
 	sub_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(sub_l)
-	var objs := Rules.side_objectives(state)
+	var objs := Rules.side_objectives_live(state)
 	if win and not objs.is_empty():
-		col.add_child(UiKit.label("Mục tiêu phụ", 11, C_GOLD, true))
+		col.add_child(UiKit.label("Mục tiêu phụ", UiKit.FS_HEAD, C_GOLD, true))
 		for o in objs:
-			col.add_child(UiKit.wrap_label(("★ " if o["dat"] else "☆ ") + o["ten"], 10, C_GOLD_LIGHT if o["dat"] else Color(0.75, 0.7, 0.65)))
+			col.add_child(_objective_line(o["ten"], o["trang_thai"]))
 	if not opened.is_empty():
-		col.add_child(UiKit.label("Sử liệu mới", 11, C_GOLD, true))
+		col.add_child(UiKit.label("Sử liệu mới", UiKit.FS_HEAD, C_GOLD, true))
 		for id in opened:
-			col.add_child(UiKit.wrap_label("• " + Story.codex_entry(id).get("tieu_de", id), 10, UiKit.C_PAPER))
-	var spacer := Control.new()
-	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	col.add_child(spacer)
-	var row := HBoxContainer.new()
-	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	row.add_theme_constant_override("separation", 8)
-	col.add_child(row)
-	row.add_child(UiKit.button("Chơi lại", func() -> void: restart_requested.emit(), 12, 80))
+			col.add_child(UiKit.wrap_label("• " + Story.codex_entry(id).get("tieu_de", id), UiKit.FS_BODY, UiKit.C_PAPER))
+	var row: HBoxContainer = pc[2]
+	row.add_child(UiKit.button("Chơi lại", func() -> void: restart_requested.emit(), UiKit.FS_BUTTON, 100))
 	if story_mode:
-		row.add_child(UiKit.button("Tiếp", func() -> void: exit_requested.emit(), 12, 80))
+		row.add_child(UiKit.button("Tiếp", func() -> void: exit_requested.emit(), UiKit.FS_BUTTON, 100))
 
 
 # ================================================================ tạm dừng
@@ -1071,30 +1120,20 @@ func _toggle_pause() -> void:
 		return
 	if mode == Mode.ENDED:
 		return
-	pause_panel = _panel(Color(0.12, 0.04, 0.04, 0.96))
-	pause_panel.set_anchors_preset(Control.PRESET_CENTER)
-	pause_panel.offset_left = -120
-	pause_panel.offset_right = 120
-	pause_panel.offset_top = -130
-	pause_panel.offset_bottom = 110
-	hud.get_child(0).add_child(pause_panel)
-	var col := VBoxContainer.new()
-	col.set_anchors_preset(Control.PRESET_FULL_RECT)
-	col.offset_left = 12
-	col.offset_right = -12
-	col.offset_top = 10
-	col.offset_bottom = -10
-	col.add_theme_constant_override("separation", 6)
-	pause_panel.add_child(col)
-	col.add_child(UiKit.label("Tạm dừng", 14, C_GOLD_LIGHT, true))
-	col.add_child(UiKit.wrap_label("Mục tiêu: " + state.mission.get("muc_tieu_chinh", "theo giới thiệu màn"), 10, Color.WHITE))
-	for o in state.mission.get("muc_tieu_phu", []):
-		col.add_child(UiKit.wrap_label("☆ " + o.get("ten", ""), 10, Color(0.85, 0.8, 0.7)))
-	var spacer := Control.new()
-	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	col.add_child(spacer)
-	col.add_child(UiKit.button("Tiếp tục", _toggle_pause, 12))
+	var pc := _overlay_panel()
+	pause_panel = pc[0]
+	var col: VBoxContainer = pc[1]
+	col.add_child(UiKit.label("Tạm dừng", UiKit.FS_TITLE, C_GOLD_LIGHT, true))
+	col.add_child(UiKit.label("Mục tiêu", UiKit.FS_HEAD, C_GOLD, true))
+	col.add_child(UiKit.wrap_label(state.mission.get("muc_tieu_chinh", "Xem giới thiệu màn."), UiKit.FS_BODY, Color.WHITE))
+	var objs := Rules.side_objectives_live(state)
+	if not objs.is_empty():
+		col.add_child(UiKit.label("Mục tiêu phụ", UiKit.FS_HEAD, C_GOLD, true))
+		for o in objs:
+			col.add_child(_objective_line(o["ten"], o["trang_thai"]))
+	var row: HBoxContainer = pc[2]
+	row.add_child(UiKit.button("Tiếp tục", _toggle_pause))
 	if story_mode:
-		col.add_child(UiKit.button("Lưu và về menu", func() -> void:
+		row.add_child(UiKit.button("Lưu, về menu", func() -> void:
 			_autosave()
-			exit_requested.emit(), 12))
+			exit_requested.emit()))

@@ -28,7 +28,7 @@ Mở game **không có tham số** (như người chơi). Bật tiếng. Lần �
 
 | # | Việc | Mong đợi |
 |---|---|---|
-| 1 | Mở game | Menu: biểu tượng, chữ TÂY SƠN, lời lưu truyền có nhãn [Tương truyền], nút Chiến dịch / Sử liệu. Nhạc chủ đề (trống, kèn, đàn) |
+| 1 | Mở game | Màn khởi động là huy hiệu + chữ TÂY SƠN (không còn logo Godot). Menu: biểu tượng, chữ TÂY SƠN, lời lưu truyền có nhãn [Tương truyền], nút Chiến dịch / Sử liệu. Nhạc chủ đề (trống, kèn, đàn) |
 | 2 | Chiến dịch | Danh sách màn 0–9 + màn phụ; chỉ màn 4 và "Trận thử luật" bấm được |
 | 3 | Màn 4 | Giới thiệu màn: ngày âm và dương lịch, bản đồ nhỏ, đoạn lịch sử có nhãn, mục tiêu, 3 mục tiêu phụ |
 | 4 | Vào trận | Trời tối, nhạc đêm (dế, gió, trống xa, sáo). Hội thoại có chân dung Quang Trung; chạm để tiếp; Bỏ qua được |
@@ -37,8 +37,8 @@ Mở game **không có tham số** (như người chơi). Bật tiếng. Lần �
 | 7 | Mua lính ở đồn của ta (bến đò) | Bảng mua lính hiện đủ các loại kèm hình, giá, chỉ số; loại không đủ vàng thì mờ |
 | 8 | Đánh lính tuần mà không hạ được, rồi hết lượt | Đầu lượt quân Lê: "Báo động!" (tiếng tù và), quân quanh đó thức |
 | 9 | Để quân Lê đứng cạnh trống lúc báo động | "Trống báo động! Cả đồn đã thức.", màn hình rung, tiếng trống dồn |
-| 10 | Nút ≡ | Tạm dừng: mục tiêu, Tiếp tục, Lưu và về menu |
-| 11 | Lưu và về menu, rồi tắt hẳn app, mở lại | Menu có "Tiếp tục"; bấm vào thì về đúng lượt đang chơi |
+| 10 | Nút ≡ | Tạm dừng: mục tiêu, mục tiêu phụ (☆ còn mở, ✗ đã hỏng — vd. sau khi bị báo động), Tiếp tục, "Lưu, về menu" |
+| 11 | "Lưu, về menu", rồi tắt hẳn app, mở lại | Menu có "Tiếp tục"; bấm vào thì về đúng lượt đang chơi |
 | 12 | Chơi đến thắng | Hội thoại sau trận; bảng THẮNG có số vòng, quân mất, sao mục tiêu phụ, Sử liệu mới; nhạc thắng |
 | 13 | Tiếp → Chiến dịch | Màn 4 có sao; Sử liệu mở được 3 mục, có nhãn nguồn, bấm nguồn thì mở trình duyệt |
 | 14 | Thử thắng không báo động trước vòng 7 | Gợi ý cách làm: tests/loi_giai/m04_gian_khau.txt (đừng xem nếu muốn tự tìm) |

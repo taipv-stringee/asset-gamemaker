@@ -12,6 +12,15 @@ const C_GOLD_LIGHT := Color(1.0, 0.91, 0.55)
 const C_PAPER := Color(0.96, 0.92, 0.82)
 const C_MUTED := Color(0.72, 0.62, 0.55)
 
+## Cỡ chữ và nút (điểm ảnh logic; trên máy 1080p nhân 3). Tăng sau phản hồi chơi thử M2: chữ và nút nhỏ quá.
+const FS_TAG := 12        # nhãn nguồn, chú thích nhỏ
+const FS_SMALL := 13      # chữ phụ
+const FS_BODY := 14       # nội dung, hội thoại, thông tin
+const FS_BUTTON := 15     # chữ trên nút
+const FS_HEAD := 16       # tiêu đề mục
+const FS_TITLE := 21      # tiêu đề màn hình
+const BTN_H := 44         # chiều cao nút tối thiểu (06 §2: nút ≥ 44 điểm)
+
 ## Màu nhãn nguồn (05 §1) — để người đọc nhận ra nhanh trong Sử liệu.
 const LABEL_COLORS := {
 	"Sử liệu": Color(0.55, 0.85, 0.55),
@@ -21,7 +30,7 @@ const LABEL_COLORS := {
 }
 
 
-static func label(text: String, size: int = 11, color: Color = Color.WHITE, bold := false) -> Label:
+static func label(text: String, size: int = FS_BODY, color: Color = Color.WHITE, bold := false) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.add_theme_font_override("font", FONT_BOLD if bold else FONT_MED)
@@ -30,7 +39,7 @@ static func label(text: String, size: int = 11, color: Color = Color.WHITE, bold
 	return l
 
 
-static func wrap_label(text: String, size: int = 11, color: Color = Color.WHITE, bold := false) -> Label:
+static func wrap_label(text: String, size: int = FS_BODY, color: Color = Color.WHITE, bold := false) -> Label:
 	var l := label(text, size, color, bold)
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	l.custom_minimum_size.x = 10
@@ -52,7 +61,7 @@ static func panel(color: Color = C_LACQUER, border := 1) -> Panel:
 	return p
 
 
-static func button(text: String, cb: Callable, size: int = 12, min_w: int = 44) -> Button:
+static func button(text: String, cb: Callable, size: int = FS_BUTTON, min_w: int = 44) -> Button:
 	var b := Button.new()
 	b.text = text
 	b.add_theme_font_override("font", FONT_BOLD)
@@ -60,10 +69,10 @@ static func button(text: String, cb: Callable, size: int = 12, min_w: int = 44) 
 	var normal := style(C_LACQUER_DARK, 0)
 	normal.border_width_top = 1
 	normal.border_width_bottom = 1
-	normal.content_margin_left = 8
-	normal.content_margin_right = 8
-	normal.content_margin_top = 6
-	normal.content_margin_bottom = 6
+	normal.content_margin_left = 10
+	normal.content_margin_right = 10
+	normal.content_margin_top = 8
+	normal.content_margin_bottom = 8
 	var pressed := normal.duplicate()
 	pressed.bg_color = Color(0.5, 0.15, 0.12)
 	var disabled := normal.duplicate()
@@ -76,7 +85,7 @@ static func button(text: String, cb: Callable, size: int = 12, min_w: int = 44) 
 	b.add_theme_stylebox_override("disabled", disabled)
 	b.add_theme_color_override("font_color", C_GOLD_LIGHT)
 	b.add_theme_color_override("font_disabled_color", Color(0.5, 0.42, 0.36))
-	b.custom_minimum_size = Vector2(min_w, 32)
+	b.custom_minimum_size = Vector2(min_w, BTN_H)
 	b.pressed.connect(func() -> void: Sfx.play("cham", -6.0))
 	b.pressed.connect(cb)
 	return b
@@ -105,18 +114,18 @@ static func backdrop() -> Control:
 
 
 ## Cột nội dung cuộn được, có lề, đặt trong `parent` (dùng anchor toàn màn hình trừ phần dưới cho nút).
-static func scroll_column(parent: Control, top := 16, bottom := 56) -> VBoxContainer:
+static func scroll_column(parent: Control, top := 16, bottom := 64) -> VBoxContainer:
 	var sc := ScrollContainer.new()
 	sc.set_anchors_preset(Control.PRESET_FULL_RECT)
-	sc.offset_left = 16
-	sc.offset_right = -16
+	sc.offset_left = 14
+	sc.offset_right = -14
 	sc.offset_top = top
 	sc.offset_bottom = -bottom
 	sc.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	parent.add_child(sc)
 	var col := VBoxContainer.new()
 	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	col.add_theme_constant_override("separation", 8)
+	col.add_theme_constant_override("separation", 10)
 	sc.add_child(col)
 	return col
 
@@ -127,7 +136,7 @@ static func bottom_bar(parent: Control) -> HBoxContainer:
 	bar.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	bar.offset_left = 16
 	bar.offset_right = -16
-	bar.offset_top = -48
+	bar.offset_top = -12 - BTN_H
 	bar.offset_bottom = -12
 	bar.alignment = BoxContainer.ALIGNMENT_CENTER
 	bar.add_theme_constant_override("separation", 8)
@@ -136,5 +145,5 @@ static func bottom_bar(parent: Control) -> HBoxContainer:
 
 
 static func source_tag(nhan: String) -> Label:
-	var l := label("[%s]" % nhan, 10, LABEL_COLORS.get(nhan, C_MUTED), true)
+	var l := label("[%s]" % nhan, FS_TAG, LABEL_COLORS.get(nhan, C_MUTED), true)
 	return l

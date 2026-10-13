@@ -5,7 +5,7 @@ extends Control
 signal start_pressed
 signal back
 
-const MINI := 5   # điểm ảnh mỗi ô trên bản đồ nhỏ
+const MINI := 6   # điểm ảnh mỗi ô trên bản đồ nhỏ
 const MINI_COLORS := {
 	"co": Color(0.36, 0.52, 0.27), "duong": Color(0.62, 0.5, 0.33), "de": Color(0.5, 0.45, 0.32),
 	"ruong": Color(0.45, 0.6, 0.35), "vuon": Color(0.3, 0.48, 0.24), "rung_tre": Color(0.18, 0.36, 0.18),
@@ -25,13 +25,13 @@ func setup(mission: Dictionary) -> Briefing:
 	add_child(UiKit.backdrop())
 	var col := UiKit.scroll_column(self, 16, 60)
 	var so_v: Variant = mission.get("so", "")
-	var so := UiKit.label("Màn %s" % (str(int(so_v)) if typeof(so_v) == TYPE_FLOAT else str(so_v)), 11, UiKit.C_MUTED, true)
+	var so := UiKit.label("Màn %s" % (str(int(so_v)) if typeof(so_v) == TYPE_FLOAT else str(so_v)), UiKit.FS_SMALL, UiKit.C_MUTED, true)
 	col.add_child(so)
-	col.add_child(UiKit.wrap_label(mission.get("ten", ""), 17, UiKit.C_GOLD_LIGHT, true))
+	col.add_child(UiKit.wrap_label(mission.get("ten", ""), UiKit.FS_TITLE, UiKit.C_GOLD_LIGHT, true))
 	if mission.has("ngay"):
-		col.add_child(UiKit.wrap_label(mission["ngay"], 10, UiKit.C_PAPER))
+		col.add_child(UiKit.wrap_label(mission["ngay"], UiKit.FS_SMALL, UiKit.C_PAPER))
 	if mission.has("dia_danh"):
-		col.add_child(UiKit.wrap_label(mission["dia_danh"], 10, UiKit.C_MUTED))
+		col.add_child(UiKit.wrap_label(mission["dia_danh"], UiKit.FS_SMALL, UiKit.C_MUTED))
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 10)
 	col.add_child(row)
@@ -44,26 +44,26 @@ func setup(mission: Dictionary) -> Briefing:
 	var hist := VBoxContainer.new()
 	hist.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(hist)
-	hist.add_child(UiKit.wrap_label(mission.get("gioi_thieu", ""), 10, UiKit.C_PAPER))
+	hist.add_child(UiKit.wrap_label(mission.get("gioi_thieu", ""), UiKit.FS_BODY, UiKit.C_PAPER))
 	if mission.has("nhan_gioi_thieu"):
 		hist.add_child(UiKit.source_tag(mission["nhan_gioi_thieu"]))
 	col.add_child(_heading("Mục tiêu"))
-	col.add_child(UiKit.wrap_label("• " + mission.get("muc_tieu_chinh", ""), 11, Color.WHITE))
+	col.add_child(UiKit.wrap_label("• " + mission.get("muc_tieu_chinh", ""), UiKit.FS_BODY, Color.WHITE))
 	if mission.has("dieu_kien_thua"):
-		col.add_child(UiKit.wrap_label("Thua: " + mission["dieu_kien_thua"], 10, Color(1, 0.7, 0.6)))
+		col.add_child(UiKit.wrap_label("Thua: " + mission["dieu_kien_thua"], UiKit.FS_SMALL, Color(1, 0.7, 0.6)))
 	var side: Array = mission.get("muc_tieu_phu", [])
 	if not side.is_empty():
 		col.add_child(_heading("Mục tiêu phụ"))
 		var best: Array = Progress.data()["xong"].get(mission.get("id", ""), {}).get("muc_tieu_phu", [])
 		for i in side.size():
 			var done: bool = i < best.size() and best[i]
-			col.add_child(UiKit.wrap_label(("★ " if done else "☆ ") + side[i].get("ten", ""), 11, UiKit.C_GOLD_LIGHT if done else Color.WHITE))
+			col.add_child(UiKit.wrap_label(("★ " if done else "☆ ") + side[i].get("ten", ""), UiKit.FS_BODY, UiKit.C_GOLD_LIGHT if done else Color.WHITE))
 	if Rules.is_dark(_fake_state()):
 		col.add_child(_heading("Đánh đêm"))
-		col.add_child(UiKit.wrap_label("Chỉ thấy quân địch trong %d ô quanh quân ta hoặc ở vùng sáng. Đánh một quân mà không hạ được, nó sẽ kêu: đầu lượt sau, quân quanh nó thức dậy." % int(mission.get("tam_nhin", 0)), 10, UiKit.C_PAPER))
+		col.add_child(UiKit.wrap_label("Chỉ thấy quân địch trong %d ô quanh quân ta hoặc ở vùng sáng. Đánh một quân mà không hạ được, nó sẽ kêu: đầu lượt sau, quân quanh nó thức dậy." % int(mission.get("tam_nhin", 0)), UiKit.FS_BODY, UiKit.C_PAPER))
 	var bar := UiKit.bottom_bar(self)
-	bar.add_child(UiKit.button("Quay lại", func() -> void: back.emit(), 12, 90))
-	bar.add_child(UiKit.button("Vào trận", func() -> void: start_pressed.emit(), 13, 120))
+	bar.add_child(UiKit.button("Quay lại", func() -> void: back.emit(), UiKit.FS_BUTTON, 90))
+	bar.add_child(UiKit.button("Vào trận", func() -> void: start_pressed.emit(), UiKit.FS_BUTTON, 120))
 	return self
 
 
@@ -74,7 +74,7 @@ func _fake_state() -> BattleState:
 
 
 func _heading(text: String) -> Label:
-	return UiKit.label(text, 12, UiKit.C_GOLD, true)
+	return UiKit.label(text, UiKit.FS_HEAD, UiKit.C_GOLD, true)
 
 
 func _draw_mini(c: Control) -> void:

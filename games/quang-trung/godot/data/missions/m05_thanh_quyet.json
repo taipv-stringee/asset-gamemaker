@@ -7,8 +7,8 @@
  "dia_danh": "Đường thiên lý từ sông Gián tới Phú Xuyên (nam Hà Nội ngày nay)",
  "gioi_thieu": "Qua sông Gián, quân Tây Sơn đuổi theo quân Lê và quân Thanh tan chạy, qua Thanh Quyết, diệt đồn Nhật Tảo. Tới Phú Xuyên, quân ta bắt hết toán do thám của địch, nên tin không về được đồn Hà Hồi.",
  "nhan_gioi_thieu": "Theo HLNTC",
- "muc_tieu_chinh": "Quang Trung chiếm đồn Nhật Tảo trước khi hết vòng 16.",
- "dieu_kien_thua": "Quang Trung bị hạ, hoặc hết vòng 16.",
+ "muc_tieu_chinh": "Quang Trung chiếm đồn Nhật Tảo trước khi hết vòng 18.",
+ "dieu_kien_thua": "Quang Trung bị hạ, hoặc hết vòng 18.",
  "hoi_thoai": "m05_thanh_quyet",
  "nhac": "chu_de",
  "ghi_chu": "Truy kích (04 §Màn 5). Vị trí đồn, sông, số trinh sát là Sáng tạo của game; việc bắt hết toán do thám ở Phú Xuyên theo HLNTC và Liệt truyện.",
@@ -403,8 +403,8 @@
    3
   ]
  },
- "thua_het_luot": 16,
- "ly_do_het_luot": "Hết vòng 16: quân Thanh ở Nhật Tảo đã kịp lui về giữ Hà Hồi.",
+ "thua_het_luot": 18,
+ "ly_do_het_luot": "Hết vòng 18: quân Thanh ở Nhật Tảo đã kịp lui về giữ Hà Hồi.",
  "muc_tieu_phu": [
   {
    "loai": "khong_thoat",
@@ -435,6 +435,11 @@
    "khi": "vong",
    "n": 5,
    "loi": "Chiếm đồn Thanh Quyết (giữa – nam) để có chỗ mua lính gần mặt trận hơn."
+  },
+  {
+   "khi": "vong",
+   "n": 8,
+   "loi": "Cờ rách (quân tan) chắn đường qua cầu thì cho quân sư đứng kề để chiêu hàng: vừa dọn đường, vừa có thêm hàng binh. Thần công đứng bờ nam vẫn bắn tới cổng và đồn Nhật Tảo."
   }
  ],
  "su_lieu": [

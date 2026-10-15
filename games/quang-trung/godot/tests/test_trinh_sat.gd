@@ -104,3 +104,15 @@ func test_event_on_capture(t) -> bool:
 	var ev := Rules.cmd_capture(s, qt)
 	t.check(_has_event(ev, "bang"), "chiếm đồn thì chạy sự kiện chiem_o")
 	return true
+
+
+func test_live_objective_done_before_win(t) -> bool:
+	# Báo cáo M3 lần 3: mục tiêu phụ đã làm được giữa trận hiện "xong" (✓), không còn ☆ như chưa làm.
+	var s := make([".........."], [{"id": "linh_giao", "phe": "tayson", "x": 0, "y": 0}],
+		{"muc_tieu_phu": [{"loai": "co", "co": "moi_thiep", "ten": "Mời"}]})
+	t.eq(Rules.side_objectives_live(s)[0]["trang_thai"], "dang", "chưa làm: còn mở")
+	s.flags["co"] = {"moi_thiep": true}
+	t.eq(Rules.side_objectives_live(s)[0]["trang_thai"], "xong", "đã làm, chưa thắng: xong")
+	s.result = "thang"
+	t.eq(Rules.side_objectives_live(s)[0]["trang_thai"], "dat", "thắng: đạt")
+	return true

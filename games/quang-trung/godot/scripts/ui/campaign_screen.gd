@@ -23,6 +23,8 @@ func _init() -> void:
 			text += ("\n" + "★".repeat(n) + "☆".repeat(maxi(total - n, 0))) if total > 0 else "\nĐã xem"
 		elif id != "" and not open:
 			text += "\nThắng màn trước để mở"
+		elif id == "":
+			text += "\n(đang làm)"
 		var b := UiKit.list_button(text, func() -> void: mission_chosen.emit(id))
 		b.disabled = not open
 		col.add_child(b)

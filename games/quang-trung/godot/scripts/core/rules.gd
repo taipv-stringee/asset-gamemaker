@@ -937,7 +937,8 @@ static func side_objectives(state: BattleState) -> Array[Dictionary]:
 	return out
 
 
-## Tình trạng mục tiêu phụ giữa trận (cho bảng tạm dừng): "dat" | "hong" (đã không thể đạt) | "dang" (còn mở).
+## Tình trạng mục tiêu phụ giữa trận (cho bảng tạm dừng): "dat" | "hong" (đã không thể đạt) | "dang" (còn mở)
+## | "xong" (đã làm được trong trận, thành ★ khi thắng — báo cáo M3 lần 3).
 static func side_objectives_live(state: BattleState) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
 	var won := state.result == "thang"
@@ -965,21 +966,21 @@ static func side_objectives_live(state: BattleState) -> Array[Dictionary]:
 					st = "hong"
 			"hang_binh_toi_thieu":
 				if int(state.flags.get("hang_binh", 0)) >= int(o["n"]):
-					st = "dat" if won else "dang"
+					st = "dat" if won else "xong"
 			"len_cap":
 				if int(state.flags.get("cap_cao_nhat", 0)) >= int(o.get("n", 1)):
-					st = "dat" if won else "dang"
+					st = "dat" if won else "xong"
 			"co":
 				if has_flag(state, o["co"]):
-					st = "dat" if won else "dang"
+					st = "dat" if won else "xong"
 			"ve_vung":
 				if int(state.flags["mat_quan"].get(o["quan"], 0)) > 0:
 					st = "hong"
 				elif won:
 					st = "dat" if _type_in_zone(state, o["quan"], o["khu"]) else "hong"
-		if st == "dang" and won:
+		if (st == "dang" or st == "xong") and won:
 			st = "dat"
-		if st == "dang" and lost_game:
+		if (st == "dang" or st == "xong") and lost_game:
 			st = "hong"
 		out.append({"ten": o.get("ten", ""), "trang_thai": st})
 	return out

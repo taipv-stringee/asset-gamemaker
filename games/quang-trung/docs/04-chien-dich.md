@@ -143,7 +143,7 @@ Mỗi điểm ghi ngày âm và dương lịch.
   **Thần công** theo kịp ở vòng 3 (viện binh, có gợi ý). Vàng 500; giới hạn 16; `mua_duoc`: như màn 4 + than_cong.
 - **Địch**: **5 trinh sát** ở dải giữa – nam, chế độ *Dò thám* (thấy quân ta trong 3 ô → *Chạy* về dải đỏ; 2 con đi tuần xuống phía nam).
   Thanh Quyết: quan giữ đồn Lê + 2 quân Lê. Nhật Tảo: quan giữ đồn, 2 điểu thương trong doanh, trường mâu ở cổng, cung tiễn (5 quân).
-- **Thắng**: Quang Trung chiếm đồn Nhật Tảo trước khi hết vòng 16. **Thua**: Quang Trung bị hạ; hết vòng 16.
+- **Thắng**: Quang Trung chiếm đồn Nhật Tảo trước khi hết vòng 18 (bản đầu 16; báo cáo M3 lần 3: chơi thật khó kịp vì quân tan chắn đầu cầu). **Thua**: Quang Trung bị hạ; hết vòng 18.
 - **Hệ quả**: có trinh sát thoát → cờ `trinh_sat_thoat` ghi vào tiến trình (`luu_co`); màn 6 đọc cờ này để quân Hà Hồi **thức sẵn**.
   Hội thoại cuối cũng khác (`sau_thang_lot`). Chơi lại và thắng sạch thì xóa hệ quả.
 - **Mục tiêu phụ**: không trinh sát nào thoát; chiếm Nhật Tảo trước vòng 14 (bản phác ghi 12; chơi thử lời giải mẫu thì 13 vòng là vừa sức).

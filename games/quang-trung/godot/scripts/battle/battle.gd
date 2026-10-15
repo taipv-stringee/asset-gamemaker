@@ -586,12 +586,12 @@ func _show_idle_info() -> void:
 	_set_buttons([])
 
 
-func _show_banner(text: String, color: Color = C_GOLD_LIGHT) -> void:
+func _show_banner(text: String, color: Color = C_GOLD_LIGHT, hold := 0.9) -> void:
 	banner.text = text
 	banner.add_theme_color_override("font_color", color)
 	var tw := create_tween()
 	tw.tween_property(banner, "modulate:a", 1.0, 0.15)
-	tw.tween_interval(0.9)
+	tw.tween_interval(hold)
 	tw.tween_property(banner, "modulate:a", 0.0, 0.3)
 
 
@@ -665,6 +665,11 @@ func _on_tap(screen: Vector2) -> void:
 	var p := _screen_to_tile(screen)
 	if not state.in_bounds(p):
 		return
+	# Đồng bộ lại hình mọi quân (xám / máu) mỗi lần chạm: báo cáo M3 lần 3 thấy một lần quân đã xong lượt chưa xám.
+	UnitSprite.turn_faction = state.current_faction()
+	for su in state.units:
+		if sprites.has(su.uid):
+			sprites[su.uid].refresh(su)
 	cursor.visible = true
 	cursor.position = Vector2(p * T)
 	end_turn_armed = false
@@ -1082,8 +1087,9 @@ func _play(events: Array[Dictionary]) -> void:
 					await tw.finished
 					es.queue_free()
 				Sfx.play("bao_dong", -6.0)
-				_show_banner("Một trinh sát đã thoát về báo tin!", Color(1, 0.5, 0.42))
-				await get_tree().create_timer(0.8).timeout
+				# Báo cáo M3 lần 3: dải này dễ lỡ → giữ lâu hơn và dừng một nhịp.
+				_show_banner("Một trinh sát đã thoát về báo tin!", Color(1, 0.5, 0.42), 2.2)
+				await get_tree().create_timer(1.8).timeout
 			"lo_dien":
 				Sfx.play("lo_dien", -6.0)
 				var seen: UnitSprite = sprites.get(e["uid"])
@@ -1225,9 +1231,11 @@ func _overlay_panel() -> Array:
 
 
 func _objective_line(ten: String, st: String) -> Label:
-	var mark: String = {"dat": "★ ", "hong": "✗ ", "dang": "☆ "}[st]
-	var color: Color = {"dat": C_GOLD_LIGHT, "hong": Color(0.95, 0.5, 0.45), "dang": Color(0.9, 0.86, 0.78)}[st]
-	var text := mark + ten + (" (đã hỏng)" if st == "hong" and state.result == "" else "")
+	var mark: String = {"dat": "★ ", "hong": "✗ ", "dang": "☆ ", "xong": "✓ "}[st]
+	var color: Color = {"dat": C_GOLD_LIGHT, "hong": Color(0.95, 0.5, 0.45), "dang": Color(0.9, 0.86, 0.78),
+		"xong": Color(0.6, 0.9, 0.6)}[st]
+	var text := mark + ten + (" (đã hỏng)" if st == "hong" and state.result == "" else "") \
+		+ (" (đã xong)" if st == "xong" else "")
 	return UiKit.wrap_label(text, UiKit.FS_BODY, color)
 
 

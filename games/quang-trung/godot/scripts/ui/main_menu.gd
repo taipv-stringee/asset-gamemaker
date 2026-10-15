@@ -50,7 +50,7 @@ func _init() -> void:
 		col.add_child(_menu_button("Tiếp tục", func() -> void: continue_pressed.emit()))
 	col.add_child(_menu_button("Chiến dịch", func() -> void: campaign_pressed.emit()))
 	col.add_child(_menu_button("Sử liệu", func() -> void: codex_pressed.emit()))
-	var foot := UiKit.label("Bản thử M2 · trò chơi miễn phí", UiKit.FS_TAG, UiKit.C_MUTED)
+	var foot := UiKit.label("Bản thử M3 · trò chơi miễn phí", UiKit.FS_TAG, UiKit.C_MUTED)
 	foot.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(foot)
 

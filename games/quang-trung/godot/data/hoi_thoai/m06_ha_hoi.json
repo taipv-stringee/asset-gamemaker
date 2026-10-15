@@ -1,0 +1,74 @@
+{
+ "_ghi_chu": "Mỗi câu có 'nhan' (một trong bốn nhãn của 05 §1). 'ai' rỗng = lời dẫn. Lời HLNTC là tóm ý, không phải trích nguyên văn.",
+ "truoc": [
+  {
+   "ai": "",
+   "loi": "Nửa đêm mùng 3 Tết. Đồn Hà Hồi đứng trên gò cao, sát đường thiên lý.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "",
+   "loi": "Tin quân Tây Sơn chưa về tới đồn. Quân Thanh trong đồn đang ngủ.",
+   "nhan": "Theo HLNTC"
+  },
+  {
+   "ai": "quang_trung",
+   "loi": "Không đánh vội. Vây cho kín bốn mặt, đừng để lọt một tiếng động.",
+   "nhan": "Sáng tạo của game",
+   "ten": "Quang Trung"
+  },
+  {
+   "ai": "quang_trung",
+   "loi": "Vây xong thì gọi hàng. Được đồn mà không mất người là hơn cả.",
+   "nhan": "Sáng tạo của game",
+   "ten": "Quang Trung"
+  },
+  {
+   "ai": "",
+   "loi": "Lính tuần và chòi canh còn thức. Để chúng thấy là cả đồn dậy.",
+   "nhan": "Sáng tạo của game"
+  }
+ ],
+ "truoc_thuc": [
+  {
+   "ai": "",
+   "loi": "Nửa đêm mùng 3 Tết. Đồn Hà Hồi đứng trên gò cao, sát đường thiên lý.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "",
+   "loi": "Trinh sát lọt lưới hôm trước đã về tới đồn. Quân Thanh thức, giữ chặt lũy.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "quang_trung",
+   "loi": "Đồn đã thức thì gọi hàng khó hơn. Vây cho chặt, đủ người quanh đồn rồi hãy gọi.",
+   "nhan": "Sáng tạo của game",
+   "ten": "Quang Trung"
+  },
+  {
+   "ai": "quang_trung",
+   "loi": "Gọi không được thì đánh. Phải xong trước khi trời sáng.",
+   "nhan": "Sáng tạo của game",
+   "ten": "Quang Trung"
+  }
+ ],
+ "sau_thang": [
+  {
+   "ai": "",
+   "loi": "Theo Hoàng Lê nhất thống chí, quân Tây Sơn vây kín đồn rồi bắc loa gọi hàng.",
+   "nhan": "Theo HLNTC"
+  },
+  {
+   "ai": "",
+   "loi": "Quân trong đồn không kịp chống cự, đều ra hàng. Quân ta thu lương thực, khí giới.",
+   "nhan": "Theo HLNTC"
+  },
+  {
+   "ai": "quang_trung",
+   "loi": "Còn Ngọc Hồi. Đi tiếp, không cho chúng kịp trở tay.",
+   "nhan": "Sáng tạo của game",
+   "ten": "Quang Trung"
+  }
+ ]
+}

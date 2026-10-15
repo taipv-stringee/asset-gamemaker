@@ -11,9 +11,14 @@ func test_all_solutions(t) -> bool:
 	for f in files:
 		if not f.ends_with(".txt"):
 			continue
-		var mission := f.get_basename()
+		# <màn>__<cờ>.txt: lời giải cho biến thể có hệ quả từ màn trước (vd. m06_ha_hoi__trinh_sat_thoat: đồn đã thức).
+		var parts := f.get_basename().split("__")
+		var mission := parts[0]
+		var carry := {}
+		if parts.size() > 1:
+			carry[parts[1]] = true
 		for sd in [1, 2, 3]:
-			var r := LoiGiai.run(mission, sd, DIR + f)
+			var r := LoiGiai.run(mission, sd, DIR + f, false, carry)
 			var s: BattleState = r["state"]
 			t.eq(r["loi"], "", "%s seed %d: lời giải chạy hết" % [mission, sd])
 			t.eq(s.result, "thang", "%s seed %d: thắng" % [mission, sd])

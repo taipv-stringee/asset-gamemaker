@@ -365,6 +365,53 @@
      "url": "https://zh.wikipedia.org/zh-hans/%E9%98%AE%E6%83%A0"
     }
    ]
+  },
+  {
+   "id": "don_ha_hoi",
+   "nhom": "Địa danh",
+   "tieu_de": "Đồn Hà Hồi",
+   "nhan": "Sử liệu",
+   "noi_dung": "Đồn Hà Hồi ở vùng Thường Tín (Hà Nội ngày nay), cách Thăng Long khoảng 20 km, trên gò cao sát đường thiên lý. Quân Tây Sơn hạ đồn này vào nửa đêm mùng 3 Tết Kỷ Dậu (28/01/1789, quy đổi), hai ngày trước trận Ngọc Hồi.\n\nNhiều bài tóm tắt viết nhầm trận Hà Hồi vào đêm 30 Tết (xem mục \"Hà Hồi không phải đêm 30\"). Trong màn chơi, ao, chòi canh và lính tuần là sáng tạo của game.",
+   "nguon": [
+    {
+     "ten": "Kỷ niệm 231 năm chiến thắng Ngọc Hồi – Đống Đa (Tỉnh ủy Gia Lai)",
+     "url": "https://gialai.dcs.vn/hoat-dong-tuyen-truyen/-/view-content/67680/k-niem-231-nam-chien-thang-ngoc-hoi-dong-da-1789-2020-quang-trung-dai-pha-quan-thanh"
+    },
+    {
+     "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
+     "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
+    }
+   ]
+  },
+  {
+   "id": "goi_hang_hlntc",
+   "nhom": "Sự kiện",
+   "tieu_de": "Vây đồn, bắc loa gọi hàng",
+   "nhan": "Theo HLNTC",
+   "noi_dung": "Theo Hoàng Lê nhất thống chí, nửa đêm quân Tây Sơn tới Hà Hồi, lặng lẽ vây kín đồn, rồi bắc loa gọi hàng; quân lính dạ ran hưởng ứng như có hàng vạn người. Quân Thanh trong đồn hoảng sợ, không kịp chống cự, đều xin hàng. Quân Tây Sơn thu hết lương thực, khí giới.\n\nĐây là tóm ý, không phải nguyên văn. Các bản tóm tắt trên mạng về trận Hà Hồi đều lấy từ Hoàng Lê nhất thống chí. Luật gọi hàng trong game (vây kín rồi so sức quân hai bên) là sáng tạo để chơi được cảnh này.",
+   "nguon": [
+    {
+     "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
+     "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
+    },
+    {
+     "ten": "Quang Trung đại phá quân Thanh (Phương Nam – Văn hóa và Phát triển)",
+     "url": "https://phuongnam.vanhoavaphattrien.vn/quang-trung-dai-pha-quan-thanh-a10832.html"
+    }
+   ]
+  },
+  {
+   "id": "ha_hoi_khong_so_tu_binh",
+   "nhom": "Tranh cãi",
+   "tieu_de": "Hà Hồi có bao nhiêu quân?",
+   "nhan": "Sử liệu",
+   "noi_dung": "Các nguồn tìm được không ghi quân số trong đồn Hà Hồi, cũng không ghi số người ra hàng. Một số bài viết đưa ra con số cụ thể nhưng không dẫn nguồn.\n\nVì vậy game không nêu con số. Tám quân trong đồn ở màn chơi chỉ để cân bằng màn, không phải số liệu lịch sử.",
+   "nguon": [
+    {
+     "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
+     "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
+    }
+   ]
   }
  ]
 }

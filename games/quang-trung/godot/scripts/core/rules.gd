@@ -502,6 +502,8 @@ static func cmd_attack(state: BattleState, u: Unit, target: Unit) -> Array[Dicti
 	var n := state.strike_counter
 	state.strike_counter += 1
 	var was_asleep := target.ngu
+	if u.faction == state.factions[0] and fort_zones(state).has(state.zone_of(target.pos)):
+		state.flags["danh_trong_khu"] = true   # mục tiêu phụ "gọi hàng mà không đánh quân nào trong khu" (màn 6)
 	ev.append(_strike(state, u, target, false, n))
 	if was_asleep:
 		target.ngu = false
@@ -557,6 +559,8 @@ static func _defeat(state: BattleState, u: Unit) -> Array[Dictionary]:
 
 
 static func can_capture(state: BattleState, u: Unit) -> bool:
+	if _granary_at(state, u):
+		return true
 	var t := state.terrain_at(u.pos)
 	if not t["so_huu"] or state.are_allies(state.owner_of(u.pos), u.faction) and state.owner_of(u.pos) != "":
 		return false
@@ -570,6 +574,18 @@ static func can_capture(state: BattleState, u: Unit) -> bool:
 static func cmd_capture(state: BattleState, u: Unit) -> Array[Dictionary]:
 	var ev: Array[Dictionary] = []
 	if not can_act(state, u) or not can_capture(state, u):
+		return ev
+	if _granary_at(state, u):
+		var o: Dictionary = state.objects[u.pos]
+		state.objects.erase(u.pos)
+		var flags: Dictionary = state.flags.get("co", {})
+		flags[o.get("co", "lay_kho_luong")] = true
+		state.flags["co"] = flags
+		u.moved = true
+		u.done = true
+		ev.append({"loai": "lay_kho", "uid": u.uid, "o": u.pos})
+		ev.append_array(run_events(state))
+		ev.append_array(check_result(state))
 		return ev
 	state.owners[u.pos] = u.faction
 	u.moved = true
@@ -746,6 +762,166 @@ static func cmd_chieu_hang(state: BattleState, u: Unit, p: Vector2i) -> Array[Di
 	state.flags["hang_binh"] = int(state.flags.get("hang_binh", 0)) + 1
 	ev.append({"loai": "chieu_hang", "uid": u.uid, "o": p, "uid_moi": hb.uid})
 	return ev
+
+
+# ================================================================ khu đồn, vây đồn, gọi hàng (02 §11; màn 6)
+# mission["khu_don"] = [tên khu]. Kho lương: vật thể {"loai": "kho_luong", "co": tên cờ} (02 §12).
+
+static func fort_zones(state: BattleState) -> Array:
+	return state.mission.get("khu_don", [])
+
+
+static func _granary_at(state: BattleState, u: Unit) -> bool:
+	return state.object_at(u.pos).get("loai", "") == "kho_luong" and u.faction == state.factions[0] \
+		and (u.has_tag("tuong") or u.has_tag("chiem_lang"))
+
+
+static func zone_enemies(state: BattleState, name: String, f: String) -> Array[Unit]:
+	var cells: Array = state.zones.get(name, [])
+	var out: Array[Unit] = []
+	for e in state.enemies_of(f):
+		if cells.has(e.pos):
+			out.append(e)
+	return out
+
+
+## Ô kề ngoài khu (4 hướng).
+static func zone_ring(state: BattleState, name: String) -> Array[Vector2i]:
+	var cells: Array = state.zones.get(name, [])
+	var ring: Array[Vector2i] = []
+	for c in cells:
+		for d in DIRS:
+			var p: Vector2i = c + d
+			if state.in_bounds(p) and not cells.has(p) and not ring.has(p):
+				ring.append(p)
+	return ring
+
+
+## Ô kề ngoài khu còn hở (02 §11): đi bộ được, không có quân phe f, không nằm trong vùng khống chế của quân phe f.
+## Rỗng = khu bị vây.
+static func siege_gaps(state: BattleState, name: String, f: String) -> Array[Vector2i]:
+	var ctrl := {}
+	for u in state.units_of(f):
+		if u.has_tag("chan"):
+			for d in DIRS:
+				ctrl[u.pos + d] = true
+	var gaps: Array[Vector2i] = []
+	for p in zone_ring(state, name):
+		if int(state.terrain_at(p)["chi_phi"]["bo"]) < 0 or state.object_at(p).get("loai", "") == "quan_tan":
+			continue   # không vào được
+		var occ := state.unit_at(p)
+		if (occ != null and occ.faction == f) or ctrl.has(p):
+			continue
+		gaps.append(p)
+	return gaps
+
+
+## Khu mà quân u gọi hàng được lúc này: u có thẻ goi_hang, đứng kề ngoài khu, khu còn quân địch, đã bị vây,
+## chưa gọi khu đó trong vòng này.
+static func goi_hang_zones(state: BattleState, u: Unit) -> Array[String]:
+	var out: Array[String] = []
+	if not can_act(state, u) or not u.has_tag("goi_hang"):
+		return out
+	var tried: Dictionary = state.flags.get("goi_hang_da", {})
+	for name in fort_zones(state):
+		var cells: Array = state.zones.get(name, [])
+		if int(tried.get(name, 0)) == state.vong or cells.has(u.pos):
+			continue
+		var next_to := false
+		for d in DIRS:
+			if cells.has(u.pos + d):
+				next_to = true
+		if next_to and not zone_enemies(state, name, u.faction).is_empty() and siege_gaps(state, name, u.faction).is_empty():
+			out.append(name)
+	return out
+
+
+## Dự báo gọi hàng (tất định): máu quân ta trong 2 ô quanh khu so với máu quân trong khu × k (k = ½ nếu quá nửa đang ngủ).
+static func goi_hang_forecast(state: BattleState, name: String, f: String) -> Dictionary:
+	var cells: Array = state.zones.get(name, [])
+	var ours := 0
+	for u in state.units_of(f):
+		for c in cells:
+			if manhattan(u.pos, c) <= 2:
+				ours += u.hp
+				break
+	var foes := zone_enemies(state, name, f)
+	var theirs := 0
+	var asleep := 0
+	for e in foes:
+		theirs += e.hp
+		if e.ngu:
+			asleep += 1
+	var half := asleep * 2 > foes.size()
+	var need := ceili(theirs / 2.0) if half else theirs
+	return {"ta": ours, "dich": theirs, "can": need, "ngu_qua_nua": half, "so_quan": foes.size(), "thanh_cong": ours >= need}
+
+
+static func cmd_goi_hang(state: BattleState, u: Unit, name: String) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	if not goi_hang_zones(state, u).has(name):
+		return ev
+	var tried: Dictionary = state.flags.get("goi_hang_da", {})
+	tried[name] = state.vong
+	state.flags["goi_hang_da"] = tried
+	var fc := goi_hang_forecast(state, name, u.faction)
+	u.moved = true
+	u.done = true
+	ev.append({"loai": "goi_hang", "uid": u.uid, "khu": name, "thanh_cong": fc["thanh_cong"], "ta": fc["ta"], "can": fc["can"]})
+	if not fc["thanh_cong"]:
+		return ev   # thất bại: không có gì xảy ra, quân ngủ vẫn ngủ
+	var cells: Array = state.zones.get(name, [])
+	for e in zone_enemies(state, name, u.faction):
+		var at := e.pos
+		state.remove_unit(e)
+		var new_uid := -1
+		if state.count_toward_limit(u.faction) < int(state.limits.get(u.faction, 0)):
+			# Không đặt hàng binh lên ô đồn: để ô đồn trống cho tướng chiếm.
+			var spot := at
+			if state.terrain_at(at)["mua_linh"]:
+				spot = Vector2i(-1, -1)
+				for c in cells + zone_ring(state, name):   # ô trống trong khu, không có thì ô kề ngoài khu
+					if state.unit_at(c) == null and not state.terrain_at(c)["mua_linh"] and state.object_at(c).is_empty() \
+						and int(state.terrain_at(c)["chi_phi"]["bo"]) > 0:
+						spot = c
+						break
+			if spot != Vector2i(-1, -1):
+				var hb := state.spawn_unit("hang_binh", u.faction, spot)
+				hb.hp = 50
+				hb.moved = true
+				hb.done = true
+				new_uid = hb.uid
+				state.flags["hang_binh"] = int(state.flags.get("hang_binh", 0)) + 1
+		if new_uid == -1:
+			state.flags["tu_binh"] = int(state.flags.get("tu_binh", 0)) + 1
+		ev.append({"loai": "ra_hang", "uid": e.uid, "o": at, "uid_moi": new_uid})
+	for c in cells:
+		if state.terrain_at(c)["so_huu"]:
+			state.owners.erase(c)   # đồn thành trung lập: tướng vào chiếm
+	var flags: Dictionary = state.flags.get("co", {})
+	flags["goi_hang_" + name] = true
+	state.flags["co"] = flags
+	ev.append_array(run_events(state))
+	ev.append_array(check_result(state))
+	return ev
+
+
+## Hệ quả từ màn trước (Progress.campaign_flag), áp lúc mở màn mới trong chiến dịch:
+## mission["he_qua"] = [{"co": tên, "thuc_khu": khu, "bang": "..."}] — cờ bật thì mọi quân trong khu thức sẵn.
+static func apply_carry(state: BattleState, carried: Dictionary) -> void:
+	for h in state.mission.get("he_qua", []):
+		if not bool(carried.get(h.get("co", ""), false)):
+			continue
+		var flags: Dictionary = state.flags.get("co", {})
+		flags["he_qua_" + String(h["co"])] = true
+		state.flags["co"] = flags
+		var cells: Array = state.zones.get(h.get("thuc_khu", ""), [])
+		for u in state.units:
+			if cells.has(u.pos) and (u.ngu or u.ai_mode == "ngu"):
+				u.ngu = false
+				u.ai_mode = "giu_don"
+				u.ai_params["tam"] = u.pos
+				u.ai_params["ban_kinh"] = 0   # thức nhưng giữ chỗ: bắn quân ta vào tầm, không ra khỏi lũy
 
 
 # ================================================================ lượt
@@ -933,6 +1109,11 @@ static func side_objectives(state: BattleState) -> Array[Dictionary]:
 				ok = state.result == "thang" and _type_in_zone(state, o["quan"], o["khu"])
 			"khong_thoat":
 				ok = state.result == "thang" and int(state.flags.get("thoat", 0)) == 0
+			"goi_hang_sach":   # gọi hàng thành công khu o["khu"] mà không đánh quân nào đứng trong khu đồn
+				ok = state.result == "thang" and has_flag(state, "goi_hang_" + String(o["khu"])) \
+					and not state.flags.get("danh_trong_khu", false)
+			"hang_tu_binh":
+				ok = state.result == "thang" and int(state.flags.get("hang_binh", 0)) + int(state.flags.get("tu_binh", 0)) >= int(o["n"])
 		out.append({"ten": o.get("ten", ""), "dat": ok})
 	return out
 
@@ -964,6 +1145,14 @@ static func side_objectives_live(state: BattleState) -> Array[Dictionary]:
 			"khong_thoat":
 				if int(state.flags.get("thoat", 0)) > 0:
 					st = "hong"
+			"goi_hang_sach":
+				if state.flags.get("danh_trong_khu", false):
+					st = "hong"
+				elif has_flag(state, "goi_hang_" + String(o["khu"])):
+					st = "dat" if won else "xong"
+			"hang_tu_binh":
+				if int(state.flags.get("hang_binh", 0)) + int(state.flags.get("tu_binh", 0)) >= int(o["n"]):
+					st = "dat" if won else "xong"
 			"hang_binh_toi_thieu":
 				if int(state.flags.get("hang_binh", 0)) >= int(o["n"]):
 					st = "dat" if won else "xong"

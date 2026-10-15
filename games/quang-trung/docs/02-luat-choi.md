@@ -168,12 +168,15 @@ Tham số của màn: `tam_nhin` (đêm 2, rạng sáng 3 → 5, ngày = không 
 ## 11. Khu đồn, vây đồn, gọi hàng
 
 - **Khu đồn**: tập ô kịch bản đánh dấu (`khu_don_<id>`), gồm ô đồn và các ô lũy / doanh bên trong.
-- **Bị vây** khi mọi ô đi được **kề ngoài** khu đồn đều: có quân Tây Sơn, hoặc không vào được, hoặc nằm trong vùng khống chế của quân Tây Sơn.
+- **Bị vây** khi mọi ô đi được **kề ngoài** khu đồn đều: có quân Tây Sơn, hoặc không vào được (sông, ao, ô có quân tan), hoặc nằm trong
+  vùng khống chế của quân Tây Sơn. Trong trận, ô kề ngoài còn hở có dấu × đỏ; chạm ô trong khu thì thấy "đã bị vây / còn N ô hở".
 - **Gọi hàng** (hành động của quân có thẻ `goi_hang`: quân sư, tướng) đứng kề khu đồn đang bị vây, mỗi khu một lần mỗi lượt:
   - Thành công nếu `Σ máu quân Tây Sơn trong 2 ô quanh khu ≥ Σ máu quân địch trong khu × k`, với k = 1/2 nếu **quá nửa** quân trong khu
-    đang ngủ, k = 1 nếu không.
+    đang ngủ, k = 1 nếu không. Kết quả tất định nên bấm **Gọi hàng** thì hiện con số trước (ta / cần), rồi mới **Gọi** hay **Thôi**.
+    Gọi được ngay sau khi đi (khép vây và gọi trong cùng một lượt).
   - Thành công: mọi quân địch trong khu (kể cả quan giữ đồn) rời bản đồ; Tây Sơn nhận hàng binh trên các ô đó, số lượng
     = min(số quân hàng, chỗ trống trong giới hạn); phần còn lại tính là **tù binh** (chỉ để tính mục tiêu phụ). Đồn chuyển trung lập để tướng chiếm.
+    Hàng binh không đứng lên ô đồn: hàng binh của quân trên ô đồn đứng ô trống khác trong khu, không có thì ô kề ngoài khu. Hàng binh 50 máu, xong lượt.
   - Thất bại: không có gì xảy ra, quân gọi hàng hết lượt; nếu quân trong khu đang ngủ thì vẫn ngủ.
 
 ## 12. Vật thể và hành động đặc biệt
@@ -183,7 +186,7 @@ Tham số của màn: `tam_nhin` (đêm 2, rạng sáng 3 → 5, ngày = không 
 | **Chông sắt** | Hiện rõ. Bước vào: dừng lại, −15 máu (mộc thuẫn, voi: −5). Không mất đi |
 | **Địa lôi** | Ẩn với Tây Sơn cho đến khi giẫm phải hoặc có quân sư đứng kề. Giẫm: −30 máu, dừng lại, mất địa lôi. AI biết và tránh địa lôi của phe mình, **trừ** chế độ *Chạy* / *Rút lui* (theo *Liệt truyện*, quân Thanh tháo chạy giẫm phải địa lôi của mình) |
 | **Lửa** | Ô đang cháy (3 vòng). Quân đứng trên / bước vào: Cháy (trừ mộc thuẫn). Hết lửa: ô doanh trại thành "doanh trại cháy" (thủ 0, đi như cỏ) |
-| **Kho lương** | Quân `tuong` hoặc `chiem_lang` đứng lên rồi chọn Chiếm → cờ mục tiêu phụ |
+| **Kho lương** | Quân `tuong` hoặc `chiem_lang` (lính giáo, hàng binh) của người chơi đứng lên rồi chọn **Lấy kho lương** → cờ mục tiêu phụ, kho mất. Đi qua được |
 | **Trống báo động** | Mục 10 |
 | **Quân tan** | Mục 8 |
 | **Cầu phao** | Đi như cầu. Kịch bản có thể làm **rung** (cảnh báo) rồi **đứt** ở vòng sau: quân trên cầu rơi xuống sông và bị hạ, trừ thủy binh (chuyển sang ô sông gần nhất) |

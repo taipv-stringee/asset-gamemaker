@@ -158,15 +158,23 @@ Mỗi điểm ghi ngày âm và dương lịch.
 - **Lịch sử**: Đồn Hà Hồi (Thường Tín, cách Thăng Long khoảng 20 km, trên gò cao sát đường thiên lý) bị quân Tây Sơn hạ đêm mùng 3.
   *[Sử liệu]* Nửa đêm bí mật vây đồn, bắc loa gọi hàng, quân trong đồn không kịp kháng cự, đều ra hàng; thu lương thực, khí giới.
   *[Theo HLNTC — các bản tóm tắt dẫn trên mạng đều lấy từ HLNTC]*. Không có nguồn về quân số hay số tù binh ở Hà Hồi.
-- **Bản đồ**: 12 × 14. **Khu đồn Hà Hồi** 4 × 3 ô trên gò giữa bản đồ (1 ô đồn, còn lại lũy và doanh), kho lương, trống báo động.
-  Nam: đồn Phú Xuyên vừa chiếm (của ta).
-- **Đêm**: `tam_nhin` 2. Quân trong khu đồn **ngủ** (trừ khi màn 5 để lọt trinh sát). Ngoài khu: 2 lính tuần, 1 điểu thương ở chòi canh (thức).
+- **Bản đồ**: 12 × 14 (`data/missions/m06_ha_hoi.json`). **Khu đồn Hà Hồi** 4 × 3 ô (x 4–7, y 4–6) trên gò: đồn (5,5), doanh, lũy,
+  cổng đông (7,5) có đèn, **kho lương** (6,5), trống báo động (4,5). **Ao** bọc mặt tây và hai góc → chỉ còn 7 ô kề ngoài phải vây
+  (2 mặt bắc, 3 mặt đông, 2 mặt nam). Đường thiên lý chạy dọc phía đông. Chòi canh có đèn (10,7). Nam: đồn Phú Xuyên (8,12) của ta.
+  Ao, chòi canh, lính tuần là *[Sáng tạo của game]*.
+- **Đêm**: `tam_nhin` 2, rạng sáng vòng 12. Quân trong khu **ngủ**. Ngoài khu: 2 trường mâu tuần tra (đường cái (8,2)–(8,6); bờ tây
+  (1,3)–(1,8)), 1 điểu thương trên chòi canh (thức). Quân ta: 1 lính giáo cầm đuốc.
 - **Quân ta**: Quang Trung, 2 quân sư, 4 lính giáo, 2 hỏa mai, 1 hỏa hổ, 1 trống trận. Vàng 400; giới hạn 18; `mua_duoc`: như màn 5.
-- **Địch (Thanh)**: trong khu: `quan_giu_don`, 3 điểu thương, 2 cung tiễn, 1 đằng bài, 1 trường mâu (8 quân). Ngoài khu: 2 trường mâu tuần tra, 1 điểu thương.
-- **Thắng**: chiếm đồn Hà Hồi — bằng đánh, hoặc **gọi hàng** rồi Quang Trung chiếm (02 §11).
-- **Mục tiêu phụ**: gọi hàng thành công mà **không đánh quân nào trong khu đồn**; tổng hàng binh + tù binh ≥ 6; chiếm kho lương.
+- **Địch (Thanh)**: trong khu: `quan_giu_don`, 3 điểu thương, 2 cung tiễn, 1 đằng bài, 1 trường mâu (8 quân).
+- **Thắng**: chiếm đồn Hà Hồi — bằng đánh, hoặc **gọi hàng** rồi Quang Trung chiếm (02 §11). **Thua**: Quang Trung bị hạ; hết vòng 14 (trời sáng).
+- **Mục tiêu phụ**: gọi hàng thành công mà **không đánh quân nào trong khu đồn**; hàng binh + tù binh ≥ 6; lấy kho lương.
+- **Hệ quả màn 5** (`he_qua`): có trinh sát thoát → quân trong khu **thức sẵn** (giữ chỗ, bắn quân vào tầm, không ra khỏi lũy), gọi hàng
+  cần đủ máu (k = 1); hội thoại mở màn khác (`truoc_thuc`).
+- **Lời giải mẫu**: `tests/loi_giai/m06_ha_hoi.txt` — áp sát chòi canh ngoài tầm nhìn, hạ gọn lính chòi khi lính tuần đường cái ở xa (vòng 3),
+  hạ lính tuần ở (8,6) (vòng 5), dàn vây (vòng 6), lính giáo khóa mặt bắc rồi quân sư gọi hàng, lấy kho, Quang Trung chiếm (vòng 7), đủ 3 sao.
+  Biến thể đồn thức: `m06_ha_hoi__trinh_sat_thoat.txt` — đứng ngoài tầm bắn, rồi cùng một lượt khép vây, dồn đủ quân vào trong 2 ô và gọi hàng (vòng 7–8).
 - **Tôn Sĩ Nghị không ở đây** (ông ở Thăng Long).
-- **Mở Sử liệu**: đồn Hà Hồi; cảnh gọi hàng trong HLNTC; vì sao không có số tù binh.
+- **Mở Sử liệu**: đồn Hà Hồi; vây đồn, bắc loa gọi hàng (HLNTC); Hà Hồi có bao nhiêu quân.
 
 ## Màn 7 — Khương Thượng (đạo Đô đốc Long)
 

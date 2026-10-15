@@ -7,7 +7,10 @@ func _init() -> void:
 	for a in OS.get_cmdline_user_args():
 		var kv: PackedStringArray = a.trim_prefix("--").split("=")
 		args[kv[0]] = kv[1] if kv.size() > 1 else ""
-	var r := LoiGiai.run(args.get("man", "m04_gian_khau"), int(args.get("seed", "1")), args.get("lenh", ""), true)
+	var carry := {}
+	for c in String(args.get("co", "")).split(",", false):
+		carry[c] = true   # --co=trinh_sat_thoat: chạy như có hệ quả từ màn trước
+	var r := LoiGiai.run(args.get("man", "m04_gian_khau"), int(args.get("seed", "1")), args.get("lenh", ""), true, carry)
 	var s: BattleState = r["state"]
 	if r["loi"] != "":
 		print("!! ", r["loi"])

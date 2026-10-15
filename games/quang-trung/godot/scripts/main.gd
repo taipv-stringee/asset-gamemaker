@@ -9,6 +9,7 @@ extends Node
 ##   --moi               xóa tiến trình và file lưu trước khi chạy (kiểm thử từ đầu)
 ##   --mo-het            mở khóa mọi màn đã làm (kiểm thử)
 ##   --menu              vẫn đi qua menu (dùng kèm --kich-ban để kiểm thử menu, hội thoại, lưu)
+##   --loi-giai=<file>   (kèm --man) chạy trước một lời giải (cú pháp tests/loi_giai.gd) rồi mới hiện trận — để chụp / chạm ở giữa màn
 ## Không có tham số nào: vào menu chính như người chơi.
 
 var battle: Battle
@@ -39,7 +40,13 @@ func _ready() -> void:
 	var direct := args.has("man") or args.has("kich-ban") or args.has("anh") or _auto
 	if direct and not args.has("menu"):
 		_mission = args.get("man", "m_thu")
-		_new_battle()
+		if args.has("loi-giai"):
+			var r: Dictionary = LoiGiai.run(_mission, _seed if _seed != 0 else 1, args["loi-giai"])
+			if r["loi"] != "":
+				push_error("Lời giải: " + r["loi"])
+			_new_battle(r["state"])
+		else:
+			_new_battle()
 	else:
 		_show_menu()
 	if args.has("kich-ban"):
@@ -146,7 +153,7 @@ func _start_story_battle(id: String) -> void:
 	Progress.clear_battle()
 	_set_screen(null)
 	_new_battle()
-	await _dialogue(Story.dialogue(battle.state.mission.get("hoi_thoai", ""), "truoc"))
+	await _dialogue(Story.dialogue(battle.state.mission.get("hoi_thoai", ""), _part_by_flag("truoc", "truoc_theo_co")))
 	if battle != null:
 		battle.hint("bat_dau")
 		battle.hint("vong", battle.state.vong)
@@ -179,7 +186,10 @@ func _new_battle(from: BattleState = null) -> void:
 	else:
 		# Trong chiến dịch mỗi lần chơi một seed mới (trừ khi kiểm thử truyền --seed).
 		var sd := _seed if _seed != 0 or not _story else randi_range(1, 999999)
-		battle.start(_mission, sd)
+		var s := Missions.new_battle(_mission, sd)
+		if _story:
+			Rules.apply_carry(s, Progress.data().get("co", {}))   # hệ quả màn trước (màn 5 → màn 6)
+		battle.start_from_state(s)
 
 
 func _on_battle_exit() -> void:
@@ -204,13 +214,17 @@ func _on_battle_finished(result: String) -> void:
 	if result == "thang":
 		opened = Progress.record_win(battle.state)
 		# Hội thoại cuối theo cờ trong trận (màn 5: có trinh sát thoát → "sau_thang_lot").
-		var part := "sau_thang"
-		var by_flag: Dictionary = battle.state.mission.get("sau_thang_theo_co", {})
-		for flag in by_flag:
-			if Rules.has_flag(battle.state, flag):
-				part = by_flag[flag]
-		await _dialogue(Story.dialogue(battle.state.mission.get("hoi_thoai", ""), part))
+		await _dialogue(Story.dialogue(battle.state.mission.get("hoi_thoai", ""), _part_by_flag("sau_thang", "sau_thang_theo_co")))
 	battle.show_result(opened)
+
+
+## Phần hội thoại đổi theo cờ trận: mission[key] = {cờ: phần} (cờ đầu tiên đang bật thắng; không có thì `default`).
+func _part_by_flag(default: String, key: String) -> String:
+	var by_flag: Dictionary = battle.state.mission.get(key, {})
+	for flag in by_flag:
+		if Rules.has_flag(battle.state, flag):
+			return by_flag[flag]
+	return default
 
 
 ## Hội thoại giữa trận do sự kiện kịch bản gọi (màn 2: gặp Nguyễn Thiếp, duyệt binh).

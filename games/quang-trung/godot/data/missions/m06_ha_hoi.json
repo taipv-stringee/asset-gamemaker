@@ -1,0 +1,404 @@
+{
+ "id": "m06_ha_hoi",
+ "so": 6,
+ "ten": "Đêm mùng 3: vây Hà Hồi",
+ "ten_ngan": "Hà Hồi",
+ "ngay": "Nửa đêm mùng 3 Tết Kỷ Dậu (28/01/1789, quy đổi)",
+ "dia_danh": "Đồn Hà Hồi (Thường Tín, Hà Nội ngày nay), cách Thăng Long khoảng 20 km",
+ "gioi_thieu": "Đồn Hà Hồi đứng trên gò cao sát đường thiên lý. Nửa đêm mùng 3, quân Tây Sơn bí mật vây kín đồn rồi bắc loa gọi hàng. Quân trong đồn không kịp chống cự, ra hàng cả; quân ta thu lương thực, khí giới.",
+ "nhan_gioi_thieu": "Theo HLNTC",
+ "muc_tieu_chinh": "Quang Trung chiếm đồn Hà Hồi trước khi hết vòng 14 — đánh, hoặc vây kín rồi gọi hàng.",
+ "dieu_kien_thua": "Quang Trung bị hạ, hoặc hết vòng 14 (trời sáng).",
+ "hoi_thoai": "m06_ha_hoi",
+ "nhac": "dem",
+ "ghi_chu": "Màn đêm thứ hai (04 §Màn 6). Gò, ao, chòi canh, lính tuần là Sáng tạo của game; vây đồn và gọi hàng theo HLNTC.",
+ "ban_do": [
+  "tt...rr.=.t^",
+  "t..rrrr.=..t",
+  "..v..hh.=v..",
+  "r..~~~hh=..r",
+  "rr~~lDDl=.rr",
+  "rr~~lFD==.rr",
+  "r.~~lDDl=..r",
+  "...~~~hh=.h.",
+  "t...hh..=..t",
+  "..rr....=...",
+  "rrr..v..=rrr",
+  ".L......=..t",
+  "t...v..LF..t",
+  "^t......=.t^"
+ ],
+ "chu_o": {
+  "5,5": "thanh",
+  "8,12": "tayson",
+  "7,12": "tayson"
+ },
+ "phe": [
+  "tayson",
+  "thanh"
+ ],
+ "vang": {
+  "tayson": 400,
+  "thanh": 0
+ },
+ "gioi_han": {
+  "tayson": 18,
+  "thanh": 99
+ },
+ "mua_duoc": {
+  "tayson": [
+   "linh_giao",
+   "hoa_mai",
+   "thuy_binh",
+   "hoa_ho",
+   "quan_su",
+   "trong_tran",
+   "voi_chien",
+   "than_cong"
+  ],
+  "thanh": []
+ },
+ "tam_nhin": 2,
+ "rang_sang": 12,
+ "khu": {
+  "ha_hoi": [
+   [
+    4,
+    4
+   ],
+   [
+    5,
+    4
+   ],
+   [
+    6,
+    4
+   ],
+   [
+    7,
+    4
+   ],
+   [
+    4,
+    5
+   ],
+   [
+    5,
+    5
+   ],
+   [
+    6,
+    5
+   ],
+   [
+    7,
+    5
+   ],
+   [
+    4,
+    6
+   ],
+   [
+    5,
+    6
+   ],
+   [
+    6,
+    6
+   ],
+   [
+    7,
+    6
+   ]
+  ]
+ },
+ "khu_don": [
+  "ha_hoi"
+ ],
+ "hien_khu": [
+  {
+   "khu": "ha_hoi",
+   "mau": "vang",
+   "ten": "đồn Hà Hồi",
+   "ghi": "Khu đồn Hà Hồi: vây kín mọi ô quanh khu, rồi cho quân sư hay Quang Trung đứng kề khu mà Gọi hàng."
+  }
+ ],
+ "vat_the": [
+  {
+   "loai": "trong",
+   "o": [
+    4,
+    5
+   ],
+   "khu": "ha_hoi"
+  },
+  {
+   "loai": "den",
+   "o": [
+    7,
+    5
+   ]
+  },
+  {
+   "loai": "den",
+   "o": [
+    10,
+    7
+   ]
+  },
+  {
+   "loai": "kho_luong",
+   "o": [
+    6,
+    5
+   ],
+   "co": "lay_kho_luong"
+  }
+ ],
+ "quan": [
+  {
+   "id": "quang_trung",
+   "phe": "tayson",
+   "x": 8,
+   "y": 11,
+   "tuong_chinh": true
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 6,
+   "y": 11,
+   "duoc": true
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 7,
+   "y": 11
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 9,
+   "y": 11
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 10,
+   "y": 11
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 6,
+   "y": 12
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 9,
+   "y": 12
+  },
+  {
+   "id": "quan_su",
+   "phe": "tayson",
+   "x": 5,
+   "y": 12
+  },
+  {
+   "id": "quan_su",
+   "phe": "tayson",
+   "x": 10,
+   "y": 12
+  },
+  {
+   "id": "hoa_ho",
+   "phe": "tayson",
+   "x": 7,
+   "y": 13
+  },
+  {
+   "id": "trong_tran",
+   "phe": "tayson",
+   "x": 9,
+   "y": 13
+  },
+  {
+   "id": "quan_giu_don",
+   "phe": "thanh",
+   "x": 5,
+   "y": 5,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "cung_tien",
+   "phe": "thanh",
+   "x": 4,
+   "y": 4,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "cung_tien",
+   "phe": "thanh",
+   "x": 7,
+   "y": 4,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 5,
+   "y": 4,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 6,
+   "y": 4,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 5,
+   "y": 6,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "truong_mau",
+   "phe": "thanh",
+   "x": 6,
+   "y": 6,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "dang_bai",
+   "phe": "thanh",
+   "x": 7,
+   "y": 5,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "truong_mau",
+   "phe": "thanh",
+   "x": 8,
+   "y": 2,
+   "ai": "tuan_tra",
+   "diem": [
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     6
+    ]
+   ]
+  },
+  {
+   "id": "truong_mau",
+   "phe": "thanh",
+   "x": 1,
+   "y": 3,
+   "ai": "tuan_tra",
+   "diem": [
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     8
+    ]
+   ]
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 10,
+   "y": 7,
+   "ai": "giu_don",
+   "tam": [
+    10,
+    7
+   ],
+   "ban_kinh": 0
+  }
+ ],
+ "he_qua": [
+  {
+   "co": "trinh_sat_thoat",
+   "thuc_khu": "ha_hoi"
+  }
+ ],
+ "truoc_theo_co": {
+  "he_qua_trinh_sat_thoat": "truoc_thuc"
+ },
+ "thang": {
+  "loai": "chiem_o",
+  "o": [
+   5,
+   5
+  ]
+ },
+ "thua_het_luot": 14,
+ "ly_do_het_luot": "Trời sáng. Quân Thanh ở Ngọc Hồi đã biết tin.",
+ "muc_tieu_phu": [
+  {
+   "loai": "goi_hang_sach",
+   "khu": "ha_hoi",
+   "ten": "Gọi hàng mà không đánh quân nào trong khu đồn"
+  },
+  {
+   "loai": "hang_tu_binh",
+   "n": 6,
+   "ten": "Hàng binh và tù binh ít nhất 6"
+  },
+  {
+   "loai": "co",
+   "co": "lay_kho_luong",
+   "ten": "Lấy kho lương"
+  }
+ ],
+ "goi_y": [
+  {
+   "khi": "bat_dau",
+   "loi": "Đồn Hà Hồi (viền vàng) đang ngủ. Vây kín các ô quanh khu đồn, rồi cho quân sư hay Quang Trung đứng kề khu mà Gọi hàng."
+  },
+  {
+   "khi": "vong",
+   "n": 1,
+   "loi": "Dấu × đỏ quanh đồn là chỗ còn hở. Ô có quân ta đứng, hoặc kề một lính giáo (khống chế), là đã kín. Ao bọc phía tây: chỉ còn 2 ô mặt bắc, 3 ô mặt đông, 2 ô mặt nam."
+  },
+  {
+   "khi": "vong",
+   "n": 2,
+   "loi": "Lính tuần và lính trên chòi canh còn thức: thấy quân ta là báo động, cả đồn dậy. Hạ gọn từng tên trong một lượt. Đứng gần đèn thì bị thấy từ xa."
+  },
+  {
+   "khi": "vong",
+   "n": 4,
+   "loi": "Gọi hàng thành công khi tổng máu quân ta trong 2 ô quanh khu đủ lớn so với máu quân trong đồn (quá nửa đang ngủ thì chỉ cần một nửa). Bấm Gọi hàng để xem con số trước khi gọi."
+  },
+  {
+   "khi": "vong",
+   "n": 6,
+   "loi": "Quân ra hàng thành hàng binh, đồn bỏ trống: Quang Trung vào Chiếm. Kho lương trong khu: tướng hay lính giáo đứng lên rồi Lấy kho lương."
+  }
+ ],
+ "su_lieu": [
+  "don_ha_hoi",
+  "goi_hang_hlntc",
+  "ha_hoi_khong_so_tu_binh"
+ ]
+}

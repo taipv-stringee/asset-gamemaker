@@ -124,7 +124,9 @@ màn → trận → kết quả) do `scripts/main.gd` điều khiển; các màn
   - `thang` (`chiem_o`, `ha_het`, `vao_vung`, `so_lang`, `co`, `tat_ca`), `thua_het_luot`, `muc_tieu_phu` (02 §13).
   - Quân: `ai` (`tan_cong`, `giu_don` + `tam` / `ban_kinh`, `tuan_tra` + `diem`, `ngu`, `dung_yen`, `do_tham` + `khu` / `thay` / `diem`).
   - Hệ quả sang màn sau: `co_khi_thoat` (cờ bật khi có trinh sát thoát), `luu_co` (cờ ghi vào tiến trình khi thắng, `Progress.campaign_flag`),
-    `sau_thang_theo_co` {cờ: phần hội thoại} (hội thoại cuối khác đi theo cờ).
+    `he_qua` [{co, thuc_khu}] (màn sau: cờ bật thì quân trong khu thức sẵn; `Rules.apply_carry`, chỉ trong chiến dịch),
+    `truoc_theo_co` / `sau_thang_theo_co` {cờ: phần hội thoại} (hội thoại mở / kết khác đi theo cờ).
+  - Vây đồn (màn 6): `khu_don` [tên khu], vật thể `kho_luong` {co}.
 - Sự kiện quá riêng để làm bằng dữ liệu (cầu phao đứt ở màn 9...): khi cần mới thêm script `missions/<id>.gd`.
 
 ## 7. Kiểm thử

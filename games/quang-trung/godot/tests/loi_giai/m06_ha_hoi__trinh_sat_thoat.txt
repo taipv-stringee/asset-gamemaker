@@ -1,0 +1,63 @@
+# Biến thể màn 6 khi màn 5 để lọt trinh sát: quân trong đồn thức, giữ chỗ và bắn quân vào tầm; gọi hàng cần đủ máu (không giảm một nửa).
+# Cách làm: đứng ngoài tầm bắn, rồi cùng một lượt khép vây và dồn đủ quân vào trong 2 ô quanh khu, gọi hàng ngay.
+# Vòng 1: áp sát chòi canh từ phía nam, ngoài tầm nhìn (chòi thấy 2 ô, ô sáng đèn thì thấy từ 5 ô)
+di 9 12 9 10
+di 10 11 11 10
+di 9 11 10 10
+di 7 13 8 13
+di 6 11 4 12
+het
+# Vòng 2: lính tuần đường cái đứng ở (8,6) đầu lượt địch → không vào trong 2 ô của nó
+di 9 10 9 9
+di 11 10 11 9
+het
+# Vòng 3: lính tuần đường cái đã về (8,2) → hạ gọn lính chòi canh trong một lượt
+danh 9 9 9 8 10 7
+danh 11 9 11 7 10 7
+danh_neu 10 10 10 8 10 7
+toi 8 11 8 9
+toi 7 11 7 9
+toi 6 12 6 10
+toi 8 13 8 10
+toi 5 12 5 10
+toi 10 12 9 11
+het
+# Vòng 4: lính tuần đường cái sắp về (8,6) → rời các ô sáng đèn chòi canh, đứng ngoài 2 ô của (8,6)
+di 10 8 10 9
+di 11 7 11 9
+toi 7 9 7 8
+toi 6 10 6 9
+toi 5 10 5 9
+toi 9 11 9 10
+toi 8 10 8 10
+het
+# Vòng 5: hạ lính tuần ở (8,6) từ các ô ngoài tầm bắn của quân trong đồn; cả đoàn dồn về phía đông nam
+danh 8 9 8 7 8 6
+danh_neu 10 9 9 6 8 6
+danh_neu 9 8 9 7 8 6
+toi 11 9 9 4
+toi 8 10 8 8
+toi 9 10 9 8
+toi 5 9 7 8
+toi 6 9 8 9
+toi 4 12 6 10
+toi 9 13 9 10
+het
+# Vòng 6: một lính giáo vòng lên (9,2), ngoài tầm cung tiễn; các quân khác đứng yên ngoài tầm bắn
+di 9 6 9 2
+het
+# Vòng 7: cùng một lượt khép vây và dồn đủ quân vào trong 2 ô quanh khu (đồn đã thức: cần đủ máu, không được một nửa), rồi gọi hàng
+di 9 2 7 3
+di 9 7 8 5
+di 8 7 6 7
+di 9 8 9 4
+di 9 9 9 5
+di 8 8 8 7
+di 9 10 9 6
+di 8 9 6 8
+di 6 10 5 8
+goi_hang 7 9 7 7
+het
+# Vòng 8: Quang Trung vào chiếm đồn; lính giáo lấy kho lương
+chiem 8 5 6 5
+toi_loai quang_trung 5 5

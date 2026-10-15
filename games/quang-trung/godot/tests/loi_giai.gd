@@ -12,6 +12,7 @@ extends RefCounted
 ##                             được ô đó, chiêu hàng nếu kề quân tan (quân sư), không thì chờ
 ##   toi_loai LOAI TX TY       như "toi" cho quân ta đầu tiên thuộc loại LOAI chưa đi (không có thì bỏ qua)
 ##   mua_neu X Y LOAI          như "mua" nhưng không đủ vàng / đồn có quân thì bỏ qua
+##   goi_hang X Y [X2 Y2]      quân ở X Y (đi tới X2 Y2 trước nếu có) gọi hàng khu đồn đứng kề (02 §11); lỗi nếu không gọi được / không thành
 ##   ai_khong_mua              như "ai" nhưng máy không mua lính
 ##   ai_giu                    như "ai_khong_mua" và máy cũng không chiếm ô (để hoãn điều kiện chuyển giai đoạn)
 ##   ai                        để máy (SimpleAI) đi nốt các quân ta còn lại trong lượt này
@@ -20,8 +21,9 @@ extends RefCounted
 
 
 ## Trả về {"state": BattleState, "loi": String rỗng nếu chạy hết, "nhat_ky": Array[String]}.
-static func run(mission: String, p_seed: int, path: String, verbose := false) -> Dictionary:
+static func run(mission: String, p_seed: int, path: String, verbose := false, carry: Dictionary = {}) -> Dictionary:
 	var s := Missions.new_battle(mission, p_seed)
+	Rules.apply_carry(s, carry)   # hệ quả màn trước (vd. {"trinh_sat_thoat": true} cho màn 6)
 	var log: Array[String] = []
 	var f := FileAccess.open(path, FileAccess.READ)
 	if f == null:
@@ -110,6 +112,24 @@ static func run(mission: String, p_seed: int, path: String, verbose := false) ->
 				ev = _toward(s, tu, Vector2i(int(w[3]), int(w[4])))
 				if verbose:
 					print("   %s → %s" % [line, tu.pos])
+			"goi_hang":
+				var gu := s.unit_at(Vector2i(int(w[1]), int(w[2])))
+				if gu == null:
+					return {"state": s, "loi": "không có quân ở %s,%s (%s)" % [w[1], w[2], line], "nhat_ky": log}
+				if w.size() >= 5 and Vector2i(int(w[3]), int(w[4])) != gu.pos:
+					ev = Rules.cmd_move(s, gu, Vector2i(int(w[3]), int(w[4])))
+					if ev.is_empty():
+						return {"state": s, "loi": "không đi được: " + line, "nhat_ky": log}
+				var zs := Rules.goi_hang_zones(s, gu)
+				if zs.is_empty():
+					var holes: Array = []
+					for zn in Rules.fort_zones(s):
+						holes.append(Rules.siege_gaps(s, zn, gu.faction))
+					return {"state": s, "loi": "không gọi hàng được (ô hở %s): %s" % [holes, line], "nhat_ky": log}
+				var gev := Rules.cmd_goi_hang(s, gu, zs[0])
+				if not gev[0]["thanh_cong"]:
+					return {"state": s, "loi": "gọi hàng không thành (%d/%d): %s" % [gev[0]["ta"], gev[0]["can"], line], "nhat_ky": log}
+				ev.append_array(gev)
 			"mua_neu":
 				ev = Rules.cmd_recruit(s, s.current_faction(), Vector2i(int(w[1]), int(w[2])), w[3])
 			"mua":

@@ -21,6 +21,7 @@ const OBJECT_TEX := {
 	"quan_tan": "res://assets/ui/quan_tan.png",
 	"trong": "res://assets/objects/obj_trong_strip2.png",
 	"den": "res://assets/objects/obj_den_strip2.png",
+	"kho_luong": "res://assets/objects/obj_kho_luong_strip2.png",
 }
 
 enum Mode { IDLE, SELECTED, MOVED, TARGETING, FORECAST, BUSY, ENDED }
@@ -569,6 +570,13 @@ func _terrain_info(p: Vector2i) -> void:
 	for z in state.mission.get("hien_khu", []):
 		if (state.zones.get(z["khu"], []) as Array).has(p) and z.has("ghi"):
 			obj_note += "\n" + String(z["ghi"])
+	var zn := state.zone_of(p)
+	if Rules.fort_zones(state).has(zn) and not Rules.zone_enemies(state, zn, PLAYER).is_empty():
+		var gaps := Rules.siege_gaps(state, zn, PLAYER).size()
+		obj_note += "\nĐã bị vây: quân sư / tướng đứng kề khu thì Gọi hàng được." if gaps == 0 else \
+			"\nChưa bị vây: còn %d ô quanh khu (dấu ×) chưa có quân ta đứng hay lính giáo khống chế." % gaps
+	if obj == "kho_luong":
+		obj_note += "\nKho lương: tướng hay lính giáo đứng lên rồi Lấy kho lương."
 	if Rules.is_dark(state) and not vis.has(p) and not Rules.lit_tiles(state).has(p):
 		obj_note += "\nTrong bóng tối: không thấy quân địch."
 	info_label.text = "   ".join(parts) + obj_note
@@ -771,7 +779,10 @@ func _show_actions() -> void:
 			info_label.text = "Chạm quân địch (ô đỏ) để xem dự báo."
 			overlay.queue_redraw()])
 	if Rules.can_capture(state, u):
-		list.append(["Chiếm", func() -> void: _run(Rules.cmd_capture(state, u))])
+		var granary: bool = state.object_at(u.pos).get("loai", "") == "kho_luong"
+		list.append(["Lấy kho lương" if granary else "Chiếm", func() -> void: _run(Rules.cmd_capture(state, u))])
+	for zname in Rules.goi_hang_zones(state, u):
+		list.append(["Gọi hàng", func() -> void: _open_goi_hang(u, zname)])
 	var ch := Rules.chieu_hang_targets(state, u)
 	if not ch.is_empty():
 		list.append(["Chiêu hàng", func() -> void: _run(Rules.cmd_chieu_hang(state, u, ch[0]))])
@@ -781,6 +792,24 @@ func _show_actions() -> void:
 	_unit_info(u)
 	_set_buttons(list)
 	overlay.queue_redraw()
+
+
+## Gọi hàng (02 §11): kết quả tất định nên cho xem trước con số rồi mới gọi.
+func _open_goi_hang(u: Unit, zname: String) -> void:
+	var fc := Rules.goi_hang_forecast(state, zname, u.faction)
+	name_label.text = "Gọi hàng · %s" % _zone_title(zname)
+	# Bảng dưới chỉ đủ 3 dòng (báo cáo M2): viết gọn.
+	info_label.text = "Ta: %d máu trong 2 ô quanh khu.\nCần %d (%s).\n%s" % [
+		fc["ta"], fc["can"], ("đồn %d máu, ngủ: ½" % fc["dich"]) if fc["ngu_qua_nua"] else ("đồn %d máu, đã thức" % fc["dich"]),
+		"✓ Đủ: sẽ ra hàng." if fc["thanh_cong"] else "✗ Chưa đủ: gọi sẽ không thành."]
+	_set_buttons([["Gọi", func() -> void: _run(Rules.cmd_goi_hang(state, u, zname))], ["Thôi", _show_actions]])
+
+
+func _zone_title(zname: String) -> String:
+	for z in state.mission.get("hien_khu", []):
+		if z["khu"] == zname and z.has("ten"):
+			return String(z["ten"])
+	return "khu đồn"
 
 
 func _undo() -> void:
@@ -1090,6 +1119,31 @@ func _play(events: Array[Dictionary]) -> void:
 				# Báo cáo M3 lần 3: dải này dễ lỡ → giữ lâu hơn và dừng một nhịp.
 				_show_banner("Một trinh sát đã thoát về báo tin!", Color(1, 0.5, 0.42), 2.2)
 				await get_tree().create_timer(1.8).timeout
+			"goi_hang":
+				Sfx.play("len_cap" if e["thanh_cong"] else "lo_dien", -3.0)
+				if e["thanh_cong"]:
+					_show_banner("Quân trong đồn ra hàng!", C_GOLD_LIGHT, 1.8)
+				else:
+					_show_banner("Gọi hàng không thành: cần %d máu quanh khu, mới có %d." % [e["can"], e["ta"]], Color(1, 0.6, 0.45), 1.8)
+				await get_tree().create_timer(1.0).timeout
+			"ra_hang":
+				var rs: UnitSprite = sprites.get(e["uid"])
+				if rs != null:
+					sprites.erase(e["uid"])
+					var tw := create_tween()
+					tw.tween_property(rs, "modulate:a", 0.0, 0.25)
+					await tw.finished
+					rs.queue_free()
+				var nu2 := state.unit_by_uid(int(e["uid_moi"]))
+				if nu2 != null and not sprites.has(nu2.uid):
+					var ns := _add_sprite(nu2)
+					ns.modulate.a = 0.0
+					create_tween().tween_property(ns, "modulate:a", 1.0, 0.25)
+				elif nu2 == null:
+					_float_text(Vector2(e["o"] * T) + Vector2(0, -6), "Tù binh", C_GOLD_LIGHT)
+			"lay_kho":
+				Sfx.play("chiem", -3.0)
+				_show_banner("Đã lấy kho lương!", C_GOLD_LIGHT)
 			"lo_dien":
 				Sfx.play("lo_dien", -6.0)
 				var seen: UnitSprite = sprites.get(e["uid"])
@@ -1149,6 +1203,15 @@ func _float_text(pos: Vector2, text: String, color: Color) -> void:
 
 
 func _draw_overlay() -> void:
+	# Khu đồn chưa bị vây: dấu × đỏ trên các ô kề ngoài khu còn hở (02 §11) — chỉ trong lượt người chơi.
+	if state.current_faction() == PLAYER and state.result == "":
+		for zname in Rules.fort_zones(state):
+			if Rules.zone_enemies(state, zname, PLAYER).is_empty():
+				continue
+			for p in Rules.siege_gaps(state, zname, PLAYER):
+				var c := Vector2(p * T) + Vector2(T / 2.0, T / 2.0)
+				overlay.draw_line(c + Vector2(-5, -5), c + Vector2(5, 5), Color(1, 0.35, 0.3, 0.9), 2.0)
+				overlay.draw_line(c + Vector2(-5, 5), c + Vector2(5, -5), Color(1, 0.35, 0.3, 0.9), 2.0)
 	# Khu kịch bản cho người chơi thấy ("hien_khu": [{khu, mau: vang|do}]): vùng thắng, đường thoát của trinh sát…
 	for z in state.mission.get("hien_khu", []):
 		var c := Color(1.0, 0.35, 0.25) if z.get("mau", "vang") == "do" else C_GOLD_LIGHT

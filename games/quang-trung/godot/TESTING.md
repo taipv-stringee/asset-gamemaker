@@ -5,7 +5,9 @@ Dành cho **agent kiểm thử chạy trên máy chủ dự án** và cho chủ 
 ## 1. Kiểm thử tự động (máy tính)
 
 1. `GODOT --headless --path . -s res://tests/run_tests.gd` → phải `0 lỗi`.
-   Bộ test có **lời giải mẫu** cho mọi màn đánh (`tests/loi_giai/<màn>.txt`, màn 0, 1, 2, 4, 5): chạy trên luật thật với 3 seed, phải thắng đủ sao.
+   Bộ test có **lời giải mẫu** cho mọi màn đánh (`tests/loi_giai/<màn>.txt`, màn 0, 1, 2, 4, 5, 6): chạy trên luật thật với 3 seed, phải thắng đủ sao.
+   `<màn>__<cờ>.txt` là lời giải cho biến thể có hệ quả từ màn trước (màn 6 khi đồn đã thức).
+   Chụp / chạm giữa màn: `--man=<id> --loi-giai=<file lời giải cắt ngắn> --kich-ban=…` chạy trước lời giải rồi mới hiện trận.
 2. Chạy từng kịch bản chạm trong `tests/kich_ban/` (lệnh chạy và giá trị mong đợi của từng file: `tests/kich_ban/README.md`):
    - `co_ban.txt`, `quan_tan_choi_lai.txt`, `dem_m04.txt`: vào thẳng trận. `cuon_danh_sach.txt`: cuộn danh sách Chiến dịch.
    - `tron_m04.txt`: `GODOT --path . -- --menu --moi --mo-het --seed=1 --kich-ban=res://tests/kich_ban/tron_m04.txt` — đi từ menu,
@@ -24,7 +26,7 @@ tắt; không ảnh hưởng gì).
 
 ## 2. Chơi thử trên điện thoại
 
-### 2.1. M3 — màn 0, 1, 2, 3, 5 (mới)
+### 2.1. M3 — màn 0, 1, 2, 3, 5, 6 (mới)
 
 Xóa dữ liệu app (hoặc `--moi`) để thấy thứ tự mở màn và gợi ý hướng dẫn từ đầu.
 
@@ -44,6 +46,9 @@ Xóa dữ liệu app (hoặc `--moi`) để thấy thứ tự mở màn và gợ
 | 12 | Màn 5: trinh sát | Dải đỏ ở mép bắc ("đường về Hà Hồi"; chạm vào ô thì có chữ). Chạm trinh sát → "dò thám: thấy quân ta trong 3 ô sẽ chạy". Đưa quân vào trong 3 ô rồi Hết lượt → dải chữ "Trinh sát thấy quân ta, bỏ chạy về báo tin!", nó chạy về phía bắc. Để một con tới dải đỏ → nó biến mất, dải chữ "Một trinh sát đã thoát…", ≡ → mục tiêu phụ ✗ |
 | 13 | Màn 5: thần công, Thanh Quyết | Vòng 3 thần công xuất hiện ở đồn của ta (gợi ý). Thần công đã đi thì không có nút Đánh trong lượt đó. Chiếm đồn Thanh Quyết → hội thoại ngắn, mua lính được ở đó. Quân địch bị hạ trên đồn không để lại cờ rách |
 | 14 | Màn 5: thắng | Quang Trung chiếm Nhật Tảo. Không ai thoát → hội thoại "bắt hết toán do thám"; có người thoát → hội thoại khác ("có người lọt lưới"). Quân địch không bị xám trong lượt của ta (chỉ quân ta đã đi mới xám) |
+| 15 | Màn 6 (Hà Hồi, đêm): vây | Khu đồn có viền vàng nét đứt; quanh khu có dấu × đỏ ở ô còn hở (mặt tây là ao, không cần vây). Chạm ô trong khu → "Chưa bị vây: còn N ô…". Đặt quân / lính giáo khống chế từng ô → dấu × mất dần; đủ thì "Đã bị vây" |
+| 16 | Màn 6: gọi hàng | Quân sư (hoặc Quang Trung) đứng kề khu đã bị vây → nút **Gọi hàng** → bảng dưới hiện "Ta: … máu", "Cần …", "✓ Đủ / ✗ Chưa đủ" với nút Gọi / Thôi. Gọi đủ → dải "Quân trong đồn ra hàng!", quân Thanh trong khu thành hàng binh (50 máu), đồn trống; Quang Trung vào Chiếm là thắng. Gọi thiếu → "Gọi hàng không thành…", quân gọi hết lượt, vòng đó không gọi lại được |
+| 17 | Màn 6: kho lương, mục tiêu phụ, đồn thức | Lính giáo đứng lên kho lương (bao thóc dưới mái rạ) → nút "Lấy kho lương". Đánh quân trong khu → mục tiêu "Gọi hàng mà không đánh…" ✗. Đồn thức (khi màn 5 có trinh sát thoát): hội thoại mở màn khác ("Trinh sát lọt lưới hôm trước…"), quân trong khu không có chữ z, bắn quân vào tầm, gọi hàng cần đủ máu |
 
 ### 2.2. M2 — lát cắt dọc màn 4
 

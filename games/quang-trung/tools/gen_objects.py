@@ -21,6 +21,8 @@ C = {
     "red_d": (120, 22, 24), "red": (190, 40, 36), "red_l": (232, 86, 60),
     "gold": (232, 182, 52), "fire_d": (214, 92, 24), "fire": (250, 160, 40), "fire_l": (255, 236, 150),
     "shadow": (0, 0, 0, 90),
+    "sack_d": (150, 120, 76), "sack": (196, 166, 112), "sack_l": (226, 204, 150),
+    "straw_d": (130, 96, 40), "straw": (186, 146, 64), "straw_l": (222, 190, 104),
 }
 
 
@@ -106,9 +108,41 @@ def den(frame):
     return img
 
 
+def kho_luong(frame):
+    """Kho lương: mái rạ trên bốn cột, dưới là các bao thóc xếp chồng; frame 1 giống frame 0 (vật tĩnh)."""
+    img = Image.new("RGBA", (T, T), (0, 0, 0, 0))
+    shadow(img, 16, 29, 13)
+    for x in (5, 26):                       # cột
+        rect(img, x, 12, x + 1, 28, "wood_d")
+    # bao thóc: 3 dưới, 2 giữa, 1 trên
+    def sack(cx, cy):
+        for y in range(cy - 3, cy + 4):
+            for x in range(cx - 4, cx + 5):
+                if ((x - cx) / 4.6) ** 2 + ((y - cy) / 3.6) ** 2 <= 1:
+                    px(img, x, y, "sack_l" if y < cy - 1 else ("sack_d" if y > cy + 1 else "sack"))
+        px(img, cx, cy - 3, "ink")
+        px(img, cx - 1, cy - 4, "ink")
+        px(img, cx + 1, cy - 4, "ink")
+    for cx in (9, 16, 23):
+        sack(cx, 25)
+    for cx in (12, 20):
+        sack(cx, 20)
+    sack(16, 15)
+    # mái rạ
+    for y in range(3, 12):
+        w = 6 + (y - 3) * 2
+        for x in range(16 - w, 16 + w + 1):
+            if 0 <= x < T:
+                band = (x + y * 2) % 5
+                px(img, x, y, "straw_l" if band == 0 else ("straw_d" if y > 9 else "straw"))
+    rect(img, 0, 11, 31, 11, "straw_d")
+    rect(img, 10, 2, 22, 2, "ink")
+    return img
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
-    for name, fn in (("trong", trong), ("den", den)):
+    for name, fn in (("trong", trong), ("den", den), ("kho_luong", kho_luong)):
         strip = Image.new("RGBA", (T * 2, T), (0, 0, 0, 0))
         for f in range(2):
             strip.paste(fn(f), (T * f, 0))

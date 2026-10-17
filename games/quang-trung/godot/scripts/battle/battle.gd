@@ -561,38 +561,39 @@ func _terrain_info(p: Vector2i) -> void:
 	var t := state.terrain_at(p)
 	portrait.texture = null
 	name_label.text = t["ten"]
-	var parts: PackedStringArray = ["Thủ %+d" % int(t["thu"])]
-	if Rules.tile_income(state, p) > 0:
-		parts.append("+%d vàng mỗi vòng" % Rules.tile_income(state, p))
-	if t["mua_linh"]:
-		parts.append("mua lính")
-	var o := state.owner_of(p)
-	if t["so_huu"]:
-		parts.append("chủ: %s" % _faction_name(o))
-	var obj: String = state.object_at(p).get("loai", "")
-	var obj_note: String = {"trong": "\nTrống báo động: quân địch kêu hay đứng cạnh trống thì cả khu đồn thức.",
-		"den": "\nĐèn: ô này và 4 ô kề luôn sáng; lính canh thấy quân ta ở đây từ 5 ô.",
-		"quan_tan": "\nQuân tan: không đi vào được; quân sư chiêu hàng được."}.get(obj, "")
-	# Khung chữ chỉ 3 dòng: trạng thái vây thay cho ghi chú khu (ghi chú vẫn còn trong gợi ý), không thì bị cắt mất
-	# (kiểm thử M3 lần 4, lỗi 1).
+	# Khung chữ chỉ 3 dòng (~33 ký tự mỗi dòng): ô khu đồn còn quân địch thì xếp theo thứ tự quan trọng — "Thủ", trạng thái
+	# vây (một dòng), rồi ghi chú vật thể bản ngắn; dòng thừa bị cắt là dòng ít quan trọng (kiểm thử M3 lần 4 lỗi 1, lần 5 lỗi 1).
 	var zn := state.zone_of(p)
-	if Rules.fort_zones(state).has(zn) and not Rules.zone_enemies(state, zn, PLAYER).is_empty():
-		var zone_name := "Khu đồn"
-		for z in state.mission.get("hien_khu", []):
-			if z["khu"] == zn and z.has("ten"):
-				zone_name = String(z["ten"]).left(1).to_upper() + String(z["ten"]).substr(1)
+	var siege := Rules.fort_zones(state).has(zn) and not Rules.zone_enemies(state, zn, PLAYER).is_empty()
+	var parts: PackedStringArray = ["Thủ %+d" % int(t["thu"])]
+	if not siege:
+		if Rules.tile_income(state, p) > 0:
+			parts.append("+%d vàng mỗi vòng" % Rules.tile_income(state, p))
+		if t["mua_linh"]:
+			parts.append("mua lính")
+		if t["so_huu"]:
+			parts.append("chủ: %s" % _faction_name(state.owner_of(p)))
+	var lines: PackedStringArray = ["   ".join(parts)]
+	if siege:
 		var gaps := Rules.siege_gaps(state, zn, PLAYER).size()
-		obj_note += ("\n%s đã bị vây: quân sư / tướng đứng kề khu thì Gọi hàng được." % zone_name) if gaps == 0 else \
-			("\n%s chưa bị vây: còn %d ô hở (dấu ×), cần quân ta đứng hay lính giáo kề." % [zone_name, gaps])
+		lines.append("Đã bị vây: Gọi hàng được." if gaps == 0 else "Chưa bị vây: còn %d ô hở (dấu ×)." % gaps)
 	else:
 		for z in state.mission.get("hien_khu", []):
 			if (state.zones.get(z["khu"], []) as Array).has(p) and z.has("ghi"):
-				obj_note += "\n" + String(z["ghi"])
-	if obj == "kho_luong":
-		obj_note += "\nKho lương: tướng hay lính giáo đứng lên rồi Lấy kho lương."
+				lines.append(String(z["ghi"]))
+	var obj: String = state.object_at(p).get("loai", "")
+	var notes: Dictionary = {"trong": "Trống báo động: quân địch kêu hay đứng cạnh trống thì cả khu đồn thức.",
+		"den": "Đèn: ô này và 4 ô kề luôn sáng; lính canh thấy quân ta ở đây từ 5 ô.",
+		"quan_tan": "Quân tan: không đi vào được; quân sư chiêu hàng được.",
+		"kho_luong": "Kho lương: tướng hay lính giáo đứng lên rồi Lấy kho lương."}
+	if siege:
+		notes = {"trong": "Trống: địch kêu là cả đồn thức.", "den": "Đèn: ô quanh luôn sáng.",
+			"quan_tan": "Quân tan: quân sư chiêu hàng.", "kho_luong": "Kho lương: tướng / lính giáo lấy."}
+	if notes.has(obj):
+		lines.append(notes[obj])
 	if Rules.is_dark(state) and not vis.has(p) and not Rules.lit_tiles(state).has(p):
-		obj_note += "\nTrong bóng tối: không thấy quân địch."
-	info_label.text = "   ".join(parts) + obj_note
+		lines.append("Trong bóng tối: không thấy quân địch.")
+	info_label.text = "\n".join(lines)
 
 
 func _faction_name(f: String) -> String:

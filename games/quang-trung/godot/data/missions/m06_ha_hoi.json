@@ -384,7 +384,7 @@
   {
    "khi": "vong",
    "n": 1,
-   "loi": "Lính tuần và lính trên chòi canh còn thức: thấy quân ta là báo động, cả đồn dậy. Hạ gọn từng tên trong một lượt. Ô cạnh đèn và quanh lính ta cầm đuốc luôn sáng, địch thấy từ xa: để lính cầm đuốc xa đồn và lính canh.",
+   "loi": "Lính tuần, lính chòi canh còn thức: thấy quân ta là báo động, cả đồn dậy. Hạ gọn từng tên trong một lượt. Đèn và lính ta cầm đuốc làm sáng ô quanh, địch thấy từ xa.",
    "khong_co": "he_qua_trinh_sat_thoat"
   },
   {
@@ -400,13 +400,13 @@
   {
    "khi": "bat_dau",
    "neu_co": "he_qua_trinh_sat_thoat",
-   "loi": "Trinh sát lọt lưới đã báo tin: quân trong đồn Hà Hồi (viền vàng) đã thức, giữ lũy, đánh quân ta vào tầm. Vẫn vây kín các ô quanh khu rồi Gọi hàng, nhưng đồn thức thì cần gấp đôi máu so với khi ngủ; chưa đủ thì đánh vào."
+   "loi": "Trinh sát lọt lưới đã báo tin: quân trong đồn Hà Hồi (viền vàng) đã thức, đánh quân ta vào tầm. Gọi hàng cần gấp đôi máu so với khi đồn ngủ; chưa đủ thì đánh."
   },
   {
    "khi": "vong",
    "n": 1,
    "neu_co": "he_qua_trinh_sat_thoat",
-   "loi": "Đừng áp sát lũy từng quân một: dồn quân ngoài tầm, rồi cùng vây kín và Gọi hàng ngay trong lượt đó. Lính tuần, lính chòi canh thấy quân ta là báo động. Ô cạnh đèn và quanh lính cầm đuốc luôn sáng, địch thấy từ xa."
+   "loi": "Đừng áp sát lũy từng quân một: dồn quân ngoài tầm, rồi cùng vây kín và Gọi hàng trong lượt đó. Đèn và lính ta cầm đuốc làm sáng ô quanh, địch thấy từ xa."
   }
  ],
  "su_lieu": [

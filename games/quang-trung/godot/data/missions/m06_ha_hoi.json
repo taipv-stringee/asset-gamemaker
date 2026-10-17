@@ -373,17 +373,19 @@
  "goi_y": [
   {
    "khi": "bat_dau",
-   "loi": "Đồn Hà Hồi (viền vàng) đang ngủ. Vây kín các ô quanh khu đồn, rồi cho quân sư hay Quang Trung đứng kề khu mà Gọi hàng."
-  },
-  {
-   "khi": "vong",
-   "n": 1,
-   "loi": "Dấu × đỏ quanh đồn là chỗ còn hở. Ô có quân ta đứng, hoặc kề một lính giáo (khống chế), là đã kín. Ao bọc phía tây: chỉ còn 2 ô mặt bắc, 3 ô mặt đông, 2 ô mặt nam."
+   "loi": "Đồn Hà Hồi (viền vàng) đang ngủ. Vây kín các ô quanh khu đồn, rồi cho quân sư hay Quang Trung đứng kề khu mà Gọi hàng.",
+   "khong_co": "he_qua_trinh_sat_thoat"
   },
   {
    "khi": "vong",
    "n": 2,
-   "loi": "Lính tuần và lính trên chòi canh còn thức: thấy quân ta là báo động, cả đồn dậy. Hạ gọn từng tên trong một lượt. Đứng gần đèn thì bị thấy từ xa."
+   "loi": "Dấu × đỏ quanh đồn là chỗ còn hở. Ô có quân ta đứng, hoặc kề một lính giáo (khống chế), là đã kín. Ao bọc phía tây: chỉ còn 2 ô mặt bắc, 3 ô mặt đông, 2 ô mặt nam."
+  },
+  {
+   "khi": "vong",
+   "n": 1,
+   "loi": "Lính tuần và lính trên chòi canh còn thức: thấy quân ta là báo động, cả đồn dậy. Hạ gọn từng tên trong một lượt. Ô cạnh đèn và quanh lính ta cầm đuốc luôn sáng, địch thấy từ xa: để lính cầm đuốc xa đồn và lính canh.",
+   "khong_co": "he_qua_trinh_sat_thoat"
   },
   {
    "khi": "vong",
@@ -394,6 +396,17 @@
    "khi": "vong",
    "n": 6,
    "loi": "Quân ra hàng thành hàng binh, đồn bỏ trống: Quang Trung vào Chiếm. Kho lương trong khu: tướng hay lính giáo đứng lên rồi Lấy kho lương."
+  },
+  {
+   "khi": "bat_dau",
+   "neu_co": "he_qua_trinh_sat_thoat",
+   "loi": "Trinh sát lọt lưới đã báo tin: quân trong đồn Hà Hồi (viền vàng) đã thức, giữ lũy, đánh quân ta vào tầm. Vẫn vây kín các ô quanh khu rồi Gọi hàng, nhưng đồn thức thì cần gấp đôi máu so với khi ngủ; chưa đủ thì đánh vào."
+  },
+  {
+   "khi": "vong",
+   "n": 1,
+   "neu_co": "he_qua_trinh_sat_thoat",
+   "loi": "Đừng áp sát lũy từng quân một: dồn quân ngoài tầm, rồi cùng vây kín và Gọi hàng ngay trong lượt đó. Lính tuần, lính chòi canh thấy quân ta là báo động. Ô cạnh đèn và quanh lính cầm đuốc luôn sáng, địch thấy từ xa."
   }
  ],
  "su_lieu": [

@@ -41,7 +41,9 @@ func _ready() -> void:
 	if direct and not args.has("menu"):
 		_mission = args.get("man", "m_thu")
 		if args.has("loi-giai"):
-			var r: Dictionary = LoiGiai.run(_mission, _seed if _seed != 0 else 1, args["loi-giai"])
+			# Nạp lúc chạy, không gọi class_name: tests/ bị loại khỏi bản xuất (kiểm thử M3 lần 4: APK không mở được).
+			var lg: GDScript = load("res://tests/loi_giai.gd")
+			var r: Dictionary = lg.run(_mission, _seed if _seed != 0 else 1, args["loi-giai"])
 			if r["loi"] != "":
 				push_error("Lời giải: " + r["loi"])
 			_new_battle(r["state"])

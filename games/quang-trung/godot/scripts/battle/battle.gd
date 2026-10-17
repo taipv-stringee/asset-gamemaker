@@ -97,6 +97,8 @@ func start_from_state(s: BattleState) -> void:
 
 # ================================================================ gợi ý hướng dẫn (06 §8)
 # Màn khai báo "goi_y": [{"khi": "bat_dau|chon_quan|sau_di|du_bao|mua_linh|len_cap|vong", "n": vòng, "loi": "..."}].
+# "neu_co" / "khong_co": cờ trận (vd. "he_qua_trinh_sat_thoat") phải bật / tắt thì gợi ý mới hiện — cho các bản màn đổi theo
+# hệ quả màn trước (kiểm thử M3 lần 4: bản đồn đã thức vẫn hiện gợi ý "đang ngủ").
 # Mỗi gợi ý hiện một lần (lưu trong tiến trình), không chặn bản đồ; xem lại trong bảng tạm dừng. Chỉ hiện trong chiến dịch.
 
 func hint(trigger: String, n := 0) -> void:
@@ -106,6 +108,8 @@ func hint(trigger: String, n := 0) -> void:
 	for i in list.size():
 		var h: Dictionary = list[i]
 		if h.get("khi", "") != trigger or (trigger == "vong" and int(h.get("n", 0)) != n):
+			continue
+		if (h.has("neu_co") and not Rules.has_flag(state, h["neu_co"])) or (h.has("khong_co") and Rules.has_flag(state, h["khong_co"])):
 			continue
 		var id := "%s/%d" % [state.mission_id, i]
 		if Progress.hint_seen(id) or _hint_queue.has(id):
@@ -542,6 +546,8 @@ func _unit_info(u: Unit) -> void:
 		notes.append("đang Cháy")
 	if u.ngu:
 		notes.append("đang ngủ")
+	if u.duoc and Rules.is_dark(state):
+		notes.append("cầm đuốc: ô quanh sáng, địch thấy từ xa")
 	if u.ai_mode == "do_tham":
 		notes.append("dò thám: thấy quân ta trong %d ô sẽ chạy" % int(u.ai_params.get("thay", 3)))
 	elif u.ai_mode == "chay" and u.ai_params.has("khu"):
@@ -567,14 +573,21 @@ func _terrain_info(p: Vector2i) -> void:
 	var obj_note: String = {"trong": "\nTrống báo động: quân địch kêu hay đứng cạnh trống thì cả khu đồn thức.",
 		"den": "\nĐèn: ô này và 4 ô kề luôn sáng; lính canh thấy quân ta ở đây từ 5 ô.",
 		"quan_tan": "\nQuân tan: không đi vào được; quân sư chiêu hàng được."}.get(obj, "")
-	for z in state.mission.get("hien_khu", []):
-		if (state.zones.get(z["khu"], []) as Array).has(p) and z.has("ghi"):
-			obj_note += "\n" + String(z["ghi"])
+	# Khung chữ chỉ 3 dòng: trạng thái vây thay cho ghi chú khu (ghi chú vẫn còn trong gợi ý), không thì bị cắt mất
+	# (kiểm thử M3 lần 4, lỗi 1).
 	var zn := state.zone_of(p)
 	if Rules.fort_zones(state).has(zn) and not Rules.zone_enemies(state, zn, PLAYER).is_empty():
+		var zone_name := "Khu đồn"
+		for z in state.mission.get("hien_khu", []):
+			if z["khu"] == zn and z.has("ten"):
+				zone_name = String(z["ten"]).left(1).to_upper() + String(z["ten"]).substr(1)
 		var gaps := Rules.siege_gaps(state, zn, PLAYER).size()
-		obj_note += "\nĐã bị vây: quân sư / tướng đứng kề khu thì Gọi hàng được." if gaps == 0 else \
-			"\nChưa bị vây: còn %d ô quanh khu (dấu ×) chưa có quân ta đứng hay lính giáo khống chế." % gaps
+		obj_note += ("\n%s đã bị vây: quân sư / tướng đứng kề khu thì Gọi hàng được." % zone_name) if gaps == 0 else \
+			("\n%s chưa bị vây: còn %d ô hở (dấu ×), cần quân ta đứng hay lính giáo kề." % [zone_name, gaps])
+	else:
+		for z in state.mission.get("hien_khu", []):
+			if (state.zones.get(z["khu"], []) as Array).has(p) and z.has("ghi"):
+				obj_note += "\n" + String(z["ghi"])
 	if obj == "kho_luong":
 		obj_note += "\nKho lương: tướng hay lính giáo đứng lên rồi Lấy kho lương."
 	if Rules.is_dark(state) and not vis.has(p) and not Rules.lit_tiles(state).has(p):

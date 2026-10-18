@@ -218,13 +218,17 @@ Mỗi điểm ghi ngày âm và dương lịch.
 - **Viện binh**: vòng 3, Đô đốc Bảo + 3 voi ở sườn tây bắc (lối Đại Áng, gần đê), hội thoại "Đại Áng".
 - **Địch** (12 quân, bản thử để chơi thử; bản phác là ~18): Hứa Thế Hanh giữ cổng trong (6,7), Trương Triều Long, Thượng Duy Thăng
   (cả ba `toi_thieu_1` + `rut_khi_yeu 50`: không bị hạ, rút về mép bắc, sang màn 9); 1 pháo binh, 1 cung tiễn trong đồn; 4 điểu thương,
-  1 đằng bài, 2 trường mâu (`rut_khi_yeu 30`). Đồn không mua thêm (`khong_thu_nhap`, vàng 0) — bản phác ghi ngân sách 600, bỏ khi chơi thử.
+  1 đằng bài, 2 trường mâu (`rut_khi_yeu 50`: còn sống mà dưới 50 máu thì rút). Đồn không mua thêm (`khong_thu_nhap`, vàng 0) — bản phác
+  ghi ngân sách 600, bỏ khi dò lời giải. Thêm 2 địa lôi của Thanh trên đê Yên Duyên: quân rút lui hoảng loạn giẫm phải (*Liệt truyện*).
 - **Thắng**: Quang Trung chiếm đồn Ngọc Hồi. Thắng thì ghi quân ta còn sống (`luu_quan`) cho màn 9.
 - **Hứa Thế Hanh rút về sông** là *[Sáng tạo của game]*, để giữ được cả hai phiên bản nơi ông tử trận (sử Thanh: bờ sông khi chặn hậu;
   cách kể phổ biến ở Việt Nam: Ngọc Hồi).
-- **Mục tiêu phụ**: thắng trước vòng 15; hạ ≥ 3 quân Thanh khi chúng đứng ở đê Yên Duyên hay Đầm Mực (`ha_tren_khu`); không mất mộc thuẫn
+- **Mục tiêu phụ**: thắng trước vòng 15; hạ ≥ 2 quân Thanh trên đường rút phía bắc — bãi bắc đồn, đê Yên Duyên, Đầm Mực, hàng 1–4
+  (`ha_tren_khu`; bản phác: ≥ 3 ở Đầm Mực, giảm khi bớt quân Thanh); không mất mộc thuẫn
   nào trước khi một mộc thuẫn qua hai hàng chông (`khong_mat_truoc_co`, cờ `qua_chong` do sự kiện `vao_khu`).
-- **Lời giải mẫu**: chưa có (đang dò bằng lệnh `ai_huong` / `don_danh`); màn đang chơi thử để chỉnh độ khó.
+- **Lời giải mẫu**: `tests/loi_giai/m08_ngoc_hoi.txt` — dùng lệnh máy-đi-hộ `ai_huong` / `don_danh` / `chiem_neu`: dồn lên cánh đông với
+  mộc thuẫn đi đầu, Bảo đánh sườn tây đồn, đánh quân rút trên đường bắc, Quang Trung chiếm đồn vòng 13, đủ 3 sao (seed 1–3). Tìm bằng cách
+  thử hàng chục biến thể kịch bản; số quân Thanh hiện tại là mức máy-đi-hộ thắng được, cần người chơi thật xác nhận độ khó.
 - **Mở Sử liệu**: mộc thuẫn (ván ghép hay bó rơm); voi chiến; Lục doanh; chông sắt và địa lôi ở Ngọc Hồi.
 
 ## Màn 9 — Cầu phao sông Nhị – vào Thăng Long

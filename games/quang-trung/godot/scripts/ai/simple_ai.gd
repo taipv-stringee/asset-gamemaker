@@ -289,7 +289,8 @@ static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 			base -= 12.0   # chông: −15 máu (quân Thanh tránh; phe người chơi khi máy chơi thay thì phải qua chông mới tới đồn)
 		if state.object_at(p).get("loai", "") == "dia_loi" and p != original:
 			base -= 25.0   # địa lôi đã biết
-		base -= float(threat.get(p, 0)) * danger_w
+		if u.ai_mode != "rut_lui":
+			base -= float(threat.get(p, 0)) * danger_w   # quân rút lui cứ chạy: không thì kẹt lại khi quân ta đông (màn 8)
 		if u.tuong_chinh and int(threat.get(p, 0)) >= u.hp + 20:
 			base -= 200.0  # có thể bị hạ ở lượt sau
 		if state.terrain_at(p)["mua_linh"] and state.owner_of(p) == u.faction and not u.tuong_chinh:

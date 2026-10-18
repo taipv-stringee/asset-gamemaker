@@ -159,7 +159,8 @@ static func _trap_known(state: BattleState, u: Unit, p: Vector2i) -> bool:
 		"chong":
 			return true
 		"dia_loi":
-			return obj.get("lo", false) or obj.get("phe", "") == u.faction
+			# Quân đang Chạy / Rút lui hoảng loạn, không còn nhớ chỗ địa lôi của mình (Liệt truyện: giẫm phải mà chết).
+			return obj.get("lo", false) or (obj.get("phe", "") == u.faction and not _fleeing(u))
 	return false
 
 

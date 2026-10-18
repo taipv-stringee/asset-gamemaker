@@ -298,6 +298,58 @@
    [
     12,
     3
+   ],
+   [
+    0,
+    4
+   ],
+   [
+    1,
+    4
+   ],
+   [
+    2,
+    4
+   ],
+   [
+    3,
+    4
+   ],
+   [
+    4,
+    4
+   ],
+   [
+    5,
+    4
+   ],
+   [
+    6,
+    4
+   ],
+   [
+    7,
+    4
+   ],
+   [
+    8,
+    4
+   ],
+   [
+    9,
+    4
+   ],
+   [
+    10,
+    4
+   ],
+   [
+    11,
+    4
+   ],
+   [
+    12,
+    4
    ]
   ],
   "mep_bac": [
@@ -956,8 +1008,8 @@
   {
    "khu": "dam_muc",
    "mau": "do",
-   "ten": "đê Yên Duyên – Đầm Mực",
-   "ghi": "Đê Yên Duyên, Đầm Mực: đường rút của quân Thanh về Thăng Long."
+   "ten": "đường rút phía bắc",
+   "ghi": "Đường rút về Thăng Long: bãi bắc đồn, đê Yên Duyên, Đầm Mực."
   }
  ],
  "vat_the": [
@@ -1214,6 +1266,22 @@
     13
    ],
    "phe": "thanh"
+  },
+  {
+   "loai": "dia_loi",
+   "o": [
+    3,
+    3
+   ],
+   "phe": "thanh"
+  },
+  {
+   "loai": "dia_loi",
+   "o": [
+    5,
+    3
+   ],
+   "phe": "thanh"
   }
  ],
  "quan": [
@@ -1373,7 +1441,7 @@
     6
    ],
    "ban_kinh": 0,
-   "rut_khi_yeu": 30
+   "rut_khi_yeu": 50
   },
   {
    "id": "dieu_thuong",
@@ -1386,7 +1454,7 @@
     8
    ],
    "ban_kinh": 1,
-   "rut_khi_yeu": 30
+   "rut_khi_yeu": 50
   },
   {
    "id": "dieu_thuong",
@@ -1399,7 +1467,7 @@
     8
    ],
    "ban_kinh": 1,
-   "rut_khi_yeu": 30
+   "rut_khi_yeu": 50
   },
   {
    "id": "dieu_thuong",
@@ -1412,7 +1480,7 @@
     9
    ],
    "ban_kinh": 2,
-   "rut_khi_yeu": 30
+   "rut_khi_yeu": 50
   },
   {
    "id": "dieu_thuong",
@@ -1425,7 +1493,7 @@
     9
    ],
    "ban_kinh": 2,
-   "rut_khi_yeu": 30
+   "rut_khi_yeu": 50
   },
   {
    "id": "dang_bai",
@@ -1438,7 +1506,7 @@
     10
    ],
    "ban_kinh": 2,
-   "rut_khi_yeu": 30
+   "rut_khi_yeu": 50
   },
   {
    "id": "cung_tien",
@@ -1451,7 +1519,7 @@
     6
    ],
    "ban_kinh": 1,
-   "rut_khi_yeu": 30
+   "rut_khi_yeu": 50
   },
   {
    "id": "truong_mau",
@@ -1464,7 +1532,7 @@
     9
    ],
    "ban_kinh": 2,
-   "rut_khi_yeu": 30
+   "rut_khi_yeu": 50
   },
   {
    "id": "truong_mau",
@@ -1477,7 +1545,7 @@
     9
    ],
    "ban_kinh": 2,
-   "rut_khi_yeu": 30
+   "rut_khi_yeu": 50
   }
  ],
  "vien_binh": [
@@ -1546,8 +1614,8 @@
   {
    "loai": "ha_tren_khu",
    "khu": "dam_muc",
-   "n": 3,
-   "ten": "Hạ ít nhất 3 quân Thanh ở đê Yên Duyên hay Đầm Mực"
+   "n": 2,
+   "ten": "Hạ ít nhất 2 quân Thanh trên đường rút phía bắc (đê Yên Duyên, Đầm Mực)"
   },
   {
    "loai": "khong_mat_truoc_co",

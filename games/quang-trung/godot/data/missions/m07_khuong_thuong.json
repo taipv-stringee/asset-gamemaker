@@ -119,7 +119,7 @@
    "khu": "khuong_thuong",
    "mau": "vang",
    "ten": "đồn Khương Thượng",
-   "ghi": "Đồn Khương Thượng trên gò Loa Sơn. Sầm Nghi Đống giữ ô đồn."
+   "ghi": "Đồn Khương Thượng trên gò Loa Sơn."
   }
  ],
  "vat_the": [
@@ -325,7 +325,7 @@
     },
     {
      "loai": "bang",
-     "chu": "Đồn Khương Thượng bỏ trống: Đô đốc Long vào Chiếm."
+     "chu": "Đồn Khương Thượng bỏ trống: Đô đốc Long vào Chiếm. Coi chừng pháo binh."
     }
    ]
   }
@@ -365,7 +365,7 @@
   {
    "khi": "vong",
    "n": 3,
-   "loi": "Sầm Nghi Đống giữ ô đồn trên gò, máu không xuống dưới 1. Đánh ông còn 1 máu thì ông rời trận; khi ấy Đô đốc Long vào Chiếm đồn."
+   "loi": "Sầm Nghi Đống giữ ô đồn, máu không xuống dưới 1, hồi máu mỗi vòng. Còn 1 máu thì ông rời trận. Pháo binh trên gò bắn xa 2–4 ô: đừng để Long đứng trong tầm."
   },
   {
    "khi": "vong",

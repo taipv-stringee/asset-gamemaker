@@ -17,6 +17,7 @@ var _portrait: TextureRect
 var _name: Label
 var _text: Label
 var _hint: Label
+var _tag: Label   # nhãn nguồn của câu (05 §1) — kiểm thử M3 lần 6: hội thoại chưa hiện nhãn
 
 
 func _init() -> void:
@@ -68,6 +69,13 @@ func _init() -> void:
 	_name = UiKit.label("", UiKit.FS_HEAD + 1, UiKit.C_GOLD_LIGHT, true)
 	_name.position = Vector2(12, 5)
 	box.add_child(_name)
+	_tag = UiKit.source_tag("")
+	_tag.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	_tag.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	_tag.offset_left = -150
+	_tag.offset_right = -12
+	_tag.offset_top = 7
+	box.add_child(_tag)
 	var skip := UiKit.button("Bỏ qua", _skip)
 	skip.set_anchors_preset(Control.PRESET_TOP_RIGHT)
 	skip.offset_left = -96
@@ -99,6 +107,10 @@ func _next() -> void:
 	_name.text = line.get("ten", "")
 	_name.position.x = 104 if _frame.visible else 12
 	_text.text = line.get("loi", "")
+	var nhan: String = line.get("nhan", "")
+	_tag.visible = nhan != ""
+	_tag.text = "[%s]" % nhan
+	_tag.add_theme_color_override("font_color", UiKit.LABEL_COLORS.get(nhan, UiKit.C_MUTED))
 	# Lời dẫn: nghiêng màu giấy cũ, không bảng tên.
 	_text.add_theme_color_override("font_color", UiKit.C_PAPER if who != "" else Color(0.85, 0.8, 0.7))
 	_text.visible_ratio = 0.0

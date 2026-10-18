@@ -400,6 +400,7 @@ static func cmd_move(state: BattleState, u: Unit, target: Vector2i, fog := false
 	for i in range(1, path.size()):
 		if state.object_at(path[i]).get("loai", "") == "lua":
 			ev.append_array(_catch_fire(state, u))   # bước vào ô lửa: Cháy (02 §12)
+			u.khoa_hoan_tac = true   # như phục kích: đã bị Cháy thì không hoàn tác được (kiểm thử M3 lần 6)
 			break
 	if ambush.has("dich"):
 		ev.append({"loai": "phuc_kich", "uid": u.uid, "dich": ambush["dich"], "o": target})

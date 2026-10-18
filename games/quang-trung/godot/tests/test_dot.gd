@@ -88,6 +88,8 @@ func test_walk_into_fire(t) -> bool:
 	var ev := Rules.cmd_move(s2, lg2, Vector2i(1, 1))
 	t.eq(lg2.chay_turns, 2, "bước vào ô lửa: Cháy tới hết lượt sau của mình")
 	t.check(ev.any(func(e: Dictionary) -> bool: return e["loai"] == "chay"), "sự kiện Cháy")
+	t.eq(Rules.cmd_undo_move(s2, lg2), [] as Array[Dictionary], "đã bước vào lửa thì không Hoàn tác được (kiểm thử M3 lần 6)")
+	t.eq(lg2.pos, Vector2i(1, 1), "vẫn đứng trên ô lửa")
 	return true
 
 

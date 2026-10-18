@@ -128,9 +128,10 @@ func _start_story_only(m: Dictionary) -> void:
 	_set_screen(stage)
 	for part in m.get("canh", []):
 		await _dialogue(Story.dialogue(m.get("hoi_thoai", ""), part))
-	var sb := SaBan.new().setup(m)
-	_set_screen(sb)
-	await sb.done
+	if m.has("sa_ban"):   # lời kết (màn K) không có sa bàn
+		var sb := SaBan.new().setup(m)
+		_set_screen(sb)
+		await sb.done
 	var opened := Progress.record_story(m)
 	var names: PackedStringArray = []
 	for id in opened:
@@ -191,6 +192,7 @@ func _new_battle(from: BattleState = null) -> void:
 		var s := Missions.new_battle(_mission, sd)
 		if _story:
 			Rules.apply_carry(s, Progress.data().get("co", {}))   # hệ quả màn trước (màn 5 → màn 6)
+			Rules.apply_army(s, Progress.data().get("quan_mang_theo", []))   # quân còn sống cuối màn 8 → màn 9
 		battle.start_from_state(s)
 
 

@@ -1,0 +1,21 @@
+{
+ "id": "m10_loi_ket",
+ "so": "K",
+ "loai": "chuyen",
+ "ten": "Lời kết",
+ "ten_ngan": "Lời kết",
+ "ngay": "Mùng 5 Tết Kỷ Dậu (30/01/1789) và về sau",
+ "dia_danh": "Thăng Long",
+ "gioi_thieu": "Quang Trung vào Thăng Long. Lời kết kể những gì xảy ra sau trận: người ở lại, người ra đi, và lễ cầu siêu ở gò Đống Đa ngày nay.",
+ "nhan_gioi_thieu": "Sử liệu",
+ "muc_tieu_chinh": "Màn chuyện, không có trận đánh.",
+ "hoi_thoai": "m10_loi_ket",
+ "nhac": "chu_de",
+ "canh": [
+  "loi_ket"
+ ],
+ "su_lieu": [
+  "le_quynh",
+  "canh_dao"
+ ]
+}

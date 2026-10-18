@@ -235,17 +235,23 @@ Mỗi điểm ghi ngày âm và dương lịch.
 
 - **Lịch sử**: Mùng 5, cầu phao sông Nhị đứt; Hứa Thế Hanh, Trương Triều Long, Thượng Duy Thăng tử trận; Tôn Sĩ Nghị chạy về nước.
   Quang Trung vào Thăng Long trưa hoặc chiều mùng 5 — sớm hơn lời hẹn mùng 7. *[Sử liệu; hai phiên bản về cầu phao]*
-- **Bản đồ**: 12 × 18. Nam: đường từ Ngọc Hồi (quân ta xuất phát). Tây bắc: **khu thành Thăng Long** (vùng thắng). Đông: sông Nhị chạy dọc,
-  **cầu phao** nối sang bờ đông; đầu cầu bờ tây là doanh trại Thanh.
-- **Quân ta**: Quang Trung + tối đa **10 quân còn sống cuối màn 8** (người chơi chọn; mặc định theo cấp giảm dần), giữ cấp và KN, đầy máu,
-  hết trạng thái; Đô đốc Bảo không sang. Nếu chơi 8 trước 7 vẫn lấy từ ảnh chụp cuối màn 8. **Không mua lính**, không vàng. Giới hạn 16.
-- **Địch**: Tôn Sĩ Nghị (`toi_thieu_1`, chế độ *Chạy* sang bờ đông qua cầu; bị đánh thì chạy ngay); Hứa Thế Hanh và hai tổng binh
-  (*Chặn hậu* ở đầu cầu bờ tây; bị hạ bình thường); tàn quân.
-- **Cầu phao**: đầu vòng 4 cầu **rung** (cảnh báo), đầu vòng 5 **đứt** (hoặc ngay khi Tôn Sĩ Nghị qua hết cầu, nếu sớm hơn; luôn có rung trước 1 vòng).
-- **Thắng**: hạ cả ba tướng chặn hậu **và** Quang Trung vào khu thành Thăng Long. Không hạ được Tôn Sĩ Nghị (mọi nguồn: ông thoát).
-- **Mục tiêu phụ**: vào thành trước vòng 8 ("trước mùng 7"); tổng hàng binh ≥ 5.
-- **Cảnh kết**: Sử liệu hiện **hai phiên bản**: Tôn Sĩ Nghị ra lệnh chặt cầu, Hứa Thế Hanh can và sai người kéo cương ngựa đưa Nghị đi
-  "giữ quốc thể" (sử Thanh); hay quân chen nhau làm gãy cầu, Nghị "ngựa không kịp đóng yên" (HLNTC).
+- **Bản đồ**: 12 × 18 (`data/missions/m09_cau_phao.json`). Sông Nhị chảy dọc phía đông (cột 8–9), **cầu phao** (8–9, 5); bờ đông (cột 10–11)
+  là khu "bo_dong". Tây bắc: **khu thành Thăng Long** (x 0–3, y 0–3). Đầu cầu bờ tây: đê, doanh trại Thanh. Nam: đường từ Ngọc Hồi.
+- **Quân ta**: Quang Trung + tối đa **10 quân còn sống cuối màn 8** (`quan_mang_theo`; tự chọn theo cấp giảm dần, luôn giữ một quân sư nếu có —
+  chưa có màn chọn quân), giữ cấp và KN, đầy máu; Đô đốc Bảo không sang. Chơi lẻ / kiểm thử: đội hình mặc định 10 quân cấp 1
+  (2 mộc thuẫn, 2 lính giáo, 2 hỏa mai, 2 quân sư, 2 voi). **Không mua lính**, không vàng. Giới hạn 16.
+- **Địch**: Tôn Sĩ Nghị (`toi_thieu_1`, chế độ *Chạy* từ thành sang bờ đông qua cầu, tới bờ đông thì rời bản đồ); Hứa Thế Hanh, Trương Triều Long,
+  Thượng Duy Thăng (giữ đầu cầu, bị hạ bình thường); 3 lính giữ đầu cầu; 6 tàn quân chạy từ Ngọc Hồi về cầu (4 con 50 máu).
+- **Cầu phao** (`cau_phao`): đầu vòng 4 cầu **rung** (hoặc đầu vòng ngay sau khi Tôn Sĩ Nghị qua hết cầu, nếu sớm hơn); đầu vòng kế tiếp **đứt**:
+  ô cầu thành sông, quân trên cầu rơi xuống sông bị hạ (trừ thủy binh).
+- **Thắng**: hạ cả ba tướng (`ha_loai`) **và** Quang Trung + 2 quân vào khu thành (`vao_vung`). Không hạ được Tôn Sĩ Nghị (mọi nguồn: ông thoát).
+- **Mục tiêu phụ**: Quang Trung vào thành trước vòng 8 ("trước mùng 7"; sự kiện `vao_khu` có `truoc_vong`); có ≥ 3 hàng binh (bản phác: tổng ≥ 5,
+  giảm khi dò lời giải vì chỉ còn ít quân tan để chiêu hàng).
+- **Lời giải mẫu**: `tests/loi_giai/m09_cau_phao.txt` (đội hình mặc định) — Quang Trung đi đường tây vào thành sớm, quân sư theo sau chiêu hàng,
+  cả đoàn dồn đánh đầu cầu, thắng vòng 8–9, đủ 2 sao.
+- **Cảnh kết**: hội thoại sau trận kể **ba phiên bản** cầu đứt: Hứa Thế Hanh can và sai người kéo cương ngựa đưa Nghị đi (sử Thanh); Nghị ra lệnh
+  chặt cầu (nguồn Trung văn khác); quân chen nhau làm gãy cầu, Nghị "ngựa không kịp đóng yên" (HLNTC). Mục Sử liệu: cầu phao vì sao đứt; vào Thăng
+  Long mùng 5; Tôn Sĩ Nghị sau trận.
 
 ## Màn phụ P — Thủy quân (mở sau màn 4)
 
@@ -269,5 +275,8 @@ Chuỗi cảnh hội thoại + tranh tĩnh, mỗi cảnh một nhãn (chỉ bố
 5. Đền thờ Sầm Nghi Đống. *[Sử liệu]*
 6. (Tùy chọn) Chuyện cành đào gửi Ngọc Hân, kể như một khúc ca. *[Tương truyền]* — mục Sử liệu ghi: một số nhà nghiên cứu cho rằng
    chuyện này bắt nguồn từ vở kịch của Trúc Đường (1964).
+
+Làm trong `data/missions/m10_loi_ket.json` (màn chuyện "K", mở sau màn 9): mục 1–6 trên, mục 4 bỏ phần "được dùng lại" (chưa kiểm);
+mục Sử liệu Lê Quýnh, cành đào. Lê Quýnh không có chân dung (khung chân dung ẩn).
 
 Chuyện "giả vương" sang Nhiệt Hà năm 1790 (còn tranh cãi) và cái chết của Quang Trung năm 1792 để dành cho phần chơi sau 1.0.

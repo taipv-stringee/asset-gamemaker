@@ -1,0 +1,112 @@
+# Lời giải mẫu màn 9 (cầu phao sông Nhị), đội hình mặc định (chơi lẻ: không có quân mang từ màn 8), đủ 2 sao trên seed 1–3.
+# Quang Trung đi đường tây vào thành sớm (trước vòng 8); hai hỏa mai chờ ngoài thành; hai quân sư theo sau đoàn để Chiêu hàng
+# quân tan (tàn quân chạy từ Ngọc Hồi bị hạ dọc đường); cả đoàn dồn đánh đầu cầu, hạ ba tướng; từ vòng 7 mọi quân vào thành.
+# vòng 1
+toi_loai quang_trung 1 2
+toi_loai hoa_mai 4 1
+toi_loai hoa_mai 4 2
+chieu_hang_het
+don_danh
+chieu_hang_het
+toi_loai quan_su 4 12
+toi_loai quan_su 4 12
+ai_huong 6 5
+het
+# vòng 2
+toi_loai quang_trung 1 2
+toi_loai hoa_mai 4 1
+toi_loai hoa_mai 4 2
+chieu_hang_het
+don_danh
+chieu_hang_het
+toi_loai quan_su 4 12
+toi_loai quan_su 4 12
+ai_huong 6 5
+het
+# vòng 3
+toi_loai quang_trung 1 2
+toi_loai hoa_mai 4 1
+toi_loai hoa_mai 4 2
+chieu_hang_het
+don_danh
+chieu_hang_het
+toi_loai quan_su 4 9
+toi_loai quan_su 4 9
+ai_huong 6 5
+het
+# vòng 4
+toi_loai quang_trung 1 2
+toi_loai hoa_mai 4 1
+toi_loai hoa_mai 4 2
+chieu_hang_het
+don_danh
+chieu_hang_het
+ai_huong 6 5
+het
+# vòng 5
+toi_loai quang_trung 1 2
+toi_loai hoa_mai 4 1
+toi_loai hoa_mai 4 2
+chieu_hang_het
+don_danh
+chieu_hang_het
+ai_huong 6 5
+het
+# vòng 6
+toi_loai quang_trung 1 2
+toi_loai hoa_mai 4 1
+toi_loai hoa_mai 4 2
+chieu_hang_het
+don_danh
+chieu_hang_het
+ai_huong 6 5
+het
+# vòng 7
+toi_loai quang_trung 1 2
+chieu_hang_het
+don_danh
+chieu_hang_het
+ai_huong 2 2
+het
+# vòng 8
+toi_loai quang_trung 1 2
+chieu_hang_het
+don_danh
+chieu_hang_het
+ai_huong 2 2
+het
+# vòng 9
+toi_loai quang_trung 1 2
+chieu_hang_het
+don_danh
+chieu_hang_het
+ai_huong 2 2
+het
+# vòng 10
+toi_loai quang_trung 1 2
+chieu_hang_het
+don_danh
+chieu_hang_het
+ai_huong 2 2
+het
+# vòng 11
+toi_loai quang_trung 1 2
+chieu_hang_het
+don_danh
+chieu_hang_het
+ai_huong 2 2
+het
+# vòng 12
+toi_loai quang_trung 1 2
+chieu_hang_het
+don_danh
+chieu_hang_het
+ai_huong 2 2
+het
+# vòng 13
+toi_loai quang_trung 1 2
+chieu_hang_het
+don_danh
+chieu_hang_het
+ai_huong 2 2
+het

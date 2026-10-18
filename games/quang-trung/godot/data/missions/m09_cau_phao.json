@@ -1,0 +1,658 @@
+{
+ "id": "m09_cau_phao",
+ "so": 9,
+ "ten": "Cầu phao sông Nhị – vào Thăng Long",
+ "ten_ngan": "Cầu phao sông Nhị",
+ "ngay": "Mùng 5 Tết Kỷ Dậu (30/01/1789)",
+ "dia_danh": "Bờ nam sông Nhị (sông Hồng) và thành Thăng Long",
+ "gioi_thieu": "Mùng 5, tin Ngọc Hồi và Khương Thượng vỡ dồn về Thăng Long. Tôn Sĩ Nghị bỏ chạy sang bờ bắc sông Nhị; cầu phao đứt, Hứa Thế Hanh, Trương Triều Long, Thượng Duy Thăng tử trận. Quang Trung vào Thăng Long trưa hoặc chiều mùng 5, sớm hơn lời hẹn mùng 7.",
+ "nhan_gioi_thieu": "Sử liệu",
+ "muc_tieu_chinh": "Hạ cả ba tướng chặn hậu ở đầu cầu phao, và Quang Trung vào thành Thăng Long (góc tây bắc).",
+ "dieu_kien_thua": "Quang Trung bị hạ, hoặc hết vòng 14.",
+ "hoi_thoai": "m09_cau_phao",
+ "nhac": "chu_de",
+ "ghi_chu": "04 §Màn 9. Bản đồ quay ngang: sông Nhị chảy dọc phía đông, cầu phao (8–9,5). Quân ta là quân còn sống cuối màn 8 (quan_mang_theo), chơi lẻ thì dùng đội hình mặc định. Không mua lính.",
+ "ban_do": [
+  "TTTT....~~..",
+  "TTTT...-~~..",
+  "TTTT...-~~t.",
+  "TTTT...-~~.t",
+  "...==DD-~~..",
+  "....===-%%..",
+  ".vv.=DD-~~..",
+  ".v..=..-~~..",
+  "....=..-~~.t",
+  ".L..=.t-~~..",
+  "....=.t-~~..",
+  "t...=..-~~..",
+  ".trr=rr-~~L.",
+  "..rr=rr-~~..",
+  "....=..-~~..",
+  "....=...~~h.",
+  "....=...~~.h",
+  "....=...~~.."
+ ],
+ "phe": [
+  "tayson",
+  "thanh"
+ ],
+ "vang": {
+  "tayson": 0,
+  "thanh": 0
+ },
+ "gioi_han": {
+  "tayson": 16,
+  "thanh": 99
+ },
+ "mua_duoc": {
+  "tayson": [],
+  "thanh": []
+ },
+ "khu": {
+  "thang_long": [
+   [
+    0,
+    0
+   ],
+   [
+    1,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    3,
+    0
+   ],
+   [
+    0,
+    1
+   ],
+   [
+    1,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    3,
+    1
+   ],
+   [
+    0,
+    2
+   ],
+   [
+    1,
+    2
+   ],
+   [
+    2,
+    2
+   ],
+   [
+    3,
+    2
+   ],
+   [
+    0,
+    3
+   ],
+   [
+    1,
+    3
+   ],
+   [
+    2,
+    3
+   ],
+   [
+    3,
+    3
+   ]
+  ],
+  "bo_dong": [
+   [
+    10,
+    0
+   ],
+   [
+    11,
+    0
+   ],
+   [
+    10,
+    1
+   ],
+   [
+    11,
+    1
+   ],
+   [
+    10,
+    2
+   ],
+   [
+    11,
+    2
+   ],
+   [
+    10,
+    3
+   ],
+   [
+    11,
+    3
+   ],
+   [
+    10,
+    4
+   ],
+   [
+    11,
+    4
+   ],
+   [
+    10,
+    5
+   ],
+   [
+    11,
+    5
+   ],
+   [
+    10,
+    6
+   ],
+   [
+    11,
+    6
+   ],
+   [
+    10,
+    7
+   ],
+   [
+    11,
+    7
+   ],
+   [
+    10,
+    8
+   ],
+   [
+    11,
+    8
+   ],
+   [
+    10,
+    9
+   ],
+   [
+    11,
+    9
+   ],
+   [
+    10,
+    10
+   ],
+   [
+    11,
+    10
+   ],
+   [
+    10,
+    11
+   ],
+   [
+    11,
+    11
+   ],
+   [
+    10,
+    12
+   ],
+   [
+    11,
+    12
+   ],
+   [
+    10,
+    13
+   ],
+   [
+    11,
+    13
+   ],
+   [
+    10,
+    14
+   ],
+   [
+    11,
+    14
+   ],
+   [
+    10,
+    15
+   ],
+   [
+    11,
+    15
+   ],
+   [
+    10,
+    16
+   ],
+   [
+    11,
+    16
+   ],
+   [
+    10,
+    17
+   ],
+   [
+    11,
+    17
+   ]
+  ],
+  "dau_cau": [
+   [
+    5,
+    4
+   ],
+   [
+    6,
+    4
+   ],
+   [
+    7,
+    4
+   ],
+   [
+    5,
+    5
+   ],
+   [
+    6,
+    5
+   ],
+   [
+    7,
+    5
+   ],
+   [
+    5,
+    6
+   ],
+   [
+    6,
+    6
+   ],
+   [
+    7,
+    6
+   ]
+  ]
+ },
+ "hien_khu": [
+  {
+   "khu": "thang_long",
+   "mau": "vang",
+   "ten": "thành Thăng Long",
+   "ghi": "Thành Thăng Long: Quang Trung và 2 quân ta vào đây."
+  },
+  {
+   "khu": "bo_dong",
+   "mau": "do",
+   "ten": "bờ đông",
+   "ghi": "Bờ đông sông Nhị: đường chạy của Tôn Sĩ Nghị."
+  }
+ ],
+ "quan": [
+  {
+   "id": "quang_trung",
+   "phe": "tayson",
+   "x": 4,
+   "y": 16,
+   "tuong_chinh": true
+  },
+  {
+   "id": "moc_thuan",
+   "phe": "tayson",
+   "x": 3,
+   "y": 15,
+   "cap": 1
+  },
+  {
+   "id": "moc_thuan",
+   "phe": "tayson",
+   "x": 5,
+   "y": 15,
+   "cap": 1
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 3,
+   "y": 16,
+   "cap": 1
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 5,
+   "y": 16,
+   "cap": 1
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 3,
+   "y": 17,
+   "cap": 1
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 5,
+   "y": 17,
+   "cap": 1
+  },
+  {
+   "id": "quan_su",
+   "phe": "tayson",
+   "x": 2,
+   "y": 16,
+   "cap": 1
+  },
+  {
+   "id": "quan_su",
+   "phe": "tayson",
+   "x": 6,
+   "y": 16,
+   "cap": 1
+  },
+  {
+   "id": "voi_chien",
+   "phe": "tayson",
+   "x": 4,
+   "y": 15,
+   "cap": 1
+  },
+  {
+   "id": "voi_chien",
+   "phe": "tayson",
+   "x": 4,
+   "y": 17,
+   "cap": 1
+  },
+  {
+   "id": "ton_si_nghi",
+   "phe": "thanh",
+   "x": 1,
+   "y": 1,
+   "ai": "chay",
+   "khu": "bo_dong",
+   "toi_thieu_1": true
+  },
+  {
+   "id": "hua_the_hanh",
+   "phe": "thanh",
+   "x": 7,
+   "y": 5,
+   "ai": "giu_don",
+   "tam": [
+    7,
+    5
+   ],
+   "ban_kinh": 1
+  },
+  {
+   "id": "truong_trieu_long",
+   "phe": "thanh",
+   "x": 6,
+   "y": 5,
+   "ai": "giu_don",
+   "tam": [
+    6,
+    5
+   ],
+   "ban_kinh": 1
+  },
+  {
+   "id": "thuong_duy_thang",
+   "phe": "thanh",
+   "x": 7,
+   "y": 6,
+   "ai": "giu_don",
+   "tam": [
+    7,
+    6
+   ],
+   "ban_kinh": 1
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 5,
+   "y": 4,
+   "ai": "giu_don",
+   "tam": [
+    5,
+    4
+   ],
+   "ban_kinh": 2
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 6,
+   "y": 6,
+   "ai": "giu_don",
+   "tam": [
+    6,
+    6
+   ],
+   "ban_kinh": 2
+  },
+  {
+   "id": "truong_mau",
+   "phe": "thanh",
+   "x": 5,
+   "y": 6,
+   "ai": "giu_don",
+   "tam": [
+    5,
+    6
+   ],
+   "ban_kinh": 2
+  },
+  {
+   "id": "truong_mau",
+   "phe": "thanh",
+   "x": 5,
+   "y": 10,
+   "ai": "chay",
+   "khu": "bo_dong"
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 3,
+   "y": 9,
+   "ai": "chay",
+   "khu": "bo_dong"
+  },
+  {
+   "id": "truong_mau",
+   "phe": "thanh",
+   "x": 2,
+   "y": 10,
+   "ai": "chay",
+   "khu": "bo_dong",
+   "mau": 50
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 6,
+   "y": 12,
+   "ai": "chay",
+   "khu": "bo_dong",
+   "mau": 50
+  },
+  {
+   "id": "truong_mau",
+   "phe": "thanh",
+   "x": 1,
+   "y": 13,
+   "ai": "chay",
+   "khu": "bo_dong",
+   "mau": 50
+  },
+  {
+   "id": "dang_bai",
+   "phe": "thanh",
+   "x": 6,
+   "y": 8,
+   "ai": "chay",
+   "khu": "bo_dong",
+   "mau": 50
+  }
+ ],
+ "quan_mang_theo": {
+  "toi_da": 10,
+  "o": [
+   [
+    3,
+    15
+   ],
+   [
+    5,
+    15
+   ],
+   [
+    3,
+    16
+   ],
+   [
+    5,
+    16
+   ],
+   [
+    3,
+    17
+   ],
+   [
+    5,
+    17
+   ],
+   [
+    2,
+    16
+   ],
+   [
+    6,
+    16
+   ],
+   [
+    4,
+    15
+   ],
+   [
+    4,
+    17
+   ]
+  ]
+ },
+ "cau_phao": {
+  "o": [
+   [
+    8,
+    5
+   ],
+   [
+    9,
+    5
+   ]
+  ],
+  "rung": 4,
+  "khi_qua": "ton_si_nghi"
+ },
+ "su_kien": [
+  {
+   "id": "vao_thanh",
+   "khi": {
+    "loai": "vao_khu",
+    "khu": "thang_long",
+    "quan": "quang_trung",
+    "truoc_vong": 8
+   },
+   "lam": [
+    {
+     "loai": "co",
+     "co": "vao_thanh_som"
+    }
+   ]
+  }
+ ],
+ "thang": {
+  "loai": "tat_ca",
+  "dk": [
+   {
+    "loai": "ha_loai",
+    "quan": [
+     "hua_the_hanh",
+     "truong_trieu_long",
+     "thuong_duy_thang"
+    ]
+   },
+   {
+    "loai": "vao_vung",
+    "khu": "thang_long",
+    "so_quan": 2
+   }
+  ]
+ },
+ "thua_het_luot": 14,
+ "ly_do_het_luot": "Quân Thanh ở bờ bắc kịp quay lại.",
+ "muc_tieu_phu": [
+  {
+   "loai": "co",
+   "co": "vao_thanh_som",
+   "ten": "Quang Trung vào thành trước vòng 8 (\"trước mùng 7\")"
+  },
+  {
+   "loai": "hang_binh_toi_thieu",
+   "n": 3,
+   "ten": "Có ít nhất 3 hàng binh"
+  }
+ ],
+ "goi_y": [
+  {
+   "khi": "bat_dau",
+   "loi": "Ba tướng Thanh chặn hậu ở đầu cầu phao (vùng quanh ô 7,5). Hạ cả ba, rồi đưa Quang Trung và 2 quân vào thành Thăng Long ở góc tây bắc."
+  },
+  {
+   "khi": "vong",
+   "n": 1,
+   "loi": "Tôn Sĩ Nghị chạy sang bờ đông qua cầu phao: không hạ được ông. Cầu rung rồi đứt ở vòng sau: quân đứng trên cầu rơi xuống sông."
+  },
+  {
+   "khi": "vong",
+   "n": 2,
+   "loi": "Không mua được lính. Quân sư đứng kề quân tan thì Chiêu hàng: có 3 hàng binh là một mục tiêu phụ."
+  }
+ ],
+ "su_lieu": [
+  "cau_phao_hai_ban",
+  "vao_thang_long",
+  "ton_si_nghi_cach_chuc"
+ ]
+}

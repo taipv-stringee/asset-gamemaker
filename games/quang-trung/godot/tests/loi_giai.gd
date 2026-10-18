@@ -19,8 +19,9 @@ extends RefCounted
 ##   ai_giu                    như "ai_khong_mua" và máy cũng không chiếm ô (để hoãn điều kiện chuyển giai đoạn)
 ##   ai                        để máy (SimpleAI) đi nốt các quân ta còn lại trong lượt này
 ##   rut TX TY                 mọi quân ta chưa đi làm "toi" về (TX, TY), quân gần đích đi trước
+##   chieu_hang_het            mọi quân ta chưa đi có thẻ chieu_hang tới được ô kề quân tan thì tới đó rồi Chiêu hàng
 ##   cho_khu X0 Y0 X1 Y1       mọi quân ta chưa đi đứng trong khung thì chờ tại chỗ
-##   don_danh [N [X0 Y0 X1 Y1]]  (có khung: chỉ đánh quân địch đứng trong khung) dồn đánh: lặp lại, chọn trong mọi quân ta chưa đi (trừ tướng chính) cú đánh tốt nhất (hạ được trước,
+##   don_danh [N [X0 Y0 X1 Y1]]  (có khung: chỉ đánh quân địch đứng trong khung) dồn đánh: lặp lại, chọn trong mọi quân ta chưa đi (trừ tướng chính, quân sư) cú đánh tốt nhất (hạ được trước,
 ##                             rồi quân địch đã yếu), tối đa N cú (mặc định hết); dừng khi không còn cú đáng đánh
 ##   chiem_neu LOAI TX TY      quân ta đầu tiên thuộc LOAI chưa đi: đi tới (TX, TY) được trong lượt này thì đi rồi chiếm, không thì thôi
 ##   ai_huong TX TY [X0 Y0 X1 Y1]  như "ai_khong_mua" nhưng quân ta nhắm (TX, TY) (vẫn đánh dọc đường, không lui hồi máu);
@@ -105,6 +106,25 @@ static func run(mission: String, p_seed: int, path: String, verbose := false, ca
 					ev.append_array(step)
 				SimpleAI.allow_recruit = true
 				SimpleAI.allow_capture = true
+			"chieu_hang_het":
+				for qs in s.units_of(s.current_faction()):
+					if qs.done or not qs.has_tag("chieu_hang"):
+						continue
+					var spot := Vector2i(-1, -1)
+					for rp in Rules.reachable(s, qs):
+						for d in Rules.DIRS:
+							var o2: Dictionary = s.object_at(rp + d)
+							if o2.get("loai", "") == "quan_tan" and s.unit_at(rp + d) == null:
+								spot = rp
+						if spot.x >= 0:
+							break
+					if spot.x < 0:
+						continue
+					if spot != qs.pos:
+						ev.append_array(Rules.cmd_move(s, qs, spot))
+					var tg2 := Rules.chieu_hang_targets(s, qs)
+					if s.units.has(qs) and not tg2.is_empty():
+						ev.append_array(Rules.cmd_chieu_hang(s, qs, tg2[0]))
 			"cho_khu":
 				var cbox := Rect2i(int(w[1]), int(w[2]), int(w[3]) - int(w[1]) + 1, int(w[4]) - int(w[2]) + 1)
 				for cu2 in s.units_of(s.current_faction()):
@@ -119,8 +139,8 @@ static func run(mission: String, p_seed: int, path: String, verbose := false, ca
 					var bt: Unit = null
 					var bs := 15.0
 					for au in s.units_of(s.current_faction()):
-						if au.done or au.tuong_chinh:
-							continue
+						if au.done or au.tuong_chinh or au.has_tag("chieu_hang"):
+							continue   # quân sư để dành Chiêu hàng (lệnh chieu_hang_het)
 						var reach := Rules.reachable(s, au)
 						for rp in reach:
 							for tg in Rules.targets_from(s, au, rp, rp != au.pos):

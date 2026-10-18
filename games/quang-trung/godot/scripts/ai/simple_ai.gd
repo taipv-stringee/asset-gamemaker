@@ -130,6 +130,9 @@ static func _goals(state: BattleState, u: Unit) -> Array[Vector2i]:
 		if u.ai_params.has("vung"):
 			for p in u.ai_params["vung"]:
 				goals.append(p)
+		elif u.ai_mode == "chay" and state.zones.has(u.ai_params.get("khu", "")):
+			for p in state.zones[u.ai_params["khu"]]:
+				goals.append(p)   # màn 9: Tôn Sĩ Nghị chạy sang bờ đông
 		elif u.ai_mode == "rut_lui" and state.zones.has(state.mission.get("khu_rut_lui", "")):
 			for p in state.zones[state.mission["khu_rut_lui"]]:
 				goals.append(p)

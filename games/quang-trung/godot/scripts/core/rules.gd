@@ -524,6 +524,9 @@ static func _escape(state: BattleState, u: Unit) -> Array[Dictionary]:
 		return ev
 	state.remove_unit(u)
 	state.flags["thoat"] = int(state.flags.get("thoat", 0)) + 1
+	var fled: Array = state.flags.get("thoat_loai", [])
+	fled.append(u.type_id)   # màn 9: Tôn Sĩ Nghị qua hết cầu thì cầu rung
+	state.flags["thoat_loai"] = fled
 	var flag: String = state.mission.get("co_khi_thoat", "")
 	if flag != "":
 		var flags: Dictionary = state.flags.get("co", {})
@@ -639,6 +642,9 @@ static func _defeat(state: BattleState, u: Unit) -> Array[Dictionary]:
 		var spots: Array = state.flags.get("ha_vi_tri", [])
 		spots.append([u.pos.x, u.pos.y])   # mục tiêu phụ "ha_tren_khu" (màn 8: Đầm Mực)
 		state.flags["ha_vi_tri"] = spots
+		var kinds: Array = state.flags.get("ha_loai", [])
+		kinds.append(u.type_id)            # điều kiện thắng "ha_loai" (màn 9: ba tướng chặn hậu)
+		state.flags["ha_loai"] = kinds
 	var leaves_trace: bool = (u.faction == "thanh" or u.faction == "le") and not u.has_tag("tuong")
 	var keeps_object: bool = state.objects.has(u.pos) and state.objects[u.pos].get("loai", "") != "quan_tan"
 	if leaves_trace and not keeps_object and not NO_QUAN_TAN.has(state.terrain_id(u.pos)):
@@ -761,6 +767,8 @@ static func run_events(state: BattleState) -> Array[Dictionary]:
 				for u in state.units:
 					if u.type_id == cond["quan"] and u.hp < int(cond["n"]):
 						ok = true
+		if ok and cond.has("truoc_vong") and state.vong >= int(cond["truoc_vong"]):
+			ok = false   # chỉ tính khi xảy ra trước vòng đó (màn 9: vào thành trước vòng 8)
 		if not ok:
 			continue
 		fired.append(e["id"])
@@ -1096,6 +1104,34 @@ static func cmd_goi_hang(state: BattleState, u: Unit, name: String) -> Array[Dic
 	return ev
 
 
+## Quân mang từ màn trước (màn 8 → 9, 04): mission["quan_mang_theo"] = {"toi_da": N, "o": [ô]}. Quân phe người chơi (trừ tướng
+## chính) đứng trên các ô đó là đội hình mặc định (chơi lẻ / kiểm thử); trong chiến dịch thay bằng tối đa N quân trong `army`
+## (Progress "quan_mang_theo": [{id, cap, xp}], cấp cao trước), đầy máu, giữ cấp và kinh nghiệm.
+static func apply_army(state: BattleState, army: Array) -> void:
+	var spec: Dictionary = state.mission.get("quan_mang_theo", {})
+	if spec.is_empty() or army.is_empty():
+		return
+	var slots: Array[Vector2i] = []
+	for c in spec.get("o", []):
+		slots.append(Vector2i(int(c[0]), int(c[1])))
+	for u in state.units_of(state.factions[0]):
+		if slots.has(u.pos) and not u.tuong_chinh:
+			state.remove_unit(u)
+	var n := mini(army.size(), mini(int(spec.get("toi_da", 10)), slots.size()))
+	var picked: Array = army.slice(0, n)
+	# Giữ ít nhất một quân sư nếu có (chiêu hàng: mục tiêu phụ hàng binh), thay quân cuối danh sách.
+	if n > 0 and not picked.any(func(a: Dictionary) -> bool: return a["id"] == "quan_su"):
+		for a in army.slice(n):
+			if a["id"] == "quan_su":
+				picked[n - 1] = a
+				break
+	for i in n:
+		var a: Dictionary = picked[i]
+		var u := state.spawn_unit(a["id"], state.factions[0], slots[i])
+		u.level = int(a.get("cap", 0))
+		u.xp = int(a.get("xp", 0))
+
+
 ## Hệ quả từ màn trước (Progress.campaign_flag), áp lúc mở màn mới trong chiến dịch:
 ## mission["he_qua"] = [{"co": tên, "thuc_khu": khu, "bang": "..."}] — cờ bật thì mọi quân trong khu thức sẵn.
 static func apply_carry(state: BattleState, carried: Dictionary) -> void:
@@ -1176,6 +1212,7 @@ static func start_turn(state: BattleState) -> Array[Dictionary]:
 		u.khoa_hoan_tac = false
 		u.than_trong = false
 	ev.append_array(_dawn(state))
+	ev.append_array(_bridge(state))
 	ev.append_array(_fires(state, f))
 	_reveal_mines(state)
 	ev.append_array(_reinforcements(state, f))
@@ -1255,6 +1292,33 @@ static func _nearest_fort(state: BattleState, from: Vector2i, f: String) -> Vect
 			best_d = manhattan(p, from)
 			best = p
 	return best
+
+
+## Cầu phao (02 §12, màn 9): mission["cau_phao"] = {"o": [ô], "rung": R, "khi_qua": loại quân}. Đầu vòng R (hoặc đầu vòng ngay
+## sau khi quân "khi_qua" đã qua hết cầu, nếu sớm hơn) cầu rung; đầu vòng kế tiếp cầu đứt: ô cầu thành sông, quân trên cầu rơi xuống
+## sông và bị hạ, trừ quân đi thủy (thủy binh) ở lại trên ô sông.
+static func _bridge(state: BattleState) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	var b: Dictionary = state.mission.get("cau_phao", {})
+	if b.is_empty() or state.current != 0 or state.flags.get("cau_dut", false):
+		return ev
+	var shook := int(state.flags.get("cau_rung", 0))
+	if shook > 0 and state.vong > shook:
+		state.flags["cau_dut"] = true
+		ev.append({"loai": "cau_dut"})
+		for c in b.get("o", []):
+			var p := Vector2i(int(c[0]), int(c[1]))
+			state.set_terrain(p, "song")
+			var u := state.unit_at(p)
+			if u != null and u.data()["kieu_di"] != "thuy":
+				ev.append_array(_defeat(state, u))
+		ev.append_array(check_result(state))
+		return ev
+	var crossed: bool = (state.flags.get("thoat_loai", []) as Array).has(b.get("khi_qua", "?"))
+	if shook == 0 and (state.vong >= int(b.get("rung", 99)) or crossed):
+		state.flags["cau_rung"] = state.vong
+		ev.append({"loai": "cau_rung"})
+	return ev
 
 
 ## Rạng sáng (02 §10): mission["rang_sang"] = R → vòng R tầm nhìn 3, R+1 tầm nhìn 5, từ R+2 hết sương mù.
@@ -1401,6 +1465,12 @@ static func _condition(state: BattleState, win: Dictionary) -> bool:
 			return villages_owned(state, player) >= int(win["n"])
 		"co":
 			return has_flag(state, win["co"])
+		"ha_loai":   # mọi loại trong "quan" đã bị hạ (màn 9: ba tướng chặn hậu)
+			var gone: Array = state.flags.get("ha_loai", [])
+			for t in win["quan"]:
+				if not gone.has(t):
+					return false
+			return true
 		"tat_ca":
 			for c in win.get("dk", []):
 				if not _condition(state, c):

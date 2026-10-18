@@ -605,6 +605,8 @@ func _terrain_info(p: Vector2i) -> void:
 			"lua": "Lửa: bước vào bị Cháy."}
 	if notes.has(obj):
 		lines.append(notes[obj])
+	elif t["id"] == "cau_phao" and state.mission.has("cau_phao"):
+		lines.append("Cầu phao: đang rung, vòng sau đứt." if int(state.flags.get("cau_rung", 0)) > 0 else "Cầu phao sang bờ đông sông Nhị.")
 	elif obj == "" and t["chay_duoc"]:
 		lines.append("Đốt được: hỏa hổ đứng kề rồi bấm Đốt.")
 	if Rules.is_dark(state) and not vis.has(p) and not Rules.lit_tiles(state).has(p):
@@ -1223,6 +1225,14 @@ func _play(events: Array[Dictionary]) -> void:
 					await _shake(0.35)
 				else:
 					await get_tree().create_timer(0.3).timeout
+			"cau_rung":
+				Sfx.play("trong_bao_dong", -4.0)
+				_show_banner("Cầu phao rung lắc! Vòng sau cầu sẽ đứt.", Color(1, 0.75, 0.45), 1.8)
+				await _shake(0.5)
+			"cau_dut":
+				Sfx.play("ha", 0.0)
+				_show_banner("Cầu phao đứt! Quân trên cầu rơi xuống sông.", Color(1, 0.55, 0.45), 2.0)
+				await _shake(0.8)
 			"rut_khoi":
 				var rs2: UnitSprite = sprites.get(e["uid"])
 				if rs2 != null:

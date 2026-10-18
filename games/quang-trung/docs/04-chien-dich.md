@@ -259,7 +259,7 @@ Mỗi điểm ghi ngày âm và dương lịch.
   **Không có ghi chép giao chiến** → trận đánh trong màn là *[Sáng tạo của game]*, ghi rõ ở màn giới thiệu.
 - **Bản đồ**: 12 × 16 (`data/missions/mP_thuy_quan.json`): sông dọc giữa (cột 5–6) và sông ngang (hàng 8) có 5 bãi bồi bộ binh lội qua
   được; nhánh sông lên bến đông. Bến của ta (đồn) ở nam (4,14); 2 bến của quân Thanh ở bắc: bến tây (4,2, bến lớn) và bến đông (8,3).
-- **Quân ta**: Đại đô đốc Lộc (tướng chính), Đô đốc Tuyết, 4 thủy binh, 2 hỏa mai, 2 lính giáo. Vàng 600; giới hạn 14;
+- **Quân ta**: Đại đô đốc Lộc (tướng chính), Đô đốc Tuyết (`toi_thieu_1`: không tử trận, sau chơi thử lần 8), 4 thủy binh, 2 hỏa mai, 2 lính giáo. Vàng 600; giới hạn 14;
   `mua_duoc`: thuy_binh, hoa_mai, linh_giao, hoa_ho. (Bản phác: 3 thủy binh, vàng 400 — tăng khi dò lời giải.)
 - **Địch (Thanh)**: quan giữ đồn, 1 trường mâu, 1 điểu thương ở bến tây; 1 trường mâu, 1 điểu thương, 1 pháo binh ở bến đông (6 quân;
   bản phác 8, bớt khi dò lời giải).

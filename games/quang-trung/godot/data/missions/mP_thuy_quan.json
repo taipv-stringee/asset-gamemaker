@@ -11,7 +11,7 @@
  "dieu_kien_thua": "Đại đô đốc Lộc bị hạ, hoặc hết vòng 15.",
  "hoi_thoai": "mP_thuy_quan",
  "nhac": "chu_de",
- "ghi_chu": "04 §Màn phụ P. Trận là Sáng tạo của game (không có ghi chép giao chiến). Thủy quân: thủy binh kề Lộc / Tuyết +1 Di.",
+ "ghi_chu": "04 §Màn phụ P. Trận là Sáng tạo của game (không có ghi chép giao chiến). Thủy quân: thủy binh kề Lộc / Tuyết +1 Di. Đô đốc Tuyết toi_thieu_1 (chơi thử lần 8: chết sớm quá).",
  "ban_do": [
   "tt...~~~~~..",
   "t..lD~~~....",
@@ -68,7 +68,8 @@
    "id": "do_doc_tuyet",
    "phe": "tayson",
    "x": 6,
-   "y": 13
+   "y": 13,
+   "toi_thieu_1": true
   },
   {
    "id": "thuy_binh",
@@ -232,7 +233,7 @@
   {
    "khi": "vong",
    "n": 2,
-   "loi": "Chỉ tướng (Lộc, Tuyết) chiếm được bến. Bến lớn phía tây có quan giữ đồn: hạ quan rồi chiếm."
+   "loi": "Chỉ Lộc, Tuyết chiếm được bến. Quan giữ bến tây hồi 20 máu mỗi vòng: dồn đánh hạ trong một lượt. Pháo bến đông bắn xa 2–4 ô, cả trên sông."
   }
  ],
  "su_lieu": [

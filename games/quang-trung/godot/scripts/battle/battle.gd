@@ -1170,8 +1170,11 @@ func _play(events: Array[Dictionary]) -> void:
 					await tw.finished
 					es.queue_free()
 				Sfx.play("bao_dong", -6.0)
-				# Báo cáo M3 lần 3: dải này dễ lỡ → giữ lâu hơn và dừng một nhịp.
-				_show_banner("Một trinh sát đã thoát về báo tin!", Color(1, 0.5, 0.42), 2.2)
+				# Báo cáo M3 lần 3: dải này dễ lỡ → giữ lâu hơn và dừng một nhịp. Lần 8: chữ theo loại quân (màn 9 không có trinh sát).
+				var who_fled: String = e.get("loai_quan", "trinh_sat")
+				var fled_text := "Một trinh sát đã thoát về báo tin!" if who_fled == "trinh_sat" else \
+					("Tôn Sĩ Nghị đã chạy thoát qua sông!" if who_fled == "ton_si_nghi" else "Một quân Thanh đã chạy thoát qua sông.")
+				_show_banner(fled_text, Color(1, 0.5, 0.42), 2.2)
 				await get_tree().create_timer(1.8).timeout
 			"goi_hang":
 				Sfx.play("len_cap" if e["thanh_cong"] else "lo_dien", -3.0)

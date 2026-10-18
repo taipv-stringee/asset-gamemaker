@@ -532,7 +532,7 @@ static func _escape(state: BattleState, u: Unit) -> Array[Dictionary]:
 		var flags: Dictionary = state.flags.get("co", {})
 		flags[flag] = true
 		state.flags["co"] = flags
-	ev.append({"loai": "thoat", "uid": u.uid, "o": u.pos, "phe": u.faction})
+	ev.append({"loai": "thoat", "uid": u.uid, "o": u.pos, "phe": u.faction, "loai_quan": u.type_id})
 	return ev
 
 

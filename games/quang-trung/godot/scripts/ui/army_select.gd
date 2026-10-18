@@ -23,8 +23,7 @@ func setup(army: Array, limit: int) -> ArmySelect:
 	col.add_child(UiKit.wrap_label("Chọn quân sang Thăng Long", UiKit.FS_TITLE, UiKit.C_GOLD_LIGHT, true))
 	col.add_child(UiKit.wrap_label("Quân còn sống sau trận Ngọc Hồi. Quang Trung luôn đi; chọn thêm tối đa %d quân. Quân đi giữ cấp, đầy máu." % _limit,
 		UiKit.FS_SMALL, UiKit.C_MUTED))
-	_count = UiKit.label("", UiKit.FS_HEAD, UiKit.C_GOLD, true)
-	col.add_child(_count)
+	_count = UiKit.label("", UiKit.FS_SMALL, UiKit.C_GOLD, true)
 	for i in _army.size():
 		_picked.append(i < _limit)
 		var b := UiKit.list_button("", _toggle.bind(i), UiKit.FS_BODY)
@@ -32,8 +31,9 @@ func setup(army: Array, limit: int) -> ArmySelect:
 		_buttons.append(b)
 		col.add_child(b)
 	var bar := UiKit.bottom_bar(self)
-	bar.add_child(UiKit.button("Quay lại", func() -> void: back.emit(), UiKit.FS_BUTTON, 90))
-	_go = UiKit.button("Vào trận", _confirm, UiKit.FS_BUTTON, 120)
+	bar.add_child(_count)   # ở thanh dưới: cuộn danh sách không mất (kiểm thử lần 8)
+	bar.add_child(UiKit.button("Quay lại", func() -> void: back.emit(), UiKit.FS_BUTTON, 70))
+	_go = UiKit.button("Vào trận", _confirm, UiKit.FS_BUTTON, 80)
 	bar.add_child(_go)
 	_refresh()
 	return self
@@ -52,7 +52,7 @@ func _refresh() -> void:
 		var a: Dictionary = _army[i]
 		var cap := int(a.get("cap", 0))
 		_buttons[i].text = "%s %s%s" % ["✓" if _picked[i] else "  ", data.unit(a["id"])["ten"], ("  · cấp %d" % cap) if cap > 0 else ""]
-	_count.text = "Đã chọn %d/%d" % [_picked.count(true), _limit]
+	_count.text = "Chọn %d/%d" % [_picked.count(true), _limit]
 
 
 func _confirm() -> void:

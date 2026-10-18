@@ -257,11 +257,15 @@ Mỗi điểm ghi ngày âm và dương lịch.
 
 - **Lịch sử**: Hai đạo thủy của Đô đốc Tuyết (ra Hải Dương) và Đô đốc Lộc (lên Lạng Giang, Phượng Nhãn chặn đường rút). *[Theo HLNTC]*
   **Không có ghi chép giao chiến** → trận đánh trong màn là *[Sáng tạo của game]*, ghi rõ ở màn giới thiệu.
-- **Bản đồ**: 12 × 16, nhiều sông, bãi bồi; bến của ta ở nam (đồn), 2 bến của quân Thanh ở bắc.
-- **Quân ta**: Đô đốc Lộc (tướng chính), Đô đốc Tuyết, 3 thủy binh, 2 hỏa mai, 2 lính giáo. Vàng 400; giới hạn 14;
-  `mua_duoc`: thuy_binh, hoa_mai, linh_giao, hoa_ho.
-- **Địch (Thanh)**: 2 trường mâu, 3 điểu thương, 1 đằng bài, 1 pháo binh giữ hai bến; `quan_giu_don` ở bến lớn.
-- **Thắng**: chiếm cả hai bến trước khi hết vòng 15. **Mục tiêu phụ**: không mất thủy binh; thắng trước vòng 10.
+- **Bản đồ**: 12 × 16 (`data/missions/mP_thuy_quan.json`): sông dọc giữa (cột 5–6) và sông ngang (hàng 8) có 5 bãi bồi bộ binh lội qua
+  được; nhánh sông lên bến đông. Bến của ta (đồn) ở nam (4,14); 2 bến của quân Thanh ở bắc: bến tây (4,2, bến lớn) và bến đông (8,3).
+- **Quân ta**: Đại đô đốc Lộc (tướng chính), Đô đốc Tuyết, 4 thủy binh, 2 hỏa mai, 2 lính giáo. Vàng 600; giới hạn 14;
+  `mua_duoc`: thuy_binh, hoa_mai, linh_giao, hoa_ho. (Bản phác: 3 thủy binh, vàng 400 — tăng khi dò lời giải.)
+- **Địch (Thanh)**: quan giữ đồn, 1 trường mâu, 1 điểu thương ở bến tây; 1 trường mâu, 1 điểu thương, 1 pháo binh ở bến đông (6 quân;
+  bản phác 8, bớt khi dò lời giải).
+- **Thắng**: chiếm cả hai bến (Lộc hoặc Tuyết) trước khi hết vòng 15. **Mục tiêu phụ**: không mất thủy binh; thắng trước vòng 10.
+- **Lời giải mẫu**: `tests/loi_giai/mP_thuy_quan.txt` — đánh bến tây trước, Tuyết chiếm, thủy binh yếu thì lui (`lui_yeu`), thắng vòng 8, đủ 2 sao.
+- **Mở Sử liệu**: đạo Đô đốc Tuyết, đạo Đô đốc Lộc, "Hai đạo thủy quân đánh ở đâu?". Chân dung Lộc và Tuyết là hình dung của game.
 
 ## Lời kết
 

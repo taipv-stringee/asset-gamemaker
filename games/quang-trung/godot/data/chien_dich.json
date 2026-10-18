@@ -29,7 +29,10 @@
   {
    "so": "P",
    "ten": "Màn phụ: thủy quân",
-   "id": ""
+   "id": "mP_thuy_quan",
+   "mo_sau": [
+    "m04_gian_khau"
+   ]
   },
   {
    "so": "5",

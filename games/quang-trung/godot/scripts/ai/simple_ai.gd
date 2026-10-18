@@ -271,7 +271,12 @@ static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 	var original := u.pos
 	# Tướng chính tránh chỗ nguy hiểm; quân thường chỉ cân nhắc nhẹ.
 	var win: Dictionary = state.mission.get("thang", {})
-	var objective := Vector2i(int(win["o"][0]), int(win["o"][1])) if win.get("loai", "") == "chiem_o" and u.faction == state.factions[0] else Vector2i(-99, -99)
+	# Ô phải chiếm để thắng (cả trong "tat_ca", vd. màn phụ P chiếm hai bến): quân thường của phe người chơi không đứng chắn.
+	var objectives: Array[Vector2i] = []
+	if u.faction == state.factions[0]:
+		for c in [win] + win.get("dk", []):
+			if c.get("loai", "") == "chiem_o":
+				objectives.append(Vector2i(int(c["o"][0]), int(c["o"][1])))
 	var threat := threat_map(state, u.faction)
 	var danger_w := 0.25 if u.tuong_chinh else 0.02
 	# Quân giữ đồn đang ở ngoài vùng (vd. lính tuần vừa báo động) thì chạy về; ở trong vùng thì không ra.
@@ -298,7 +303,7 @@ static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 			base -= 200.0  # có thể bị hạ ở lượt sau
 		if state.terrain_at(p)["mua_linh"] and state.owner_of(p) == u.faction and not u.tuong_chinh:
 			base -= 25.0   # đừng đứng chắn ô mua lính của phe mình
-		if p == objective and not u.has_tag("tuong"):
+		if objectives.has(p) and not u.has_tag("tuong"):
 			base -= 100.0  # đừng đứng lên ô mục tiêu chiếm: chỉ tướng chiếm được, quân thường đứng đó là chắn đường tướng
 		if base > best_score:
 			best_score = base

@@ -1,0 +1,243 @@
+{
+ "id": "mP_thuy_quan",
+ "so": "P",
+ "ten": "Màn phụ: thủy quân",
+ "ten_ngan": "Thủy quân",
+ "ngay": "Khoảng mùng 1–5 Tết Kỷ Dậu (26–30/01/1789)",
+ "dia_danh": "Vùng sông nước phía đông bắc Thăng Long (Hải Dương, Lạng Giang)",
+ "gioi_thieu": "Theo Hoàng Lê nhất thống chí, hai đạo thủy quân của Đại đô đốc Lộc và Đô đốc Tuyết vượt biển vào sông Lục Đầu, chặn đường rút của quân Thanh. Sử không ghi trận giao chiến nào của hai đạo này: trận trong màn là do game dựng.",
+ "nhan_gioi_thieu": "Theo HLNTC",
+ "muc_tieu_chinh": "Đại đô đốc Lộc hay Đô đốc Tuyết chiếm cả hai bến của quân Thanh ở phía bắc trước khi hết vòng 15.",
+ "dieu_kien_thua": "Đại đô đốc Lộc bị hạ, hoặc hết vòng 15.",
+ "hoi_thoai": "mP_thuy_quan",
+ "nhac": "chu_de",
+ "ghi_chu": "04 §Màn phụ P. Trận là Sáng tạo của game (không có ghi chép giao chiến). Thủy quân: thủy binh kề Lộc / Tuyết +1 Di.",
+ "ban_do": [
+  "tt...~~~~~..",
+  "t..lD~~~....",
+  "...DF~~~Dl..",
+  ".....~~~FD..",
+  ".hh..~~~.rr.",
+  ".....:~..rrt",
+  ".....~~...tt",
+  ".....~~.....",
+  "~~:~:~~:~:~~",
+  ".....~~.....",
+  ".rrr.~~...h.",
+  ".Lrr.~:...h.",
+  ".rrr.~~.....",
+  "t....~~.L...",
+  "....F~~....t",
+  ".....~~....t"
+ ],
+ "chu_o": {
+  "4,2": "thanh",
+  "8,3": "thanh",
+  "4,14": "tayson"
+ },
+ "phe": [
+  "tayson",
+  "thanh"
+ ],
+ "vang": {
+  "tayson": 600,
+  "thanh": 0
+ },
+ "gioi_han": {
+  "tayson": 14,
+  "thanh": 99
+ },
+ "mua_duoc": {
+  "tayson": [
+   "thuy_binh",
+   "hoa_mai",
+   "linh_giao",
+   "hoa_ho"
+  ],
+  "thanh": []
+ },
+ "quan": [
+  {
+   "id": "do_doc_loc",
+   "phe": "tayson",
+   "x": 5,
+   "y": 13,
+   "tuong_chinh": true
+  },
+  {
+   "id": "do_doc_tuyet",
+   "phe": "tayson",
+   "x": 6,
+   "y": 13
+  },
+  {
+   "id": "thuy_binh",
+   "phe": "tayson",
+   "x": 5,
+   "y": 12
+  },
+  {
+   "id": "thuy_binh",
+   "phe": "tayson",
+   "x": 6,
+   "y": 12
+  },
+  {
+   "id": "thuy_binh",
+   "phe": "tayson",
+   "x": 6,
+   "y": 14
+  },
+  {
+   "id": "thuy_binh",
+   "phe": "tayson",
+   "x": 5,
+   "y": 14
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 3,
+   "y": 13
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 4,
+   "y": 13
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 3,
+   "y": 14
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 7,
+   "y": 14
+  },
+  {
+   "id": "quan_giu_don",
+   "phe": "thanh",
+   "x": 4,
+   "y": 2,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    2
+   ],
+   "ban_kinh": 0
+  },
+  {
+   "id": "truong_mau",
+   "phe": "thanh",
+   "x": 3,
+   "y": 2,
+   "ai": "giu_don",
+   "tam": [
+    3,
+    2
+   ],
+   "ban_kinh": 1
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 4,
+   "y": 1,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    1
+   ],
+   "ban_kinh": 1
+  },
+  {
+   "id": "truong_mau",
+   "phe": "thanh",
+   "x": 9,
+   "y": 3,
+   "ai": "giu_don",
+   "tam": [
+    9,
+    3
+   ],
+   "ban_kinh": 1
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 8,
+   "y": 2,
+   "ai": "giu_don",
+   "tam": [
+    8,
+    2
+   ],
+   "ban_kinh": 1
+  },
+  {
+   "id": "phao_binh",
+   "phe": "thanh",
+   "x": 9,
+   "y": 4,
+   "ai": "giu_don",
+   "tam": [
+    9,
+    4
+   ],
+   "ban_kinh": 0
+  }
+ ],
+ "thang": {
+  "loai": "tat_ca",
+  "dk": [
+   {
+    "loai": "chiem_o",
+    "o": [
+     4,
+     2
+    ]
+   },
+   {
+    "loai": "chiem_o",
+    "o": [
+     8,
+     3
+    ]
+   }
+  ]
+ },
+ "thua_het_luot": 15,
+ "ly_do_het_luot": "Quân Thanh đã rút qua sông, không chặn kịp.",
+ "muc_tieu_phu": [
+  {
+   "loai": "khong_mat",
+   "quan": "thuy_binh",
+   "ten": "Không mất thủy binh nào"
+  },
+  {
+   "loai": "truoc_vong",
+   "n": 10,
+   "ten": "Thắng trước vòng 10"
+  }
+ ],
+ "goi_y": [
+  {
+   "khi": "bat_dau",
+   "loi": "Thủy binh và hai đô đốc đi sông 1 điểm, lên bờ 2 điểm. Thủy binh đứng kề Lộc hay Tuyết được +1 Di. Bãi bồi (cát vàng) bộ binh lội qua được."
+  },
+  {
+   "khi": "vong",
+   "n": 2,
+   "loi": "Chỉ tướng (Lộc, Tuyết) chiếm được bến. Bến lớn phía tây có quan giữ đồn: hạ quan rồi chiếm."
+  }
+ ],
+ "su_lieu": [
+  "dao_do_doc_tuyet",
+  "dao_do_doc_loc",
+  "thuy_quan_khong_ghi_chep"
+ ]
+}

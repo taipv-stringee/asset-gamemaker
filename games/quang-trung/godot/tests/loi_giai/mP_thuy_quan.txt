@@ -1,0 +1,157 @@
+# Lời giải mẫu màn phụ P (thủy quân), đủ 2 sao trên seed 1–3, thắng vòng 8. Đánh bến tây trước rồi bến đông; Đô đốc Tuyết đi sau đoàn,
+# tới được bến thì chiếm (chiem_neu); Đại đô đốc Lộc ở lại phía sau; thủy binh dưới 40 máu thì lui về (không mất thủy binh); mua thêm thủy binh.
+# vòng 1
+chiem_neu do_doc_tuyet 4 2
+chiem_neu do_doc_tuyet 8 3
+chiem_neu do_doc_loc 4 2
+chiem_neu do_doc_loc 8 3
+mua_neu 4 14 thuy_binh
+lui_yeu 40 6 12 thuy_binh
+don_danh
+toi_loai do_doc_loc 5 11
+toi_loai do_doc_tuyet 5 5
+ai_huong 4 3
+het
+# vòng 2
+chiem_neu do_doc_tuyet 4 2
+chiem_neu do_doc_tuyet 8 3
+chiem_neu do_doc_loc 4 2
+chiem_neu do_doc_loc 8 3
+lui_yeu 40 6 12 thuy_binh
+don_danh
+toi_loai do_doc_loc 5 11
+toi_loai do_doc_tuyet 5 5
+ai_huong 4 3
+het
+# vòng 3
+chiem_neu do_doc_tuyet 4 2
+chiem_neu do_doc_tuyet 8 3
+chiem_neu do_doc_loc 4 2
+chiem_neu do_doc_loc 8 3
+lui_yeu 40 6 12 thuy_binh
+don_danh
+toi_loai do_doc_loc 5 11
+toi_loai do_doc_tuyet 5 5
+ai_huong 4 3
+het
+# vòng 4
+chiem_neu do_doc_tuyet 4 2
+chiem_neu do_doc_tuyet 8 3
+chiem_neu do_doc_loc 4 2
+chiem_neu do_doc_loc 8 3
+lui_yeu 40 6 12 thuy_binh
+don_danh
+toi_loai do_doc_loc 5 11
+toi_loai do_doc_tuyet 5 5
+ai_huong 4 3
+het
+# vòng 5
+chiem_neu do_doc_tuyet 4 2
+chiem_neu do_doc_tuyet 8 3
+chiem_neu do_doc_loc 4 2
+chiem_neu do_doc_loc 8 3
+lui_yeu 40 6 12 thuy_binh
+don_danh
+toi_loai do_doc_loc 5 11
+toi_loai do_doc_tuyet 5 5
+ai_huong 4 3
+het
+# vòng 6
+chiem_neu do_doc_tuyet 4 2
+chiem_neu do_doc_tuyet 8 3
+chiem_neu do_doc_loc 4 2
+chiem_neu do_doc_loc 8 3
+lui_yeu 40 6 12 thuy_binh
+don_danh
+toi_loai do_doc_loc 5 11
+toi_loai do_doc_tuyet 5 5
+ai_huong 4 3
+het
+# vòng 7
+chiem_neu do_doc_tuyet 4 2
+chiem_neu do_doc_tuyet 8 3
+chiem_neu do_doc_loc 4 2
+chiem_neu do_doc_loc 8 3
+lui_yeu 40 6 12 thuy_binh
+don_danh
+toi_loai do_doc_loc 5 11
+toi_loai do_doc_tuyet 7 6
+ai_huong 8 4
+het
+# vòng 8
+chiem_neu do_doc_tuyet 4 2
+chiem_neu do_doc_tuyet 8 3
+chiem_neu do_doc_loc 4 2
+chiem_neu do_doc_loc 8 3
+lui_yeu 40 6 12 thuy_binh
+don_danh
+toi_loai do_doc_loc 5 11
+toi_loai do_doc_tuyet 7 6
+ai_huong 8 4
+het
+# vòng 9
+chiem_neu do_doc_tuyet 4 2
+chiem_neu do_doc_tuyet 8 3
+chiem_neu do_doc_loc 4 2
+chiem_neu do_doc_loc 8 3
+lui_yeu 40 6 12 thuy_binh
+don_danh
+toi_loai do_doc_loc 5 11
+toi_loai do_doc_tuyet 7 6
+ai_huong 8 4
+het
+# vòng 10
+chiem_neu do_doc_tuyet 4 2
+chiem_neu do_doc_tuyet 8 3
+chiem_neu do_doc_loc 4 2
+chiem_neu do_doc_loc 8 3
+lui_yeu 40 6 12 thuy_binh
+don_danh
+toi_loai do_doc_loc 5 11
+toi_loai do_doc_tuyet 7 6
+ai_huong 8 4
+het
+# vòng 11
+chiem_neu do_doc_tuyet 4 2
+chiem_neu do_doc_tuyet 8 3
+chiem_neu do_doc_loc 4 2
+chiem_neu do_doc_loc 8 3
+lui_yeu 40 6 12 thuy_binh
+don_danh
+toi_loai do_doc_loc 5 11
+toi_loai do_doc_tuyet 7 6
+ai_huong 8 4
+het
+# vòng 12
+chiem_neu do_doc_tuyet 4 2
+chiem_neu do_doc_tuyet 8 3
+chiem_neu do_doc_loc 4 2
+chiem_neu do_doc_loc 8 3
+lui_yeu 40 6 12 thuy_binh
+don_danh
+toi_loai do_doc_loc 5 11
+toi_loai do_doc_tuyet 7 6
+ai_huong 8 4
+het
+# vòng 13
+chiem_neu do_doc_tuyet 4 2
+chiem_neu do_doc_tuyet 8 3
+chiem_neu do_doc_loc 4 2
+chiem_neu do_doc_loc 8 3
+lui_yeu 40 6 12 thuy_binh
+don_danh
+toi_loai do_doc_loc 5 11
+toi_loai do_doc_tuyet 7 6
+ai_huong 8 4
+het
+# vòng 14
+chiem_neu do_doc_tuyet 4 2
+chiem_neu do_doc_tuyet 8 3
+chiem_neu do_doc_loc 4 2
+chiem_neu do_doc_loc 8 3
+lui_yeu 40 6 12 thuy_binh
+don_danh
+toi_loai do_doc_loc 5 11
+toi_loai do_doc_tuyet 7 6
+ai_huong 8 4
+het

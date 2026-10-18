@@ -20,6 +20,7 @@ extends RefCounted
 ##   ai                        để máy (SimpleAI) đi nốt các quân ta còn lại trong lượt này
 ##   rut TX TY                 mọi quân ta chưa đi làm "toi" về (TX, TY), quân gần đích đi trước
 ##   chieu_hang_het            mọi quân ta chưa đi có thẻ chieu_hang tới được ô kề quân tan thì tới đó rồi Chiêu hàng
+##   lui_yeu N TX TY [LOAI]    mọi quân ta chưa đi (trừ tướng chính; chỉ loại LOAI nếu có) còn dưới N máu thì lui về (TX, TY) và chờ
 ##   cho_khu X0 Y0 X1 Y1       mọi quân ta chưa đi đứng trong khung thì chờ tại chỗ
 ##   don_danh [N [X0 Y0 X1 Y1]]  (có khung: chỉ đánh quân địch đứng trong khung) dồn đánh: lặp lại, chọn trong mọi quân ta chưa đi (trừ tướng chính, quân sư) cú đánh tốt nhất (hạ được trước,
 ##                             rồi quân địch đã yếu), tối đa N cú (mặc định hết); dừng khi không còn cú đáng đánh
@@ -125,6 +126,13 @@ static func run(mission: String, p_seed: int, path: String, verbose := false, ca
 					var tg2 := Rules.chieu_hang_targets(s, qs)
 					if s.units.has(qs) and not tg2.is_empty():
 						ev.append_array(Rules.cmd_chieu_hang(s, qs, tg2[0]))
+			"lui_yeu":
+				var lim := int(w[1])
+				var home := Vector2i(int(w[2]), int(w[3]))
+				for lu in s.units_of(s.current_faction()):
+					if lu.done or lu.tuong_chinh or lu.hp >= lim or (w.size() > 4 and lu.type_id != w[4]):
+						continue
+					ev.append_array(_toward(s, lu, home))
 			"cho_khu":
 				var cbox := Rect2i(int(w[1]), int(w[2]), int(w[3]) - int(w[1]) + 1, int(w[4]) - int(w[2]) + 1)
 				for cu2 in s.units_of(s.current_faction()):

@@ -1,0 +1,50 @@
+{
+ "_ghi_chu": "Màn phụ P: cả trận là Sáng tạo của game; chỉ việc phân quân là Theo HLNTC.",
+ "truoc": [
+  {
+   "ai": "",
+   "loi": "Hoàng Lê nhất thống chí kể hai đạo thủy quân vượt biển vào sông Lục Đầu.",
+   "nhan": "Theo HLNTC"
+  },
+  {
+   "ai": "",
+   "loi": "Đạo Đô đốc Tuyết ra Hải Dương; đạo Đại đô đốc Lộc lên Lạng Giang chặn đường rút.",
+   "nhan": "Theo HLNTC"
+  },
+  {
+   "ai": "",
+   "loi": "Sử không ghi trận đánh nào của hai đạo này. Trận dưới đây là do game dựng.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "do_doc_loc",
+   "loi": "Chiếm hai bến phía bắc, chặn đường quân Thanh rút về nước.",
+   "nhan": "Sáng tạo của game",
+   "ten": "Đại đô đốc Lộc"
+  },
+  {
+   "ai": "do_doc_tuyet",
+   "loi": "Thủy binh đi trước. Bộ binh lên bờ sau.",
+   "nhan": "Sáng tạo của game",
+   "ten": "Đô đốc Tuyết"
+  }
+ ],
+ "sau_thang": [
+  {
+   "ai": "",
+   "loi": "Hai bến đã về tay quân ta.",
+   "nhan": "Sáng tạo của game"
+  },
+  {
+   "ai": "",
+   "loi": "Theo Hoàng Lê nhất thống chí, các đạo thủy quân chặn đường rút của quân Thanh.",
+   "nhan": "Theo HLNTC"
+  },
+  {
+   "ai": "do_doc_loc",
+   "loi": "Báo về đại quân: đường bắc đã chặn.",
+   "nhan": "Sáng tạo của game",
+   "ten": "Đại đô đốc Lộc"
+  }
+ ]
+}

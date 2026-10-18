@@ -7,8 +7,8 @@
  "dia_danh": "Đồn Ngọc Hồi (Thanh Trì, Hà Nội ngày nay), trên đường thiên lý vào Thăng Long",
  "gioi_thieu": "Mờ sáng mùng 5, quân Tây Sơn phá đồn Ngọc Hồi. Sử Thanh chép Nguyễn Huệ sai chiến sĩ đội ván gỗ xông vào trận, tự cưỡi voi đốc chiến phía sau. Đồn có lũy đất, chông sắt, địa lôi; quân Thanh tháo chạy giẫm phải địa lôi của mình.",
  "nhan_gioi_thieu": "Sử liệu",
- "muc_tieu_chinh": "Quang Trung chiếm đồn Ngọc Hồi trước khi hết vòng 20.",
- "dieu_kien_thua": "Quang Trung bị hạ, hoặc hết vòng 20.",
+ "muc_tieu_chinh": "Quang Trung chiếm đồn Ngọc Hồi trước khi hết vòng 22.",
+ "dieu_kien_thua": "Quang Trung bị hạ, hoặc hết vòng 22.",
  "hoi_thoai": "m08_ngoc_hoi",
  "nhac": "chu_de",
  "ghi_chu": "Màn trùm (04 §Màn 8). Rạng sáng R = 1. Bố trí hàng chông, địa lôi, Đầm Mực ở phía bắc đồn là Sáng tạo của game theo HLNTC và Liệt truyện. Ba tướng Thanh toi_thieu_1 + rut_khi_yeu: rút về mép bắc, sang màn 9.",
@@ -1602,14 +1602,14 @@
    6
   ]
  },
- "thua_het_luot": 20,
+ "thua_het_luot": 22,
  "ly_do_het_luot": "Quân Thanh ở Thăng Long kịp kéo xuống tiếp viện.",
  "luu_quan": true,
  "muc_tieu_phu": [
   {
    "loai": "truoc_vong",
-   "n": 15,
-   "ten": "Thắng trước vòng 15"
+   "n": 17,
+   "ten": "Thắng trước vòng 17"
   },
   {
    "loai": "ha_tren_khu",
@@ -1637,12 +1637,12 @@
   {
    "khi": "vong",
    "n": 2,
-   "loi": "Trời sáng dần, vòng 3 hết sương. Pháo binh trong đồn bắn xa 2–4 ô. Quân Thanh còn dưới 30 máu thì rút về phía bắc qua Đầm Mực."
+   "loi": "Trời sáng dần, vòng 3 hết sương. Pháo binh trong đồn bắn xa 2–4 ô. Quân Thanh còn dưới 50 máu thì rút về bắc qua đê, có khi giẫm địa lôi của mình."
   },
   {
    "khi": "vong",
    "n": 3,
-   "loi": "Đô đốc Bảo đem voi tới lối Đại Áng, sườn tây bắc đồn. Đánh vào sườn đồn, hoặc chặn quân Thanh rút qua Đầm Mực."
+   "loi": "Đô đốc Bảo đem voi tới sườn tây bắc. Đứng ngoài tầm pháo trong đồn (2–4 ô); chặn quân Thanh rút trên đê, đầm."
   }
  ],
  "su_lieu": [

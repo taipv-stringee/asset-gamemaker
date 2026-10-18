@@ -212,7 +212,7 @@ Mỗi điểm ghi ngày âm và dương lịch.
   - **Khu đồn Ngọc Hồi** x 4–9, y 5–8: lũy bao quanh, đồn (6,6), doanh, cổng nam (6,8), trống báo động.
   - Bắc: đê Yên Duyên (hàng 3), Đầm Mực (hàng 1–2), mép bắc phía tây (x 0–5, y 0) là khu rút lui; đông bắc là núi, sông.
   - Tây: lối Đại Áng dọc mép tây. Vị trí chông, địa lôi, đầm là *[Sáng tạo của game]* theo HLNTC và *Liệt truyện*.
-- **Rạng sáng**: R = 1 (vòng 1 `tam_nhin` 3, vòng 2 = 5, từ vòng 3 trời sáng). Thua khi hết vòng 20.
+- **Rạng sáng**: R = 1 (vòng 1 `tam_nhin` 3, vòng 2 = 5, từ vòng 3 trời sáng). Thua khi hết vòng 22 (chơi thử lần 7: người chơi cần 15–18 vòng).
 - **Quân ta**: Quang Trung, 4 mộc thuẫn, 4 lính giáo, 2 hỏa mai, 2 hỏa hổ, 2 voi chiến, 1 thần công, 1 trống trận. Vàng 800; giới hạn 24
   (viện binh không tính); `mua_duoc`: như màn 5 + moc_thuan.
 - **Viện binh**: vòng 3, Đô đốc Bảo + 3 voi ở sườn tây bắc (lối Đại Áng, gần đê), hội thoại "Đại Áng".
@@ -223,7 +223,7 @@ Mỗi điểm ghi ngày âm và dương lịch.
 - **Thắng**: Quang Trung chiếm đồn Ngọc Hồi. Thắng thì ghi quân ta còn sống (`luu_quan`) cho màn 9.
 - **Hứa Thế Hanh rút về sông** là *[Sáng tạo của game]*, để giữ được cả hai phiên bản nơi ông tử trận (sử Thanh: bờ sông khi chặn hậu;
   cách kể phổ biến ở Việt Nam: Ngọc Hồi).
-- **Mục tiêu phụ**: thắng trước vòng 15; hạ ≥ 2 quân Thanh trên đường rút phía bắc — bãi bắc đồn, đê Yên Duyên, Đầm Mực, hàng 1–4
+- **Mục tiêu phụ**: thắng trước vòng 17 (bản phác: 15, nới sau chơi thử lần 7); hạ ≥ 2 quân Thanh trên đường rút phía bắc — bãi bắc đồn, đê Yên Duyên, Đầm Mực, hàng 1–4
   (`ha_tren_khu`; bản phác: ≥ 3 ở Đầm Mực, giảm khi bớt quân Thanh); không mất mộc thuẫn
   nào trước khi một mộc thuẫn qua hai hàng chông (`khong_mat_truoc_co`, cờ `qua_chong` do sự kiện `vao_khu`).
 - **Lời giải mẫu**: `tests/loi_giai/m08_ngoc_hoi.txt` — dùng lệnh máy-đi-hộ `ai_huong` / `don_danh` / `chiem_neu`: dồn lên cánh đông với

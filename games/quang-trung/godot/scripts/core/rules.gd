@@ -805,6 +805,7 @@ static func _spawn_list(state: BattleState, f: String, list: Array, kind: String
 			u.ai_params["tam"] = Vector2i(int(q["tam"][0]), int(q["tam"][1]))
 		if q.has("ban_kinh"):
 			u.ai_params["ban_kinh"] = int(q["ban_kinh"])
+		u.toi_thieu_1 = q.get("toi_thieu_1", false)   # màn 8: Đô đốc Bảo không tử trận
 		u.ngoai_gioi_han = true
 		ev.append({"loai": kind, "uid": u.uid, "o": at})
 	return ev

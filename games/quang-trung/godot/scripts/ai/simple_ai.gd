@@ -114,6 +114,27 @@ static func _escaping(state: BattleState, u: Unit) -> bool:
 		and not state.zones.get(win["khu"], []).has(u.pos)
 
 
+## Màn 9: "vao_vung" nằm trong "tat_ca". Tướng chính (phe người chơi) nhắm khu đó luôn; quân khác nhắm khu khi mọi điều kiện còn lại
+## đã xong. Trả về các ô khu, hoặc rỗng.
+static func _zone_goal(state: BattleState, u: Unit) -> Array[Vector2i]:
+	var out: Array[Vector2i] = []
+	var win: Dictionary = state.mission.get("thang", {})
+	if u.faction != state.factions[0] or win.get("loai", "") != "tat_ca":
+		return out
+	var zone_cond: Dictionary = {}
+	var others_done := true
+	for c in win.get("dk", []):
+		if c.get("loai", "") == "vao_vung":
+			zone_cond = c
+		elif not Rules._condition(state, c):
+			others_done = false
+	if zone_cond.is_empty() or not (u.tuong_chinh or others_done):
+		return out
+	for p in state.zones.get(zone_cond["khu"], []):
+		out.append(p)
+	return out
+
+
 static func _goals(state: BattleState, u: Unit) -> Array[Vector2i]:
 	var goals: Array[Vector2i] = []
 	if not goal_override.is_empty() and u.faction == state.factions[0]:
@@ -146,6 +167,9 @@ static func _goals(state: BattleState, u: Unit) -> Array[Vector2i]:
 		for p in state.zones.get(win["khu"], []):
 			goals.append(p)
 		return goals
+	var zg := _zone_goal(state, u)
+	if not zg.is_empty():
+		return zg
 	if u.tuong_chinh and u.faction == state.factions[0] and win.get("loai", "") == "chiem_o":
 		var obj := Vector2i(int(win["o"][0]), int(win["o"][1]))
 		var guarded := false

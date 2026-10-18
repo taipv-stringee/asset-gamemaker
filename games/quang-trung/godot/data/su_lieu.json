@@ -636,6 +636,74 @@
      "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
     }
    ]
+  },
+  {
+   "id": "hua_the_hanh",
+   "nhom": "Nhân vật",
+   "tieu_de": "Hứa Thế Hanh (許世亨)",
+   "nhan": "Sử liệu",
+   "noi_dung": "Đề đốc Quảng Tây. Tài liệu Thanh ghi ngày 28 tháng 10 năm Càn Long 53 (1788) Tôn Sĩ Nghị cùng Hứa Thế Hanh dẫn một vạn quân ra Trấn Nam Quan làm chính binh. Theo Wikipedia tiếng Anh, ông là người Hồi (Hui); vì vậy \"quân Thanh\" không đồng nghĩa với \"người Hán\".\n\nNơi ông tử trận có hai bản: sử Thanh chép ông ở lại bờ sông Nhị chặn hậu và chết khi cầu phao đứt; cách kể phổ biến ở Việt Nam đặt cái chết của ông ở Ngọc Hồi. Game cho ông rút khỏi Ngọc Hồi (màn 8) rồi tử trận ở đầu cầu (màn 9) để giữ cả hai cách kể; việc \"rút về sông\" là sắp đặt của game.",
+   "nguon": [
+    {
+     "ten": "人大清史所 – tư liệu Thanh về chiến dịch",
+     "url": "http://iqh.ruc.edu.cn/old/qdzzsyj/jshd/038e695fde7d472ead2d851973be834c.htm"
+    },
+    {
+     "ten": "Wikipedia (Anh): Xu Shiheng",
+     "url": "https://en.wikipedia.org/wiki/Xu_Shiheng"
+    }
+   ]
+  },
+  {
+   "id": "hlntc_la_gi",
+   "nhom": "Tranh cãi",
+   "tieu_de": "Hoàng Lê nhất thống chí là sách gì?",
+   "nhan": "Sử liệu",
+   "noi_dung": "Hoàng Lê nhất thống chí là tiểu thuyết chương hồi, gần thời với sự kiện nhất. Nhiều chi tiết được kể quen thuộc chủ yếu đến từ sách này: Hà Hồi bị vây rồi bắc loa gọi hàng, mộc thuẫn 20 bức ván phủ rơm ướt, lời hẹn mùng 7 vào Thăng Long, đê Yên Duyên, Đầm Mực. Các bản tóm tắt trên mạng phần lớn dựa vào chính sách này.\n\nNguồn phía Thanh chỉ xác nhận vài chi tiết, như quân Tây Sơn \"đội ván\" xông trận và nhà vua cưỡi voi đốc chiến. Vì vậy game gắn nhãn [Theo HLNTC] cho những chi tiết chỉ có trong sách, tách khỏi nhãn [Sử liệu].",
+   "nguon": [
+    {
+     "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
+     "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
+    },
+    {
+     "ten": "nghiencuulichsu.com – Chiến thuật hạ thành Ngọc Hồi của quân Tây Sơn",
+     "url": "https://nghiencuulichsu.com/2016/09/12/chien-thuat-ha-thanh-ngoc-hoi-cua-quan-tay-son/"
+    }
+   ]
+  },
+  {
+   "id": "dai_ang_yen_duyen",
+   "nhom": "Địa danh",
+   "tieu_de": "Đại Áng, đê Yên Duyên, Đầm Mực",
+   "nhan": "Theo HLNTC",
+   "noi_dung": "Theo Hoàng Lê nhất thống chí, Đại đô đốc Bảo đem tượng binh đánh từ Đại Áng, tiếp ứng mặt tả; tàn quân Thanh bị phục ở đê Yên Duyên rồi bị dồn xuống Đầm Mực.\n\nVới quân tiến lên phía bắc, mặt tả là phía tây: Đại Áng (Thanh Trì) ở phía tây, tây nam Ngọc Hồi. Đầm Mực (làng Quỳnh Đô, nay thuộc Vĩnh Quỳnh) và đê Yên Duyên (Yên Sở, Hoàng Mai) ở phía bắc Ngọc Hồi, trên đường tàn quân chạy về Thăng Long. Vị trí các nơi này theo hiểu biết chung, chưa đối chiếu bản đồ cổ; bản đồ màn 8 chỉ phỏng theo hướng.",
+   "nguon": [
+    {
+     "ten": "Loigiaihay – tóm tắt Hoàng Lê nhất thống chí",
+     "url": "https://loigiaihay.com/tac-pham-hoang-le-nhat-thong-chi-a11020.html"
+    },
+    {
+     "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
+     "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
+    }
+   ]
+  },
+  {
+   "id": "binh_dinh_an_nam_chien_do",
+   "nhom": "Tranh cãi",
+   "tieu_de": "Bộ tranh Bình định An Nam chiến đồ",
+   "nhan": "Sử liệu",
+   "noi_dung": "Nguồn hình ảnh phía Thanh quan trọng nhất là bộ 6 bức Bình định An Nam chiến đồ (平定安南戰圖), do Tạo biện xứ khắc đồng trong các năm 1790–1793. Bộ tranh cố ý bỏ trận thua: chỉ vẽ các trận thắng cho đến khi \"thu phục Lê thành\".\n\nMột số trang ảnh gán bộ tranh cho Castiglione và thợ khắc Paris là nhầm với bộ tranh Tây Vực. Game dùng bộ tranh để tham khảo trang phục, khí giới quân Thanh, không dùng để kể diễn biến.",
+   "nguon": [
+    {
+     "ten": "Lawdata – Lý Thái Hàn",
+     "url": "https://lawdata.com.tw/tw/detail.aspx?no=484833"
+    },
+    {
+     "ten": "Cố Cung (故宫博物院)",
+     "url": "https://www.dpm.org.cn/ancient/yuanmingqing/163527.html"
+    }
+   ]
   }
  ]
 }

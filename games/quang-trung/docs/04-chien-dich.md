@@ -263,7 +263,8 @@ Mỗi điểm ghi ngày âm và dương lịch.
   `mua_duoc`: thuy_binh, hoa_mai, linh_giao, hoa_ho. (Bản phác: 3 thủy binh, vàng 400 — tăng khi dò lời giải.)
 - **Địch (Thanh)**: quan giữ đồn, 1 trường mâu, 1 điểu thương ở bến tây; 1 trường mâu, 2 điểu thương ở bến đông, giữ chỗ (6 quân;
   bản phác 8 có pháo binh — bớt khi dò lời giải và sau chơi thử lần 9: pháo bắn khắp lòng sông, quân bến đông đứng lên ô bến để hồi máu).
-  Chiếm bến tây thì có dải chữ nhắc mua lính, hồi máu ở đó.
+  Chiếm bến tây thì có dải chữ nhắc mua lính, hồi máu ở đó. Chơi thử lần 10: thắng vòng 6, ★ thắng trước vòng 10, ✗ không mất thủy binh;
+  bến đông hơi dễ (ô bến trống). Thử đặt một trường mâu lên ô bến đông thì lời giải mẫu không đạt đủ sao nữa, nên giữ như hiện tại cho màn phụ.
 - **Thắng**: chiếm cả hai bến (Lộc hoặc Tuyết) trước khi hết vòng 15. **Mục tiêu phụ**: không mất thủy binh; thắng trước vòng 10.
 - **Lời giải mẫu**: `tests/loi_giai/mP_thuy_quan.txt` — đánh bến tây trước, Tuyết chiếm, thủy binh yếu thì lui (`lui_yeu`), thắng vòng 8, đủ 2 sao.
 - **Mở Sử liệu**: đạo Đô đốc Tuyết, đạo Đô đốc Lộc, "Hai đạo thủy quân đánh ở đâu?". Chân dung Lộc và Tuyết là hình dung của game.

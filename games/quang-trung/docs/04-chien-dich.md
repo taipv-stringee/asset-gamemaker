@@ -237,8 +237,8 @@ Mỗi điểm ghi ngày âm và dương lịch.
   Quang Trung vào Thăng Long trưa hoặc chiều mùng 5 — sớm hơn lời hẹn mùng 7. *[Sử liệu; hai phiên bản về cầu phao]*
 - **Bản đồ**: 12 × 18 (`data/missions/m09_cau_phao.json`). Sông Nhị chảy dọc phía đông (cột 8–9), **cầu phao** (8–9, 5); bờ đông (cột 10–11)
   là khu "bo_dong". Tây bắc: **khu thành Thăng Long** (x 0–3, y 0–3). Đầu cầu bờ tây: đê, doanh trại Thanh. Nam: đường từ Ngọc Hồi.
-- **Quân ta**: Quang Trung + tối đa **10 quân còn sống cuối màn 8** (`quan_mang_theo`; tự chọn theo cấp giảm dần, luôn giữ một quân sư nếu có —
-  chưa có màn chọn quân), giữ cấp và KN, đầy máu; Đô đốc Bảo không sang. Chơi lẻ / kiểm thử: đội hình mặc định 10 quân cấp 1
+- **Quân ta**: Quang Trung + tối đa **10 quân còn sống cuối màn 8** (`quan_mang_theo`; màn "Chọn quân sang Thăng Long" trước trận, chọn sẵn theo cấp giảm dần; tiếp tục /
+  chơi lại thì tự chọn, giữ một quân sư nếu có), giữ cấp và KN, đầy máu; Đô đốc Bảo không sang. Chơi lẻ / kiểm thử: đội hình mặc định 10 quân cấp 1
   (2 mộc thuẫn, 2 lính giáo, 2 hỏa mai, 2 quân sư, 2 voi). **Không mua lính**, không vàng. Giới hạn 16.
 - **Địch**: Tôn Sĩ Nghị (`toi_thieu_1`, chế độ *Chạy* từ thành sang bờ đông qua cầu, tới bờ đông thì rời bản đồ); Hứa Thế Hanh, Trương Triều Long,
   Thượng Duy Thăng (giữ đầu cầu, bị hạ bình thường); 3 lính giữ đầu cầu; 6 tàn quân chạy từ Ngọc Hồi về cầu (4 con 50 máu).

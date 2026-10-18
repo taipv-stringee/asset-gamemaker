@@ -1107,7 +1107,7 @@ static func cmd_goi_hang(state: BattleState, u: Unit, name: String) -> Array[Dic
 ## Quân mang từ màn trước (màn 8 → 9, 04): mission["quan_mang_theo"] = {"toi_da": N, "o": [ô]}. Quân phe người chơi (trừ tướng
 ## chính) đứng trên các ô đó là đội hình mặc định (chơi lẻ / kiểm thử); trong chiến dịch thay bằng tối đa N quân trong `army`
 ## (Progress "quan_mang_theo": [{id, cap, xp}], cấp cao trước), đầy máu, giữ cấp và kinh nghiệm.
-static func apply_army(state: BattleState, army: Array) -> void:
+static func apply_army(state: BattleState, army: Array, auto_pick := true) -> void:
 	var spec: Dictionary = state.mission.get("quan_mang_theo", {})
 	if spec.is_empty() or army.is_empty():
 		return
@@ -1120,7 +1120,7 @@ static func apply_army(state: BattleState, army: Array) -> void:
 	var n := mini(army.size(), mini(int(spec.get("toi_da", 10)), slots.size()))
 	var picked: Array = army.slice(0, n)
 	# Giữ ít nhất một quân sư nếu có (chiêu hàng: mục tiêu phụ hàng binh), thay quân cuối danh sách.
-	if n > 0 and not picked.any(func(a: Dictionary) -> bool: return a["id"] == "quan_su"):
+	if auto_pick and n > 0 and not picked.any(func(a: Dictionary) -> bool: return a["id"] == "quan_su"):
 		for a in army.slice(n):
 			if a["id"] == "quan_su":
 				picked[n - 1] = a

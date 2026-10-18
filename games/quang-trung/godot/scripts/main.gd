@@ -12,6 +12,7 @@ extends Node
 ##   --loi-giai=<file>   (kèm --man) chạy trước một lời giải (cú pháp tests/loi_giai.gd) rồi mới hiện trận — để chụp / chạm ở giữa màn
 ## Không có tham số nào: vào menu chính như người chơi.
 
+var _army_choice: Array = []   # quân người chơi chọn mang sang màn 9 (ArmySelect)
 var battle: Battle
 var screen: Control                # màn hình menu đang mở (null khi đang trong trận)
 var ui_layer: CanvasLayer          # menu, giới thiệu màn, hội thoại nằm trên trận
@@ -102,9 +103,25 @@ func _show_briefing(id: String) -> void:
 		_start_story_battle(id)  # màn luyện tập: không có giới thiệu
 		return
 	var b := Briefing.new().setup(m)
-	b.start_pressed.connect(_start_story_battle.bind(id))
+	b.start_pressed.connect(_choose_army_then_start.bind(id))
 	b.back.connect(_show_campaign)
 	_set_screen(b)
+
+
+## Màn 9: chọn quân còn sống cuối màn 8 trước khi vào trận (không có quân mang theo thì vào thẳng).
+func _choose_army_then_start(id: String) -> void:
+	_army_choice = []
+	var m := Missions.load_mission(id)
+	var army: Array = Progress.data().get("quan_mang_theo", [])
+	if not m.has("quan_mang_theo") or army.is_empty():
+		_start_story_battle(id)
+		return
+	var sel := ArmySelect.new().setup(army, int(m["quan_mang_theo"].get("toi_da", 10)))
+	sel.chosen.connect(func(picked: Array) -> void:
+		_army_choice = picked
+		_start_story_battle(id))
+	sel.back.connect(_show_briefing.bind(id))
+	_set_screen(sel)
 
 
 ## Màn chuyện (loai "chuyen", màn 3): chuỗi cảnh hội thoại trên nền sơn mài, rồi sa bàn; xong là qua màn.
@@ -192,7 +209,11 @@ func _new_battle(from: BattleState = null) -> void:
 		var s := Missions.new_battle(_mission, sd)
 		if _story:
 			Rules.apply_carry(s, Progress.data().get("co", {}))   # hệ quả màn trước (màn 5 → màn 6)
-			Rules.apply_army(s, Progress.data().get("quan_mang_theo", []))   # quân còn sống cuối màn 8 → màn 9
+			# Quân còn sống cuối màn 8 → màn 9: theo lựa chọn ở màn chọn quân; tiếp tục / chơi lại thì lấy mặc định.
+			if not _army_choice.is_empty():
+				Rules.apply_army(s, _army_choice, false)
+			else:
+				Rules.apply_army(s, Progress.data().get("quan_mang_theo", []))
 		battle.start_from_state(s)
 
 

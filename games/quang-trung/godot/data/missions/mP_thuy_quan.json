@@ -11,7 +11,7 @@
  "dieu_kien_thua": "Đại đô đốc Lộc bị hạ, hoặc hết vòng 15.",
  "hoi_thoai": "mP_thuy_quan",
  "nhac": "chu_de",
- "ghi_chu": "04 §Màn phụ P. Trận là Sáng tạo của game (không có ghi chép giao chiến). Thủy quân: thủy binh kề Lộc / Tuyết +1 Di. Đô đốc Tuyết toi_thieu_1 (chơi thử lần 8: chết sớm quá).",
+ "ghi_chu": "04 §Màn phụ P. Trận là Sáng tạo của game (không có ghi chép giao chiến). Thủy quân: thủy binh kề Lộc / Tuyết +1 Di. Đô đốc Tuyết toi_thieu_1 (chơi thử lần 8: chết sớm quá). Chơi thử lần 9: bến đông bỏ pháo (thay điểu thương), quân bến đông giữ chỗ.",
  "ban_do": [
   "tt...~~~~~..",
   "t..lD~~~....",
@@ -165,7 +165,7 @@
     9,
     3
    ],
-   "ban_kinh": 1
+   "ban_kinh": 0
   },
   {
    "id": "dieu_thuong",
@@ -177,10 +177,10 @@
     8,
     2
    ],
-   "ban_kinh": 1
+   "ban_kinh": 0
   },
   {
-   "id": "phao_binh",
+   "id": "dieu_thuong",
    "phe": "thanh",
    "x": 9,
    "y": 4,
@@ -233,12 +233,30 @@
   {
    "khi": "vong",
    "n": 2,
-   "loi": "Chỉ Lộc, Tuyết chiếm được bến. Quan giữ bến tây hồi 20 máu mỗi vòng: dồn đánh hạ trong một lượt. Pháo bến đông bắn xa 2–4 ô, cả trên sông."
+   "loi": "Chỉ Lộc, Tuyết chiếm được bến. Quan giữ bến tây hồi 20 máu mỗi vòng: dồn đánh hạ trong một lượt. Chiếm bến tây rồi thì mua lính, hồi máu ở đó."
   }
  ],
  "su_lieu": [
   "dao_do_doc_tuyet",
   "dao_do_doc_loc",
   "thuy_quan_khong_ghi_chep"
+ ],
+ "su_kien": [
+  {
+   "id": "ben_tay",
+   "khi": {
+    "loai": "chiem_o",
+    "o": [
+     4,
+     2
+    ]
+   },
+   "lam": [
+    {
+     "loai": "bang",
+     "chu": "Bến tây đã về tay ta: mua thủy binh, hồi máu ở bến tây được."
+    }
+   ]
+  }
  ]
 }

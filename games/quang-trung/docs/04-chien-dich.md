@@ -261,8 +261,9 @@ Mỗi điểm ghi ngày âm và dương lịch.
   được; nhánh sông lên bến đông. Bến của ta (đồn) ở nam (4,14); 2 bến của quân Thanh ở bắc: bến tây (4,2, bến lớn) và bến đông (8,3).
 - **Quân ta**: Đại đô đốc Lộc (tướng chính), Đô đốc Tuyết (`toi_thieu_1`: không tử trận, sau chơi thử lần 8), 4 thủy binh, 2 hỏa mai, 2 lính giáo. Vàng 600; giới hạn 14;
   `mua_duoc`: thuy_binh, hoa_mai, linh_giao, hoa_ho. (Bản phác: 3 thủy binh, vàng 400 — tăng khi dò lời giải.)
-- **Địch (Thanh)**: quan giữ đồn, 1 trường mâu, 1 điểu thương ở bến tây; 1 trường mâu, 1 điểu thương, 1 pháo binh ở bến đông (6 quân;
-  bản phác 8, bớt khi dò lời giải).
+- **Địch (Thanh)**: quan giữ đồn, 1 trường mâu, 1 điểu thương ở bến tây; 1 trường mâu, 2 điểu thương ở bến đông, giữ chỗ (6 quân;
+  bản phác 8 có pháo binh — bớt khi dò lời giải và sau chơi thử lần 9: pháo bắn khắp lòng sông, quân bến đông đứng lên ô bến để hồi máu).
+  Chiếm bến tây thì có dải chữ nhắc mua lính, hồi máu ở đó.
 - **Thắng**: chiếm cả hai bến (Lộc hoặc Tuyết) trước khi hết vòng 15. **Mục tiêu phụ**: không mất thủy binh; thắng trước vòng 10.
 - **Lời giải mẫu**: `tests/loi_giai/mP_thuy_quan.txt` — đánh bến tây trước, Tuyết chiếm, thủy binh yếu thì lui (`lui_yeu`), thắng vòng 8, đủ 2 sao.
 - **Mở Sử liệu**: đạo Đô đốc Tuyết, đạo Đô đốc Lộc, "Hai đạo thủy quân đánh ở đâu?". Chân dung Lộc và Tuyết là hình dung của game.

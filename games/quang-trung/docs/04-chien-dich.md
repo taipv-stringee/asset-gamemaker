@@ -206,23 +206,26 @@ Mỗi điểm ghi ngày âm và dương lịch.
   mà tự thúc voi đốc đằng sau"; có voi chiến (thường ghi hơn 100). Đồn có lũy đất, chông sắt, địa lôi; quân Thanh tháo chạy giẫm phải địa lôi
   của mình (*Liệt truyện*). *[Sử liệu]* Mộc thuẫn 60 ván ghép thành 20 bức phủ rơm ướt; Đô đốc Bảo đánh từ Đại Áng; tàn quân bị phục ở
   đê Yên Duyên, bị dồn xuống Đầm Mực. *[Theo HLNTC]*
-- **Bản đồ**: 14 × 22, hướng đúng địa lý — bắc là phía Thăng Long:
-  - Nam: quân ta, đồn của ta.
-  - Giữa: hai hàng chông sắt, bãi địa lôi ẩn, lũy đất; **khu đồn Ngọc Hồi** phía trên.
-  - Bắc (sau đồn, trên đường rút về Thăng Long): đê Yên Duyên và Đầm Mực.
-  - Tây / tây nam ("mặt tả"): lối Đại Áng — nơi Đô đốc Bảo xuất hiện.
-- **Rạng sáng**: R = 1 (vòng 1 `tam_nhin` 3, vòng 2 = 5, từ vòng 3 trời sáng).
-- **Quân ta**: Quang Trung, 4 mộc thuẫn, 4 lính giáo, 2 hỏa mai, 2 hỏa hổ, 2 voi chiến, 1 thần công. Vàng 800; **giới hạn 24**
+- **Bản đồ**: 14 × 22 (`data/missions/m08_ngoc_hoi.json`), bắc là phía Thăng Long:
+  - Nam: quân ta, đồn của ta (6,20), hai làng trung lập.
+  - Giữa: hai hàng chông sắt kín bề ngang (hàng 11 và 14), 8 địa lôi ẩn ở hàng 12–13 (các cột 0, 1, 5, 9, 12 không có).
+  - **Khu đồn Ngọc Hồi** x 4–9, y 5–8: lũy bao quanh, đồn (6,6), doanh, cổng nam (6,8), trống báo động.
+  - Bắc: đê Yên Duyên (hàng 3), Đầm Mực (hàng 1–2), mép bắc phía tây (x 0–5, y 0) là khu rút lui; đông bắc là núi, sông.
+  - Tây: lối Đại Áng dọc mép tây. Vị trí chông, địa lôi, đầm là *[Sáng tạo của game]* theo HLNTC và *Liệt truyện*.
+- **Rạng sáng**: R = 1 (vòng 1 `tam_nhin` 3, vòng 2 = 5, từ vòng 3 trời sáng). Thua khi hết vòng 20.
+- **Quân ta**: Quang Trung, 4 mộc thuẫn, 4 lính giáo, 2 hỏa mai, 2 hỏa hổ, 2 voi chiến, 1 thần công, 1 trống trận. Vàng 800; giới hạn 24
   (viện binh không tính); `mua_duoc`: như màn 5 + moc_thuan.
-- **Viện binh**: vòng 4, Đô đốc Bảo + 3 voi chiến ở lối Đại Áng.
-- **Địch**: Hứa Thế Hanh, Trương Triều Long, Thượng Duy Thăng (cả ba `rut_khi_yeu 30` → *Rút lui* về mép bắc, sang màn 9);
-  khoảng 18 quân Lục doanh (40–60% điểu thương, có đằng bài, cung tiễn, 2 pháo binh); đồn Ngọc Hồi mua thêm trường mâu, điểu thương
-  (ngân sách 600). Tàn quân *Rút lui* khi máu < 30, đường rút đi qua Đầm Mực.
-- **Thắng**: Quang Trung chiếm đồn Ngọc Hồi.
+- **Viện binh**: vòng 3, Đô đốc Bảo + 3 voi ở sườn tây bắc (lối Đại Áng, gần đê), hội thoại "Đại Áng".
+- **Địch** (12 quân, bản thử để chơi thử; bản phác là ~18): Hứa Thế Hanh giữ cổng trong (6,7), Trương Triều Long, Thượng Duy Thăng
+  (cả ba `toi_thieu_1` + `rut_khi_yeu 50`: không bị hạ, rút về mép bắc, sang màn 9); 1 pháo binh, 1 cung tiễn trong đồn; 4 điểu thương,
+  1 đằng bài, 2 trường mâu (`rut_khi_yeu 30`). Đồn không mua thêm (`khong_thu_nhap`, vàng 0) — bản phác ghi ngân sách 600, bỏ khi chơi thử.
+- **Thắng**: Quang Trung chiếm đồn Ngọc Hồi. Thắng thì ghi quân ta còn sống (`luu_quan`) cho màn 9.
 - **Hứa Thế Hanh rút về sông** là *[Sáng tạo của game]*, để giữ được cả hai phiên bản nơi ông tử trận (sử Thanh: bờ sông khi chặn hậu;
   cách kể phổ biến ở Việt Nam: Ngọc Hồi).
-- **Mục tiêu phụ**: thắng trước vòng 15; hạ ≥ 3 quân Thanh khi chúng đứng trên ô Đầm Mực; không mất mộc thuẫn nào trước khi qua hàng chông.
-- **Mở Sử liệu**: mộc thuẫn (ván ghép phủ rơm hay bó rơm lăn); voi chiến; Lục doanh; địa lôi.
+- **Mục tiêu phụ**: thắng trước vòng 15; hạ ≥ 3 quân Thanh khi chúng đứng ở đê Yên Duyên hay Đầm Mực (`ha_tren_khu`); không mất mộc thuẫn
+  nào trước khi một mộc thuẫn qua hai hàng chông (`khong_mat_truoc_co`, cờ `qua_chong` do sự kiện `vao_khu`).
+- **Lời giải mẫu**: chưa có (đang dò bằng lệnh `ai_huong` / `don_danh`); màn đang chơi thử để chỉnh độ khó.
+- **Mở Sử liệu**: mộc thuẫn (ván ghép hay bó rơm); voi chiến; Lục doanh; chông sắt và địa lôi ở Ngọc Hồi.
 
 ## Màn 9 — Cầu phao sông Nhị – vào Thăng Long
 

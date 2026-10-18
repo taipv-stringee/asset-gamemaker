@@ -127,6 +127,8 @@ màn → trận → kết quả) do `scripts/main.gd` điều khiển; các màn
     `he_qua` [{co, thuc_khu}] (màn sau: cờ bật thì quân trong khu thức sẵn; `Rules.apply_carry`, chỉ trong chiến dịch),
     `truoc_theo_co` / `sau_thang_theo_co` {cờ: phần hội thoại} (hội thoại mở / kết khác đi theo cờ).
   - Vây đồn (màn 6): `khu_don` [tên khu], vật thể `kho_luong` {co}.
+  - Màn 8: vật thể `chong`, `dia_loi` {phe, lo}; `khu_rut_lui`; `khong_thu_nhap` [phe]; `luu_quan` (ghi quân sang màn 9);
+    viện binh có `hoi_thoai`; mục tiêu phụ `ha_tren_khu` {khu, n}, `khong_mat_truoc_co` {quan, co}; chiến dịch: `mo_sau` [màn].
   - Đốt (màn 7): ô địa hình `chay_duoc` (doanh trại); vật thể `lua` {het: vòng tắt} do lệnh Đốt tạo; mục tiêu phụ `dot_doanh` {n, truoc_vong}.
   - `goi_y` có thể kèm `neu_co` / `khong_co` (cờ trận) để gợi ý chỉ hiện ở một biến thể màn (màn 6 đồn thức).
 - Sự kiện quá riêng để làm bằng dữ liệu (cầu phao đứt ở màn 9...): khi cần mới thêm script `missions/<id>.gd`.

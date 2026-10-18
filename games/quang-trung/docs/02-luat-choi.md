@@ -122,7 +122,8 @@ Chạm quân địch trong tầm → hiện khoảng sát thương gây ra, kho�
 - Tướng phụ phe Tây Sơn về 0 máu → **rút lui bị thương**: rời bản đồ, không chết trong cốt truyện.
 - Tướng địch có tên: kịch bản gán một trong các thẻ:
   - `toi_thieu_1`: máu không xuống dưới 1 trong màn đó (vd. Tôn Sĩ Nghị ở màn 9).
-  - `rut_khi_yeu X`: sau một đòn khiến máu < X thì chuyển sang chế độ AI *Rút lui* và không bị hạ trong màn (máu tối thiểu 1).
+  - `rut_khi_yeu X`: còn sống sau một đòn mà máu < X thì chuyển sang chế độ AI *Rút lui*; đòn đủ hạ thì vẫn bị hạ. Tướng không được
+    chết trong màn (vd. ba tướng Thanh ở màn 8, sang màn 9) thì kèm `toi_thieu_1`. Quân rút lui tới khu `khu_rut_lui` của màn thì rời bản đồ.
   - Không thẻ: bị hạ bình thường, hiện câu thoại rồi rời bản đồ.
 - Cái chết của tướng có tên chỉ được kể **theo các phiên bản trong nguồn**, trong hội thoại và Sử liệu, không trong hoạt cảnh.
 
@@ -183,7 +184,7 @@ Tham số của màn: `tam_nhin` (đêm 2, rạng sáng 3 → 5, ngày = không 
 
 | Vật thể | Luật |
 |---|---|
-| **Chông sắt** | Hiện rõ. Bước vào: dừng lại, −15 máu (mộc thuẫn, voi: −5). Không mất đi |
+| **Chông sắt** | Hiện rõ. Bước vào: dừng lại, −15 máu (mộc thuẫn, voi: −5), không Hoàn tác được. Không mất đi. Bị hạ được |
 | **Địa lôi** | Ẩn với Tây Sơn cho đến khi giẫm phải hoặc có quân sư đứng kề. Giẫm: −30 máu, dừng lại, mất địa lôi. AI biết và tránh địa lôi của phe mình, **trừ** chế độ *Chạy* / *Rút lui* (theo *Liệt truyện*, quân Thanh tháo chạy giẫm phải địa lôi của mình) |
 | **Lửa** | Ô đang cháy (3 vòng). Quân đứng trên / bước vào: Cháy (trừ mộc thuẫn). Hết lửa: ô doanh trại thành "doanh trại cháy" (thủ 0, đi như cỏ) |
 | **Kho lương** | Quân `tuong` hoặc `chiem_lang` (lính giáo, hàng binh) của người chơi đứng lên rồi chọn **Lấy kho lương** → cờ mục tiêu phụ, kho mất. Đi qua được |

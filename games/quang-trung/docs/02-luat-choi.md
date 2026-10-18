@@ -191,7 +191,10 @@ Tham số của màn: `tam_nhin` (đêm 2, rạng sáng 3 → 5, ngày = không 
 | **Quân tan** | Mục 8 |
 | **Cầu phao** | Đi như cầu. Kịch bản có thể làm **rung** (cảnh báo) rồi **đứt** ở vòng sau: quân trên cầu rơi xuống sông và bị hạ, trừ thủy binh (chuyển sang ô sông gần nhất) |
 
-**Đốt** (hành động của hỏa hổ): chọn một ô doanh trại trong tầm 1 → ô đó thành Lửa.
+**Đốt** (hành động của hỏa hổ, thẻ `dot`): chọn một ô doanh trại kề bên (tầm 1, đi rồi vẫn đốt được) không có vật thể (quân tan thì bị lửa
+đuổi đi) và không có quân mình → ô đó thành Lửa, quân đốt hết lượt. Lửa cháy 3 vòng (tắt đầu vòng thứ 4, ô thành "doanh trại cháy") và là
+nguồn sáng. Quân địch đứng trên ô bị đốt: bị Cháy, thức dậy, và ban đêm thì **kêu** (báo động đầu lượt phe nó). Quân đứng trên ô lửa đầu
+lượt phe mình, hoặc đi qua / dừng trên ô lửa: bị Cháy. Máy tránh đứng trên ô lửa.
 
 ## 13. Thắng thua
 

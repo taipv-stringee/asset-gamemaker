@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-gen_objects.py — Vật thể trên bản đồ (32x32, pixel art): trống báo động, đèn lồng, đuốc đồn.
+gen_objects.py — Vật thể trên bản đồ (32x32, pixel art): trống báo động, đèn lồng, kho lương, lửa (doanh trại bị đốt).
 Mỗi vật thể có 2 frame (dải 64x32) để nhấp nháy lửa / rung trống.
 
 Kết quả: godot/assets/objects/obj_<loai>_strip2.png
@@ -140,9 +140,38 @@ def kho_luong(frame):
     return img
 
 
+def lua(frame):
+    """Lửa trên ô doanh trại bị Đốt (02 §12): cột lều cháy đen, ba lưỡi lửa; frame 1 lưỡi lửa đổi cao thấp."""
+    img = Image.new("RGBA", (T, T), (0, 0, 0, 0))
+    shadow(img, 16, 29, 12)
+    # cột lều cháy dở, nghiêng
+    for i in range(14):
+        px(img, 7 + i // 4, 28 - i, "ink")
+        px(img, 25 - i // 4, 28 - i, "ink")
+    rect(img, 4, 27, 27, 28, "wood_d")
+    for x in range(5, 27, 3):
+        px(img, x, 26, "ink")
+    # ba lưỡi lửa: (tâm x, chiều cao frame 0, frame 1, nửa bề ngang)
+    tongues = ((10, 14, 18, 4), (17, 21, 16, 5), (24, 12, 15, 4))
+    for cx, h0, h1, half in tongues:
+        h = h1 if frame else h0
+        top = 27 - h
+        for y in range(top, 27):
+            t = (y - top) / max(h, 1)          # 0 ở đỉnh → 1 ở chân
+            w = max(0, round(half * min(1.0, t * 1.6)))
+            sway = 1 if (frame and y < top + h // 2) else 0
+            for x in range(cx - w + sway, cx + w + 1 + sway):
+                core = abs(x - cx - sway) <= w // 2 and t > 0.35
+                px(img, x, y, "fire_l" if core and t > 0.6 else ("fire" if core or t > 0.5 else "fire_d"))
+    # tàn lửa
+    for x, y in (((6, 9), (27, 6)) if frame else ((12, 4), (22, 8))):
+        px(img, x, y, "fire_l")
+    return img
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
-    for name, fn in (("trong", trong), ("den", den), ("kho_luong", kho_luong)):
+    for name, fn in (("trong", trong), ("den", den), ("kho_luong", kho_luong), ("lua", lua)):
         strip = Image.new("RGBA", (T * 2, T), (0, 0, 0, 0))
         for f in range(2):
             strip.paste(fn(f), (T * f, 0))

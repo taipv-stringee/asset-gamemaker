@@ -1,0 +1,93 @@
+{
+ "_ghi_chu": "Mỗi câu có 'nhan' (một trong bốn nhãn của 05 §1). 'ai' rỗng = lời dẫn. Cái chết của Sầm Nghi Đống kể trang nghiêm, không chế giễu (04 §Màn 7).",
+ "truoc": [
+  {
+   "ai": "",
+   "loi": "Đêm mùng 4 rạng mùng 5 Tết.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "",
+   "loi": "Một đạo quân Tây Sơn vòng từ phía tây nam, nhắm Khương Thượng.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "",
+   "loi": "Ở đó đóng quân Điền Châu của Sầm Nghi Đống, tri phủ Điền Châu.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "",
+   "loi": "Người cầm đạo quân này, sách báo thường gọi là Đô đốc Long.",
+   "nhan": "Tương truyền"
+  },
+  {
+   "ai": "",
+   "loi": "Ông thật sự là ai, đến nay các nhà nghiên cứu còn bàn cãi.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "do_doc_long",
+   "loi": "Đốt doanh ngoài cho chúng rối, rồi thọc thẳng lên gò.",
+   "nhan": "Sáng tạo của game",
+   "ten": "Đô đốc Long"
+  },
+  {
+   "ai": "do_doc_long",
+   "loi": "Trời rạng là mất lợi thế đêm. Phải nhanh tay.",
+   "nhan": "Sáng tạo của game",
+   "ten": "Đô đốc Long"
+  }
+ ],
+ "loa_son": [
+  {
+   "ai": "",
+   "loi": "Doanh trại tan vỡ. Sầm Nghi Đống lui lên gò Loa Sơn.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "",
+   "loi": "Thế cùng, ông thắt cổ tự vẫn.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "",
+   "loi": "Các nguồn chép khác nhau về lúc ông mất: ngay đêm ấy, sáng mùng 5, hay hôm sau.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "do_doc_long",
+   "loi": "Ông ấy giữ trọn phận người cầm quân. Chôn cất cho tử tế.",
+   "nhan": "Sáng tạo của game",
+   "ten": "Đô đốc Long"
+  }
+ ],
+ "sau_thang": [
+  {
+   "ai": "",
+   "loi": "Rạng sáng mùng 5 Tết, các doanh Khương Thượng tan vỡ.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "",
+   "loi": "Cùng ngày, đồn Ngọc Hồi cũng vỡ.",
+   "nhan": "Sử liệu"
+  },
+  {
+   "ai": "",
+   "loi": "Gò Đống Đa gần đó về sau được coi là nơi chôn xác quân Thanh.",
+   "nhan": "Tương truyền"
+  },
+  {
+   "ai": "",
+   "loi": "Lễ hội gò Đống Đa ngày nay có lễ cầu siêu cho cả lính Thanh tử trận.",
+   "nhan": "Tương truyền"
+  },
+  {
+   "ai": "do_doc_long",
+   "loi": "Báo tin về đại quân: mặt tây Thăng Long đã mở.",
+   "nhan": "Sáng tạo của game",
+   "ten": "Đô đốc Long"
+  }
+ ]
+}

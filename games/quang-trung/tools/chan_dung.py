@@ -9,6 +9,7 @@ Ngoại hình là **hình dung của game** (05 §2): không có chân dung đư
 Chạy:  python3 tools/chan_dung.py   → godot/assets/portraits/portrait_<ma>.png (+ ảnh xem phóng to trong tools/_xem_chan_dung.png)
 """
 
+import math
 import os
 import sys
 
@@ -140,15 +141,49 @@ def mu_canh_chuon(p, d):
         d.ellipse((x0 + 2, 15, x1 - 2, 18), fill=f("khan_den_light"))
 
 
+def ao_quan_thanh(p, d):
+    """Áo quan nhà Thanh (cùng nét với chân dung Tôn Sĩ Nghị của bản nháp): bổ tử trước ngực, chuỗi triều châu."""
+    f = lambda n: rgba(p.pal[n])  # noqa: E731
+    d.polygon([(4, 79), (10, 63), (26, 57), (54, 57), (70, 63), (76, 79)], fill=f("team_dark"))
+    d.polygon([(30, 57), (40, 68), (50, 57)], fill=f("team"))
+    d.rectangle((28, 66, 52, 79), fill=f("gold"))                # bổ tử
+    d.rectangle((30, 68, 50, 79), fill=f("team_light"))
+    d.ellipse((35, 70, 45, 78), fill=f("white"))
+    for i in range(17):                                            # chuỗi triều châu
+        t = i / 16
+        bx = round(22 + 36 * t)
+        by = round(60 + 16 * math.sin(math.pi * t))
+        d.ellipse((bx - 1, by - 1, bx + 1, by + 1), fill=f("coral" if i % 3 else "flower"))
+
+
+def mu_luong_mao(p, d):
+    """Mũ lương mạo tua đỏ của quan nhà Thanh (không lông công: lông công là của Tôn Sĩ Nghị)."""
+    f = lambda n: rgba(p.pal[n])  # noqa: E731
+    for y in range(6, 28):
+        half = 4 + (y - 6) * 1.15
+        for x in range(round(40 - half), round(40 + half) + 1):
+            ang = (x - 40) / max(1, y - 3)
+            p.px(x, y, "tassel" if int(ang * 6 + 20) % 2 else "tassel_dark")
+    d.rectangle((14, 26, 66, 29), fill=f("pants_dark"))
+    d.line((14, 26, 66, 26), fill=rgba(C["hair_light"]))
+    d.rectangle((36, 6, 44, 8), fill=f("gold"))
+    d.ellipse((36, 0, 44, 7), fill=f("team_light"))
+
+
 def portrait(spec):
     img = v2.canvas(80, 80)
-    p = Pen(img, "tayson")
+    p = Pen(img, spec.get("phe", "tayson"))
     d = ImageDraw.Draw(img)
-    robe(p, d, spec["ao"], collar=spec.get("co", "white"), armor=spec.get("giap", False), belt=spec.get("dai"))
+    if spec["ao"] == "quan_thanh":
+        ao_quan_thanh(p, d)
+    else:
+        robe(p, d, spec["ao"], collar=spec.get("co", "white"), armor=spec.get("giap", False), belt=spec.get("dai"))
     face(p, d, spec.get("rau", "none"), spec.get("may", "thin"), spec.get("tuoi", 0), spec.get("toc", "hair"))
     hat = spec["mu"]
     if hat == "mu_canh_chuon":
         mu_canh_chuon(p, d)
+    elif hat == "luong_mao":
+        mu_luong_mao(p, d)
     else:
         khan(p, d, hat, tall=spec.get("cao", False), tail=spec.get("duoi", True))
     return outline(img)
@@ -165,6 +200,11 @@ CHARACTERS = {
     # Ẩn sĩ, nói ít: nho sĩ già, khăn xếp đen, áo nâu, râu tóc bạc.
     "nguyen_thiep": {"ao": "robe_brown", "mu": "khan_den", "cao": True, "duoi": False, "rau": "long", "toc": "hair_white",
                      "may": "thin", "tuoi": 2},
+    # Táo bạo, giỏi đánh đêm (màn 7): võ tướng, khăn đen, áo đỏ sẫm, giáp vai, râu ngắn, mày chau.
+    # Tên và danh tính còn tranh cãi (05 §3): không vẽ theo một nhân vật lịch sử cụ thể nào.
+    "do_doc_long": {"ao": "robe_red", "mu": "khan_den", "giap": True, "rau": "short", "may": "fierce", "dai": "gold_dark"},
+    # Tri phủ Điền Châu, tử thủ (màn 7): quan nhà Thanh trung niên, mũ lương mạo, râu ngắn. Vẽ trang nghiêm, không chế giễu.
+    "sam_nghi_dong": {"phe": "thanh", "ao": "quan_thanh", "mu": "luong_mao", "rau": "short", "may": "thick", "tuoi": 1},
 }
 
 

@@ -1,0 +1,381 @@
+{
+ "id": "m07_khuong_thuong",
+ "so": 7,
+ "ten": "Khương Thượng (đạo Đô đốc Long)",
+ "ten_ngan": "Khương Thượng",
+ "ngay": "Đêm mùng 4 rạng mùng 5 Tết Kỷ Dậu (29–30/01/1789, quy đổi)",
+ "dia_danh": "Khương Thượng, gò Loa Sơn (quận Đống Đa, Hà Nội ngày nay), phía tây nam Thăng Long",
+ "gioi_thieu": "Đêm mùng 4 rạng mùng 5, một đạo quân Tây Sơn từ phía tây nam đánh úp Khương Thượng, nơi quân Điền Châu của Sầm Nghi Đống đóng. Doanh trại tan vỡ; Sầm Nghi Đống thắt cổ ở gò Loa Sơn.",
+ "nhan_gioi_thieu": "Sử liệu",
+ "muc_tieu_chinh": "Đô đốc Long chiếm đồn Khương Thượng trên gò Loa Sơn trước khi hết vòng 14.",
+ "dieu_kien_thua": "Đô đốc Long bị hạ, hoặc hết vòng 14.",
+ "hoi_thoai": "m07_khuong_thuong",
+ "nhac": "dem",
+ "ghi_chu": "Đêm → sáng (04 §Màn 7): rạng sáng vòng 7. Doanh trại ngoài đốt được (02 §12). Vị trí doanh, lính tuần, đèn là Sáng tạo của game. Sầm Nghi Đống toi_thieu_1: còn 1 máu thì cảnh Loa Sơn rồi rời bản đồ.",
+ "ban_do": [
+  "....hhhhhhh^",
+  "t....hlDDlh^",
+  "tt...hlFDlh.",
+  "t....hl=Dlh.",
+  "t......=....",
+  "..DD...=.DD.",
+  "..D..DD=..D.",
+  "......D=....",
+  "...tt..=...t",
+  "h...t..=..tt",
+  "h=======...t",
+  ".=..rrrrr...",
+  ".=.vrrrrrtL.",
+  ".=...rrrrv..",
+  ".F..Lv.....h",
+  "..L........h"
+ ],
+ "chu_o": {
+  "7,2": "thanh",
+  "1,14": "tayson",
+  "2,15": "tayson"
+ },
+ "phe": [
+  "tayson",
+  "thanh"
+ ],
+ "vang": {
+  "tayson": 500,
+  "thanh": 0
+ },
+ "gioi_han": {
+  "tayson": 16,
+  "thanh": 99
+ },
+ "mua_duoc": {
+  "tayson": [
+   "linh_giao",
+   "hoa_mai",
+   "thuy_binh",
+   "hoa_ho",
+   "quan_su",
+   "trong_tran",
+   "voi_chien",
+   "than_cong"
+  ],
+  "thanh": []
+ },
+ "tam_nhin": 2,
+ "rang_sang": 7,
+ "khu": {
+  "khuong_thuong": [
+   [
+    6,
+    1
+   ],
+   [
+    7,
+    1
+   ],
+   [
+    8,
+    1
+   ],
+   [
+    9,
+    1
+   ],
+   [
+    6,
+    2
+   ],
+   [
+    7,
+    2
+   ],
+   [
+    8,
+    2
+   ],
+   [
+    9,
+    2
+   ],
+   [
+    6,
+    3
+   ],
+   [
+    7,
+    3
+   ],
+   [
+    8,
+    3
+   ],
+   [
+    9,
+    3
+   ]
+  ]
+ },
+ "hien_khu": [
+  {
+   "khu": "khuong_thuong",
+   "mau": "vang",
+   "ten": "đồn Khương Thượng",
+   "ghi": "Đồn Khương Thượng trên gò Loa Sơn. Sầm Nghi Đống giữ ô đồn."
+  }
+ ],
+ "vat_the": [
+  {
+   "loai": "trong",
+   "o": [
+    6,
+    2
+   ],
+   "khu": "khuong_thuong"
+  },
+  {
+   "loai": "den",
+   "o": [
+    7,
+    4
+   ]
+  }
+ ],
+ "quan": [
+  {
+   "id": "do_doc_long",
+   "phe": "tayson",
+   "x": 2,
+   "y": 12,
+   "tuong_chinh": true
+  },
+  {
+   "id": "hoa_ho",
+   "phe": "tayson",
+   "x": 1,
+   "y": 11
+  },
+  {
+   "id": "hoa_ho",
+   "phe": "tayson",
+   "x": 3,
+   "y": 11
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 2,
+   "y": 11,
+   "duoc": true
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 2,
+   "y": 13,
+   "duoc": true
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 3,
+   "y": 13
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 0,
+   "y": 11
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 0,
+   "y": 13
+  },
+  {
+   "id": "voi_chien",
+   "phe": "tayson",
+   "x": 2,
+   "y": 14
+  },
+  {
+   "id": "trong_tran",
+   "phe": "tayson",
+   "x": 3,
+   "y": 14
+  },
+  {
+   "id": "sam_nghi_dong",
+   "phe": "thanh",
+   "x": 7,
+   "y": 2,
+   "toi_thieu_1": true,
+   "ai": "giu_don",
+   "tam": [
+    7,
+    2
+   ],
+   "ban_kinh": 0
+  },
+  {
+   "id": "phao_binh",
+   "phe": "thanh",
+   "x": 8,
+   "y": 2,
+   "ai": "giu_don",
+   "tam": [
+    8,
+    2
+   ],
+   "ban_kinh": 0
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 8,
+   "y": 1,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 5,
+   "y": 4,
+   "ai": "tuan_tra",
+   "diem": [
+    [
+     3,
+     4
+    ],
+    [
+     10,
+     4
+    ]
+   ]
+  },
+  {
+   "id": "tho_binh",
+   "phe": "thanh",
+   "x": 2,
+   "y": 5,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "tho_binh",
+   "phe": "thanh",
+   "x": 3,
+   "y": 5,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "tho_binh",
+   "phe": "thanh",
+   "x": 5,
+   "y": 6,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "tho_binh",
+   "phe": "thanh",
+   "x": 6,
+   "y": 7,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "tho_binh",
+   "phe": "thanh",
+   "x": 9,
+   "y": 5,
+   "ngu": true,
+   "ai": "ngu"
+  },
+  {
+   "id": "tho_binh",
+   "phe": "thanh",
+   "x": 10,
+   "y": 6,
+   "ngu": true,
+   "ai": "ngu"
+  }
+ ],
+ "su_kien": [
+  {
+   "id": "loa_son",
+   "khi": {
+    "loai": "mau_duoi",
+    "quan": "sam_nghi_dong",
+    "n": 2
+   },
+   "lam": [
+    {
+     "loai": "hoi_thoai",
+     "phan": "loa_son"
+    },
+    {
+     "loai": "roi_ban_do",
+     "quan": "sam_nghi_dong"
+    },
+    {
+     "loai": "co",
+     "co": "snd_tu_van"
+    },
+    {
+     "loai": "bang",
+     "chu": "Đồn Khương Thượng bỏ trống: Đô đốc Long vào Chiếm."
+    }
+   ]
+  }
+ ],
+ "thang": {
+  "loai": "chiem_o",
+  "o": [
+   7,
+   2
+  ]
+ },
+ "thua_het_luot": 14,
+ "ly_do_het_luot": "Trời sáng hẳn; quân Thanh ở Thăng Long kịp kéo tới cứu Khương Thượng.",
+ "muc_tieu_phu": [
+  {
+   "loai": "dot_doanh",
+   "n": 4,
+   "truoc_vong": 7,
+   "ten": "Đốt ít nhất 4 ô doanh trại trước vòng 7 (rạng sáng)"
+  },
+  {
+   "loai": "truoc_vong",
+   "n": 10,
+   "ten": "Thắng trước vòng 10"
+  }
+ ],
+ "goi_y": [
+  {
+   "khi": "bat_dau",
+   "loi": "Doanh trại (ô lều) đốt được: hỏa hổ đứng kề rồi bấm Đốt. Ô cháy 3 vòng, sáng như đuốc; quân đứng trên bị Cháy. Đốt 4 ô trước vòng 7 là mục tiêu phụ."
+  },
+  {
+   "khi": "vong",
+   "n": 1,
+   "loi": "Thổ binh ngủ trong doanh. Đốt ô có quân là đánh thức nó, nó kêu báo động. Lính tuần thấy quân ta đứng cạnh lửa hay đèn từ 5 ô: hạ lính tuần trước."
+  },
+  {
+   "khi": "vong",
+   "n": 3,
+   "loi": "Sầm Nghi Đống giữ ô đồn trên gò, máu không xuống dưới 1. Đánh ông còn 1 máu thì ông rời trận; khi ấy Đô đốc Long vào Chiếm đồn."
+  },
+  {
+   "khi": "vong",
+   "n": 7,
+   "loi": "Trời rạng: mọi quân thức, sương tan dần trong hai vòng. Đô đốc Long giỏi đánh đêm (+10 công), từ vòng 8 mất lợi thế ấy."
+  }
+ ],
+ "su_lieu": [
+  "sam_nghi_dong",
+  "do_doc_long_la_ai",
+  "go_dong_da"
+ ]
+}

@@ -412,6 +412,73 @@
      "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
     }
    ]
+  },
+  {
+   "id": "sam_nghi_dong",
+   "nhom": "Nhân vật",
+   "tieu_de": "Sầm Nghi Đống (岑宜棟)",
+   "nhan": "Sử liệu",
+   "noi_dung": "Tri phủ Điền Châu (Quảng Tây), một thổ quan người Tráng. Quân Điền Châu của ông đóng ở Khương Thượng, phía tây nam Thăng Long. Hoàng đế Càn Long từng ban dụ khen lòng trung của ông.\n\nĐêm mùng 4 rạng mùng 5 Tết Kỷ Dậu, doanh Khương Thượng bị đánh úp. Mọi nguồn đều chép ông thắt cổ ở gò Loa Sơn; còn thời điểm thì có ba bản: ngay đêm ấy, sáng mùng 5, hoặc cố thủ chờ cứu viện tới hôm sau mới tự vẫn.\n\nKhi giảng hòa, phía Thanh đòi Tây Sơn lập đền thờ tướng sĩ Thanh tử trận. Về sau ở Thăng Long có đền thờ Sầm Nghi Đống. Game kể cái chết của ông trang nghiêm: ông chết vì giữ chức phận của mình. Chân dung trong game là hình dung, không có chân dung đương thời.",
+   "nguon": [
+    {
+     "ten": "Wikipedia: Sầm Nghi Đống",
+     "url": "https://vi.wikipedia.org/wiki/S%E1%BA%A7m_Nghi_%C4%90%E1%BB%91ng"
+    },
+    {
+     "ten": "VUSTA – Đạo quân thứ ba trong cuộc xâm lăng của Tôn Sĩ Nghị năm 1788",
+     "url": "https://vusta.vn/dao-quan-thu-ba-trong-cuoc-xam-lang-cua-ton-si-nghi-nam-1788-p72663.html"
+    },
+    {
+     "ten": "Dân Việt – Trận đánh khiến tướng giặc phương Bắc tự vẫn tại chỗ",
+     "url": "https://danviet.vn/tran-danh-kinh-hoang-khien-tuong-giac-phuong-bac-tu-van-tai-cho-77771014283-d750877.html"
+    },
+    {
+     "ten": "知乎 – điều kiện giảng hòa của Phúc Khang An",
+     "url": "https://zhuanlan.zhihu.com/p/655390066"
+    }
+   ]
+  },
+  {
+   "id": "do_doc_long_la_ai",
+   "nhom": "Tranh cãi",
+   "tieu_de": "Đô đốc Long là ai?",
+   "nhan": "Sử liệu",
+   "noi_dung": "Người cầm đạo quân đánh Khương Thượng được sách giáo khoa và báo chí gọi là Đô đốc Long. Hoàng Lê nhất thống chí (hồi 14) lại gọi người đánh thẳng tới Nhân Mục, chỗ quân Điền Châu đóng, là Đô đốc Mưu.\n\nCác thuyết về danh tính:\n• GS Phan Huy Lê đồng nhất ông với Đặng Tiến Đông; Hà Nội đã đặt tên phố Đặng Tiến Đông cạnh gò Đống Đa.\n• Nguyễn Khắc Thuần cho là Nguyễn Tăng Long.\n• Tư liệu địa phương ở Tam Kỳ cho là Lê Văn Long.\n• Nhà báo Trúc Diệp Thanh cho rằng Đặng Tiến Đông chỉ ra Bắc năm 1788 để diệt Nguyễn Hữu Chỉnh.\n\nWikipedia tiếng Việt kết luận danh tính thật vẫn chưa rõ. Game dùng tên quen thuộc \"Đô đốc Long\" và không vẽ ông theo một nhân vật cụ thể nào.",
+   "nguon": [
+    {
+     "ten": "his.ussh.vnu.edu.vn – Đô đốc Đặng Tiến Đông, một tướng Tây Sơn chỉ huy trận Đống Đa (GS Phan Huy Lê)",
+     "url": "https://his.ussh.vnu.edu.vn/vi/news/le-huu-quan/do-doc-dang-tien-dong-mot-tuong-tay-son-chi-huy-tran-dong-da-gs-phan-huy-le-5674.html"
+    },
+    {
+     "ten": "Wikipedia: Đặng Tiến Đông",
+     "url": "https://vi.wikipedia.org/wiki/%C4%90%E1%BA%B7ng_Ti%E1%BA%BFn_%C4%90%C3%B4ng"
+    },
+    {
+     "ten": "QĐND – Chiến thắng Đống Đa – Thăng Long đầu xuân Kỷ Dậu 1789",
+     "url": "https://www.qdnd.vn/quoc-phong-an-ninh/nghe-thuat-quan-su-vn/chien-thang-dong-da-thang-long-dau-xuan-ky-dau-1789-764936"
+    },
+    {
+     "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
+     "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
+    }
+   ]
+  },
+  {
+   "id": "go_dong_da",
+   "nhom": "Địa danh",
+   "tieu_de": "Gò Đống Đa",
+   "nhan": "Tương truyền",
+   "noi_dung": "Gò Đống Đa, gần Khương Thượng, thường được coi là nơi chôn xác quân Thanh sau trận đánh. Các nguồn không thống nhất có 12 hay 13 gò, cũng như gò bị san phẳng lúc nào. Cách giải thích tên \"Đống Đa\" ra đời sau trận đánh cũng chưa chắc chắn, nên game gọi màn này là Khương Thượng.\n\nLễ hội gò Đống Đa hằng năm có lễ cầu siêu cho cả lính Thanh tử trận.",
+   "nguon": [
+    {
+     "ten": "Vinpearl – Gò Đống Đa Hà Nội",
+     "url": "https://vinpearl.com/vi/go-dong-da-ha-noi-di-tich-lich-su-ghi-nho-chien-cong-hien-hach-cua-dan-toc"
+    },
+    {
+     "ten": "FPT Shop – Lễ hội gò Đống Đa",
+     "url": "https://fptshop.com.vn/tin-tuc/danh-gia/le-hoi-go-dong-da-188609"
+    }
+   ]
   }
  ]
 }

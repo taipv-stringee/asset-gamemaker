@@ -1,0 +1,96 @@
+# Lời giải mẫu màn 7 (Khương Thượng): đốt doanh tây và doanh giữa (4 ô trước vòng 7), hạ lính tuần và thổ binh,
+# dàn quân sát gò ngoài tầm nhìn của quân Thanh, rồi một lượt dồn đánh Sầm Nghi Đống (hỏa hổ trước để ông bị Cháy);
+# ông còn 1 máu thì rời trận, Đô đốc Long vào chiếm đồn ở vòng 7. Báo động là chấp nhận được: màn không có mục tiêu "không báo động".
+# vòng 1: tiến lên phía bắc, ngoài tầm nhìn lính tuần
+toi 2 12 2 8
+toi 1 11 1 8
+toi 3 11 3 8
+toi 0 11 1 9
+toi 0 13 1 10
+toi 3 13 3 9
+toi 2 14 2 10
+toi 3 14 3 10
+het
+# vòng 2: đốt ô trống doanh tây, hạ hai thổ binh doanh tây
+dot 1 8 2 7 2 6
+danh 2 8 1 5 2 5
+danh_neu 1 9 1 6 2 5
+danh 3 9 3 6 3 5
+toi 2 10 2 8
+toi 1 10 2 9
+toi 3 10 3 9
+toi 2 11 1 9
+het
+# vòng 3: hạ lính tuần (bắn Long), đốt ô doanh có quân tan, hạ thổ binh đã thức
+danh 1 5 1 4 1 3
+danh_neu 1 6 2 4 1 3
+dot 2 7 1 5 2 5
+danh 3 6 3 6 3 7
+danh_neu 3 8 3 8 3 7
+danh 2 8 4 10 4 9
+danh_neu 2 9 2 9 4 9
+danh_neu 1 9 1 9 4 9
+het
+# vòng 4: hạ nốt lính tuần, đốt thêm hai ô (đủ 4 trước vòng 7)
+danh_neu 2 4 2 3 1 2
+danh_neu 1 4 1 3 1 2
+dot 1 5 3 4 3 5
+dot 3 8 5 7 5 6
+toi 4 10 6 8
+toi 3 6 4 5
+toi 2 9 4 7
+toi 1 9 3 7
+toi 3 9 5 8
+toi 1 4 3 3
+het
+# vòng 5: dàn quân sát gò nhưng ngoài tầm nhìn của quân Thanh (pháo bắn 2–4 ô, chỉ bắn ô quân Thanh thấy)
+toi 3 4 4 2
+toi 2 3 5 3
+toi 6 8 6 5
+toi 2 7 4 5
+toi 5 7 7 6
+toi 5 9 6 6
+toi 3 3 5 5
+toi_loai linh_giao 5 4
+toi_loai linh_giao 4 4
+het
+# vòng 6: hỏa hổ đánh trước cho Sầm Nghi Đống bị Cháy, rồi voi (cạnh trống trận), hỏa mai bắn từ 2 ô
+danh 4 2 6 2 7 2
+di 6 6 6 4
+danh 6 5 7 3 7 2
+danh_neu 5 3 5 2 7 2
+danh_neu 4 5 7 4 7 2
+danh_neu 7 6 8 3 8 2
+toi 5 5 4 4
+ai_khong_mua
+het
+# vòng 7: đánh tiếp Sầm Nghi Đống (còn 1 máu thì ông rời trận), Đô đốc Long vào chiếm đồn
+danh_neu 6 2 6 2 7 2
+danh_neu 7 3 7 3 7 2
+danh_neu 5 2 5 2 7 2
+danh_neu 6 3 6 3 7 2
+danh_neu 7 4 7 4 7 2
+danh_neu 7 1 7 1 7 2
+toi_loai do_doc_long 7 2
+ai_khong_mua
+het
+# vòng 8: đánh tiếp Sầm Nghi Đống (còn 1 máu thì ông rời trận), Đô đốc Long vào chiếm đồn
+danh_neu 6 2 6 2 7 2
+danh_neu 7 3 7 3 7 2
+danh_neu 5 2 5 2 7 2
+danh_neu 6 3 6 3 7 2
+danh_neu 7 4 7 4 7 2
+danh_neu 7 1 7 1 7 2
+toi_loai do_doc_long 7 2
+ai_khong_mua
+het
+# vòng 9: đánh tiếp Sầm Nghi Đống (còn 1 máu thì ông rời trận), Đô đốc Long vào chiếm đồn
+danh_neu 6 2 6 2 7 2
+danh_neu 7 3 7 3 7 2
+danh_neu 5 2 5 2 7 2
+danh_neu 6 3 6 3 7 2
+danh_neu 7 4 7 4 7 2
+danh_neu 7 1 7 1 7 2
+toi_loai do_doc_long 7 2
+ai_khong_mua
+het

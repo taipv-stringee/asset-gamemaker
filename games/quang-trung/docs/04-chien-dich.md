@@ -181,15 +181,24 @@ Mỗi điểm ghi ngày âm và dương lịch.
 - **Lịch sử**: Đêm mùng 4 rạng mùng 5, một đạo quân đánh úp Khương Thượng – Đống Đa, nơi quân Điền Châu của Sầm Nghi Đống đóng;
   Sầm Nghi Đống thắt cổ ở Loa Sơn. *[Sử liệu]* Thời điểm ông tự vẫn có ba bản; tên người chỉ huy đạo quân còn tranh cãi. Đốt doanh ngoài rồi
   thọc sâu là cách kể phổ biến.
-- **Bản đồ**: 12 × 16. Doanh trại vòng ngoài (đốt được), **khu đồn Khương Thượng** trên gò Loa Sơn, rừng tre, ruộng. Đồn của ta ở tây nam.
-- **Đêm → sáng**: vòng 1–6 `tam_nhin` 2; rạng sáng R = 7 (02 §10).
-- **Quân ta**: Đô đốc Long (tướng chính), 2 hỏa hổ, 3 lính giáo, 2 hỏa mai, 1 voi chiến, 1 trống trận (2 lính giáo cầm đuốc).
-  Vàng 500; giới hạn 16; `mua_duoc`: như màn 5.
-- **Địch**: Sầm Nghi Đống (`toi_thieu_1`), 6 thổ binh Điền Châu, 2 điểu thương, 1 pháo binh; phần lớn ngủ ở doanh ngoài.
-- **Thắng**: Đô đốc Long chiếm đồn Khương Thượng. Khi đó (hoặc khi Sầm Nghi Đống còn 1 máu) → cảnh hội thoại về cái chết của ông,
-  giọng trang nghiêm, không chế giễu.
-- **Mục tiêu phụ**: đốt ≥ 4 ô doanh trại trước vòng 7; thắng trước vòng 10.
-- **Mở Sử liệu**: Sầm Nghi Đống (thổ quan người Tráng, được Càn Long khen, đền thờ về sau); tranh cãi Đô đốc Long.
+- **Bản đồ**: 12 × 16 (`data/missions/m07_khuong_thuong.json`). **Khu đồn Khương Thượng** 4 × 3 ô (x 6–9, y 1–3) trên gò Loa Sơn:
+  đồn (7,2), lũy hai bên, 4 ô doanh trong, cổng nam (7,3), trống báo động (6,2), đèn ngoài cổng (7,4). **Doanh vòng ngoài** 9 ô thành
+  ba cụm (tây, giữa, đông, y 5–7). Đường từ cổng xuống nam rồi rẽ tây về đồn của ta (1,14). Rừng tre, ruộng, hai làng trung lập.
+  Vị trí doanh, đèn, lính tuần là *[Sáng tạo của game]*.
+- **Đêm → sáng**: vòng 1–6 `tam_nhin` 2; rạng sáng R = 7 (02 §10). Thua khi hết vòng 14 (viện binh Thanh từ Thăng Long tới — *Sáng tạo*).
+- **Quân ta**: Đô đốc Long (tướng chính, `tap_kich`: +10 công ban đêm), 2 hỏa hổ, 3 lính giáo (2 cầm đuốc), 2 hỏa mai, 1 voi chiến,
+  1 trống trận. Vàng 500; giới hạn 16; `mua_duoc`: như màn 5.
+- **Địch**: Sầm Nghi Đống (`toi_thieu_1`, giữ ô đồn: thủ +10 trên đồn, hồi máu trên đồn), 1 pháo binh giữ ô doanh cạnh đồn (thức),
+  1 điểu thương ngủ trong khu, 1 điểu thương tuần tra ngoài gò; 6 thổ binh Điền Châu ngủ ở doanh ngoài.
+- **Đốt** (02 §12): hỏa hổ đốt ô doanh; ô có quân thì quân đó thức và kêu. Báo động không phạt gì thêm ngoài việc quân Thanh dậy.
+- **Sầm Nghi Đống**: còn 1 máu → sự kiện `mau_duoi` → hội thoại **Loa Sơn** (giọng trang nghiêm, không chế giễu; nêu ba bản thời điểm),
+  ông rời bản đồ (`roi_ban_do`), đồn bỏ trống. **Thắng**: Đô đốc Long chiếm đồn. Phải dồn đánh trong một lượt (hỏa hổ trước để ông bị Cháy)
+  vì ông hồi máu mỗi vòng.
+- **Mục tiêu phụ**: đốt ≥ 4 ô doanh trại trước vòng 7 (`dot_doanh`); thắng trước vòng 10.
+- **Lời giải mẫu**: `tests/loi_giai/m07_khuong_thuong.txt` — đốt doanh tây và giữa (4 ô ở vòng 2–4), hạ lính tuần và thổ binh, dàn quân
+  sát gò ngoài tầm nhìn quân Thanh (vòng 5), dồn đánh Sầm Nghi Đống (vòng 6–7), Long chiếm đồn vòng 7, đủ 2 sao.
+- **Thứ tự 7 / 8**: hiện màn 7 mở sau màn 6; khi làm màn 8 thì cho cả hai mở sau màn 6.
+- **Mở Sử liệu**: Sầm Nghi Đống; Đô đốc Long là ai (đủ các thuyết); gò Đống Đa.
 
 ## Màn 8 — Ngọc Hồi (màn trùm)
 

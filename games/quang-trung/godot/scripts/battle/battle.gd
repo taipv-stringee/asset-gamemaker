@@ -22,12 +22,15 @@ const OBJECT_TEX := {
 	"trong": "res://assets/objects/obj_trong_strip2.png",
 	"den": "res://assets/objects/obj_den_strip2.png",
 	"kho_luong": "res://assets/objects/obj_kho_luong_strip2.png",
+	"lua": "res://assets/objects/obj_lua_strip2.png",
 }
 
-enum Mode { IDLE, SELECTED, MOVED, TARGETING, FORECAST, BUSY, ENDED }
+# BURNING: hỏa hổ đang chọn ô doanh trại để Đốt (02 §12).
+enum Mode { IDLE, SELECTED, MOVED, TARGETING, FORECAST, BUSY, ENDED, BURNING }
 
 var state: BattleState
 var mode := Mode.IDLE
+var burn_tiles: Array[Vector2i] = []
 var selected: Unit = null
 var reach: Dictionary = {}
 var pending_dest := Vector2i(-1, -1)
@@ -585,12 +588,16 @@ func _terrain_info(p: Vector2i) -> void:
 	var notes: Dictionary = {"trong": "Trống báo động: quân địch kêu hay đứng cạnh trống thì cả khu đồn thức.",
 		"den": "Đèn: ô này và 4 ô kề luôn sáng; lính canh thấy quân ta ở đây từ 5 ô.",
 		"quan_tan": "Quân tan: không đi vào được; quân sư chiêu hàng được.",
-		"kho_luong": "Kho lương: tướng hay lính giáo đứng lên rồi Lấy kho lương."}
+		"kho_luong": "Kho lương: tướng hay lính giáo đứng lên rồi Lấy kho lương.",
+		"lua": "Lửa: tắt đầu vòng %d; quân đứng trên hay bước vào bị Cháy." % int(state.object_at(p).get("het", 0))}
 	if siege:
 		notes = {"trong": "Trống: địch kêu là cả đồn thức.", "den": "Đèn: ô quanh luôn sáng.",
-			"quan_tan": "Quân tan: quân sư chiêu hàng.", "kho_luong": "Kho lương: tướng / lính giáo lấy."}
+			"quan_tan": "Quân tan: quân sư chiêu hàng.", "kho_luong": "Kho lương: tướng / lính giáo lấy.",
+			"lua": "Lửa: bước vào bị Cháy."}
 	if notes.has(obj):
 		lines.append(notes[obj])
+	elif obj == "" and t["chay_duoc"]:
+		lines.append("Đốt được: hỏa hổ đứng kề rồi bấm Đốt.")
 	if Rules.is_dark(state) and not vis.has(p) and not Rules.lit_tiles(state).has(p):
 		lines.append("Trong bóng tối: không thấy quân địch.")
 	info_label.text = "\n".join(lines)
@@ -705,6 +712,9 @@ func _on_tap(screen: Vector2) -> void:
 			_tap_selected(p, u)
 		Mode.MOVED, Mode.TARGETING, Mode.FORECAST:
 			_tap_moved(p, u)
+		Mode.BURNING:
+			if burn_tiles.has(p):
+				_run(Rules.cmd_dot(state, selected, p))
 	overlay.queue_redraw()
 
 
@@ -792,6 +802,9 @@ func _show_actions() -> void:
 			mode = Mode.TARGETING
 			info_label.text = "Chạm quân địch (ô đỏ) để xem dự báo."
 			overlay.queue_redraw()])
+	var fire := Rules.burn_targets(state, u)
+	if not fire.is_empty():
+		list.append(["Đốt", func() -> void: _choose_burn(u, fire)])
 	if Rules.can_capture(state, u):
 		var granary: bool = state.object_at(u.pos).get("loai", "") == "kho_luong"
 		list.append(["Lấy kho lương" if granary else "Chiếm", func() -> void: _run(Rules.cmd_capture(state, u))])
@@ -805,6 +818,21 @@ func _show_actions() -> void:
 		list.append(["Hoàn tác", _undo])
 	_unit_info(u)
 	_set_buttons(list)
+	overlay.queue_redraw()
+
+
+## Đốt (02 §12): một ô thì đốt luôn; nhiều ô thì viền cam các ô, chạm một ô để đốt.
+func _choose_burn(u: Unit, fire: Array[Vector2i]) -> void:
+	if fire.size() == 1:
+		_run(Rules.cmd_dot(state, u, fire[0]))
+		return
+	mode = Mode.BURNING
+	burn_tiles = fire
+	info_label.text = "Chạm ô doanh trại (viền cam) để đốt."
+	_set_buttons([["Thôi", func() -> void:
+		mode = Mode.MOVED
+		burn_tiles = []
+		_show_actions()]])
 	overlay.queue_redraw()
 
 
@@ -868,6 +896,7 @@ func _run(ev: Array[Dictionary]) -> void:
 	forecast_target = null
 	targets = []
 	reach = {}
+	burn_tiles = []
 	cursor.visible = false
 	if state.result != "":
 		_finish()
@@ -1155,6 +1184,22 @@ func _play(events: Array[Dictionary]) -> void:
 					create_tween().tween_property(ns, "modulate:a", 1.0, 0.25)
 				elif nu2 == null:
 					_float_text(Vector2(e["o"] * T) + Vector2(0, -6), "Tù binh", C_GOLD_LIGHT)
+			"dot":
+				Sfx.play("lua", -2.0)
+				_float_text(Vector2(e["o"] * T) + Vector2(4, -6), "Đốt!", Color(1, 0.7, 0.35))
+				await get_tree().create_timer(0.35).timeout
+			"chay":
+				var cs: UnitSprite = sprites.get(e["uid"])
+				if cs != null and cs.visible:
+					_float_text(cs.position + Vector2(2, 4), "Cháy", Color(1, 0.6, 0.3))
+			"roi_ban_do":
+				var gs: UnitSprite = sprites.get(e["uid"])
+				if gs != null:
+					sprites.erase(e["uid"])
+					var tw := create_tween()
+					tw.tween_property(gs, "modulate:a", 0.0, 0.8)
+					await tw.finished
+					gs.queue_free()
 			"lay_kho":
 				Sfx.play("chiem", -3.0)
 				_show_banner("Đã lấy kho lương!", C_GOLD_LIGHT)
@@ -1246,11 +1291,15 @@ func _draw_overlay() -> void:
 			var path: Array = reach[pending_dest]["duong"]
 			for i in range(1, path.size()):
 				overlay.draw_line(Vector2(path[i - 1] * T) + Vector2(16, 16), Vector2(path[i] * T) + Vector2(16, 16), C_GOLD_LIGHT, 2.0)
-	if selected != null and mode in [Mode.SELECTED, Mode.MOVED, Mode.TARGETING, Mode.FORECAST]:
+	if selected != null and mode in [Mode.SELECTED, Mode.MOVED, Mode.TARGETING, Mode.FORECAST, Mode.BURNING]:
 		for t in targets:
 			overlay.draw_rect(Rect2(Vector2(t.pos * T), Vector2(T, T)), Color(1.0, 0.25, 0.2, 0.35))
 			overlay.draw_rect(Rect2(Vector2(t.pos * T), Vector2(T, T)), Color(1.0, 0.4, 0.3, 0.8), false, 1.0)
 		overlay.draw_rect(Rect2(Vector2(selected.pos * T), Vector2(T, T)), C_GOLD_LIGHT, false, 1.0)
+	if mode == Mode.BURNING:
+		for p in burn_tiles:
+			overlay.draw_rect(Rect2(Vector2(p * T), Vector2(T, T)), Color(1.0, 0.55, 0.15, 0.3))
+			overlay.draw_rect(Rect2(Vector2(p * T) + Vector2(1, 1), Vector2(T - 2, T - 2)), Color(1.0, 0.65, 0.2, 0.95), false, 2.0)
 	if forecast_target != null and mode == Mode.FORECAST:
 		overlay.draw_rect(Rect2(Vector2(forecast_target.pos * T) + Vector2(1, 1), Vector2(T - 2, T - 2)), Color.WHITE, false, 2.0)
 

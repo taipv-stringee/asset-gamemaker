@@ -273,6 +273,8 @@ static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 		if u.ai_mode == "giu_don":
 			base = -float(Rules.manhattan(p, center)) * (3.0 if guard_outside else 0.5)
 		base += float(state.terrain_at(p)["thu"]) * 0.3
+		if state.object_at(p).get("loai", "") == "lua" and not u.has_tag("khong_chay"):
+			base -= 30.0   # đừng đứng trên ô lửa, đang đứng thì bước ra (02 §12)
 		base -= float(threat.get(p, 0)) * danger_w
 		if u.tuong_chinh and int(threat.get(p, 0)) >= u.hp + 20:
 			base -= 200.0  # có thể bị hạ ở lượt sau

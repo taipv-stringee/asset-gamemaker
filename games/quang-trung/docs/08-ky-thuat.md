@@ -119,7 +119,7 @@ màn → trận → kết quả) do `scripts/main.gd` điều khiển; các màn
 - Các trường đã dùng (M2–M3), đều là dữ liệu, chưa cần script riêng cho màn nào:
   - `khu` {tên: [ô]}: khu đồn (trống báo động), vùng thắng `vao_vung`, vùng thoát của trinh sát. `hien_khu` [{khu, mau: vang|do, ghi}]:
     khu vẽ lên bản đồ cho người chơi thấy, `ghi` hiện khi chạm vào ô.
-  - `vat_the`, `tam_nhin`, `rang_sang` (đêm); `vien_binh` (theo vòng); `su_kien` (khi `vao_o` / `so_lang` / `chiem_o` → cờ, hội thoại, quân, dải chữ);
+  - `vat_the`, `tam_nhin`, `rang_sang` (đêm); `vien_binh` (theo vòng); `su_kien` (khi `vao_o` / `so_lang` / `chiem_o` / `mau_duoi` → cờ, hội thoại, quân, dải chữ, `roi_ban_do`);
     `thuong_chiem_lang`, `vang_lang`; `goi_y`.
   - `thang` (`chiem_o`, `ha_het`, `vao_vung`, `so_lang`, `co`, `tat_ca`), `thua_het_luot`, `muc_tieu_phu` (02 §13).
   - Quân: `ai` (`tan_cong`, `giu_don` + `tam` / `ban_kinh`, `tuan_tra` + `diem`, `ngu`, `dung_yen`, `do_tham` + `khu` / `thay` / `diem`).
@@ -127,6 +127,8 @@ màn → trận → kết quả) do `scripts/main.gd` điều khiển; các màn
     `he_qua` [{co, thuc_khu}] (màn sau: cờ bật thì quân trong khu thức sẵn; `Rules.apply_carry`, chỉ trong chiến dịch),
     `truoc_theo_co` / `sau_thang_theo_co` {cờ: phần hội thoại} (hội thoại mở / kết khác đi theo cờ).
   - Vây đồn (màn 6): `khu_don` [tên khu], vật thể `kho_luong` {co}.
+  - Đốt (màn 7): ô địa hình `chay_duoc` (doanh trại); vật thể `lua` {het: vòng tắt} do lệnh Đốt tạo; mục tiêu phụ `dot_doanh` {n, truoc_vong}.
+  - `goi_y` có thể kèm `neu_co` / `khong_co` (cờ trận) để gợi ý chỉ hiện ở một biến thể màn (màn 6 đồn thức).
 - Sự kiện quá riêng để làm bằng dữ liệu (cầu phao đứt ở màn 9...): khi cần mới thêm script `missions/<id>.gd`.
 
 ## 7. Kiểm thử

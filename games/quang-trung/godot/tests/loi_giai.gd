@@ -12,6 +12,8 @@ extends RefCounted
 ##                             được ô đó, chiêu hàng nếu kề quân tan (quân sư), không thì chờ
 ##   toi_loai LOAI TX TY       như "toi" cho quân ta đầu tiên thuộc loại LOAI chưa đi (không có thì bỏ qua)
 ##   mua_neu X Y LOAI          như "mua" nhưng không đủ vàng / đồn có quân thì bỏ qua
+##   dot X Y X2 Y2 TX TY       hỏa hổ ở X Y đi tới X2 Y2 rồi Đốt ô TX TY (02 §12); lỗi nếu không đốt được
+##   dot_neu X Y X2 Y2 TX TY   như "dot" nhưng bỏ qua nếu không có quân ở X Y, không đi tới được hoặc không đốt được
 ##   goi_hang X Y [X2 Y2]      quân ở X Y (đi tới X2 Y2 trước nếu có) gọi hàng khu đồn đứng kề (02 §11); lỗi nếu không gọi được / không thành
 ##   ai_khong_mua              như "ai" nhưng máy không mua lính
 ##   ai_giu                    như "ai_khong_mua" và máy cũng không chiếm ô (để hoãn điều kiện chuyển giai đoạn)
@@ -112,6 +114,25 @@ static func run(mission: String, p_seed: int, path: String, verbose := false, ca
 				ev = _toward(s, tu, Vector2i(int(w[3]), int(w[4])))
 				if verbose:
 					print("   %s → %s" % [line, tu.pos])
+			"dot", "dot_neu":
+				var du := s.unit_at(Vector2i(int(w[1]), int(w[2])))
+				var dto := Vector2i(int(w[3]), int(w[4]))
+				var tile := Vector2i(int(w[5]), int(w[6]))
+				var ok := du != null and du.faction == s.current_faction() and not du.done \
+					and (dto == du.pos or Rules.reachable(s, du).has(dto))
+				if not ok:
+					if w[0] == "dot_neu":
+						continue
+					return {"state": s, "loi": "không có hỏa hổ đi tới được: " + line, "nhat_ky": log}
+				if dto != du.pos:
+					ev = Rules.cmd_move(s, du, dto)
+				if not Rules.burn_targets(s, du).has(tile):
+					if w[0] == "dot_neu":
+						if not du.done:
+							ev.append_array(Rules.cmd_wait(s, du))
+						continue
+					return {"state": s, "loi": "không đốt được: " + line, "nhat_ky": log}
+				ev.append_array(Rules.cmd_dot(s, du, tile))
 			"goi_hang":
 				var gu := s.unit_at(Vector2i(int(w[1]), int(w[2])))
 				if gu == null:
@@ -146,7 +167,7 @@ static func run(mission: String, p_seed: int, path: String, verbose := false, ca
 			_:
 				return {"state": s, "loi": "lệnh lạ: " + line, "nhat_ky": log}
 		for e in ev:
-			if e["loai"] in ["danh", "ha", "bao_dong", "trong_bao_dong", "ket_qua", "lo_dien"]:
+			if e["loai"] in ["danh", "ha", "bao_dong", "trong_bao_dong", "ket_qua", "lo_dien", "dot", "roi_ban_do"]:
 				log.append("%s → %s" % [line, e])
 				if verbose:
 					print("   ", log[-1])
@@ -182,12 +203,14 @@ static func _toward(s: BattleState, u: Unit, goal: Vector2i, path := true) -> Ar
 
 static func print_map(s: BattleState) -> void:
 	print("--- vòng %d, báo động %d, vàng %d, thoát %d" % [s.vong, int(s.flags["bao_dong"]), s.gold.get(s.factions[0], 0), int(s.flags.get("thoat", 0))])
-	var marks := {"quang_trung": "@", "voi_chien": "V", "thuy_binh": "W", "hoa_ho": "X"}
+	var marks := {"quang_trung": "@", "do_doc_long": "@", "voi_chien": "V", "thuy_binh": "W", "hoa_ho": "X"}
 	for y in s.height:
 		var row := "%2d " % y
 		for x in s.width:
 			var u := s.unit_at(Vector2i(x, y))
 			var ch: String = GameData.get_data().terrain[s.terrain_id(Vector2i(x, y))]["ky_tu"]
+			if s.object_at(Vector2i(x, y)).get("loai", "") == "lua":
+				ch = "*"
 			if u != null:
 				if u.faction == s.factions[0]:
 					ch = marks.get(u.type_id, u.type_id.substr(0, 1).to_upper())

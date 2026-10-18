@@ -10,6 +10,7 @@ const LEVEL_DEF := 2
 const NO_QUAN_TAN: Array[String] = ["cau", "cau_phao", "song", "dam", "don", "thanh"]
 const CHAN_HAU_TERRAIN: Array[String] = ["cau", "cau_phao", "de", "song_can"]
 const INF := 1 << 30
+const FIRE_ROUNDS := 3   # ô doanh trại bị Đốt cháy 3 vòng rồi thành "doanh trại cháy" (02 §12)
 
 
 # ================================================================ tiện ích
@@ -396,6 +397,10 @@ static func cmd_move(state: BattleState, u: Unit, target: Vector2i, fog := false
 	u.pos = target
 	u.moved = true
 	ev.append({"loai": "di", "uid": u.uid, "duong": path})
+	for i in range(1, path.size()):
+		if state.object_at(path[i]).get("loai", "") == "lua":
+			ev.append_array(_catch_fire(state, u))   # bước vào ô lửa: Cháy (02 §12)
+			break
 	if ambush.has("dich"):
 		ev.append({"loai": "phuc_kich", "uid": u.uid, "dich": ambush["dich"], "o": target})
 	if is_dark(state):
@@ -624,9 +629,11 @@ static func _village_reward(state: BattleState, u: Unit) -> Array[Dictionary]:
 # ================================================================ sự kiện kịch bản (màn 2 trở đi)
 # "su_kien": [{"id", "khi": {...}, "lam": [{...}]}] — mỗi sự kiện xảy ra một lần.
 #   khi: {"loai": "vao_o", "o": [x, y]} quân phe người chơi đứng ở ô đó; {"loai": "so_lang", "n": N} phe người chơi giữ ≥ N làng;
-#        {"loai": "chiem_o", "o": [x, y]} phe người chơi làm chủ ô đó.
+#        {"loai": "chiem_o", "o": [x, y]} phe người chơi làm chủ ô đó;
+#        {"loai": "mau_duoi", "quan": loại, "n": N} có quân loại đó còn dưới N máu (màn 7: Sầm Nghi Đống, `toi_thieu_1`, còn 1 máu).
 #   lam: {"loai": "co", "co": tên} bật cờ; {"loai": "hoi_thoai", "phan": tên phần trong file hội thoại};
-#        {"loai": "quan", "phe": f, "quan": [{id, x, y, ai}]} đặt quân; {"loai": "bang", "chu": "..."} dải chữ.
+#        {"loai": "quan", "phe": f, "quan": [{id, x, y, ai}]} đặt quân; {"loai": "bang", "chu": "..."} dải chữ;
+#        {"loai": "roi_ban_do", "quan": loại} mọi quân loại đó rời bản đồ (không để quân tan).
 
 static func has_flag(state: BattleState, name: String) -> bool:
 	return (state.flags.get("co", {}) as Dictionary).has(name)
@@ -657,6 +664,10 @@ static func run_events(state: BattleState) -> Array[Dictionary]:
 				ok = villages_owned(state, player) >= int(cond["n"])
 			"chiem_o":
 				ok = state.owner_of(Vector2i(int(cond["o"][0]), int(cond["o"][1]))) == player
+			"mau_duoi":
+				for u in state.units:
+					if u.type_id == cond["quan"] and u.hp < int(cond["n"]):
+						ok = true
 		if not ok:
 			continue
 		fired.append(e["id"])
@@ -673,6 +684,11 @@ static func run_events(state: BattleState) -> Array[Dictionary]:
 					ev.append({"loai": "bang", "chu": a["chu"]})
 				"quan":
 					ev.append_array(_spawn_list(state, a["phe"], a["quan"], "vien_binh"))
+				"roi_ban_do":
+					for u in state.units.duplicate():
+						if u.type_id == a["quan"]:
+							state.remove_unit(u)
+							ev.append({"loai": "roi_ban_do", "uid": u.uid, "o": u.pos})
 	return ev
 
 
@@ -761,6 +777,87 @@ static func cmd_chieu_hang(state: BattleState, u: Unit, p: Vector2i) -> Array[Di
 	u.done = true
 	state.flags["hang_binh"] = int(state.flags.get("hang_binh", 0)) + 1
 	ev.append({"loai": "chieu_hang", "uid": u.uid, "o": p, "uid_moi": hb.uid})
+	return ev
+
+
+# ================================================================ Đốt, lửa (02 §12; màn 7)
+# Hỏa hổ (thẻ `dot`) chọn một ô kề (tầm 1) đốt được (`chay_duoc`: doanh trại), không có vật thể (trừ quân tan), không có quân phe mình
+# → vật thể {"loai": "lua", "het": vòng tắt}. Lửa cháy FIRE_ROUNDS vòng, là nguồn sáng; quân đứng trên / bước vào bị Cháy
+# (trừ `khong_chay`); tắt đầu vòng "het" thì ô thành "doanh trại cháy". Quân đứng trên ô bị đốt: Cháy, thức dậy và kêu.
+# flags["dot"]: vòng của từng lần đốt (mục tiêu phụ "dot_doanh").
+
+static func burn_targets(state: BattleState, u: Unit) -> Array[Vector2i]:
+	var out: Array[Vector2i] = []
+	if not can_act(state, u) or not u.has_tag("dot"):
+		return out
+	for d in DIRS:
+		var p := u.pos + d
+		var obj: String = state.object_at(p).get("loai", "") if state.in_bounds(p) else ""
+		if not state.in_bounds(p) or not state.terrain_at(p)["chay_duoc"] or (obj != "" and obj != "quan_tan"):
+			continue   # quân tan trên ô doanh thì lửa đuổi đi (hạ quân trong doanh xong vẫn đốt được ô đó)
+		var occ := state.unit_at(p)
+		if occ != null and state.are_allies(occ.faction, u.faction):
+			continue
+		out.append(p)
+	return out
+
+
+static func cmd_dot(state: BattleState, u: Unit, p: Vector2i) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	if not burn_targets(state, u).has(p):
+		return ev
+	state.objects[p] = {"loai": "lua", "het": state.vong + FIRE_ROUNDS}
+	var burned: Array = state.flags.get("dot", [])
+	burned.append(state.vong)
+	state.flags["dot"] = burned
+	u.moved = true
+	u.done = true
+	ev.append({"loai": "dot", "uid": u.uid, "o": p})
+	var occ := state.unit_at(p)
+	if occ != null:
+		ev.append_array(_catch_fire(state, occ))
+		occ.ngu = false
+		if is_night(state):
+			occ.keu = true
+	ev.append_array(run_events(state))
+	ev.append_array(check_result(state))
+	return ev
+
+
+## Số ô đã đốt trong các vòng trước vòng `before` (0 = mọi vòng).
+static func burned_count(state: BattleState, before := 0) -> int:
+	var n := 0
+	for v in state.flags.get("dot", []):
+		if before <= 0 or int(v) < before:
+			n += 1
+	return n
+
+
+static func _catch_fire(state: BattleState, u: Unit) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	if u.has_tag("khong_chay"):
+		return ev
+	# Như trúng đòn hỏa hổ: tới hết lượt kế tiếp của phe quân đó (02 §9).
+	u.chay_turns = maxi(u.chay_turns, 2 if u.faction == state.current_faction() else 1)
+	ev.append({"loai": "chay", "uid": u.uid})
+	return ev
+
+
+## Đầu lượt: quân phe f đứng trên lửa bị Cháy; đầu vòng (lượt Tây Sơn) lửa hết hạn thì tắt.
+static func _fires(state: BattleState, f: String) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	for u in state.units_of(f):
+		if state.object_at(u.pos).get("loai", "") == "lua" and not u.has_tag("khong_chay"):
+			u.chay_turns = maxi(u.chay_turns, 1)
+			ev.append({"loai": "chay", "uid": u.uid})
+	if state.current == 0:
+		for p in state.objects.keys():
+			var o: Dictionary = state.objects[p]
+			if o.get("loai", "") == "lua" and state.vong >= int(o["het"]):
+				state.objects.erase(p)
+				if state.terrain_id(p) == "doanh":
+					state.set_terrain(p, "doanh_chay")
+				ev.append({"loai": "lua_tat", "o": p})
 	return ev
 
 
@@ -986,6 +1083,7 @@ static func start_turn(state: BattleState) -> Array[Dictionary]:
 		u.khoa_hoan_tac = false
 		u.than_trong = false
 	ev.append_array(_dawn(state))
+	ev.append_array(_fires(state, f))
 	ev.append_array(_reinforcements(state, f))
 	if f != state.factions[0]:
 		ev.append_array(_alarm(state, f))
@@ -1114,6 +1212,8 @@ static func side_objectives(state: BattleState) -> Array[Dictionary]:
 					and not state.flags.get("danh_trong_khu", false)
 			"hang_tu_binh":
 				ok = state.result == "thang" and int(state.flags.get("hang_binh", 0)) + int(state.flags.get("tu_binh", 0)) >= int(o["n"])
+			"dot_doanh":   # đốt ≥ n ô (doanh trại) trong các vòng trước vòng "truoc_vong" (màn 7)
+				ok = state.result == "thang" and burned_count(state, int(o.get("truoc_vong", 0))) >= int(o["n"])
 		out.append({"ten": o.get("ten", ""), "dat": ok})
 	return out
 
@@ -1153,6 +1253,12 @@ static func side_objectives_live(state: BattleState) -> Array[Dictionary]:
 			"hang_tu_binh":
 				if int(state.flags.get("hang_binh", 0)) + int(state.flags.get("tu_binh", 0)) >= int(o["n"]):
 					st = "dat" if won else "xong"
+			"dot_doanh":
+				var before := int(o.get("truoc_vong", 0))
+				if burned_count(state, before) >= int(o["n"]):
+					st = "dat" if won else "xong"
+				elif before > 0 and state.vong >= before:
+					st = "hong"
 			"hang_binh_toi_thieu":
 				if int(state.flags.get("hang_binh", 0)) >= int(o["n"]):
 					st = "dat" if won else "xong"

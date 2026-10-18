@@ -19,6 +19,9 @@ extends RefCounted
 ##   ai_giu                    như "ai_khong_mua" và máy cũng không chiếm ô (để hoãn điều kiện chuyển giai đoạn)
 ##   ai                        để máy (SimpleAI) đi nốt các quân ta còn lại trong lượt này
 ##   rut TX TY                 mọi quân ta chưa đi làm "toi" về (TX, TY), quân gần đích đi trước
+##   cho_khu X0 Y0 X1 Y1       mọi quân ta chưa đi đứng trong khung thì chờ tại chỗ
+##   don_danh [N [X0 Y0 X1 Y1]]  (có khung: chỉ đánh quân địch đứng trong khung) dồn đánh: lặp lại, chọn trong mọi quân ta chưa đi (trừ tướng chính) cú đánh tốt nhất (hạ được trước,
+##                             rồi quân địch đã yếu), tối đa N cú (mặc định hết); dừng khi không còn cú đáng đánh
 ##   chiem_neu LOAI TX TY      quân ta đầu tiên thuộc LOAI chưa đi: đi tới (TX, TY) được trong lượt này thì đi rồi chiếm, không thì thôi
 ##   ai_huong TX TY [X0 Y0 X1 Y1]  như "ai_khong_mua" nhưng quân ta nhắm (TX, TY) (vẫn đánh dọc đường, không lui hồi máu);
 ##                             có khung thì chỉ quân đang đứng trong khung (X0..X1, Y0..Y1) đi
@@ -102,6 +105,44 @@ static func run(mission: String, p_seed: int, path: String, verbose := false, ca
 					ev.append_array(step)
 				SimpleAI.allow_recruit = true
 				SimpleAI.allow_capture = true
+			"cho_khu":
+				var cbox := Rect2i(int(w[1]), int(w[2]), int(w[3]) - int(w[1]) + 1, int(w[4]) - int(w[2]) + 1)
+				for cu2 in s.units_of(s.current_faction()):
+					if not cu2.done and cbox.has_point(cu2.pos):
+						ev.append_array(Rules.cmd_wait(s, cu2))
+			"don_danh":
+				var limit := int(w[1]) if w.size() > 1 else 99
+				var tbox := Rect2i(int(w[2]), int(w[3]), int(w[4]) - int(w[2]) + 1, int(w[5]) - int(w[3]) + 1) if w.size() >= 6 else Rect2i()
+				for _k in limit:
+					var bu: Unit = null
+					var bp := Vector2i.ZERO
+					var bt: Unit = null
+					var bs := 15.0
+					for au in s.units_of(s.current_faction()):
+						if au.done or au.tuong_chinh:
+							continue
+						var reach := Rules.reachable(s, au)
+						for rp in reach:
+							for tg in Rules.targets_from(s, au, rp, rp != au.pos):
+								if tbox.size != Vector2i.ZERO and not tbox.has_point(tg.pos):
+									continue
+								var fc := Rules.forecast(s, au, rp, tg)
+								var pd: float = (fc["pd_min"] + fc["pd_max"]) / 2.0 if fc["phan_don"] else 0.0
+								var sc: float = fc["ti_le_ha"] * 100.0 + (fc["st_min"] + fc["st_max"]) / 2.0 - pd * 0.8 \
+									+ (100 - tg.hp) * 0.3 - float(reach[rp]["chi_phi"]) * 0.1
+								if sc > bs:
+									bs = sc
+									bu = au
+									bp = rp
+									bt = tg
+					if bu == null or s.result != "":
+						break
+					if bp != bu.pos:
+						ev.append_array(Rules.cmd_move(s, bu, bp))
+					if s.units.has(bu) and bu.pos == bp and s.units.has(bt):
+						ev.append_array(Rules.cmd_attack(s, bu, bt))
+					elif s.units.has(bu) and not bu.done:
+						ev.append_array(Rules.cmd_wait(s, bu))
 			"chiem_neu":
 				var cu: Unit = null
 				for c2 in s.units_of(s.current_faction()):

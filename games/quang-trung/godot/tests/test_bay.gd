@@ -68,13 +68,16 @@ func test_quan_su_thay_dia_loi(t) -> bool:
 
 
 func test_rut_lui(t) -> bool:
-	var s := make([q("voi_chien", "tayson", 2, 2), q("truong_mau", "thanh", 2, 1, {"rut_khi_yeu": 30, "mau": 40})],
+	var s := make([q("hoa_mai", "tayson", 2, 3), q("truong_mau", "thanh", 2, 1, {"rut_khi_yeu": 30, "mau": 60})],
 		{"khu_rut_lui": "bac"})
 	var tm := s.unit_at(Vector2i(2, 1))
-	Rules.cmd_attack(s, s.unit_at(Vector2i(2, 2)), tm)
-	t.check(s.units.has(tm), "lần đầu tụt dưới 30: không bị hạ")
+	Rules.cmd_attack(s, s.unit_at(Vector2i(2, 3)), tm)
+	t.check(s.units.has(tm) and tm.hp < 30, "còn sống, dưới 30 máu")
 	t.eq(tm.ai_mode, "rut_lui", "chuyển sang rút lui")
-	t.eq(Rules.forecast(s, s.unit_at(Vector2i(2, 2)), Vector2i(2, 2), tm)["ti_le_ha"] > 0.0, true, "đang rút lui: hạ được")
+	var s0 := make([q("voi_chien", "tayson", 2, 2), q("truong_mau", "thanh", 2, 1, {"rut_khi_yeu": 30, "mau": 20})])
+	t.check(Rules.forecast(s0, s0.unit_at(Vector2i(2, 2)), Vector2i(2, 2), s0.unit_at(Vector2i(2, 1)))["ti_le_ha"] > 0.0, "đòn đủ hạ thì vẫn hạ")
+	Rules.cmd_attack(s0, s0.unit_at(Vector2i(2, 2)), s0.unit_at(Vector2i(2, 1)))
+	t.eq(s0.units_of("thanh").size(), 0, "bị hạ, không giữ lại 1 máu")
 	Rules.cmd_end_turn(s)
 	var ev := SimpleAI.play_turn(s)
 	t.check(not s.units.has(tm), "rút tới khu mép bắc thì rời bản đồ")

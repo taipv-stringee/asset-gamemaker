@@ -46,7 +46,7 @@
  ],
  "vang": {
   "tayson": 800,
-  "thanh": 400
+  "thanh": 0
  },
  "khong_thu_nhap": [
   "thanh"
@@ -67,10 +67,7 @@
    "than_cong",
    "moc_thuan"
   ],
-  "thanh": [
-   "truong_mau",
-   "dieu_thuong"
-  ]
+  "thanh": []
  },
  "tam_nhin": 3,
  "rang_sang": 1,
@@ -249,6 +246,58 @@
    [
     9,
     2
+   ],
+   [
+    0,
+    3
+   ],
+   [
+    1,
+    3
+   ],
+   [
+    2,
+    3
+   ],
+   [
+    3,
+    3
+   ],
+   [
+    4,
+    3
+   ],
+   [
+    5,
+    3
+   ],
+   [
+    6,
+    3
+   ],
+   [
+    7,
+    3
+   ],
+   [
+    8,
+    3
+   ],
+   [
+    9,
+    3
+   ],
+   [
+    10,
+    3
+   ],
+   [
+    11,
+    3
+   ],
+   [
+    12,
+    3
    ]
   ],
   "mep_bac": [
@@ -907,8 +956,8 @@
   {
    "khu": "dam_muc",
    "mau": "do",
-   "ten": "Đầm Mực",
-   "ghi": "Đầm Mực: đường rút của quân Thanh về Thăng Long."
+   "ten": "đê Yên Duyên – Đầm Mực",
+   "ghi": "Đê Yên Duyên, Đầm Mực: đường rút của quân Thanh về Thăng Long."
   }
  ],
  "vat_the": [
@@ -1266,6 +1315,12 @@
    "y": 19
   },
   {
+   "id": "trong_tran",
+   "phe": "tayson",
+   "x": 5,
+   "y": 19
+  },
+  {
    "id": "hua_the_hanh",
    "phe": "thanh",
    "x": 6,
@@ -1276,7 +1331,7 @@
     7
    ],
    "ban_kinh": 1,
-   "rut_khi_yeu": 30,
+   "rut_khi_yeu": 50,
    "toi_thieu_1": true
   },
   {
@@ -1290,7 +1345,7 @@
     7
    ],
    "ban_kinh": 1,
-   "rut_khi_yeu": 30,
+   "rut_khi_yeu": 50,
    "toi_thieu_1": true
   },
   {
@@ -1304,7 +1359,7 @@
     7
    ],
    "ban_kinh": 1,
-   "rut_khi_yeu": 30,
+   "rut_khi_yeu": 50,
    "toi_thieu_1": true
   },
   {
@@ -1368,19 +1423,6 @@
    "tam": [
     11,
     9
-   ],
-   "ban_kinh": 2,
-   "rut_khi_yeu": 30
-  },
-  {
-   "id": "dang_bai",
-   "phe": "thanh",
-   "x": 4,
-   "y": 10,
-   "ai": "giu_don",
-   "tam": [
-    4,
-    10
    ],
    "ban_kinh": 2,
    "rut_khi_yeu": 30
@@ -1505,7 +1547,7 @@
    "loai": "ha_tren_khu",
    "khu": "dam_muc",
    "n": 3,
-   "ten": "Hạ ít nhất 3 quân Thanh khi chúng đứng ở Đầm Mực"
+   "ten": "Hạ ít nhất 3 quân Thanh ở đê Yên Duyên hay Đầm Mực"
   },
   {
    "loai": "khong_mat_truoc_co",

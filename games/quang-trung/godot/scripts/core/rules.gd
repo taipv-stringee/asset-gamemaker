@@ -355,7 +355,7 @@ static func forecast(state: BattleState, att: Unit, from: Vector2i, def: Unit, c
 		var st := damage(c, s["thu"], att.hp)
 		lo = mini(lo, st)
 		hi = maxi(hi, st)
-		if st >= def.hp and not def.toi_thieu_1 and (def.rut_khi_yeu == 0 or def.ai_mode == "rut_lui"):
+		if st >= def.hp and not def.toi_thieu_1:
 			kills += 1
 		n += 1
 	var out := {"st_min": lo, "st_max": hi, "ti_le_ha": float(kills) / float(n),
@@ -374,9 +374,9 @@ static func _apply_damage(u: Unit, st: int) -> void:
 	u.hp = maxi(0, u.hp - st)
 	if u.toi_thieu_1 and u.hp < 1:
 		u.hp = 1
-	# Lần đầu tụt dưới ngưỡng: còn ít nhất 1 máu và chuyển sang Rút lui; đang rút lui thì bị hạ được (02 §14, màn 8).
-	if u.rut_khi_yeu > 0 and u.hp < u.rut_khi_yeu and u.ai_mode != "rut_lui":
-		u.hp = maxi(u.hp, 1)
+	# Còn sống mà máu dưới ngưỡng thì chuyển sang Rút lui (02 §14, màn 8). Đòn đủ hạ thì vẫn hạ: trước đây giữ lại 1 máu
+	# làm mỗi quân Thanh cần thêm một đòn, màn 8 quá khó. Tướng không bị hạ ở màn 8 là nhờ toi_thieu_1.
+	if u.rut_khi_yeu > 0 and u.hp > 0 and u.hp < u.rut_khi_yeu:
 		u.ai_mode = "rut_lui"
 
 

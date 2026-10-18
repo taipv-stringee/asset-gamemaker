@@ -131,3 +131,15 @@ func test_event_mau_duoi_roi_ban_do(t) -> bool:
 	t.check(ev.any(func(e: Dictionary) -> bool: return e["loai"] == "roi_ban_do"), "sự kiện rời bản đồ")
 	t.eq(s.owner_of(Vector2i(4, 1)), "thanh", "đồn vẫn của Thanh: phải vào chiếm")
 	return true
+
+
+func test_objective_won_early_without_burning(t) -> bool:
+	# Kiểm thử lần 6c: thắng trước vòng 7 mà chưa đốt đủ thì bảng kết quả phải là ✗, khớp với tiến trình.
+	var obj := {"muc_tieu_phu": [{"loai": "dot_doanh", "n": 4, "truoc_vong": 7, "ten": "Đốt"}], "thang": {"loai": "co", "co": "xong"}}
+	var s := make([q("hoa_ho", "tayson", 1, 0)], obj)
+	s.flags["co"] = {"xong": true}
+	Rules.check_result(s)
+	t.eq(s.result, "thang", "thắng")
+	t.eq(Rules.side_objectives_live(s)[0]["trang_thai"], "hong", "chưa đốt đủ: ✗")
+	t.eq(Rules.side_objectives(s)[0]["dat"], false, "tiến trình cũng không đạt")
+	return true

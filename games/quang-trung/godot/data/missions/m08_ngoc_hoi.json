@@ -46,7 +46,7 @@
  ],
  "vang": {
   "tayson": 800,
-  "thanh": 600
+  "thanh": 400
  },
  "khong_thu_nhap": [
   "thanh"
@@ -1321,32 +1321,6 @@
    "rut_khi_yeu": 30
   },
   {
-   "id": "phao_binh",
-   "phe": "thanh",
-   "x": 8,
-   "y": 6,
-   "ai": "giu_don",
-   "tam": [
-    8,
-    6
-   ],
-   "ban_kinh": 0,
-   "rut_khi_yeu": 30
-  },
-  {
-   "id": "dieu_thuong",
-   "phe": "thanh",
-   "x": 4,
-   "y": 8,
-   "ai": "giu_don",
-   "tam": [
-    4,
-    8
-   ],
-   "ban_kinh": 1,
-   "rut_khi_yeu": 30
-  },
-  {
    "id": "dieu_thuong",
    "phe": "thanh",
    "x": 5,
@@ -1367,19 +1341,6 @@
    "ai": "giu_don",
    "tam": [
     8,
-    8
-   ],
-   "ban_kinh": 1,
-   "rut_khi_yeu": 30
-  },
-  {
-   "id": "dieu_thuong",
-   "phe": "thanh",
-   "x": 9,
-   "y": 8,
-   "ai": "giu_don",
-   "tam": [
-    9,
     8
    ],
    "ban_kinh": 1,
@@ -1412,32 +1373,6 @@
    "rut_khi_yeu": 30
   },
   {
-   "id": "dieu_thuong",
-   "phe": "thanh",
-   "x": 4,
-   "y": 5,
-   "ai": "giu_don",
-   "tam": [
-    4,
-    5
-   ],
-   "ban_kinh": 1,
-   "rut_khi_yeu": 30
-  },
-  {
-   "id": "dieu_thuong",
-   "phe": "thanh",
-   "x": 9,
-   "y": 5,
-   "ai": "giu_don",
-   "tam": [
-    9,
-    5
-   ],
-   "ban_kinh": 1,
-   "rut_khi_yeu": 30
-  },
-  {
    "id": "dang_bai",
    "phe": "thanh",
    "x": 4,
@@ -1458,19 +1393,6 @@
    "ai": "giu_don",
    "tam": [
     7,
-    10
-   ],
-   "ban_kinh": 2,
-   "rut_khi_yeu": 30
-  },
-  {
-   "id": "dang_bai",
-   "phe": "thanh",
-   "x": 10,
-   "y": 10,
-   "ai": "giu_don",
-   "tam": [
-    10,
     10
    ],
    "ban_kinh": 2,
@@ -1490,19 +1412,6 @@
    "rut_khi_yeu": 30
   },
   {
-   "id": "cung_tien",
-   "phe": "thanh",
-   "x": 8,
-   "y": 7,
-   "ai": "giu_don",
-   "tam": [
-    8,
-    7
-   ],
-   "ban_kinh": 1,
-   "rut_khi_yeu": 30
-  },
-  {
    "id": "truong_mau",
    "phe": "thanh",
    "x": 3,
@@ -1510,19 +1419,6 @@
    "ai": "giu_don",
    "tam": [
     3,
-    9
-   ],
-   "ban_kinh": 2,
-   "rut_khi_yeu": 30
-  },
-  {
-   "id": "truong_mau",
-   "phe": "thanh",
-   "x": 6,
-   "y": 9,
-   "ai": "giu_don",
-   "tam": [
-    6,
     9
    ],
    "ban_kinh": 2,
@@ -1546,29 +1442,29 @@
   {
    "phe": "tayson",
    "vong": [
-    4
+    3
    ],
    "hoi_thoai": "dai_ang",
    "quan": [
     {
      "id": "do_doc_bao",
      "x": 0,
-     "y": 9
+     "y": 5
     },
     {
      "id": "voi_chien",
      "x": 0,
-     "y": 10
+     "y": 4
     },
     {
      "id": "voi_chien",
      "x": 1,
-     "y": 9
+     "y": 5
     },
     {
      "id": "voi_chien",
-     "x": 0,
-     "y": 8
+     "x": 1,
+     "y": 4
     }
    ]
   }
@@ -1635,8 +1531,8 @@
   },
   {
    "khi": "vong",
-   "n": 4,
-   "loi": "Đô đốc Bảo đem voi tới lối Đại Áng (mép tây). Đánh vào sườn đồn, hoặc vòng lên đê chặn quân Thanh rút qua Đầm Mực."
+   "n": 3,
+   "loi": "Đô đốc Bảo đem voi tới lối Đại Áng, sườn tây bắc đồn. Đánh vào sườn đồn, hoặc chặn quân Thanh rút qua Đầm Mực."
   }
  ],
  "su_lieu": [

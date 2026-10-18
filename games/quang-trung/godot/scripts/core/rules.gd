@@ -1321,6 +1321,7 @@ static func side_objectives_live(state: BattleState) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
 	var won := state.result == "thang"
 	var lost_game := state.result == "thua"
+	var final := side_objectives(state)
 	for o in state.mission.get("muc_tieu_phu", []):
 		var st := "dang"
 		match o.get("loai", ""):
@@ -1378,8 +1379,9 @@ static func side_objectives_live(state: BattleState) -> Array[Dictionary]:
 					st = "hong"
 				elif won:
 					st = "dat" if _type_in_zone(state, o["quan"], o["khu"]) else "hong"
-		if (st == "dang" or st == "xong") and won:
-			st = "dat"
+		if won:
+			# Đã thắng: lấy đúng kết quả cuối (kiểm thử lần 6c: "đốt ≥ 4 ô" còn "dang" mà thắng sớm thì từng thành ★).
+			st = "dat" if final[out.size()]["dat"] else "hong"
 		if (st == "dang" or st == "xong") and lost_game:
 			st = "hong"
 		out.append({"ten": o.get("ten", ""), "trang_thai": st})

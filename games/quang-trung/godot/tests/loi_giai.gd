@@ -19,6 +19,9 @@ extends RefCounted
 ##   ai_giu                    như "ai_khong_mua" và máy cũng không chiếm ô (để hoãn điều kiện chuyển giai đoạn)
 ##   ai                        để máy (SimpleAI) đi nốt các quân ta còn lại trong lượt này
 ##   rut TX TY                 mọi quân ta chưa đi làm "toi" về (TX, TY), quân gần đích đi trước
+##   chiem_neu LOAI TX TY      quân ta đầu tiên thuộc LOAI chưa đi: đi tới (TX, TY) được trong lượt này thì đi rồi chiếm, không thì thôi
+##   ai_huong TX TY [X0 Y0 X1 Y1]  như "ai_khong_mua" nhưng quân ta nhắm (TX, TY) (vẫn đánh dọc đường, không lui hồi máu);
+##                             có khung thì chỉ quân đang đứng trong khung (X0..X1, Y0..Y1) đi
 ##   het                       hết lượt; máy chơi lượt địch
 
 
@@ -99,6 +102,41 @@ static func run(mission: String, p_seed: int, path: String, verbose := false, ca
 					ev.append_array(step)
 				SimpleAI.allow_recruit = true
 				SimpleAI.allow_capture = true
+			"chiem_neu":
+				var cu: Unit = null
+				for c2 in s.units_of(s.current_faction()):
+					if c2.type_id == w[1] and not c2.done:
+						cu = c2
+						break
+				var cto := Vector2i(int(w[2]), int(w[3]))
+				if cu == null or (cto != cu.pos and not Rules.reachable(s, cu).has(cto)):
+					continue
+				if cto != cu.pos:
+					ev = Rules.cmd_move(s, cu, cto)
+				if s.units.has(cu) and cu.pos == cto:
+					ev.append_array(Rules.cmd_capture(s, cu))
+			"ai_huong":
+				SimpleAI.goal_override = [Vector2i(int(w[1]), int(w[2]))] as Array[Vector2i]
+				SimpleAI.allow_recruit = false
+				var box := Rect2i()
+				if w.size() >= 7:
+					box = Rect2i(int(w[3]), int(w[4]), int(w[5]) - int(w[3]) + 1, int(w[6]) - int(w[4]) + 1)
+				for _i in 60:
+					if s.result != "":
+						break
+					var pend: Array[Unit] = []
+					for au in s.units_of(s.current_faction()):
+						if not au.done and (box.size == Vector2i.ZERO or box.has_point(au.pos)):
+							pend.append(au)
+					if pend.is_empty():
+						break
+					var plan := SimpleAI.plan_unit(s, pend[0])
+					var step := SimpleAI.execute(s, plan)
+					if step.is_empty() and s.units.has(pend[0]):
+						pend[0].done = true
+					ev.append_array(step)
+				SimpleAI.goal_override = [] as Array[Vector2i]
+				SimpleAI.allow_recruit = true
 			"rut":
 				var goal2 := Vector2i(int(w[1]), int(w[2]))
 				var order := s.units_of(s.current_faction()).filter(func(x: Unit) -> bool: return not x.done)

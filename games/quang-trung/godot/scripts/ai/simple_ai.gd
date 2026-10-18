@@ -81,6 +81,8 @@ static func _order(u: Unit) -> int:
 static var allow_recruit := true
 ## Tắt chiếm ô (lời giải mẫu: hoãn đủ số làng để còn làm việc khác trước khi màn chuyển giai đoạn).
 static var allow_capture := true
+## Lời giải mẫu (lệnh "ai_huong"): quân phe người chơi nhắm các ô này thay cho mục tiêu thường, và không lui về hồi máu.
+static var goal_override: Array[Vector2i] = []
 
 
 static func _plan_recruit(state: BattleState, f: String) -> Dictionary:
@@ -114,6 +116,8 @@ static func _escaping(state: BattleState, u: Unit) -> bool:
 
 static func _goals(state: BattleState, u: Unit) -> Array[Vector2i]:
 	var goals: Array[Vector2i] = []
+	if not goal_override.is_empty() and u.faction == state.factions[0]:
+		return goal_override.duplicate()
 	if (u.ai_mode == "tuan_tra" or u.ai_mode == "do_tham") and u.ai_params.has("diem"):
 		var pts: Array = u.ai_params["diem"]
 		var i := int(u.ai_params.get("i", 0)) % pts.size()
@@ -247,7 +251,7 @@ static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 	var goals := _goals(state, u)
 	# Quân yếu (máu < 35) lui về làng / đồn của phe mình để hồi máu; chỉ đánh khi chắc hạ được.
 	var healing := false
-	if not fleeing and u.hp < 35 and u.ai_mode != "giu_don":
+	if not fleeing and u.hp < 35 and u.ai_mode != "giu_don" and (goal_override.is_empty() or u.faction != state.factions[0]):
 		var heal_spots: Array[Vector2i] = []
 		for p in state.owners:
 			if state.are_allies(state.owners[p], u.faction) and int(state.terrain_at(p)["hoi_mau"]) > 0:
@@ -275,6 +279,8 @@ static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 		var base: float = -float(dmap.get(p, UNREACHABLE)) * (3.0 if fleeing else 1.5)
 		if u.ai_mode == "giu_don":
 			base = -float(Rules.manhattan(p, center)) * (3.0 if guard_outside else 0.5)
+		if not goal_override.is_empty() and u.faction == state.factions[0]:
+			base -= float(Rules.manhattan(p, goal_override[0])) * 0.05   # "ai_huong": hòa điểm thì nhích lên, không đứng chắn hàng
 		if u.ai_mode != "rut_lui":
 			base += float(state.terrain_at(p)["thu"]) * 0.3   # quân rút lui chỉ lo chạy: không thì đứng lì trên đê, không xuống đầm (màn 8)
 		if state.object_at(p).get("loai", "") == "lua" and not u.has_tag("khong_chay"):

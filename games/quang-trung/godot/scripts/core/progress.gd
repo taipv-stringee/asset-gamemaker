@@ -61,6 +61,14 @@ static func record_win(state: BattleState) -> Array[String]:
 	for name in state.mission.get("luu_co", []):
 		carried[name] = Rules.has_flag(state, name)
 	d["co"] = carried
+	# Màn 8 → màn 9 (04): ghi quân ta còn sống (trừ tướng, quân ngoài giới hạn), cấp cao trước, để màn 9 chọn tối đa 10 quân.
+	if state.mission.get("luu_quan", false):
+		var kept: Array = []
+		for u in state.units_of(state.factions[0]):
+			if not u.has_tag("tuong") and not u.ngoai_gioi_han:
+				kept.append({"id": u.type_id, "cap": u.level, "xp": u.xp})
+		kept.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a["cap"] > b["cap"] or (a["cap"] == b["cap"] and a["xp"] > b["xp"]))
+		d["quan_mang_theo"] = kept
 	var opened: Array[String] = []
 	for id in state.mission.get("su_lieu", []):
 		if not d["su_lieu"].has(id):
@@ -127,6 +135,11 @@ static func mission_unlocked(id: String) -> bool:
 	var prev := ""
 	for m in Story.campaign():
 		if m["id"] == id:
+			if m.has("mo_sau"):   # màn 7 và 8 cùng mở sau màn 6; màn 9 cần thắng cả hai (04)
+				for need in m["mo_sau"]:
+					if not is_won(need):
+						return false
+				return true
 			return prev == "" or is_won(prev)
 		if m["id"] != "" and m["so"] != "P":
 			prev = m["id"]

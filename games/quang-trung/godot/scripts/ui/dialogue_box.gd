@@ -41,7 +41,7 @@ func _init() -> void:
 	_text.offset_left = 12
 	_text.offset_right = -12
 	_text.offset_top = 28
-	_text.offset_bottom = -18
+	_text.offset_bottom = -20
 	_text.add_theme_constant_override("line_spacing", 3)
 	box.add_child(_text)
 	_hint = UiKit.label("▼", UiKit.FS_SMALL, UiKit.C_GOLD, true)
@@ -69,12 +69,13 @@ func _init() -> void:
 	_name = UiKit.label("", UiKit.FS_HEAD + 1, UiKit.C_GOLD_LIGHT, true)
 	_name.position = Vector2(12, 5)
 	box.add_child(_name)
+	# Góc dưới trái (kiểm thử lần 6b: đặt góc trên phải thì đè tên người nói dài như "Sầm Nghi Đống").
 	_tag = UiKit.source_tag("")
-	_tag.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	_tag.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	_tag.offset_left = -150
-	_tag.offset_right = -12
-	_tag.offset_top = 7
+	_tag.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
+	_tag.offset_left = 12
+	_tag.offset_right = 200
+	_tag.offset_top = -19
+	_tag.offset_bottom = -4
 	box.add_child(_tag)
 	var skip := UiKit.button("Bỏ qua", _skip)
 	skip.set_anchors_preset(Control.PRESET_TOP_RIGHT)

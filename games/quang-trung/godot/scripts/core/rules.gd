@@ -140,9 +140,32 @@ static func _enterable(state: BattleState, u: Unit, p: Vector2i, vis: Dictionary
 	var occ := state.unit_at(p)
 	if occ != null and not state.are_allies(occ.faction, u.faction) and (vis.is_empty() or vis.has(p)):
 		return false
-	if state.object_at(p).get("loai", "") == "quan_tan":
+	var obj: Dictionary = state.object_at(p)
+	if obj.get("loai", "") == "quan_tan":
 		return false
+	if obj.get("loai", "") == "dia_loi" and obj.get("phe", "") == u.faction and not _fleeing(u):
+		return false   # máy biết và tránh địa lôi của phe mình, trừ khi đang Chạy / Rút lui (02 §12)
 	return true
+
+
+static func _fleeing(u: Unit) -> bool:
+	return u.ai_mode == "rut_lui" or u.ai_mode == "chay"
+
+
+## Ô bẫy làm quân dừng lại (02 §12): chông sắt; địa lôi mà phe quân đó biết (đã lộ, hoặc của phe mình).
+static func _trap_known(state: BattleState, u: Unit, p: Vector2i) -> bool:
+	var obj: Dictionary = state.object_at(p)
+	match obj.get("loai", ""):
+		"chong":
+			return true
+		"dia_loi":
+			return obj.get("lo", false) or obj.get("phe", "") == u.faction
+	return false
+
+
+## Bước vào ô bẫy thật (kể cả địa lôi ẩn): chông, địa lôi.
+static func _trap_at(state: BattleState, p: Vector2i) -> bool:
+	return state.object_at(p).get("loai", "") in ["chong", "dia_loi"]
 
 
 ## Các ô quân có thể dừng lại: {Vector2i: {"chi_phi": int, "duong": Array[Vector2i]}}. Gồm cả ô đang đứng.
@@ -165,8 +188,8 @@ static func reachable(state: BattleState, u: Unit, fog := false) -> Dictionary:
 		if closed.has(p):
 			continue
 		closed[p] = true
-		if p != u.pos and zoc.has(p):
-			continue  # vào vùng khống chế thì dừng
+		if p != u.pos and (zoc.has(p) or _trap_known(state, u, p)):
+			continue  # vào vùng khống chế / ô chông / địa lôi đã biết thì dừng
 		for d in DIRS:
 			var n := p + d
 			if not _enterable(state, u, n, vis):
@@ -332,7 +355,7 @@ static func forecast(state: BattleState, att: Unit, from: Vector2i, def: Unit, c
 		var st := damage(c, s["thu"], att.hp)
 		lo = mini(lo, st)
 		hi = maxi(hi, st)
-		if st >= def.hp and not def.toi_thieu_1 and def.rut_khi_yeu == 0:
+		if st >= def.hp and not def.toi_thieu_1 and (def.rut_khi_yeu == 0 or def.ai_mode == "rut_lui"):
 			kills += 1
 		n += 1
 	var out := {"st_min": lo, "st_max": hi, "ti_le_ha": float(kills) / float(n),
@@ -351,7 +374,8 @@ static func _apply_damage(u: Unit, st: int) -> void:
 	u.hp = maxi(0, u.hp - st)
 	if u.toi_thieu_1 and u.hp < 1:
 		u.hp = 1
-	if u.rut_khi_yeu > 0 and u.hp < u.rut_khi_yeu:
+	# Lần đầu tụt dưới ngưỡng: còn ít nhất 1 máu và chuyển sang Rút lui; đang rút lui thì bị hạ được (02 §14, màn 8).
+	if u.rut_khi_yeu > 0 and u.hp < u.rut_khi_yeu and u.ai_mode != "rut_lui":
 		u.hp = maxi(u.hp, 1)
 		u.ai_mode = "rut_lui"
 
@@ -393,10 +417,23 @@ static func cmd_move(state: BattleState, u: Unit, target: Vector2i, fog := false
 		path = path.slice(0, ambush["dung"] + 1)
 		target = path[-1]
 		u.khoa_hoan_tac = true
+	var trap_i := -1
+	for i in range(1, path.size()):
+		if _trap_at(state, path[i]):
+			trap_i = i
+			break
+	if trap_i > 0 and trap_i < path.size() - 1:
+		path = path.slice(0, trap_i + 1)   # bẫy: dừng lại ở ô đó
+		target = path[-1]
 	u.move_origin = u.pos
 	u.pos = target
 	u.moved = true
 	ev.append({"loai": "di", "uid": u.uid, "duong": path})
+	if trap_i > 0:
+		u.khoa_hoan_tac = true
+		ev.append_array(_spring_trap(state, u))
+		if not state.units.has(u):
+			return ev
 	for i in range(1, path.size()):
 		if state.object_at(path[i]).get("loai", "") == "lua":
 			ev.append_array(_catch_fire(state, u))   # bước vào ô lửa: Cháy (02 §12)
@@ -410,7 +447,38 @@ static func cmd_move(state: BattleState, u: Unit, target: Vector2i, fog := false
 				u.khoa_hoan_tac = true
 				ev.append({"loai": "lo_dien", "uid": uid})
 	ev.append_array(_escape(state, u))
+	_reveal_mines(state)
 	return ev
+
+
+## Chông sắt: −15 máu (voi, mộc thuẫn −5), không mất. Địa lôi: −30 máu rồi mất (02 §12). Bị hạ được.
+static func _spring_trap(state: BattleState, u: Unit) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	var o: Dictionary = state.object_at(u.pos)
+	var st := 0
+	if o.get("loai", "") == "chong":
+		st = 5 if (u.has_tag("voi") or u.type_id == "moc_thuan") else 15
+		ev.append({"loai": "chong", "uid": u.uid, "o": u.pos, "st": st})
+	elif o.get("loai", "") == "dia_loi":
+		st = 30
+		state.objects.erase(u.pos)
+		ev.append({"loai": "dia_loi_no", "uid": u.uid, "o": u.pos, "st": st})
+	_apply_damage(u, st)
+	if u.hp <= 0:
+		ev.append_array(_defeat(state, u))
+		ev.append_array(check_result(state))
+	return ev
+
+
+## Quân có thẻ thay_dia_loi (quân sư) thấy địa lôi ở 4 ô kề.
+static func _reveal_mines(state: BattleState) -> void:
+	for u in state.units:
+		if not u.has_tag("thay_dia_loi"):
+			continue
+		for d in DIRS:
+			var o: Dictionary = state.object_at(u.pos + d)
+			if o.get("loai", "") == "dia_loi" and o.get("phe", "") != u.faction:
+				o["lo"] = true
 
 
 # ================================================================ trinh sát (màn 5; 02 §14 chế độ Chạy)
@@ -440,6 +508,15 @@ static func _scouts_spot(state: BattleState, f: String) -> Array[Dictionary]:
 
 static func _escape(state: BattleState, u: Unit) -> Array[Dictionary]:
 	var ev: Array[Dictionary] = []
+	if u.ai_mode == "rut_lui":
+		# Màn 8: quân rút lui tới khu "khu_rut_lui" (mép bắc) thì rời bản đồ — tướng sang màn 9.
+		if (state.zones.get(state.mission.get("khu_rut_lui", ""), []) as Array).has(u.pos):
+			state.remove_unit(u)
+			var gone: Array = state.flags.get("rut_khoi", [])
+			gone.append(u.type_id)
+			state.flags["rut_khoi"] = gone
+			ev.append({"loai": "rut_khoi", "uid": u.uid, "o": u.pos, "phe": u.faction})
+		return ev
 	if u.ai_mode != "chay" or not u.ai_params.has("khu"):
 		return ev
 	if not (state.zones.get(u.ai_params["khu"], []) as Array).has(u.pos):
@@ -552,6 +629,15 @@ static func _defeat(state: BattleState, u: Unit) -> Array[Dictionary]:
 	if u.faction == state.factions[0]:
 		var lost: Dictionary = state.flags["mat_quan"]
 		lost[u.type_id] = int(lost.get(u.type_id, 0)) + 1
+		for o in state.mission.get("muc_tieu_phu", []):
+			if o.get("loai", "") == "khong_mat_truoc_co" and o["quan"] == u.type_id and not has_flag(state, o["co"]):
+				var early: Dictionary = state.flags.get("mat_truoc_co", {})
+				early[o["co"]] = true
+				state.flags["mat_truoc_co"] = early
+	else:
+		var spots: Array = state.flags.get("ha_vi_tri", [])
+		spots.append([u.pos.x, u.pos.y])   # mục tiêu phụ "ha_tren_khu" (màn 8: Đầm Mực)
+		state.flags["ha_vi_tri"] = spots
 	var leaves_trace: bool = (u.faction == "thanh" or u.faction == "le") and not u.has_tag("tuong")
 	var keeps_object: bool = state.objects.has(u.pos) and state.objects[u.pos].get("loai", "") != "quan_tan"
 	if leaves_trace and not keeps_object and not NO_QUAN_TAN.has(state.terrain_id(u.pos)):
@@ -665,6 +751,11 @@ static func run_events(state: BattleState) -> Array[Dictionary]:
 				ok = villages_owned(state, player) >= int(cond["n"])
 			"chiem_o":
 				ok = state.owner_of(Vector2i(int(cond["o"][0]), int(cond["o"][1]))) == player
+			"vao_khu":   # quân phe người chơi (loại "quan" nếu có) đứng trong khu
+				var cells: Array = state.zones.get(cond["khu"], [])
+				for u in state.units_of(player):
+					if cells.has(u.pos) and (not cond.has("quan") or u.type_id == cond["quan"]):
+						ok = true
 			"mau_duoi":
 				for u in state.units:
 					if u.type_id == cond["quan"] and u.hp < int(cond["n"]):
@@ -1061,7 +1152,7 @@ static func start_turn(state: BattleState) -> Array[Dictionary]:
 	var f := state.current_faction()
 	ev.append({"loai": "bat_dau_luot", "phe": f, "vong": state.vong})
 	# Vàng: chỉ phe có lính mua được mới có thu nhập (02 §2).
-	if not state.buyable.get(f, PackedStringArray()).is_empty():
+	if not state.buyable.get(f, PackedStringArray()).is_empty() and not (state.mission.get("khong_thu_nhap", []) as Array).has(f):
 		var income := 0
 		for p in state.owners:
 			if state.owners[p] == f:
@@ -1085,6 +1176,7 @@ static func start_turn(state: BattleState) -> Array[Dictionary]:
 		u.than_trong = false
 	ev.append_array(_dawn(state))
 	ev.append_array(_fires(state, f))
+	_reveal_mines(state)
 	ev.append_array(_reinforcements(state, f))
 	if f != state.factions[0]:
 		ev.append_array(_alarm(state, f))
@@ -1215,6 +1307,10 @@ static func side_objectives(state: BattleState) -> Array[Dictionary]:
 				ok = state.result == "thang" and int(state.flags.get("hang_binh", 0)) + int(state.flags.get("tu_binh", 0)) >= int(o["n"])
 			"dot_doanh":   # đốt ≥ n ô (doanh trại) trong các vòng trước vòng "truoc_vong" (màn 7)
 				ok = state.result == "thang" and burned_count(state, int(o.get("truoc_vong", 0))) >= int(o["n"])
+			"ha_tren_khu":   # hạ ≥ n quân đối phương khi chúng đứng trong khu (màn 8: Đầm Mực)
+				ok = state.result == "thang" and kills_in_zone(state, o["khu"]) >= int(o["n"])
+			"khong_mat_truoc_co":   # không mất quân loại "quan" trước khi cờ "co" bật (màn 8: mộc thuẫn trước khi qua hàng chông)
+				ok = state.result == "thang" and not (state.flags.get("mat_truoc_co", {}) as Dictionary).has(o["co"])
 		out.append({"ten": o.get("ten", ""), "dat": ok})
 	return out
 
@@ -1253,6 +1349,14 @@ static func side_objectives_live(state: BattleState) -> Array[Dictionary]:
 					st = "dat" if won else "xong"
 			"hang_tu_binh":
 				if int(state.flags.get("hang_binh", 0)) + int(state.flags.get("tu_binh", 0)) >= int(o["n"]):
+					st = "dat" if won else "xong"
+			"ha_tren_khu":
+				if kills_in_zone(state, o["khu"]) >= int(o["n"]):
+					st = "dat" if won else "xong"
+			"khong_mat_truoc_co":
+				if (state.flags.get("mat_truoc_co", {}) as Dictionary).has(o["co"]):
+					st = "hong"
+				elif has_flag(state, o["co"]):
 					st = "dat" if won else "xong"
 			"dot_doanh":
 				var before := int(o.get("truoc_vong", 0))
@@ -1314,6 +1418,15 @@ static func _condition(state: BattleState, win: Dictionary) -> bool:
 	return false
 
 
+static func kills_in_zone(state: BattleState, zone_name: String) -> int:
+	var cells: Array = state.zones.get(zone_name, [])
+	var n := 0
+	for p in state.flags.get("ha_vi_tri", []):
+		if cells.has(Vector2i(int(p[0]), int(p[1]))):
+			n += 1
+	return n
+
+
 static func _type_in_zone(state: BattleState, type_id: String, zone_name: String) -> bool:
 	var zone: Array = state.zones.get(zone_name, [])
 	for u in state.units_of(state.factions[0]):
@@ -1322,7 +1435,8 @@ static func _type_in_zone(state: BattleState, type_id: String, zone_name: String
 	return false
 
 
-## Viện binh theo kịch bản (04, màn 0): mỗi mục {"phe", "vong": [..] hoặc "tu_vong"/"moi"/"den_vong", "quan": [{id, x, y, ai}]}.
+## Viện binh theo kịch bản (04, màn 0): mỗi mục {"phe", "vong": [..] hoặc "tu_vong"/"moi"/"den_vong", "quan": [{id, x, y, ai}],
+## "hoi_thoai": phần hội thoại (tùy chọn)}.
 ## Đầu lượt của phe đó; ô đã có quân thì lùi sang ô trống gần nhất đi được.
 static func _reinforcements(state: BattleState, f: String) -> Array[Dictionary]:
 	var ev: Array[Dictionary] = []
@@ -1340,6 +1454,8 @@ static func _reinforcements(state: BattleState, f: String) -> Array[Dictionary]:
 		if not rounds.has(state.vong):
 			continue
 		ev.append_array(_spawn_list(state, f, r.get("quan", []), "vien_binh"))
+		if r.has("hoi_thoai"):
+			ev.append({"loai": "hoi_thoai", "phan": r["hoi_thoai"]})   # màn 8: Đô đốc Bảo tới từ Đại Áng
 	return ev
 
 

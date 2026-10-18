@@ -479,6 +479,65 @@
      "url": "https://fptshop.com.vn/tin-tuc/danh-gia/le-hoi-go-dong-da-188609"
     }
    ]
+  },
+  {
+   "id": "moc_thuan_van_hay_rom",
+   "nhom": "Tranh cãi",
+   "tieu_de": "Mộc thuẫn: ván ghép hay bó rơm?",
+   "nhan": "Sử liệu",
+   "noi_dung": "Mộc thuẫn ở Ngọc Hồi là có thật: sử Thanh chép Nguyễn Huệ \"sai chiến sĩ đội ván gỗ để xông vào trận, mà tự thúc voi đốc đằng sau\". Hình dạng thì còn tranh cãi.\n\nHoàng Lê nhất thống chí kể nhà vua cho lấy sáu chục tấm ván, ghép ba ván thành một bức, ngoài phủ rơm dấp nước, tất cả 20 bức. GS Nguyễn Lý Tưởng cho rằng mỗi bức do 10 người khiêng, 20 người cầm khí giới theo sau. Thanh thông giám và Cương mục lại chép quân Tây Sơn lăn bó rơm lớn đi trước. Một bài trên VUSTA lập luận rơm ướt bết lại nên khó lăn, nên tấm ván khả thi hơn.\n\nGame vẽ mộc thuẫn là tấm ván phủ rơm, theo cách kể quen thuộc.",
+   "nguon": [
+    {
+     "ten": "nghiencuulichsu.com – Chiến thuật hạ thành Ngọc Hồi của quân Tây Sơn",
+     "url": "https://nghiencuulichsu.com/2016/09/12/chien-thuat-ha-thanh-ngoc-hoi-cua-quan-tay-son/"
+    },
+    {
+     "ten": "VUSTA – Trận đánh đồn Ngọc Hồi: Quang Trung dùng bó rơm hay tấm ván?",
+     "url": "https://vusta.vn/tran-danh-don-ngoc-hoi-quang-trung-dung-bo-rom-hay-tam-van-p69237.html"
+    },
+    {
+     "ten": "Văn Hóa Mới – GS Nguyễn Lý Tưởng",
+     "url": "https://vanhoimoi.org/?p=13417"
+    }
+   ]
+  },
+  {
+   "id": "luc_doanh",
+   "nhom": "Binh chủng",
+   "tieu_de": "Lục doanh",
+   "nhan": "Sử liệu",
+   "noi_dung": "Quân Thanh sang Đại Việt là Lục doanh (綠營, quân cờ xanh) của Lưỡng Quảng và Vân – Quý, chủ yếu người Hán; tướng Hứa Thế Hanh là người Hồi, Sầm Nghi Đống là thổ quan người Tráng. Chưa thấy bằng chứng quân Bát kỳ tham chiến.\n\nLục doanh luyện cung tên, điểu thương, đằng bài (khiên mây), trường mâu. Định chế các doanh Vân – Quý: cứ 1.000 lính có 100 pháo thủ, 600 điểu thương, 200 cung tiễn, 100 đằng bài. Đó là quy chế chung, không phải số liệu riêng năm 1789, nhưng là khung tốt nhất để dựng đội hình quân Thanh trong game. Điểu thương là súng hỏa mai mồi dây, tầm khoảng 100 m, bắn 1–2 phát mỗi phút.",
+   "nguon": [
+    {
+     "ten": "historychina.net",
+     "url": "http://www.historychina.net/zz/353443.shtml"
+    },
+    {
+     "ten": "知乎 – định chế doanh Vân – Quý",
+     "url": "https://zhuanlan.zhihu.com/p/9657701402"
+    },
+    {
+     "ten": "Wikipedia: 清军",
+     "url": "https://zh.wikipedia.org/zh-hans/%E6%B8%85%E5%86%9B"
+    }
+   ]
+  },
+  {
+   "id": "dia_loi_ngoc_hoi",
+   "nhom": "Sự kiện",
+   "tieu_de": "Chông sắt và địa lôi ở Ngọc Hồi",
+   "nhan": "Sử liệu",
+   "noi_dung": "Đồn Ngọc Hồi có lũy đất, hàng rào chông sắt và địa lôi. Đại Nam chính biên liệt truyện chép khi đồn vỡ, quân Thanh tháo chạy giẫm phải chính địa lôi mình đặt.\n\nTheo Hoàng Lê nhất thống chí, tàn quân bị phục binh ở đê Yên Duyên, rồi bị quân voi từ Đại Áng dồn xuống Đầm Mực. Vị trí hàng chông, bãi địa lôi và Đầm Mực trên bản đồ màn chơi là sắp đặt của game.",
+   "nguon": [
+    {
+     "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
+     "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Ng%E1%BB%8Dc_H%E1%BB%93i_%E2%80%93_%C4%90%E1%BB%91ng_%C4%90a"
+    },
+    {
+     "ten": "Loigiaihay – tóm tắt Hoàng Lê nhất thống chí",
+     "url": "https://loigiaihay.com/tac-pham-hoang-le-nhat-thong-chi-a11020.html"
+    }
+   ]
   }
  ]
 }

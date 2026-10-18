@@ -203,6 +203,8 @@ CHARACTERS = {
     # Táo bạo, giỏi đánh đêm (màn 7): võ tướng, khăn đen, áo đỏ sẫm, giáp vai, râu ngắn, mày chau.
     # Tên và danh tính còn tranh cãi (05 §3): không vẽ theo một nhân vật lịch sử cụ thể nào.
     "do_doc_long": {"ao": "robe_red", "mu": "khan_den", "giap": True, "rau": "short", "may": "fierce", "dai": "gold_dark"},
+    # Tướng voi, đánh mặt tả từ Đại Áng (màn 8): võ tướng, khăn đỏ, áo chàm, giáp vai, râu dài.
+    "do_doc_bao": {"ao": "robe_navy", "mu": "khan_do", "giap": True, "rau": "long", "may": "thick", "tuoi": 1, "dai": "gold_dark"},
     # Tri phủ Điền Châu, tử thủ (màn 7): quan nhà Thanh trung niên, mũ lương mạo, râu ngắn. Vẽ trang nghiêm, không chế giễu.
     "sam_nghi_dong": {"phe": "thanh", "ao": "quan_thanh", "mu": "luong_mao", "rau": "short", "may": "thick", "tuoi": 1},
 }

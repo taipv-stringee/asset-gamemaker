@@ -1,5 +1,5 @@
 {
- "_ghi_chu": "Danh sách màn theo docs/04. 'id' rỗng = chưa làm (nút mờ). Màn phụ P mở sau màn 4.",
+ "_ghi_chu": "Danh sách màn theo docs/04. 'id' rỗng = chưa làm (nút mờ). Màn phụ P mở sau màn 4. 'mo_sau': các màn phải thắng trước (màn 7 và 8 chọn thứ tự, 04).",
  "man": [
   {
    "so": "0",
@@ -44,17 +44,27 @@
   {
    "so": "7",
    "ten": "Khương Thượng (đạo Đô đốc Long)",
-   "id": "m07_khuong_thuong"
+   "id": "m07_khuong_thuong",
+   "mo_sau": [
+    "m06_ha_hoi"
+   ]
   },
   {
    "so": "8",
    "ten": "Ngọc Hồi",
-   "id": ""
+   "id": "",
+   "mo_sau": [
+    "m06_ha_hoi"
+   ]
   },
   {
    "so": "9",
    "ten": "Cầu phao sông Nhị – vào Thăng Long",
-   "id": ""
+   "id": "",
+   "mo_sau": [
+    "m07_khuong_thuong",
+    "m08_ngoc_hoi"
+   ]
   }
  ]
 }

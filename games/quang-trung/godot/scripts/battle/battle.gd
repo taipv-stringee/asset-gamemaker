@@ -23,6 +23,8 @@ const OBJECT_TEX := {
 	"den": "res://assets/objects/obj_den_strip2.png",
 	"kho_luong": "res://assets/objects/obj_kho_luong_strip2.png",
 	"lua": "res://assets/objects/obj_lua_strip2.png",
+	"chong": "res://assets/objects/obj_chong_strip2.png",
+	"dia_loi": "res://assets/objects/obj_dia_loi_strip2.png",
 }
 
 # BURNING: hỏa hổ đang chọn ô doanh trại để Đốt (02 §12).
@@ -254,7 +256,7 @@ func _refresh_map() -> void:
 		c.queue_free()
 	for p in state.objects:
 		var path: String = OBJECT_TEX.get(state.objects[p].get("loai", ""), "")
-		if path == "":
+		if path == "" or not _object_shown(state.objects[p]):
 			continue
 		var s := Sprite2D.new()
 		s.texture = load(path)
@@ -263,6 +265,11 @@ func _refresh_map() -> void:
 		s.position = Vector2(p * T)
 		objects_layer.add_child(s)
 	_update_night()
+
+
+## Địa lôi của đối phương ẩn cho tới khi lộ (quân sư đứng kề) hay bị giẫm (02 §12).
+func _object_shown(o: Dictionary) -> bool:
+	return o.get("loai", "") != "dia_loi" or o.get("lo", false) or o.get("phe", "") == PLAYER
 
 
 ## Bóng tối, sương mù, ẩn quân địch không thấy. Gọi sau mỗi thay đổi trạng thái.
@@ -584,12 +591,14 @@ func _terrain_info(p: Vector2i) -> void:
 		for z in state.mission.get("hien_khu", []):
 			if (state.zones.get(z["khu"], []) as Array).has(p) and z.has("ghi"):
 				lines.append(String(z["ghi"]))
-	var obj: String = state.object_at(p).get("loai", "")
+	var obj: String = state.object_at(p).get("loai", "") if _object_shown(state.object_at(p)) else ""
 	var notes: Dictionary = {"trong": "Trống báo động: quân địch kêu hay đứng cạnh trống thì cả khu đồn thức.",
 		"den": "Đèn: ô này và 4 ô kề luôn sáng; lính canh thấy quân ta ở đây từ 5 ô.",
 		"quan_tan": "Quân tan: không đi vào được; quân sư chiêu hàng được.",
 		"kho_luong": "Kho lương: tướng hay lính giáo đứng lên rồi Lấy kho lương.",
-		"lua": "Lửa: tắt đầu vòng %d; quân đứng trên hay bước vào bị Cháy." % int(state.object_at(p).get("het", 0))}
+		"lua": "Lửa: tắt đầu vòng %d; quân đứng trên hay bước vào bị Cháy." % int(state.object_at(p).get("het", 0)),
+		"chong": "Chông sắt: bước vào phải dừng, −15 máu (voi, mộc thuẫn −5).",
+		"dia_loi": "Địa lôi (đã lộ): bước vào phải dừng, −30 máu."}
 	if siege:
 		notes = {"trong": "Trống: địch kêu là cả đồn thức.", "den": "Đèn: ô quanh luôn sáng.",
 			"quan_tan": "Quân tan: quân sư chiêu hàng.", "kho_luong": "Kho lương: tướng / lính giáo lấy.",
@@ -1193,6 +1202,7 @@ func _play(events: Array[Dictionary]) -> void:
 				if cs != null and cs.visible:
 					_float_text(cs.position + Vector2(2, 4), "Cháy", Color(1, 0.6, 0.3))
 			"roi_ban_do":
+				_show_idle_info()   # bỏ bảng dự báo đánh cũ (kiểm thử lần 6b)
 				var gs: UnitSprite = sprites.get(e["uid"])
 				if gs != null:
 					sprites.erase(e["uid"])
@@ -1200,6 +1210,28 @@ func _play(events: Array[Dictionary]) -> void:
 					tw.tween_property(gs, "modulate:a", 0.0, 0.8)
 					await tw.finished
 					gs.queue_free()
+			"chong", "dia_loi_no":
+				var ts: UnitSprite = sprites.get(e["uid"])
+				var boom: bool = e["loai"] == "dia_loi_no"
+				Sfx.play("sung" if boom else "trung", 0.0 if boom else -4.0)
+				if ts != null and ts.visible:
+					_float_text(ts.position + Vector2(0, -6), ("Địa lôi! -%d" if boom else "Chông! -%d") % e["st"], Color(1, 0.5, 0.35))
+					var tu2 := state.unit_by_uid(e["uid"])
+					if tu2 != null:
+						ts.refresh(tu2)
+				if boom:
+					await _shake(0.35)
+				else:
+					await get_tree().create_timer(0.3).timeout
+			"rut_khoi":
+				var rs2: UnitSprite = sprites.get(e["uid"])
+				if rs2 != null:
+					sprites.erase(e["uid"])
+					var tw := create_tween()
+					tw.tween_property(rs2, "modulate:a", 0.0, 0.5)
+					await tw.finished
+					rs2.queue_free()
+				_show_banner("Quân Thanh rút về phía bắc.", Color(1, 0.75, 0.5), 1.2)
 			"lay_kho":
 				Sfx.play("chiem", -3.0)
 				_show_banner("Đã lấy kho lương!", C_GOLD_LIGHT)

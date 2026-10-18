@@ -1,0 +1,1648 @@
+{
+ "id": "m08_ngoc_hoi",
+ "so": 8,
+ "ten": "Ngọc Hồi",
+ "ten_ngan": "Ngọc Hồi",
+ "ngay": "Mờ sáng mùng 5 Tết Kỷ Dậu (30/01/1789)",
+ "dia_danh": "Đồn Ngọc Hồi (Thanh Trì, Hà Nội ngày nay), trên đường thiên lý vào Thăng Long",
+ "gioi_thieu": "Mờ sáng mùng 5, quân Tây Sơn phá đồn Ngọc Hồi. Sử Thanh chép Nguyễn Huệ sai chiến sĩ đội ván gỗ xông vào trận, tự cưỡi voi đốc chiến phía sau. Đồn có lũy đất, chông sắt, địa lôi; quân Thanh tháo chạy giẫm phải địa lôi của mình.",
+ "nhan_gioi_thieu": "Sử liệu",
+ "muc_tieu_chinh": "Quang Trung chiếm đồn Ngọc Hồi trước khi hết vòng 20.",
+ "dieu_kien_thua": "Quang Trung bị hạ, hoặc hết vòng 20.",
+ "hoi_thoai": "m08_ngoc_hoi",
+ "nhac": "chu_de",
+ "ghi_chu": "Màn trùm (04 §Màn 8). Rạng sáng R = 1. Bố trí hàng chông, địa lôi, Đầm Mực ở phía bắc đồn là Sáng tạo của game theo HLNTC và Liệt truyện. Ba tướng Thanh toi_thieu_1 + rut_khi_yeu: rút về mép bắc, sang màn 9.",
+ "ban_do": [
+  "......^^^^^^^^",
+  "&&&&&&&&&~~~~~",
+  "&&&&&&&&&&~~~~",
+  "-------------^",
+  "=.hh......hL.^",
+  "=...llllll...^",
+  "=...lDFDDl.tt^",
+  "=tt.lD=DDl..t^",
+  "=t..ll==ll.h.^",
+  "=.....=.....h^",
+  "=h....=......^",
+  "=.....=......^",
+  "=.....=......^",
+  "=.....=......^",
+  "=.....=......^",
+  "=.....=......^",
+  "=.t...=....t.^",
+  "=.rrr.=.rrr.t^",
+  "=.rrr.=.rrr..^",
+  "=..L.v=.v.L..^",
+  "=.....F......^",
+  "=............^"
+ ],
+ "chu_o": {
+  "6,6": "thanh",
+  "6,20": "tayson"
+ },
+ "phe": [
+  "tayson",
+  "thanh"
+ ],
+ "vang": {
+  "tayson": 800,
+  "thanh": 600
+ },
+ "khong_thu_nhap": [
+  "thanh"
+ ],
+ "gioi_han": {
+  "tayson": 24,
+  "thanh": 99
+ },
+ "mua_duoc": {
+  "tayson": [
+   "linh_giao",
+   "hoa_mai",
+   "thuy_binh",
+   "hoa_ho",
+   "quan_su",
+   "trong_tran",
+   "voi_chien",
+   "than_cong",
+   "moc_thuan"
+  ],
+  "thanh": [
+   "truong_mau",
+   "dieu_thuong"
+  ]
+ },
+ "tam_nhin": 3,
+ "rang_sang": 1,
+ "khu": {
+  "ngoc_hoi": [
+   [
+    4,
+    5
+   ],
+   [
+    5,
+    5
+   ],
+   [
+    6,
+    5
+   ],
+   [
+    7,
+    5
+   ],
+   [
+    8,
+    5
+   ],
+   [
+    9,
+    5
+   ],
+   [
+    4,
+    6
+   ],
+   [
+    5,
+    6
+   ],
+   [
+    6,
+    6
+   ],
+   [
+    7,
+    6
+   ],
+   [
+    8,
+    6
+   ],
+   [
+    9,
+    6
+   ],
+   [
+    4,
+    7
+   ],
+   [
+    5,
+    7
+   ],
+   [
+    6,
+    7
+   ],
+   [
+    7,
+    7
+   ],
+   [
+    8,
+    7
+   ],
+   [
+    9,
+    7
+   ],
+   [
+    4,
+    8
+   ],
+   [
+    5,
+    8
+   ],
+   [
+    6,
+    8
+   ],
+   [
+    7,
+    8
+   ],
+   [
+    8,
+    8
+   ],
+   [
+    9,
+    8
+   ]
+  ],
+  "dam_muc": [
+   [
+    0,
+    1
+   ],
+   [
+    1,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    3,
+    1
+   ],
+   [
+    4,
+    1
+   ],
+   [
+    5,
+    1
+   ],
+   [
+    6,
+    1
+   ],
+   [
+    7,
+    1
+   ],
+   [
+    8,
+    1
+   ],
+   [
+    0,
+    2
+   ],
+   [
+    1,
+    2
+   ],
+   [
+    2,
+    2
+   ],
+   [
+    3,
+    2
+   ],
+   [
+    4,
+    2
+   ],
+   [
+    5,
+    2
+   ],
+   [
+    6,
+    2
+   ],
+   [
+    7,
+    2
+   ],
+   [
+    8,
+    2
+   ],
+   [
+    9,
+    2
+   ]
+  ],
+  "mep_bac": [
+   [
+    0,
+    0
+   ],
+   [
+    1,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    3,
+    0
+   ],
+   [
+    4,
+    0
+   ],
+   [
+    5,
+    0
+   ]
+  ],
+  "sau_chong": [
+   [
+    0,
+    0
+   ],
+   [
+    1,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    3,
+    0
+   ],
+   [
+    4,
+    0
+   ],
+   [
+    5,
+    0
+   ],
+   [
+    6,
+    0
+   ],
+   [
+    7,
+    0
+   ],
+   [
+    8,
+    0
+   ],
+   [
+    9,
+    0
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    11,
+    0
+   ],
+   [
+    12,
+    0
+   ],
+   [
+    13,
+    0
+   ],
+   [
+    0,
+    1
+   ],
+   [
+    1,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    3,
+    1
+   ],
+   [
+    4,
+    1
+   ],
+   [
+    5,
+    1
+   ],
+   [
+    6,
+    1
+   ],
+   [
+    7,
+    1
+   ],
+   [
+    8,
+    1
+   ],
+   [
+    9,
+    1
+   ],
+   [
+    10,
+    1
+   ],
+   [
+    11,
+    1
+   ],
+   [
+    12,
+    1
+   ],
+   [
+    13,
+    1
+   ],
+   [
+    0,
+    2
+   ],
+   [
+    1,
+    2
+   ],
+   [
+    2,
+    2
+   ],
+   [
+    3,
+    2
+   ],
+   [
+    4,
+    2
+   ],
+   [
+    5,
+    2
+   ],
+   [
+    6,
+    2
+   ],
+   [
+    7,
+    2
+   ],
+   [
+    8,
+    2
+   ],
+   [
+    9,
+    2
+   ],
+   [
+    10,
+    2
+   ],
+   [
+    11,
+    2
+   ],
+   [
+    12,
+    2
+   ],
+   [
+    13,
+    2
+   ],
+   [
+    0,
+    3
+   ],
+   [
+    1,
+    3
+   ],
+   [
+    2,
+    3
+   ],
+   [
+    3,
+    3
+   ],
+   [
+    4,
+    3
+   ],
+   [
+    5,
+    3
+   ],
+   [
+    6,
+    3
+   ],
+   [
+    7,
+    3
+   ],
+   [
+    8,
+    3
+   ],
+   [
+    9,
+    3
+   ],
+   [
+    10,
+    3
+   ],
+   [
+    11,
+    3
+   ],
+   [
+    12,
+    3
+   ],
+   [
+    13,
+    3
+   ],
+   [
+    0,
+    4
+   ],
+   [
+    1,
+    4
+   ],
+   [
+    2,
+    4
+   ],
+   [
+    3,
+    4
+   ],
+   [
+    4,
+    4
+   ],
+   [
+    5,
+    4
+   ],
+   [
+    6,
+    4
+   ],
+   [
+    7,
+    4
+   ],
+   [
+    8,
+    4
+   ],
+   [
+    9,
+    4
+   ],
+   [
+    10,
+    4
+   ],
+   [
+    11,
+    4
+   ],
+   [
+    12,
+    4
+   ],
+   [
+    13,
+    4
+   ],
+   [
+    0,
+    5
+   ],
+   [
+    1,
+    5
+   ],
+   [
+    2,
+    5
+   ],
+   [
+    3,
+    5
+   ],
+   [
+    4,
+    5
+   ],
+   [
+    5,
+    5
+   ],
+   [
+    6,
+    5
+   ],
+   [
+    7,
+    5
+   ],
+   [
+    8,
+    5
+   ],
+   [
+    9,
+    5
+   ],
+   [
+    10,
+    5
+   ],
+   [
+    11,
+    5
+   ],
+   [
+    12,
+    5
+   ],
+   [
+    13,
+    5
+   ],
+   [
+    0,
+    6
+   ],
+   [
+    1,
+    6
+   ],
+   [
+    2,
+    6
+   ],
+   [
+    3,
+    6
+   ],
+   [
+    4,
+    6
+   ],
+   [
+    5,
+    6
+   ],
+   [
+    6,
+    6
+   ],
+   [
+    7,
+    6
+   ],
+   [
+    8,
+    6
+   ],
+   [
+    9,
+    6
+   ],
+   [
+    10,
+    6
+   ],
+   [
+    11,
+    6
+   ],
+   [
+    12,
+    6
+   ],
+   [
+    13,
+    6
+   ],
+   [
+    0,
+    7
+   ],
+   [
+    1,
+    7
+   ],
+   [
+    2,
+    7
+   ],
+   [
+    3,
+    7
+   ],
+   [
+    4,
+    7
+   ],
+   [
+    5,
+    7
+   ],
+   [
+    6,
+    7
+   ],
+   [
+    7,
+    7
+   ],
+   [
+    8,
+    7
+   ],
+   [
+    9,
+    7
+   ],
+   [
+    10,
+    7
+   ],
+   [
+    11,
+    7
+   ],
+   [
+    12,
+    7
+   ],
+   [
+    13,
+    7
+   ],
+   [
+    0,
+    8
+   ],
+   [
+    1,
+    8
+   ],
+   [
+    2,
+    8
+   ],
+   [
+    3,
+    8
+   ],
+   [
+    4,
+    8
+   ],
+   [
+    5,
+    8
+   ],
+   [
+    6,
+    8
+   ],
+   [
+    7,
+    8
+   ],
+   [
+    8,
+    8
+   ],
+   [
+    9,
+    8
+   ],
+   [
+    10,
+    8
+   ],
+   [
+    11,
+    8
+   ],
+   [
+    12,
+    8
+   ],
+   [
+    13,
+    8
+   ],
+   [
+    0,
+    9
+   ],
+   [
+    1,
+    9
+   ],
+   [
+    2,
+    9
+   ],
+   [
+    3,
+    9
+   ],
+   [
+    4,
+    9
+   ],
+   [
+    5,
+    9
+   ],
+   [
+    6,
+    9
+   ],
+   [
+    7,
+    9
+   ],
+   [
+    8,
+    9
+   ],
+   [
+    9,
+    9
+   ],
+   [
+    10,
+    9
+   ],
+   [
+    11,
+    9
+   ],
+   [
+    12,
+    9
+   ],
+   [
+    13,
+    9
+   ],
+   [
+    0,
+    10
+   ],
+   [
+    1,
+    10
+   ],
+   [
+    2,
+    10
+   ],
+   [
+    3,
+    10
+   ],
+   [
+    4,
+    10
+   ],
+   [
+    5,
+    10
+   ],
+   [
+    6,
+    10
+   ],
+   [
+    7,
+    10
+   ],
+   [
+    8,
+    10
+   ],
+   [
+    9,
+    10
+   ],
+   [
+    10,
+    10
+   ],
+   [
+    11,
+    10
+   ],
+   [
+    12,
+    10
+   ],
+   [
+    13,
+    10
+   ]
+  ]
+ },
+ "khu_rut_lui": "mep_bac",
+ "hien_khu": [
+  {
+   "khu": "ngoc_hoi",
+   "mau": "vang",
+   "ten": "đồn Ngọc Hồi",
+   "ghi": "Đồn Ngọc Hồi: lũy đất, chông sắt, địa lôi."
+  },
+  {
+   "khu": "dam_muc",
+   "mau": "do",
+   "ten": "Đầm Mực",
+   "ghi": "Đầm Mực: đường rút của quân Thanh về Thăng Long."
+  }
+ ],
+ "vat_the": [
+  {
+   "loai": "trong",
+   "o": [
+    9,
+    6
+   ],
+   "khu": "ngoc_hoi"
+  },
+  {
+   "loai": "chong",
+   "o": [
+    0,
+    11
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    1,
+    11
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    2,
+    11
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    3,
+    11
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    4,
+    11
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    5,
+    11
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    6,
+    11
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    7,
+    11
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    8,
+    11
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    9,
+    11
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    10,
+    11
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    11,
+    11
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    12,
+    11
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    0,
+    14
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    1,
+    14
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    2,
+    14
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    3,
+    14
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    4,
+    14
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    5,
+    14
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    6,
+    14
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    7,
+    14
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    8,
+    14
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    9,
+    14
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    10,
+    14
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    11,
+    14
+   ]
+  },
+  {
+   "loai": "chong",
+   "o": [
+    12,
+    14
+   ]
+  },
+  {
+   "loai": "dia_loi",
+   "o": [
+    2,
+    12
+   ],
+   "phe": "thanh"
+  },
+  {
+   "loai": "dia_loi",
+   "o": [
+    4,
+    13
+   ],
+   "phe": "thanh"
+  },
+  {
+   "loai": "dia_loi",
+   "o": [
+    6,
+    12
+   ],
+   "phe": "thanh"
+  },
+  {
+   "loai": "dia_loi",
+   "o": [
+    8,
+    13
+   ],
+   "phe": "thanh"
+  },
+  {
+   "loai": "dia_loi",
+   "o": [
+    10,
+    12
+   ],
+   "phe": "thanh"
+  },
+  {
+   "loai": "dia_loi",
+   "o": [
+    11,
+    13
+   ],
+   "phe": "thanh"
+  },
+  {
+   "loai": "dia_loi",
+   "o": [
+    3,
+    12
+   ],
+   "phe": "thanh"
+  },
+  {
+   "loai": "dia_loi",
+   "o": [
+    7,
+    13
+   ],
+   "phe": "thanh"
+  }
+ ],
+ "quan": [
+  {
+   "id": "quang_trung",
+   "phe": "tayson",
+   "x": 6,
+   "y": 17,
+   "tuong_chinh": true
+  },
+  {
+   "id": "moc_thuan",
+   "phe": "tayson",
+   "x": 4,
+   "y": 16
+  },
+  {
+   "id": "moc_thuan",
+   "phe": "tayson",
+   "x": 5,
+   "y": 16
+  },
+  {
+   "id": "moc_thuan",
+   "phe": "tayson",
+   "x": 7,
+   "y": 16
+  },
+  {
+   "id": "moc_thuan",
+   "phe": "tayson",
+   "x": 8,
+   "y": 16
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 4,
+   "y": 17
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 5,
+   "y": 17
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 7,
+   "y": 17
+  },
+  {
+   "id": "linh_giao",
+   "phe": "tayson",
+   "x": 8,
+   "y": 17
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 5,
+   "y": 18
+  },
+  {
+   "id": "hoa_mai",
+   "phe": "tayson",
+   "x": 7,
+   "y": 18
+  },
+  {
+   "id": "hoa_ho",
+   "phe": "tayson",
+   "x": 3,
+   "y": 16
+  },
+  {
+   "id": "hoa_ho",
+   "phe": "tayson",
+   "x": 9,
+   "y": 16
+  },
+  {
+   "id": "voi_chien",
+   "phe": "tayson",
+   "x": 6,
+   "y": 16
+  },
+  {
+   "id": "voi_chien",
+   "phe": "tayson",
+   "x": 6,
+   "y": 18
+  },
+  {
+   "id": "than_cong",
+   "phe": "tayson",
+   "x": 6,
+   "y": 19
+  },
+  {
+   "id": "hua_the_hanh",
+   "phe": "thanh",
+   "x": 6,
+   "y": 7,
+   "ai": "giu_don",
+   "tam": [
+    6,
+    7
+   ],
+   "ban_kinh": 1,
+   "rut_khi_yeu": 30,
+   "toi_thieu_1": true
+  },
+  {
+   "id": "truong_trieu_long",
+   "phe": "thanh",
+   "x": 5,
+   "y": 7,
+   "ai": "giu_don",
+   "tam": [
+    5,
+    7
+   ],
+   "ban_kinh": 1,
+   "rut_khi_yeu": 30,
+   "toi_thieu_1": true
+  },
+  {
+   "id": "thuong_duy_thang",
+   "phe": "thanh",
+   "x": 7,
+   "y": 7,
+   "ai": "giu_don",
+   "tam": [
+    7,
+    7
+   ],
+   "ban_kinh": 1,
+   "rut_khi_yeu": 30,
+   "toi_thieu_1": true
+  },
+  {
+   "id": "phao_binh",
+   "phe": "thanh",
+   "x": 5,
+   "y": 6,
+   "ai": "giu_don",
+   "tam": [
+    5,
+    6
+   ],
+   "ban_kinh": 0,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "phao_binh",
+   "phe": "thanh",
+   "x": 8,
+   "y": 6,
+   "ai": "giu_don",
+   "tam": [
+    8,
+    6
+   ],
+   "ban_kinh": 0,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 4,
+   "y": 8,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    8
+   ],
+   "ban_kinh": 1,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 5,
+   "y": 8,
+   "ai": "giu_don",
+   "tam": [
+    5,
+    8
+   ],
+   "ban_kinh": 1,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 8,
+   "y": 8,
+   "ai": "giu_don",
+   "tam": [
+    8,
+    8
+   ],
+   "ban_kinh": 1,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 9,
+   "y": 8,
+   "ai": "giu_don",
+   "tam": [
+    9,
+    8
+   ],
+   "ban_kinh": 1,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 2,
+   "y": 9,
+   "ai": "giu_don",
+   "tam": [
+    2,
+    9
+   ],
+   "ban_kinh": 2,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 11,
+   "y": 9,
+   "ai": "giu_don",
+   "tam": [
+    11,
+    9
+   ],
+   "ban_kinh": 2,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 4,
+   "y": 5,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    5
+   ],
+   "ban_kinh": 1,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "dieu_thuong",
+   "phe": "thanh",
+   "x": 9,
+   "y": 5,
+   "ai": "giu_don",
+   "tam": [
+    9,
+    5
+   ],
+   "ban_kinh": 1,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "dang_bai",
+   "phe": "thanh",
+   "x": 4,
+   "y": 10,
+   "ai": "giu_don",
+   "tam": [
+    4,
+    10
+   ],
+   "ban_kinh": 2,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "dang_bai",
+   "phe": "thanh",
+   "x": 7,
+   "y": 10,
+   "ai": "giu_don",
+   "tam": [
+    7,
+    10
+   ],
+   "ban_kinh": 2,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "dang_bai",
+   "phe": "thanh",
+   "x": 10,
+   "y": 10,
+   "ai": "giu_don",
+   "tam": [
+    10,
+    10
+   ],
+   "ban_kinh": 2,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "cung_tien",
+   "phe": "thanh",
+   "x": 7,
+   "y": 6,
+   "ai": "giu_don",
+   "tam": [
+    7,
+    6
+   ],
+   "ban_kinh": 1,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "cung_tien",
+   "phe": "thanh",
+   "x": 8,
+   "y": 7,
+   "ai": "giu_don",
+   "tam": [
+    8,
+    7
+   ],
+   "ban_kinh": 1,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "truong_mau",
+   "phe": "thanh",
+   "x": 3,
+   "y": 9,
+   "ai": "giu_don",
+   "tam": [
+    3,
+    9
+   ],
+   "ban_kinh": 2,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "truong_mau",
+   "phe": "thanh",
+   "x": 6,
+   "y": 9,
+   "ai": "giu_don",
+   "tam": [
+    6,
+    9
+   ],
+   "ban_kinh": 2,
+   "rut_khi_yeu": 30
+  },
+  {
+   "id": "truong_mau",
+   "phe": "thanh",
+   "x": 9,
+   "y": 9,
+   "ai": "giu_don",
+   "tam": [
+    9,
+    9
+   ],
+   "ban_kinh": 2,
+   "rut_khi_yeu": 30
+  }
+ ],
+ "vien_binh": [
+  {
+   "phe": "tayson",
+   "vong": [
+    4
+   ],
+   "hoi_thoai": "dai_ang",
+   "quan": [
+    {
+     "id": "do_doc_bao",
+     "x": 0,
+     "y": 9
+    },
+    {
+     "id": "voi_chien",
+     "x": 0,
+     "y": 10
+    },
+    {
+     "id": "voi_chien",
+     "x": 1,
+     "y": 9
+    },
+    {
+     "id": "voi_chien",
+     "x": 0,
+     "y": 8
+    }
+   ]
+  }
+ ],
+ "su_kien": [
+  {
+   "id": "qua_chong",
+   "khi": {
+    "loai": "vao_khu",
+    "khu": "sau_chong",
+    "quan": "moc_thuan"
+   },
+   "lam": [
+    {
+     "loai": "co",
+     "co": "qua_chong"
+    }
+   ]
+  }
+ ],
+ "thang": {
+  "loai": "chiem_o",
+  "o": [
+   6,
+   6
+  ]
+ },
+ "thua_het_luot": 20,
+ "ly_do_het_luot": "Quân Thanh ở Thăng Long kịp kéo xuống tiếp viện.",
+ "luu_quan": true,
+ "muc_tieu_phu": [
+  {
+   "loai": "truoc_vong",
+   "n": 15,
+   "ten": "Thắng trước vòng 15"
+  },
+  {
+   "loai": "ha_tren_khu",
+   "khu": "dam_muc",
+   "n": 3,
+   "ten": "Hạ ít nhất 3 quân Thanh khi chúng đứng ở Đầm Mực"
+  },
+  {
+   "loai": "khong_mat_truoc_co",
+   "quan": "moc_thuan",
+   "co": "qua_chong",
+   "ten": "Không mất mộc thuẫn nào trước khi qua hai hàng chông"
+  }
+ ],
+ "goi_y": [
+  {
+   "khi": "bat_dau",
+   "loi": "Hai hàng chông sắt chắn trước đồn: bước vào phải dừng, −15 máu (mộc thuẫn, voi −5). Mộc thuẫn đi trước, chịu súng điểu thương tốt."
+  },
+  {
+   "khi": "vong",
+   "n": 1,
+   "loi": "Giữa hai hàng chông có địa lôi ẩn (−30 máu). Quân sư đứng kề thì thấy địa lôi: mua một quân sư ở đồn ta để dò đường."
+  },
+  {
+   "khi": "vong",
+   "n": 2,
+   "loi": "Trời sáng dần, vòng 3 hết sương. Pháo binh trong đồn bắn xa 2–4 ô. Quân Thanh còn dưới 30 máu thì rút về phía bắc qua Đầm Mực."
+  },
+  {
+   "khi": "vong",
+   "n": 4,
+   "loi": "Đô đốc Bảo đem voi tới lối Đại Áng (mép tây). Đánh vào sườn đồn, hoặc vòng lên đê chặn quân Thanh rút qua Đầm Mực."
+  }
+ ],
+ "su_lieu": [
+  "moc_thuan_van_hay_rom",
+  "voi_chien_tay_son",
+  "luc_doanh",
+  "dia_loi_ngoc_hoi"
+ ]
+}

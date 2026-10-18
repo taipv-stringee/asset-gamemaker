@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-gen_objects.py — Vật thể trên bản đồ (32x32, pixel art): trống báo động, đèn lồng, kho lương, lửa (doanh trại bị đốt).
+gen_objects.py — Vật thể trên bản đồ (32x32, pixel art): trống báo động, đèn lồng, kho lương, lửa (doanh trại bị đốt), chông sắt, địa lôi (đã lộ).
 Mỗi vật thể có 2 frame (dải 64x32) để nhấp nháy lửa / rung trống.
 
 Kết quả: godot/assets/objects/obj_<loai>_strip2.png
@@ -23,6 +23,8 @@ C = {
     "shadow": (0, 0, 0, 90),
     "sack_d": (150, 120, 76), "sack": (196, 166, 112), "sack_l": (226, 204, 150),
     "straw_d": (130, 96, 40), "straw": (186, 146, 64), "straw_l": (222, 190, 104),
+    "iron_d": (52, 54, 62), "iron": (104, 108, 120), "iron_l": (170, 176, 188),
+    "clay_d": (92, 56, 34), "clay": (140, 88, 52), "clay_l": (180, 124, 80),
 }
 
 
@@ -169,9 +171,50 @@ def lua(frame):
     return img
 
 
+def chong(frame):
+    """Chông sắt (02 §12): hai hàng mũi sắt cắm trên đất; frame 1: lóe sáng ở vài mũi (vật tĩnh, chỉ để nhận ra)."""
+    img = Image.new("RGBA", (T, T), (0, 0, 0, 0))
+    for row, y0 in enumerate((14, 25)):
+        for i in range(5):
+            cx = 4 + i * 6 + (3 if row else 0)
+            if cx > 28:
+                continue
+            shadow(img, cx, y0 + 1, 2)
+            for k in range(7):                      # mũi nhọn: rộng dần xuống chân
+                w = k // 3
+                for x in range(cx - w, cx + w + 1):
+                    px(img, x, y0 - 6 + k, "iron_l" if x < cx else ("iron_d" if x > cx else "iron"))
+            if frame and (i + row) % 2 == 0:
+                px(img, cx, y0 - 6, "fire_l")
+    return img
+
+
+def dia_loi(frame):
+    """Địa lôi đã lộ: hũ sành chôn nửa, ngòi thò lên, cắm cờ đỏ cảnh báo; frame 1 cờ phất."""
+    img = Image.new("RGBA", (T, T), (0, 0, 0, 0))
+    shadow(img, 15, 27, 8)
+    for y in range(17, 27):                          # hũ sành chôn nửa
+        half = [5, 6, 7, 7, 7, 7, 7, 6, 6, 5][y - 17]
+        for x in range(15 - half, 15 + half + 1):
+            px(img, x, y, "clay_l" if x < 13 else ("clay_d" if x > 18 else "clay"))
+    rect(img, 6, 26, 24, 27, "wood_d")              # đất lấp
+    rect(img, 13, 15, 17, 16, "ink")                # miệng hũ
+    px(img, 15, 14, "ink")                          # ngòi
+    px(img, 16, 13, "ink")
+    px(img, 17, 12, "fire" if frame else "red_l")
+    rect(img, 24, 6, 24, 27, "wood")                 # cọc cờ
+    fl = ((25, 6), (29, 7), (25, 11)) if frame else ((25, 6), (30, 9), (25, 11))
+    for y in range(6, 12):
+        for x in range(25, 31):
+            if x - 25 <= (fl[1][0] - 25) * (1 - abs(y - fl[1][1]) / 3.5):
+                px(img, x, y, "red")
+    return img
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
-    for name, fn in (("trong", trong), ("den", den), ("kho_luong", kho_luong), ("lua", lua)):
+    for name, fn in (("trong", trong), ("den", den), ("kho_luong", kho_luong), ("lua", lua),
+                     ("chong", chong), ("dia_loi", dia_loi)):
         strip = Image.new("RGBA", (T * 2, T), (0, 0, 0, 0))
         for f in range(2):
             strip.paste(fn(f), (T * f, 0))

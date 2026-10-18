@@ -126,6 +126,9 @@ static func _goals(state: BattleState, u: Unit) -> Array[Vector2i]:
 		if u.ai_params.has("vung"):
 			for p in u.ai_params["vung"]:
 				goals.append(p)
+		elif u.ai_mode == "rut_lui" and state.zones.has(state.mission.get("khu_rut_lui", "")):
+			for p in state.zones[state.mission["khu_rut_lui"]]:
+				goals.append(p)
 		else:
 			for x in state.width:
 				goals.append(Vector2i(x, 0))
@@ -272,9 +275,14 @@ static func plan_unit(state: BattleState, u: Unit) -> Dictionary:
 		var base: float = -float(dmap.get(p, UNREACHABLE)) * (3.0 if fleeing else 1.5)
 		if u.ai_mode == "giu_don":
 			base = -float(Rules.manhattan(p, center)) * (3.0 if guard_outside else 0.5)
-		base += float(state.terrain_at(p)["thu"]) * 0.3
+		if u.ai_mode != "rut_lui":
+			base += float(state.terrain_at(p)["thu"]) * 0.3   # quân rút lui chỉ lo chạy: không thì đứng lì trên đê, không xuống đầm (màn 8)
 		if state.object_at(p).get("loai", "") == "lua" and not u.has_tag("khong_chay"):
 			base -= 30.0   # đừng đứng trên ô lửa, đang đứng thì bước ra (02 §12)
+		if state.object_at(p).get("loai", "") == "chong" and p != original and u.faction != state.factions[0]:
+			base -= 12.0   # chông: −15 máu (quân Thanh tránh; phe người chơi khi máy chơi thay thì phải qua chông mới tới đồn)
+		if state.object_at(p).get("loai", "") == "dia_loi" and p != original:
+			base -= 25.0   # địa lôi đã biết
 		base -= float(threat.get(p, 0)) * danger_w
 		if u.tuong_chinh and int(threat.get(p, 0)) >= u.hp + 20:
 			base -= 200.0  # có thể bị hạ ở lượt sau

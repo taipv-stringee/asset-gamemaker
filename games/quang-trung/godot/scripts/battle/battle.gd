@@ -61,6 +61,7 @@ var story_player: Callable        # main đặt: func(phan) phát một phần h
 var hint_panel: Panel
 var _hint_queue: Array = []
 var _hint_h := 0.0                # chiều cao khung gợi ý đang hiện (camera chừa chỗ)
+var danger_tiles: Dictionary = {}       # ô quân địch đang xem đánh tới được ở lượt sau (đánh giá độc lập 18/10)
 var _camera_before_ai := Vector2.INF   # chỗ camera trước lượt máy (trả lại sau)
 var _obj_states: Array = []      # tình trạng mục tiêu phụ lần trước, để báo ngay khi xong / hỏng (đánh giá độc lập 18/10)
 var _hints_shown: Array = []      # chỉ số gợi ý đã hiện trong trận này (bảng tạm dừng chỉ liệt kê những cái này)
@@ -731,6 +732,7 @@ func _on_tap(screen: Vector2) -> void:
 	cursor.visible = true
 	cursor.position = Vector2(p * T)
 	end_turn_armed = false
+	danger_tiles = {}
 	var u := state.unit_at(p)
 	if u != null and not _shown(u):
 		u = null  # quân địch trong sương: người chơi không biết
@@ -752,6 +754,7 @@ func _tap_idle(p: Vector2i, u: Unit) -> void:
 		_select(u)
 	elif u != null:
 		_unit_info(u)
+		_show_danger(u)
 		_set_buttons([])
 	elif not Rules.recruit_options(state, PLAYER, p).is_empty():
 		_show_recruit(p)
@@ -770,6 +773,35 @@ func _select(u: Unit) -> void:
 	mode = Mode.SELECTED
 	_unit_info(u)
 	_set_buttons([["Đứng yên", func() -> void: _do_move(u.pos)], ["Bỏ chọn", _deselect]])
+
+
+## Vùng đỏ: các ô quân địch `e` đánh tới được ở lượt sau (đi trong tầm được phép rồi đánh). Quân ngủ, đứng yên: không đi.
+func _show_danger(e: Unit) -> void:
+	danger_tiles = {}
+	if state.are_allies(e.faction, PLAYER):
+		return
+	if e.ngu:
+		info_label.text += "\nĐang ngủ: lượt sau không đánh (trừ khi bị báo động)."
+		overlay.queue_redraw()
+		return
+	var spots: Array = [e.pos]
+	if not e.has_tag("ban_dung") and e.ai_mode != "dung_yen":
+		spots = Rules.reachable(state, e).keys()
+		var r: int = e.ai_params.get("ban_kinh", -1)
+		if e.ai_mode == "giu_don" and r >= 0:
+			var c: Vector2i = e.ai_params.get("tam", e.pos)
+			spots = spots.filter(func(sp: Vector2i) -> bool: return Rules.manhattan(sp, c) <= r or sp == e.pos)
+	var lo := int(e.data()["tam_min"])
+	var hi := int(e.data()["tam_max"])
+	for sp in spots:
+		for dy in range(-hi, hi + 1):
+			for dx in range(-hi, hi + 1):
+				var d := absi(dx) + absi(dy)
+				var q: Vector2i = sp + Vector2i(dx, dy)
+				if d >= lo and d <= hi and state.in_bounds(q):
+					danger_tiles[q] = true
+	info_label.text += "\nVùng đỏ: nơi quân này đánh tới ở lượt sau."
+	overlay.queue_redraw()
 
 
 func _deselect() -> void:
@@ -802,6 +834,7 @@ func _tap_selected(p: Vector2i, u: Unit) -> void:
 		return
 	if u != null:
 		_unit_info(u)
+		_show_danger(u)
 	else:
 		_deselect()
 
@@ -911,6 +944,7 @@ func _tap_moved(p: Vector2i, u: Unit) -> void:
 			info_label.text += "\nNgoài tầm đánh từ ô này."
 		elif u != selected and u.faction == PLAYER and not u.done:
 			info_label.text += "\nQuân đang chọn đã đi: Chờ hay đánh trước."
+		_show_danger(u)
 
 
 func _open_forecast(t: Unit) -> void:
@@ -1371,6 +1405,9 @@ func _float_text(pos: Vector2, text: String, color: Color) -> void:
 
 
 func _draw_overlay() -> void:
+	for p in danger_tiles:
+		overlay.draw_rect(Rect2(Vector2(p * T), Vector2(T, T)), Color(1.0, 0.2, 0.15, 0.22))
+		overlay.draw_rect(Rect2(Vector2(p * T) + Vector2(1, 1), Vector2(T - 2, T - 2)), Color(1.0, 0.35, 0.3, 0.5), false, 1.0)
 	# Khu đồn chưa bị vây: dấu × đỏ trên các ô kề ngoài khu còn hở (02 §11) — chỉ trong lượt người chơi.
 	if state.current_faction() == PLAYER and state.result == "":
 		for zname in Rules.fort_zones(state):

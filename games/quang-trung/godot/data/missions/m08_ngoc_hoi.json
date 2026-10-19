@@ -1230,14 +1230,6 @@
   {
    "loai": "dia_loi",
    "o": [
-    8,
-    13
-   ],
-   "phe": "thanh"
-  },
-  {
-   "loai": "dia_loi",
-   "o": [
     10,
     12
    ],
@@ -1247,22 +1239,6 @@
    "loai": "dia_loi",
    "o": [
     11,
-    13
-   ],
-   "phe": "thanh"
-  },
-  {
-   "loai": "dia_loi",
-   "o": [
-    3,
-    12
-   ],
-   "phe": "thanh"
-  },
-  {
-   "loai": "dia_loi",
-   "o": [
-    7,
     13
    ],
    "phe": "thanh"

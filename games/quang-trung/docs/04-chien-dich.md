@@ -208,7 +208,7 @@ Mỗi điểm ghi ngày âm và dương lịch.
   đê Yên Duyên, bị dồn xuống Đầm Mực. *[Theo HLNTC]*
 - **Bản đồ**: 14 × 22 (`data/missions/m08_ngoc_hoi.json`), bắc là phía Thăng Long:
   - Nam: quân ta, đồn của ta (6,20), hai làng trung lập.
-  - Giữa: hai hàng chông sắt kín bề ngang (hàng 11 và 14), 8 địa lôi ẩn ở hàng 12–13 (các cột 0, 1, 5, 9, 12 không có).
+  - Giữa: hai hàng chông sắt kín bề ngang (hàng 11 và 14), 5 địa lôi ẩn ở hàng 12–13 (bản đầu 8; bớt sau kiểm thử lần 12: giẫm địa lôi ẩn hoài ở cánh đông).
   - **Khu đồn Ngọc Hồi** x 4–9, y 5–8: lũy bao quanh, đồn (6,6), doanh, cổng nam (6,8), trống báo động.
   - Bắc: đê Yên Duyên (hàng 3), Đầm Mực (hàng 1–2), mép bắc phía tây (x 0–5, y 0) là khu rút lui; đông bắc là núi, sông.
   - Tây: lối Đại Áng dọc mép tây. Vị trí chông, địa lôi, đầm là *[Sáng tạo của game]* theo HLNTC và *Liệt truyện*.

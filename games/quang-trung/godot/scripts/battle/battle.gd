@@ -61,6 +61,7 @@ var story_player: Callable        # main đặt: func(phan) phát một phần h
 var hint_panel: Panel
 var _hint_queue: Array = []
 var _hint_h := 0.0                # chiều cao khung gợi ý đang hiện (camera chừa chỗ)
+var _bought: Dictionary = {}            # uid quân mua trong lượt này → giá (bỏ mua được)
 var danger_tiles: Dictionary = {}       # ô quân địch đang xem đánh tới được ở lượt sau (đánh giá độc lập 18/10)
 var _camera_before_ai := Vector2.INF   # chỗ camera trước lượt máy (trả lại sau)
 var _obj_states: Array = []      # tình trạng mục tiêu phụ lần trước, để báo ngay khi xong / hỏng (đánh giá độc lập 18/10)
@@ -758,6 +759,14 @@ func _on_tap(screen: Vector2) -> void:
 
 
 func _tap_idle(p: Vector2i, u: Unit) -> void:
+	if u != null and u.faction == PLAYER and _bought.has(u.uid):
+		# Vừa mua trong lượt này: cho bỏ mua, hoàn vàng (kiểm thử lần 12: hàng trong bảng mua cao lên, chạm nhầm loại quân).
+		_unit_info(u)
+		var refund: int = _bought[u.uid]
+		_set_buttons([["Bỏ mua (+%d vàng)" % refund, func() -> void:
+			_run(Rules.cmd_unrecruit(state, u, refund))
+			_bought.erase(u.uid)]])
+		return
 	if u != null and u.faction == PLAYER and not u.done:
 		_select(u)
 	elif u != null:
@@ -789,7 +798,7 @@ func _show_danger(e: Unit) -> void:
 	if state.are_allies(e.faction, PLAYER):
 		return
 	if e.ngu:
-		info_label.text += "\nĐang ngủ: lượt sau không đánh (trừ khi bị báo động)."
+		info_label.text += "\nĐang ngủ: lượt sau không đánh."
 		overlay.queue_redraw()
 		return
 	var spots: Array = [e.pos]
@@ -889,7 +898,7 @@ func _show_actions() -> void:
 		list.append(["Hoàn tác", _undo])
 	_unit_info(u)
 	if u.has_tag("ban_dung") and u.pos != u.move_origin:
-		info_label.text += "\nĐã đi: lượt này không bắn được (chỉ bắn khi đứng yên)."
+		info_label.text += "\nĐã đi: lượt này không bắn được."
 	_set_buttons(list)
 	overlay.queue_redraw()
 
@@ -1069,6 +1078,7 @@ func _on_end_turn_pressed() -> void:
 	_deselect()
 	mode = Mode.BUSY
 	_camera_before_ai = camera.position
+	_bought = {}
 	var ev := Rules.cmd_end_turn(state)
 	await _play(ev)
 	await _run_ai_turns()
@@ -1179,8 +1189,10 @@ func _play(events: Array[Dictionary]) -> void:
 				if story_player.is_valid():
 					await story_player.call(e["phan"])
 			"bang":
-				_show_banner(e["chu"])
-				await get_tree().create_timer(1.0).timeout
+				# Giữ lâu theo độ dài chữ (kiểm thử lần 11: dải 4 dòng chỉ hiện ~1,5 giây).
+				var hold := clampf(String(e["chu"]).length() / 40.0, 0.9, 3.0)
+				_show_banner(e["chu"], C_GOLD_LIGHT, hold)
+				await get_tree().create_timer(hold + 0.2).timeout
 			"vien_binh":
 				var vu := state.unit_by_uid(e["uid"])
 				if vu != null and not sprites.has(vu.uid):
@@ -1191,6 +1203,8 @@ func _play(events: Array[Dictionary]) -> void:
 						_show_banner("Viện binh %s!" % _faction_name(vu.faction), Color(1, 0.6, 0.5))
 			"mua", "chieu_hang":
 				Sfx.play("mua", -4.0)
+				if e["loai"] == "mua" and state.current_faction() == PLAYER:
+					_bought[e["uid"]] = int(e["gia"])
 				var nu := state.unit_by_uid(e.get("uid_moi", e["uid"]))
 				if nu != null and not sprites.has(nu.uid):
 					var s := _add_sprite(nu)
@@ -1206,6 +1220,11 @@ func _play(events: Array[Dictionary]) -> void:
 					_float_text(s.position + Vector2(0, -6), "Lên cấp!", C_GOLD_LIGHT)
 			"chiem":
 				Sfx.play("chiem", -3.0)
+			"bo_mua":
+				var bs: UnitSprite = sprites.get(e["uid"])
+				if bs != null:
+					sprites.erase(e["uid"])
+					bs.queue_free()
 			"vang":
 				if e["phe"] == PLAYER:
 					Sfx.play("vang", -8.0)

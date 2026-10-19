@@ -874,6 +874,17 @@ static func cmd_recruit(state: BattleState, f: String, p: Vector2i, type_id: Str
 	return ev
 
 
+## Bỏ quân vừa mua trong lượt (chưa làm gì), hoàn lại vàng.
+static func cmd_unrecruit(state: BattleState, u: Unit, refund: int) -> Array[Dictionary]:
+	var ev: Array[Dictionary] = []
+	if u == null or not state.units.has(u) or u.faction != state.current_faction():
+		return ev
+	state.remove_unit(u)
+	state.gold[u.faction] = int(state.gold.get(u.faction, 0)) + refund
+	ev.append({"loai": "bo_mua", "uid": u.uid, "o": u.pos})
+	return ev
+
+
 static func chieu_hang_targets(state: BattleState, u: Unit) -> Array[Vector2i]:
 	var out: Array[Vector2i] = []
 	if not u.has_tag("chieu_hang") or state.count_toward_limit(u.faction) >= int(state.limits.get(u.faction, 0)):
@@ -1269,7 +1280,7 @@ static func _alarm(state: BattleState, f: String) -> Array[Dictionary]:
 					break
 		if u.keu or spotted:
 			triggers.append(u)
-			reasons[u.uid] = "thay" if spotted else "keu"
+			reasons[u.uid] = "keu" if u.keu else "thay"   # bị đánh mà sống thì là kêu (kiểm thử lần 11)
 		u.keu = false
 	# Một lần báo động = một quân phát hiện làm thức / đổi lệnh ít nhất một quân (kể cả chính nó).
 	# Quân đã thức cả rồi mà vẫn thấy quân ta thì không tính thêm.

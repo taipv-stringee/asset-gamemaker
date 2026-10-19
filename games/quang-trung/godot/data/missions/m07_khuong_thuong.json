@@ -371,6 +371,10 @@
    "khi": "vong",
    "n": 7,
    "loi": "Trời rạng: mọi quân thức, sương tan dần trong hai vòng. Đô đốc Long giỏi đánh đêm (+10 công), từ vòng 8 mất lợi thế ấy."
+  },
+  {
+   "khi": "bao_dong",
+   "loi": "Báo động: lính canh thấy quân ta, hoặc quân bị đánh, bị đốt mà còn sống kêu lên. Quân Thanh thức sẽ kéo về giữ đồn trên gò."
   }
  ],
  "su_lieu": [

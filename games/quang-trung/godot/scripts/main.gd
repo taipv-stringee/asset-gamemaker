@@ -108,6 +108,31 @@ func _show_briefing(id: String) -> void:
 	_set_screen(b)
 
 
+## Màn hình kết thúc chiến dịch (sau lời kết): lời cảm ơn, sao từng màn, tổng sao.
+func _campaign_summary(col: VBoxContainer) -> void:
+	col.add_child(UiKit.wrap_label("Hoàn thành chiến dịch", UiKit.FS_TITLE, UiKit.C_GOLD_LIGHT, true))
+	col.add_child(UiKit.wrap_label("Từ núi Bân tới Thăng Long, sáu ngày Tết Kỷ Dậu. Cảm ơn bạn đã đi cùng nghĩa quân Tây Sơn, và đã đọc cả những trang của phía bên kia.",
+		UiKit.FS_BODY, UiKit.C_PAPER))
+	var got := 0
+	var total := 0
+	var lines: PackedStringArray = []
+	for e in Story.campaign():
+		if e["id"] == "":
+			continue
+		var mm := Missions.load_mission(e["id"])
+		var n := (mm.get("muc_tieu_phu", []) as Array).size()
+		if n == 0:
+			continue
+		var st := Progress.stars(e["id"])
+		got += st
+		total += n
+		lines.append("Màn %s · %s  %s" % [e["so"], e["ten"], "★".repeat(st) + "☆".repeat(maxi(n - st, 0)) if Progress.is_won(e["id"]) else "(chưa thắng)"])
+	col.add_child(UiKit.label("Tổng sao: %d/%d" % [got, total], UiKit.FS_HEAD, UiKit.C_GOLD, true))
+	col.add_child(UiKit.wrap_label("\n".join(lines), UiKit.FS_SMALL, UiKit.C_PAPER))
+	if got < total:
+		col.add_child(UiKit.wrap_label("Chơi lại một màn bất kỳ để lấy thêm sao; sao cũ vẫn giữ.", UiKit.FS_SMALL, UiKit.C_MUTED))
+
+
 ## Màn 9: chọn quân còn sống cuối màn 8 trước khi vào trận (không có quân mang theo thì vào thẳng).
 func _choose_army_then_start(id: String) -> void:
 	_army_choice = []
@@ -155,7 +180,10 @@ func _start_story_only(m: Dictionary) -> void:
 		names.append("• " + Story.codex_entry(id).get("tieu_de", id))
 	var end := UiKit.backdrop()
 	var col := UiKit.scroll_column(end, 40, 64)
-	col.add_child(UiKit.label("Xong màn chuyện", UiKit.FS_TITLE, UiKit.C_GOLD_LIGHT, true))
+	if m.get("ket_chien_dich", false):
+		_campaign_summary(col)   # đánh giá độc lập 18/10: xong cả chiến dịch mà không có lời chúc mừng, tổng kết
+	else:
+		col.add_child(UiKit.label("Xong màn chuyện", UiKit.FS_TITLE, UiKit.C_GOLD_LIGHT, true))
 	if not names.is_empty():
 		col.add_child(UiKit.label("Sử liệu mới", UiKit.FS_HEAD, UiKit.C_GOLD, true))
 		col.add_child(UiKit.wrap_label("\n".join(names), UiKit.FS_BODY, UiKit.C_PAPER))

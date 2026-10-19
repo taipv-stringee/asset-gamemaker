@@ -107,6 +107,19 @@
  ],
  "su_kien": [
   {
+   "id": "bao_truoc_duyet_binh",
+   "khi": {
+    "loai": "so_lang",
+    "n": 5
+   },
+   "lam": [
+    {
+     "loai": "bang",
+     "chu": "Còn một làng nữa: chiếm làng thứ 6 thì cuộc diễn tập bắt đầu, quân diễn tập (voi) hiện ở phía bắc. Đưa quân sư lùi lại."
+    }
+   ]
+  },
+  {
    "id": "gap_thiep",
    "khi": {
     "loai": "vao_o",

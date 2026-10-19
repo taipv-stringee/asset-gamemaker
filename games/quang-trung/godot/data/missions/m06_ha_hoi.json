@@ -407,6 +407,10 @@
    "n": 1,
    "neu_co": "he_qua_trinh_sat_thoat",
    "loi": "Đừng áp sát lũy từng quân một: dồn quân ngoài tầm, rồi cùng vây kín và Gọi hàng trong lượt đó. Đèn và lính ta cầm đuốc làm sáng ô quanh, địch thấy từ xa."
+  },
+  {
+   "khi": "bao_dong",
+   "loi": "Báo động: lính canh thấy quân ta, hoặc quân bị đánh mà còn sống kêu lên. Cạnh trống báo động thì cả đồn thức: gọi hàng khó gấp đôi."
   }
  ],
  "su_lieu": [

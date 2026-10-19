@@ -1239,6 +1239,7 @@ static func _alarm(state: BattleState, f: String) -> Array[Dictionary]:
 		return ev
 	var lit := lit_tiles(state)
 	var triggers: Array[Unit] = []
+	var reasons := {}   # uid → "thay" (thấy quân đối phương) / "keu" (bị đánh mà sống)
 	for u in state.units_of(f):
 		var spotted := false
 		if not u.ngu:
@@ -1248,6 +1249,7 @@ static func _alarm(state: BattleState, f: String) -> Array[Dictionary]:
 					break
 		if u.keu or spotted:
 			triggers.append(u)
+			reasons[u.uid] = "thay" if spotted else "keu"
 		u.keu = false
 	# Một lần báo động = một quân phát hiện làm thức / đổi lệnh ít nhất một quân (kể cả chính nó).
 	# Quân đã thức cả rồi mà vẫn thấy quân ta thì không tính thêm.
@@ -1279,7 +1281,7 @@ static func _alarm(state: BattleState, f: String) -> Array[Dictionary]:
 				o.ai_params["ban_kinh"] = 4
 		if changed:
 			raised = true
-			ev.append({"loai": "bao_dong", "uid": t.uid, "o": t.pos})
+			ev.append({"loai": "bao_dong", "uid": t.uid, "o": t.pos, "phe": f, "ly_do": reasons.get(t.uid, "thay")})
 	if raised:
 		state.flags["bao_dong"] = int(state.flags.get("bao_dong", 0)) + 1
 	return ev

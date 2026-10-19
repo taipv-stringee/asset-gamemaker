@@ -146,7 +146,7 @@
    "nhom": "Nhân vật",
    "tieu_de": "Nguyễn Thiếp – La Sơn Phu tử",
    "nhan": "Theo HLNTC",
-   "noi_dung": "Nguyễn Thiếp (阮浹), hiệu La Sơn Phu tử, là nhà nho ở ẩn vùng Nghệ An – Hà Tĩnh. Theo Hoàng Lê nhất thống chí, khi đại quân dừng ở Nghệ An, Quang Trung vời ông vào doanh hỏi kế; ông đoán quân Thanh sẽ bị dẹp trong khoảng mười ngày.\n\nViệc gặp và lời đoán chủ yếu biết qua Hoàng Lê nhất thống chí; câu nói của ông trong game là lời của game, chưa đối chiếu nguyên văn. Năm sinh, năm mất thường ghi là 1723–1804 (chưa kiểm).",
+   "noi_dung": "Nguyễn Thiếp (阮浹), hiệu La Sơn Phu tử, là nhà nho ở ẩn vùng Nghệ An – Hà Tĩnh. Theo Hoàng Lê nhất thống chí, khi đại quân dừng ở Nghệ An, Quang Trung vời ông vào doanh hỏi kế; ông đoán quân Thanh sẽ bị dẹp trong khoảng mười ngày.\n\nViệc gặp và lời đoán chủ yếu biết qua Hoàng Lê nhất thống chí; câu nói của ông trong game là lời của game, không phải trích sách. Năm sinh, năm mất thường ghi là 1723–1804 (chưa kiểm).",
    "nguon": [
     {
      "ten": "Wikipedia: Nguyễn Thiếp",
@@ -184,7 +184,7 @@
    "nhom": "Sự kiện",
    "tieu_de": "Tuyển quân ở Nghệ An",
    "nhan": "Sử liệu",
-   "noi_dung": "Đại quân tới Nghệ An ngày 29 tháng 11 năm Mậu Thân (26/12/1788) và dừng khoảng mười ngày tuyển thêm quân, duyệt binh. Đại Nam chính biên liệt truyện ghi sau khi lấy thêm binh ở Nghệ An, Thanh Hóa, quân Tây Sơn \"hơn mười vạn\".\n\nHoàng Lê nhất thống chí còn kể lời dụ quân lính ở Nghệ An; game chưa dùng lời dụ này vì chưa đọc được nguyên văn. Trong màn chơi, mỗi làng tặng một lính giáo là cách tượng trưng cho việc tuyển quân (Sáng tạo của game).",
+   "noi_dung": "Đại quân tới Nghệ An ngày 29 tháng 11 năm Mậu Thân (26/12/1788) và dừng khoảng mười ngày tuyển thêm quân, duyệt binh. Đại Nam chính biên liệt truyện ghi sau khi lấy thêm binh ở Nghệ An, Thanh Hóa, quân Tây Sơn \"hơn mười vạn\".\n\nHoàng Lê nhất thống chí còn kể lời dụ quân lính ở Nghệ An; game chưa dùng lời dụ này vì chưa có bản sách để trích cho đúng. Trong màn chơi, mỗi làng tặng một lính giáo là cách tượng trưng cho việc tuyển quân (Sáng tạo của game).",
    "nguon": [
     {
      "ten": "Hợp Lưu – Nhìn lại mùa xuân khói lửa 1789",
@@ -290,7 +290,7 @@
    "nhom": "Sự kiện",
    "tieu_de": "Đạo thủy Đại đô đốc Lộc",
    "nhan": "Theo HLNTC",
-   "noi_dung": "Theo Hoàng Lê nhất thống chí, Đại đô đốc Lộc cùng thủy quân vào sông Lục Đầu rồi kéo lên Lạng Giang, Phượng Nhãn, Yên Thế (Bắc Giang ngày nay) để chặn đường rút của quân Thanh về nước.\n\nCác chi tiết về đạo này chủ yếu đến từ Hoàng Lê nhất thống chí, chưa đối chiếu nguyên văn. Đây là đạo quân của màn phụ \"Thủy quân\" trong game.",
+   "noi_dung": "Theo Hoàng Lê nhất thống chí, Đại đô đốc Lộc cùng thủy quân vào sông Lục Đầu rồi kéo lên Lạng Giang, Phượng Nhãn, Yên Thế (Bắc Giang ngày nay) để chặn đường rút của quân Thanh về nước.\n\nCác chi tiết về đạo này chủ yếu đến từ Hoàng Lê nhất thống chí (tóm tắt theo bản dịch). Đây là đạo quân của màn phụ \"Thủy quân\" trong game.",
    "nguon": [
     {
      "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
@@ -307,7 +307,7 @@
    "nhom": "Tranh cãi",
    "tieu_de": "Cách chia quân trong Hoàng Lê nhất thống chí",
    "nhan": "Theo HLNTC",
-   "noi_dung": "Sơ đồ năm đạo trên sa bàn theo sách giáo khoa hiện nay. Hoàng Lê nhất thống chí hồi 14 lại chia theo tiền, hậu, tả, hữu, trung quân: Ngô Văn Sở và Phan Văn Lân cầm tiền quân làm tiên phong; Hám hổ hầu cầm hậu quân; Đại đô đốc Lộc và Đô đốc Tuyết cầm hữu quân cùng thủy quân vượt biển vào sông Lục Đầu; Đại đô đốc Bảo và Đô đốc Mưu cầm tả quân có tượng binh, kỵ binh — Mưu đánh thẳng tới Nhân Mục chỗ quân Điền Châu, Bảo ra Đại Áng tiếp ứng; Quang Trung đốc trung quân.\n\nHai cách chia không trùng nhau; game dùng sơ đồ sách giáo khoa cho sa bàn và giữ cả hai trong Sử liệu. Bản tóm tắt này chưa đối chiếu nguyên văn.",
+   "noi_dung": "Sơ đồ năm đạo trên sa bàn theo sách giáo khoa hiện nay. Hoàng Lê nhất thống chí hồi 14 lại chia theo tiền, hậu, tả, hữu, trung quân: Ngô Văn Sở và Phan Văn Lân cầm tiền quân làm tiên phong; Hám hổ hầu cầm hậu quân; Đại đô đốc Lộc và Đô đốc Tuyết cầm hữu quân cùng thủy quân vượt biển vào sông Lục Đầu; Đại đô đốc Bảo và Đô đốc Mưu cầm tả quân có tượng binh, kỵ binh — Mưu đánh thẳng tới Nhân Mục chỗ quân Điền Châu, Bảo ra Đại Áng tiếp ứng; Quang Trung đốc trung quân.\n\nHai cách chia không trùng nhau; game dùng sơ đồ sách giáo khoa cho sa bàn và giữ cả hai trong Sử liệu. Đây là tóm tắt theo các bản dịch, chưa so với bản chữ Hán.",
    "nguon": [
     {
      "ten": "Wikipedia: Trận Ngọc Hồi – Đống Đa",
@@ -595,7 +595,7 @@
    "nhom": "Nhân vật",
    "tieu_de": "Lê Quýnh (1750–1805)",
    "nhan": "Sử liệu",
-   "noi_dung": "Lê Chiêu Thống chạy theo quân Thanh, bị ép cắt tóc, bị giam lỏng và mất ở Bắc Kinh năm 1793. Đối lập với ông là Lê Quýnh, người cầm đầu nhóm quan nhà Lê nhất định không cạo đầu.\n\nLê Quýnh để lại tự thuật Bắc hành lược ký, trong đó có câu đáp: \"cái mệnh bảo cắt tóc, ở miệng thì là mệnh, nhưng trong tâm thì không phải là mệnh\". Câu trích theo bản dịch đăng trên mạng, chưa đối chiếu nguyên văn.",
+   "noi_dung": "Lê Chiêu Thống chạy theo quân Thanh, bị ép cắt tóc, bị giam lỏng và mất ở Bắc Kinh năm 1793. Đối lập với ông là Lê Quýnh, người cầm đầu nhóm quan nhà Lê nhất định không cạo đầu.\n\nLê Quýnh để lại tự thuật Bắc hành lược ký, trong đó có câu đáp: \"cái mệnh bảo cắt tóc, ở miệng thì là mệnh, nhưng trong tâm thì không phải là mệnh\". Câu trích theo một bản dịch tiếng Việt, chưa so với bản chữ Hán.",
    "nguon": [
     {
      "ten": "damau.org – Lê Quýnh (phần 3)",

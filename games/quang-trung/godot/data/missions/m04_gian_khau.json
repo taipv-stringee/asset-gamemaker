@@ -394,5 +394,11 @@
   "song_gian",
   "ha_hoi_khong_phai_dem_30",
   "tet_mau_than_co_ngay_30"
+ ],
+ "goi_y": [
+  {
+   "khi": "bao_dong",
+   "loi": "Báo động: lính canh thấy quân ta (trong 2 ô, hay 5 ô nếu ta đứng chỗ sáng), hoặc quân bị đánh mà còn sống kêu lên. Hạ gọn trong một lượt thì không báo động."
+  }
  ]
 }

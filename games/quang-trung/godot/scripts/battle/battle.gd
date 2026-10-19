@@ -27,6 +27,19 @@ const OBJECT_TEX := {
 	"dia_loi": "res://assets/objects/obj_dia_loi_strip2.png",
 }
 
+# Một dòng kỹ năng trong bảng mua lính (đánh giá độc lập 18/10: bảng chỉ có chỉ số, không nói quân làm được gì).
+const ABILITY := {
+	"linh_giao": "Chặn đường địch; đánh voi +10; chiếm làng.",
+	"hoa_mai": "Bắn xa 1–2 ô.",
+	"thuy_binh": "Đi sông 1 điểm; lên bờ chậm.",
+	"quan_su": "Chiêu hàng quân tan, gọi hàng, thấy địa lôi.",
+	"trong_tran": "Quân đứng kề được +10 công.",
+	"hoa_ho": "Đánh gây Cháy; đốt doanh trại.",
+	"moc_thuan": "Đỡ đạn (+10 thủ trước súng, cung); không bị Cháy.",
+	"than_cong": "Bắn xa 2–4 ô; đi rồi thì không bắn.",
+	"voi_chien": "Xung phong qua vùng chặn; mạnh khi đánh bộ binh.",
+}
+
 # BURNING: hỏa hổ đang chọn ô doanh trại để Đốt (02 §12).
 enum Mode { IDLE, SELECTED, MOVED, TARGETING, FORECAST, BUSY, ENDED, BURNING }
 
@@ -48,6 +61,8 @@ var story_player: Callable        # main đặt: func(phan) phát một phần h
 var hint_panel: Panel
 var _hint_queue: Array = []
 var _hint_h := 0.0                # chiều cao khung gợi ý đang hiện (camera chừa chỗ)
+var _camera_before_ai := Vector2.INF   # chỗ camera trước lượt máy (trả lại sau)
+var _obj_states: Array = []      # tình trạng mục tiêu phụ lần trước, để báo ngay khi xong / hỏng (đánh giá độc lập 18/10)
 var _hints_shown: Array = []      # chỉ số gợi ý đã hiện trong trận này (bảng tạm dừng chỉ liệt kê những cái này)
 
 var terrain_layer: TileMapLayer
@@ -88,6 +103,7 @@ func start(mission_id: String, p_seed: int = 0) -> void:
 ## Mở trận từ một trạng thái có sẵn (màn mới, hoặc "Tiếp tục" từ file lưu).
 func start_from_state(s: BattleState) -> void:
 	state = s
+	_obj_states = Rules.side_objectives_live(state).map(func(o: Dictionary) -> String: return o["trang_thai"])
 	_build_world()
 	_build_hud()
 	_refresh_all()
@@ -101,7 +117,7 @@ func start_from_state(s: BattleState) -> void:
 
 
 # ================================================================ gợi ý hướng dẫn (06 §8)
-# Màn khai báo "goi_y": [{"khi": "bat_dau|chon_quan|sau_di|du_bao|mua_linh|len_cap|vong", "n": vòng, "loi": "..."}].
+# Màn khai báo "goi_y": [{"khi": "bat_dau|chon_quan|sau_di|du_bao|mua_linh|len_cap|vong|bao_dong|thoat", "n": vòng, "loi": "..."}].
 # "neu_co" / "khong_co": cờ trận (vd. "he_qua_trinh_sat_thoat") phải bật / tắt thì gợi ý mới hiện — cho các bản màn đổi theo
 # hệ quả màn trước (kiểm thử M3 lần 4: bản đồn đã thức vẫn hiện gợi ý "đang ngủ").
 # Mỗi gợi ý hiện một lần (lưu trong tiến trình), không chặn bản đồ; xem lại trong bảng tạm dừng. Chỉ hiện trong chiến dịch.
@@ -963,10 +979,12 @@ func _show_recruit(p: Vector2i) -> void:
 		var d := data.unit(id)
 		var tam := str(d["tam_min"]) if d["tam_min"] == d["tam_max"] else "%d–%d" % [d["tam_min"], d["tam_max"]]
 		var text := "%s · %d\nCông %d–%d  Thủ %d  Di %d  Tầm %s" % [d["ten"], d["gia"], d["cong_min"], d["cong_max"], d["thu"], d["di"], tam]
+		if ABILITY.has(id):
+			text += "\n" + ABILITY[id]
 		var b := UiKit.list_button(text, func() -> void:
 			_close_recruit()
 			_run(Rules.cmd_recruit(state, PLAYER, p, id)), UiKit.FS_SMALL)
-		b.custom_minimum_size = Vector2(0, 54)
+		b.custom_minimum_size = Vector2(0, 66 if ABILITY.has(id) else 54)
 		b.icon = _unit_icon(id)
 		b.add_theme_constant_override("icon_max_width", 32)
 		b.disabled = not Rules.can_afford(state, PLAYER, id)
@@ -1008,6 +1026,7 @@ func _on_end_turn_pressed() -> void:
 	end_turn_armed = false
 	_deselect()
 	mode = Mode.BUSY
+	_camera_before_ai = camera.position
 	var ev := Rules.cmd_end_turn(state)
 	await _play(ev)
 	await _run_ai_turns()
@@ -1046,6 +1065,11 @@ func _run_ai_turns() -> void:
 		_finish()
 		return
 	mode = Mode.IDLE
+	# Đánh giá độc lập 18/10: camera tự dời theo lượt máy rồi để lệch → trả về chỗ người chơi để lại.
+	if _camera_before_ai != Vector2.INF:
+		var tw := create_tween()
+		tw.tween_property(camera, "position", _clamp_camera(_camera_before_ai), 0.25)
+		_camera_before_ai = Vector2.INF
 	_show_banner("Vòng %d · lượt Tây Sơn" % state.vong)
 	_show_idle_info()
 	_refresh_all()
@@ -1150,12 +1174,15 @@ func _play(events: Array[Dictionary]) -> void:
 				Sfx.play("bao_dong", -2.0)
 				var who := state.unit_by_uid(e["uid"])
 				# Phản hồi M2: chữ nhỏ đỏ sẫm dễ lỡ → luôn có thêm dải chữ to giữa màn.
+				# Đánh giá độc lập 18/10: không biết ai báo động, vì sao → nói lý do, giữ dải chữ lâu hơn, gợi ý lần đầu.
+				var why: String = "một quân bị đánh kêu lên" if e.get("ly_do", "") == "keu" else "lính canh thấy quân ta"
 				if who != null and _shown(who) and sprites.has(who.uid):
+					_center_camera_on(who.pos)
 					_float_text(sprites[who.uid].position + Vector2(-4, -6), "Báo động!", Color(1, 0.45, 0.38))
-					_show_banner("Báo động! Quân %s đã thức." % _faction_name(who.faction).trim_prefix("quân "), Color(1, 0.55, 0.45))
-				else:
-					_show_banner("Có tiếng hô báo động trong đêm!", Color(1, 0.55, 0.45))
-				await get_tree().create_timer(0.5).timeout
+				_show_banner("Báo động: %s! Quân %s quanh đó đã thức." % [why, _faction_name(e.get("phe", "thanh")).trim_prefix("quân ")],
+					Color(1, 0.55, 0.45), 2.4)
+				hint("bao_dong")
+				await get_tree().create_timer(1.4).timeout
 			"trong_bao_dong":
 				Sfx.play("trong_bao_dong")
 				_show_banner("Trống báo động! Cả đồn đã thức.", Color(1, 0.55, 0.45))
@@ -1189,6 +1216,7 @@ func _play(events: Array[Dictionary]) -> void:
 				var fled_text := "Một trinh sát đã thoát về báo tin!" if who_fled == "trinh_sat" else \
 					("Tôn Sĩ Nghị đã chạy thoát qua sông!" if who_fled == "ton_si_nghi" else "Một quân Thanh đã chạy thoát qua sông.")
 				_show_banner(fled_text, Color(1, 0.5, 0.42), 2.2)
+				hint("thoat")
 				await get_tree().create_timer(1.8).timeout
 			"goi_hang":
 				Sfx.play("len_cap" if e["thanh_cong"] else "lo_dien", -3.0)
@@ -1274,6 +1302,28 @@ func _play(events: Array[Dictionary]) -> void:
 			if sprites.has(u.uid):
 				sprites[u.uid].refresh(u)
 		_refresh_top()
+	await _announce_objectives()
+
+
+## Mục tiêu phụ vừa xong / vừa hỏng trong trận: dải chữ ngay lúc đó (trước đây chỉ thấy trong bảng tạm dừng hay lúc kết thúc).
+func _announce_objectives() -> void:
+	if state.result != "":
+		return
+	var live := Rules.side_objectives_live(state)
+	for i in live.size():
+		var st: String = live[i]["trang_thai"]
+		var before: String = _obj_states[i] if i < _obj_states.size() else "dang"
+		if st == before:
+			continue
+		if st == "hong":
+			Sfx.play("lo_dien", -4.0)
+			_show_banner("✗ Mục tiêu phụ hỏng: %s" % live[i]["ten"], Color(1, 0.55, 0.45), 2.2)
+			await get_tree().create_timer(1.2).timeout
+		elif st == "xong":
+			Sfx.play("len_cap", -6.0)
+			_show_banner("✓ Mục tiêu phụ xong: %s" % live[i]["ten"], C_GOLD_LIGHT, 2.0)
+			await get_tree().create_timer(1.0).timeout
+	_obj_states = live.map(func(o: Dictionary) -> String: return o["trang_thai"])
 
 
 ## Tiếng đánh theo loại quân: hỏa mai bắn xa → súng; hỏa hổ → lửa; voi → rống; còn lại → chém.

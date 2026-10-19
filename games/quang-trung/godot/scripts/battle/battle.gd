@@ -558,6 +558,8 @@ func _unit_info(u: Unit) -> void:
 		notes.append("đang ngủ")
 	if u.duoc and Rules.is_dark(state):
 		notes.append("cầm đuốc: ô quanh sáng, địch thấy từ xa")
+	if u.has_tag("ban_dung"):
+		notes.append("đi rồi thì không bắn")
 	if u.ai_mode == "do_tham":
 		notes.append("dò thám: thấy quân ta trong %d ô sẽ chạy" % int(u.ai_params.get("thay", 3)))
 	elif u.ai_mode == "chay" and u.ai_params.has("khu"):
@@ -825,9 +827,12 @@ func _show_actions() -> void:
 	if not ch.is_empty():
 		list.append(["Chiêu hàng", func() -> void: _run(Rules.cmd_chieu_hang(state, u, ch[0]))])
 	list.append(["Chờ", func() -> void: _run(Rules.cmd_wait(state, u))])
-	if u.pos != u.move_origin and not u.khoa_hoan_tac:
+	# Cả khi "Đứng yên" cũng hoàn tác được (đánh giá độc lập 18/10: bấm Đứng yên là mất lượt quân đó).
+	if not u.khoa_hoan_tac:
 		list.append(["Hoàn tác", _undo])
 	_unit_info(u)
+	if u.has_tag("ban_dung") and u.pos != u.move_origin:
+		info_label.text += "\nĐã đi: lượt này không bắn được (chỉ bắn khi đứng yên)."
 	_set_buttons(list)
 	overlay.queue_redraw()
 
@@ -879,8 +884,17 @@ func _tap_moved(p: Vector2i, u: Unit) -> void:
 			_run(Rules.cmd_attack(state, selected, u))
 		else:
 			_open_forecast(u)
+	elif u != null and u != selected and u.faction == PLAYER and not u.done and not selected.khoa_hoan_tac:
+		# Chạm quân khác của ta: bỏ nước đi của quân đang chọn rồi chọn quân kia (đánh giá độc lập 18/10).
+		Rules.cmd_undo_move(state, selected)
+		sprites[selected.uid].position = Vector2(selected.pos * T)
+		_select(u)
 	elif u != null:
 		_unit_info(u)
+		if not state.are_allies(u.faction, PLAYER):
+			info_label.text += "\nNgoài tầm đánh từ ô này."
+		elif u != selected and u.faction == PLAYER and not u.done:
+			info_label.text += "\nQuân đang chọn đã đi: Chờ hay đánh trước."
 
 
 func _open_forecast(t: Unit) -> void:

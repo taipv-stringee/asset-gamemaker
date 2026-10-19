@@ -173,7 +173,7 @@ Tham số của màn: `tam_nhin` (đêm 2, rạng sáng 3 → 5, ngày = không 
   vùng khống chế của quân Tây Sơn. Trong trận, ô kề ngoài còn hở có dấu × đỏ; chạm ô trong khu thì thấy "đã bị vây / còn N ô hở".
 - **Gọi hàng** (hành động của quân có thẻ `goi_hang`: quân sư, tướng) đứng kề khu đồn đang bị vây, mỗi khu một lần mỗi lượt:
   - Thành công nếu `Σ máu quân Tây Sơn trong 2 ô quanh khu ≥ Σ máu quân địch trong khu × k`, với k = 1/2 nếu **quá nửa** quân trong khu
-    đang ngủ, k = 1 nếu không. Kết quả tất định nên bấm **Gọi hàng** thì hiện con số trước (ta / cần), rồi mới **Gọi** hay **Thôi**.
+    đang ngủ, k = 3/4 nếu không (bản đầu k = 1; giảm sau đánh giá độc lập 18/10). Kết quả tất định nên bấm **Gọi hàng** thì hiện con số trước (ta / cần), rồi mới **Gọi** hay **Thôi**.
     Gọi được ngay sau khi đi (khép vây và gọi trong cùng một lượt).
   - Thành công: mọi quân địch trong khu (kể cả quan giữ đồn) rời bản đồ; Tây Sơn nhận hàng binh trên các ô đó, số lượng
     = min(số quân hàng, chỗ trống trong giới hạn); phần còn lại tính là **tù binh** (chỉ để tính mục tiêu phụ). Đồn chuyển trung lập để tướng chiếm.
@@ -184,7 +184,7 @@ Tham số của màn: `tam_nhin` (đêm 2, rạng sáng 3 → 5, ngày = không 
 
 | Vật thể | Luật |
 |---|---|
-| **Chông sắt** | Hiện rõ. Bước vào: dừng lại, −15 máu (mộc thuẫn, voi: −5), không Hoàn tác được. Không mất đi. Bị hạ được |
+| **Chông sắt** | Hiện rõ. Bộ binh bước vào: dừng lại, −15 máu. Mộc thuẫn, voi: không phải dừng, −5 mỗi ô chông đi qua (từ 18/10). Không Hoàn tác được. Không mất đi. Bị hạ được |
 | **Địa lôi** | Ẩn với Tây Sơn cho đến khi giẫm phải hoặc có quân sư đứng kề. Giẫm: −30 máu, dừng lại, mất địa lôi. AI biết và tránh địa lôi của phe mình, **trừ** chế độ *Chạy* / *Rút lui* (theo *Liệt truyện*, quân Thanh tháo chạy giẫm phải địa lôi của mình) |
 | **Lửa** | Ô đang cháy (3 vòng). Quân đứng trên / bước vào: Cháy (trừ mộc thuẫn). Hết lửa: ô doanh trại thành "doanh trại cháy" (thủ 0, đi như cỏ) |
 | **Kho lương** | Quân `tuong` hoặc `chiem_lang` (lính giáo, hàng binh) của người chơi đứng lên rồi chọn **Lấy kho lương** → cờ mục tiêu phụ, kho mất. Đi qua được |

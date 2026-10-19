@@ -378,7 +378,7 @@
   },
   {
    "khi": "vong",
-   "n": 2,
+   "n": 1,
    "loi": "Dấu × đỏ quanh đồn là chỗ còn hở. Ô có quân ta đứng, hoặc kề một lính giáo (khống chế), là đã kín. Ao bọc phía tây: chỉ còn 2 ô mặt bắc, 3 ô mặt đông, 2 ô mặt nam."
   },
   {
@@ -400,7 +400,7 @@
   {
    "khi": "bat_dau",
    "neu_co": "he_qua_trinh_sat_thoat",
-   "loi": "Trinh sát lọt lưới đã báo tin: quân trong đồn Hà Hồi (viền vàng) đã thức, đánh quân ta vào tầm. Gọi hàng cần gấp đôi máu so với khi đồn ngủ; chưa đủ thì đánh."
+   "loi": "Trinh sát lọt lưới đã báo tin: quân trong đồn Hà Hồi (viền vàng) đã thức, đánh quân ta vào tầm. Gọi hàng cần nhiều máu hơn khi đồn ngủ; chưa đủ thì đánh."
   },
   {
    "khi": "vong",
@@ -410,7 +410,7 @@
   },
   {
    "khi": "bao_dong",
-   "loi": "Báo động: lính canh thấy quân ta, hoặc quân bị đánh mà còn sống kêu lên. Cạnh trống báo động thì cả đồn thức: gọi hàng khó gấp đôi."
+   "loi": "Báo động: lính canh thấy quân ta, hoặc quân bị đánh mà còn sống kêu lên. Cạnh trống báo động thì cả đồn thức: gọi hàng khó hơn."
   }
  ],
  "su_lieu": [
@@ -418,5 +418,6 @@
   "goi_hang_hlntc",
   "ha_hoi_khong_so_tu_binh",
   "hlntc_la_gi"
- ]
+ ],
+ "meo_thua": "chạm ô đồn xem còn ô hở (dấu ×); vây kín rồi để quân sư hay Quang Trung gọi hàng, càng nhiều quân trong 2 ô quanh đồn càng dễ."
 }

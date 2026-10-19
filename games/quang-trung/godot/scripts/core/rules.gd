@@ -157,16 +157,22 @@ static func _trap_known(state: BattleState, u: Unit, p: Vector2i) -> bool:
 	var obj: Dictionary = state.object_at(p)
 	match obj.get("loai", ""):
 		"chong":
-			return true
+			return not _spike_proof(u)
 		"dia_loi":
 			# Quân đang Chạy / Rút lui hoảng loạn, không còn nhớ chỗ địa lôi của mình (Liệt truyện: giẫm phải mà chết).
 			return obj.get("lo", false) or (obj.get("phe", "") == u.faction and not _fleeing(u))
 	return false
 
 
-## Bước vào ô bẫy thật (kể cả địa lôi ẩn): chông, địa lôi.
-static func _trap_at(state: BattleState, p: Vector2i) -> bool:
-	return state.object_at(p).get("loai", "") in ["chong", "dia_loi"]
+## Bước vào ô bẫy thật (kể cả địa lôi ẩn): chông, địa lôi. Mộc thuẫn, voi qua chông không phải dừng (vẫn −5 máu).
+static func _trap_at(state: BattleState, p: Vector2i, u: Unit = null) -> bool:
+	var kind: String = state.object_at(p).get("loai", "")
+	return kind == "dia_loi" or (kind == "chong" and (u == null or not _spike_proof(u)))
+
+
+## Mộc thuẫn, voi: chông chỉ −5 máu và không bắt dừng (đánh giá độc lập 18/10: mỗi quân dừng hai lần ở hai hàng chông, màn 8 chậm và nản).
+static func _spike_proof(u: Unit) -> bool:
+	return u.has_tag("voi") or u.type_id == "moc_thuan"
 
 
 ## Các ô quân có thể dừng lại: {Vector2i: {"chi_phi": int, "duong": Array[Vector2i]}}. Gồm cả ô đang đứng.
@@ -420,7 +426,7 @@ static func cmd_move(state: BattleState, u: Unit, target: Vector2i, fog := false
 		u.khoa_hoan_tac = true
 	var trap_i := -1
 	for i in range(1, path.size()):
-		if _trap_at(state, path[i]):
+		if _trap_at(state, path[i], u):
 			trap_i = i
 			break
 	if trap_i > 0 and trap_i < path.size() - 1:
@@ -435,6 +441,19 @@ static func cmd_move(state: BattleState, u: Unit, target: Vector2i, fog := false
 		ev.append_array(_spring_trap(state, u))
 		if not state.units.has(u):
 			return ev
+	if _spike_proof(u):
+		var spikes := 0
+		for i in range(1, path.size()):
+			if state.object_at(path[i]).get("loai", "") == "chong":
+				spikes += 1
+		if spikes > 0:
+			u.khoa_hoan_tac = true
+			_apply_damage(u, 5 * spikes)
+			ev.append({"loai": "chong", "uid": u.uid, "o": u.pos, "st": 5 * spikes})
+			if u.hp <= 0:
+				ev.append_array(_defeat(state, u))
+				ev.append_array(check_result(state))
+				return ev
 	for i in range(1, path.size()):
 		if state.object_at(path[i]).get("loai", "") == "lua":
 			ev.append_array(_catch_fire(state, u))   # bước vào ô lửa: Cháy (02 §12)
@@ -1035,7 +1054,7 @@ static func goi_hang_zones(state: BattleState, u: Unit) -> Array[String]:
 	return out
 
 
-## Dự báo gọi hàng (tất định): máu quân ta trong 2 ô quanh khu so với máu quân trong khu × k (k = ½ nếu quá nửa đang ngủ).
+## Dự báo gọi hàng (tất định): máu quân ta trong 2 ô quanh khu so với máu quân trong khu × k (k = ½ nếu quá nửa đang ngủ, ¾ nếu không).
 static func goi_hang_forecast(state: BattleState, name: String, f: String) -> Dictionary:
 	var cells: Array = state.zones.get(name, [])
 	var ours := 0
@@ -1052,7 +1071,8 @@ static func goi_hang_forecast(state: BattleState, name: String, f: String) -> Di
 		if e.ngu:
 			asleep += 1
 	var half := asleep * 2 > foes.size()
-	var need := ceili(theirs / 2.0) if half else theirs
+	# Đồn thức: cần 3/4 (trước đây cần đủ máu — đánh giá độc lập 18/10: bản đồn thức của màn 6 quá khó).
+	var need := ceili(theirs / 2.0) if half else ceili(theirs * 0.75)
 	return {"ta": ours, "dich": theirs, "can": need, "ngu_qua_nua": half, "so_quan": foes.size(), "thanh_cong": ours >= need}
 
 

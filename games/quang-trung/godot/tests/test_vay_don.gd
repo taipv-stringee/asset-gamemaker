@@ -61,13 +61,13 @@ func test_goi_hang_success(t) -> bool:
 
 func test_goi_hang_awake_needs_full(t) -> bool:
 	var g := [q("dieu_thuong", "thanh", 2, 1), q("quan_giu_don", "thanh", 3, 1)]
-	var s := make(g + [q("linh_giao", "tayson", 2, 0, {"mau": 60}), q("quan_su", "tayson", 2, 2, {"mau": 60}),
-		q("linh_giao", "tayson", 3, 2, {"mau": 60})])
+	var s := make(g + [q("linh_giao", "tayson", 2, 0, {"mau": 45}), q("quan_su", "tayson", 2, 2, {"mau": 45}),
+		q("linh_giao", "tayson", 3, 2, {"mau": 45})])
 	var fc := Rules.goi_hang_forecast(s, "don", "tayson")
-	t.eq(fc["can"], 200, "thức: cần đủ máu")
+	t.eq(fc["can"], 150, "thức: cần 3/4 máu đồn")
 	var qs := s.unit_at(Vector2i(2, 2))
 	var ev := Rules.cmd_goi_hang(s, qs, "don")
-	t.check(not ev[0]["thanh_cong"], "180 < 200: không thành")
+	t.check(not ev[0]["thanh_cong"], "135 < 150: không thành")
 	t.eq(Rules.zone_enemies(s, "don", "tayson").size(), 2, "quân vẫn trong khu")
 	t.check(qs.done, "quân gọi hết lượt")
 	t.eq(Rules.goi_hang_zones(s, s.unit_at(Vector2i(3, 2))), [] as Array[String], "mỗi khu một lần mỗi vòng")

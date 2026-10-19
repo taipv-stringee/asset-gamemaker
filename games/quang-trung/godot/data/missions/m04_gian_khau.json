@@ -400,5 +400,6 @@
    "khi": "bao_dong",
    "loi": "Báo động: lính canh thấy quân ta (trong 2 ô, hay 5 ô nếu ta đứng chỗ sáng), hoặc quân bị đánh mà còn sống kêu lên. Hạ gọn trong một lượt thì không báo động."
   }
- ]
+ ],
+ "meo_thua": "hạ gọn lính canh trong một lượt (hai quân cùng đánh); để lính cầm đuốc ở xa."
 }

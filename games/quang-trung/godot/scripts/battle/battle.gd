@@ -642,6 +642,14 @@ func _show_idle_info() -> void:
 	name_label.text = "Lượt của %s" % _faction_name(state.current_faction())
 	var can_buy: bool = not state.buyable.get(PLAYER, PackedStringArray()).is_empty()
 	info_label.text = "Chạm một quân để chọn.%s Kéo để xem bản đồ." % (" Chạm đồn trống của ta để mua lính." if can_buy else "")
+	# Màn vây đồn: tình trạng vây luôn thấy (đánh giá độc lập 18/10: chỉ tình cờ chạm ô đồn mới biết còn ô hở).
+	for zname in Rules.fort_zones(state):
+		if not Rules.zone_enemies(state, zname, PLAYER).is_empty():
+			var gaps := Rules.siege_gaps(state, zname, PLAYER).size()
+			var head := _zone_title(zname)
+			head = head.left(1).to_upper() + head.substr(1)
+			info_label.text = ("%s: còn %d ô hở (dấu ×). " % [head, gaps] if gaps > 0 else "%s đã bị vây: quân sư / tướng kề khu thì Gọi hàng. " % head) \
+				+ "Chạm một quân để chọn."
 	_set_buttons([])
 
 
@@ -1530,6 +1538,9 @@ func show_result(opened: Array) -> void:
 	var sub_l := UiKit.wrap_label(sub, UiKit.FS_BODY, Color.WHITE)
 	sub_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(sub_l)
+	if not win and state.mission.has("meo_thua"):
+		# Đánh giá độc lập 18/10: thua mà không biết vì sao → một dòng "Lần sau thử".
+		col.add_child(UiKit.wrap_label("Lần sau thử: " + String(state.mission["meo_thua"]), UiKit.FS_BODY, UiKit.C_GOLD_LIGHT))
 	var objs := Rules.side_objectives_live(state)
 	if win and not objs.is_empty():
 		col.add_child(UiKit.label("Mục tiêu phụ", UiKit.FS_HEAD, C_GOLD, true))

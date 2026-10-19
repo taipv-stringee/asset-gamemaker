@@ -169,7 +169,7 @@ Mỗi điểm ghi ngày âm và dương lịch.
 - **Thắng**: chiếm đồn Hà Hồi — bằng đánh, hoặc **gọi hàng** rồi Quang Trung chiếm (02 §11). **Thua**: Quang Trung bị hạ; hết vòng 14 (trời sáng).
 - **Mục tiêu phụ**: gọi hàng thành công mà **không đánh quân nào trong khu đồn**; hàng binh + tù binh ≥ 6; lấy kho lương.
 - **Hệ quả màn 5** (`he_qua`): có trinh sát thoát → quân trong khu **thức sẵn** (giữ chỗ, bắn quân vào tầm, không ra khỏi lũy), gọi hàng
-  cần đủ máu (k = 1); hội thoại mở màn khác (`truoc_thuc`).
+  cần 3/4 máu đồn (k = 3/4; bản đầu k = 1, quá khó theo đánh giá độc lập); hội thoại mở màn khác (`truoc_thuc`).
 - **Lời giải mẫu**: `tests/loi_giai/m06_ha_hoi.txt` — áp sát chòi canh ngoài tầm nhìn, hạ gọn lính chòi khi lính tuần đường cái ở xa (vòng 3),
   hạ lính tuần ở (8,6) (vòng 5), dàn vây (vòng 6), lính giáo khóa mặt bắc rồi quân sư gọi hàng, lấy kho, Quang Trung chiếm (vòng 7), đủ 3 sao.
   Biến thể đồn thức: `m06_ha_hoi__trinh_sat_thoat.txt` — đứng ngoài tầm bắn, rồi cùng một lượt khép vây, dồn đủ quân vào trong 2 ô và gọi hàng (vòng 7–8).

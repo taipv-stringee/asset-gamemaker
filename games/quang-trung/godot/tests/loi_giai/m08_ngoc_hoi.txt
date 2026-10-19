@@ -1,100 +1,101 @@
-# Lời giải mẫu màn 8 (Ngọc Hồi), đủ 3 sao trên seed 1–3, thắng vòng 13. Dùng các lệnh máy-đi-hộ của tests/loi_giai.gd:
-# ai_huong (cả đoàn nhắm một ô, đánh dọc đường), don_danh (dồn đánh: cú hạ được trước), chiem_neu (Quang Trung chiếm khi tới được).
-# Ý chính: dồn lên cánh đông (cột 8, ít địa lôi) với mộc thuẫn đi đầu; Quang Trung đi sau; Đô đốc Bảo (vòng 3, sườn tây bắc) đánh
-# vào sườn tây đồn; quân Thanh yếu rút về bắc thì đánh trên đường rút (bãi bắc đồn, đê, đầm); chiếm đồn từ vòng 13.
-# vòng 1: mua quân sư (thấy địa lôi), cả đoàn tiến tới hàng chông cánh đông; Quang Trung đứng chờ
+# Lời giải mẫu màn 8 (Ngọc Hồi), đủ 3 sao trên seed 1–3, thắng vòng 12. Dùng các lệnh máy-đi-hộ của tests/loi_giai.gd:
+# ai_huong (cả đoàn nhắm một ô, đánh dọc đường), don_danh (dồn đánh), chiem_neu (Quang Trung chiếm khi tới được).
+# Dồn lên cánh đông (cột 8) với mộc thuẫn, voi đi qua chông không dừng; Quang Trung đi sau; Đô đốc Bảo (vòng 3, sườn tây bắc)
+# đánh sườn tây đồn; đánh quân Thanh rút trên đường bắc (hàng 1–4); cả đoàn nhắm ô đồn (6,6).
 di 6 17 6 17
 mua 6 20 quan_su
 ai_huong 8 12
 het
-# vòng 2: dồn đánh quân Thanh tiền tiêu, qua bãi địa lôi
 toi_loai quang_trung 6 16
 don_danh
 ai_huong 8 11
 het
-# vòng 3: đánh quân trên đường rút trước, Bảo đánh sườn tây đồn, cả đoàn nhắm cổng đông (7,8), Quang Trung theo sau
-don_danh 99 0 1 12 3
+don_danh 99 0 1 12 4
 ai_huong 4 6 0 0 3 8
 toi_loai quang_trung 6 15
-ai_huong 7 8
+ai_huong 6 6
 don_danh
 het
-# vòng 4: đánh quân trên đường rút trước, Bảo đánh sườn tây đồn, cả đoàn nhắm cổng đông (7,8), Quang Trung theo sau
-don_danh 99 0 1 12 3
+don_danh 99 0 1 12 4
 ai_huong 4 6 0 0 3 8
 toi_loai quang_trung 6 15
-ai_huong 7 8
+ai_huong 6 6
 don_danh
 het
-# vòng 5: đánh quân trên đường rút trước, Bảo đánh sườn tây đồn, cả đoàn nhắm cổng đông (7,8), Quang Trung theo sau
-don_danh 99 0 1 12 3
+don_danh 99 0 1 12 4
 ai_huong 4 6 0 0 3 8
 toi_loai quang_trung 6 15
-ai_huong 7 8
+ai_huong 6 6
 don_danh
 het
-# vòng 6: đánh quân trên đường rút trước, Bảo đánh sườn tây đồn, cả đoàn nhắm cổng đông (7,8), Quang Trung theo sau
-don_danh 99 0 1 12 3
+don_danh 99 0 1 12 4
 ai_huong 4 6 0 0 3 8
 toi_loai quang_trung 6 15
-ai_huong 7 8
+ai_huong 6 6
 don_danh
 het
-# vòng 7: đánh quân trên đường rút trước, Bảo đánh sườn tây đồn, cả đoàn nhắm cổng đông (7,8), Quang Trung theo sau
-don_danh 99 0 1 12 3
+don_danh 99 0 1 12 4
 ai_huong 4 6 0 0 3 8
 toi_loai quang_trung 6 12
-ai_huong 7 8
+ai_huong 6 6
 don_danh
 het
-# vòng 8: đánh quân trên đường rút trước, Bảo đánh sườn tây đồn, cả đoàn nhắm cổng đông (7,8), Quang Trung theo sau
-don_danh 99 0 1 12 3
+don_danh 99 0 1 12 4
 ai_huong 4 6 0 0 3 8
 toi_loai quang_trung 6 12
-ai_huong 7 8
+ai_huong 6 6
 don_danh
 het
-# vòng 9: đánh quân trên đường rút trước, Bảo đánh sườn tây đồn, cả đoàn nhắm cổng đông (7,8), Quang Trung theo sau
-don_danh 99 0 1 12 3
+don_danh 99 0 1 12 4
 ai_huong 4 6 0 0 3 8
 toi_loai quang_trung 6 12
-ai_huong 7 8
+ai_huong 6 6
 don_danh
 het
-# vòng 10: đánh quân trên đường rút trước, Bảo đánh sườn tây đồn, cả đoàn nhắm cổng đông (7,8), Quang Trung theo sau
-don_danh 99 0 1 12 3
+don_danh 99 0 1 12 4
 ai_huong 4 6 0 0 3 8
 toi_loai quang_trung 6 10
-ai_huong 7 8
+ai_huong 6 6
 don_danh
 het
-# vòng 11: đánh quân trên đường rút trước, Bảo đánh sườn tây đồn, cả đoàn nhắm cổng đông (7,8), Quang Trung theo sau
-don_danh 99 0 1 12 3
+don_danh 99 0 1 12 4
 ai_huong 4 6 0 0 3 8
 toi_loai quang_trung 6 10
-ai_huong 7 8
+ai_huong 6 6
 don_danh
 het
-# vòng 12: đánh quân trên đường rút trước, Bảo đánh sườn tây đồn, cả đoàn nhắm cổng đông (7,8), Quang Trung theo sau
-don_danh 99 0 1 12 3
-ai_huong 4 6 0 0 3 8
-toi_loai quang_trung 6 10
-ai_huong 7 8
-don_danh
-het
-# vòng 13: đánh quân trên đường rút trước, Bảo đánh sườn tây đồn, cả đoàn nhắm cổng đông (7,8), Quang Trung theo sau; từ vòng 13 chiếm đồn khi tới được
 chiem_neu quang_trung 6 6
-don_danh 99 0 1 12 3
+don_danh 99 0 1 12 4
 ai_huong 4 6 0 0 3 8
 toi_loai quang_trung 6 10
-ai_huong 7 8
+ai_huong 6 6
 don_danh
 het
-# vòng 14: đánh quân trên đường rút trước, Bảo đánh sườn tây đồn, cả đoàn nhắm cổng đông (7,8), Quang Trung theo sau
 chiem_neu quang_trung 6 6
-don_danh 99 0 1 12 3
+don_danh 99 0 1 12 4
 ai_huong 4 6 0 0 3 8
 toi_loai quang_trung 6 10
-ai_huong 7 8
+ai_huong 6 6
+don_danh
+het
+chiem_neu quang_trung 6 6
+don_danh 99 0 1 12 4
+ai_huong 4 6 0 0 3 8
+toi_loai quang_trung 6 10
+ai_huong 6 6
+don_danh
+het
+chiem_neu quang_trung 6 6
+don_danh 99 0 1 12 4
+ai_huong 4 6 0 0 3 8
+toi_loai quang_trung 6 10
+ai_huong 6 6
+don_danh
+het
+chiem_neu quang_trung 6 6
+don_danh 99 0 1 12 4
+ai_huong 4 6 0 0 3 8
+toi_loai quang_trung 6 10
+ai_huong 6 6
 don_danh
 het

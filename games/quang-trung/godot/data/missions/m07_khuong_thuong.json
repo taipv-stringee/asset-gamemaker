@@ -365,7 +365,7 @@
   {
    "khi": "vong",
    "n": 3,
-   "loi": "Sầm Nghi Đống giữ ô đồn, máu không xuống dưới 1, hồi máu mỗi vòng. Còn 1 máu thì ông rời trận. Pháo binh trên gò bắn xa 2–4 ô: đừng để Long đứng trong tầm."
+   "loi": "Sầm Nghi Đống giữ ô đồn, máu không dưới 1, hồi 20 máu mỗi vòng: dồn đánh trong một lượt. Đồn ta ở góc nam mua thêm quân được."
   },
   {
    "khi": "vong",
@@ -381,5 +381,6 @@
   "sam_nghi_dong",
   "do_doc_long_la_ai",
   "go_dong_da"
- ]
+ ],
+ "meo_thua": "chạm pháo binh để xem vùng nó bắn; dồn đánh Sầm Nghi Đống trong một lượt (hỏa hổ trước cho ông bị Cháy) vì ông hồi 20 máu mỗi vòng."
 }

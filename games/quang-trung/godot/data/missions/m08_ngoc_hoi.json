@@ -1627,7 +1627,7 @@
  "goi_y": [
   {
    "khi": "bat_dau",
-   "loi": "Hai hàng chông sắt chắn trước đồn: bước vào phải dừng, −15 máu (mộc thuẫn, voi −5). Mộc thuẫn đi trước, chịu súng điểu thương tốt."
+   "loi": "Hai hàng chông sắt chắn trước đồn: bộ binh bước vào phải dừng, −15 máu; mộc thuẫn, voi đi qua không dừng, chỉ −5. Cho mộc thuẫn đi trước."
   },
   {
    "khi": "vong",
@@ -1651,5 +1651,6 @@
   "luc_doanh",
   "dia_loi_ngoc_hoi",
   "dai_ang_yen_duyen"
- ]
+ ],
+ "meo_thua": "mộc thuẫn, voi đi trước qua chông; mua một quân sư để thấy địa lôi; chạm quân Thanh để xem vùng chúng bắn tới."
 }
